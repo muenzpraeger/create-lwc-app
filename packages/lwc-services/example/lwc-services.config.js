@@ -1,0 +1,47 @@
+// This configuration represents the default settings of `lwc-services`.
+// Place this file into the root of your LWC app directory, and configure the files as needed.
+module.exports = {
+    // Default directory for the build output
+    buildDir: './dist',
+    // Default mode for build command
+    mode: 'development',
+    // Clears the build directory on every build
+    noclear: false,
+    // Defines the directory where to find the individual
+    // modules. Change only when you know what you do. ;-)
+    moduleDir: 'src/modules',
+    // Array of directories where to look for additional
+    // modules that don't live in `moduleDir`
+    localModulesDirs: ['node_modules'],
+    // Defines the directory layout. Using `namespaced` is easiest. Or so.
+    layout: 'namespaced',
+    // Default directory for source files
+    sourceDir: './src',
+    // List of resources for copying to the build folder
+    resources: [],
+    // Default server options for watch command
+    devServer: {
+        port: 3001,
+        host: 'localhost',
+        open: false,
+        stats: 'errors-only',
+        noInfo: true,
+        contentBase: './src'
+    },
+    // Default server options for serve command
+    server: {
+        port: 3002,
+        host: 'localhost',
+        open: false
+    },
+    // LWC Compiler options for production mode.
+    // Find the detailed description here: https://www.npmjs.com/package/@lwc/compiler
+    lwcCompilerOutput: {
+        production: {
+            compat: false,
+            minify: true,
+            env: {
+                NODE_ENV: 'production'
+            }
+        }
+    }

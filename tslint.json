@@ -1,0 +1,7 @@
+{
+    "extends": ["@oclif/tslint", "tslint-config-prettier"],
+    "rules": {
+        "file-name-casing": [false, "camel-case"],
+        "object-curly-spacing": false
+    }
+}

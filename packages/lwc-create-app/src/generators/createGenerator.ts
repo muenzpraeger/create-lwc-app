@@ -31,6 +31,7 @@ class CreateGenerator extends Generator {
     answers!: {
         name: string
         description: string
+        webcomponent: boolean
         version: string
         github: { repo: string; user: string }
         author: string
@@ -67,6 +68,7 @@ class CreateGenerator extends Generator {
             repository = `${this.githubUser}/${repository.split('/')[1]}`
         const defaults = {
             name: this.determineAppname().replace(/ /g, '-'),
+            webcomponent: true,
             version: '0.0.0',
             license: 'MIT',
             author: this.githubUser
@@ -94,6 +96,12 @@ class CreateGenerator extends Generator {
                     name: 'name',
                     message: messages.questions.name,
                     default: this.name !== '' ? this.name : defaults.name
+                },
+                {
+                    type: 'confirm',
+                    name: 'webcomponent',
+                    message: messages.questions.webcomponent,
+                    default: defaults.webcomponent
                 },
                 {
                     type: 'input',
@@ -314,12 +322,12 @@ class CreateGenerator extends Generator {
         )
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
-                this.templatePath('src/index.html'),
+                this.templatePath(this.answers.webcomponent ? 'src/index.html' : 'src/index.non-wc.html'),
                 this.destinationPath('src/index.html'),
                 this
             )
             this.fs.copyTpl(
-                this.templatePath('src/index.js'),
+                this.templatePath(this.answers.webcomponent ? 'src/index.js' : 'src/index.non-wc.js'),
                 this.destinationPath('src/index.js'),
                 this
             )

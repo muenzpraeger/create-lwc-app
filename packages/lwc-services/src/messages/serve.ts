@@ -1,16 +1,17 @@
 export const messages = {
-    description: 'Runs a Lightning Web Components project with a local server',
+    description:
+        'Runs a Lightning Web Components project with a local express server',
     help: {
         examples: [
             'lwc-services serve',
-            'lwc-services serve -p 3998 -h 192.168.178.12 -m production'
+            'lwc-services serve -p 3998 -h 192.168.178.12'
         ]
     },
     flags: {
         directory: 'defines the directory where the build is stored',
         open: 'opens the site in the default browser',
         host: 'sets the hostname',
-        port: 'configures the port of the application',
+        port: 'configures the port of the server',
         webpack: 'location of custom webpack configuration file'
     },
     errors: {

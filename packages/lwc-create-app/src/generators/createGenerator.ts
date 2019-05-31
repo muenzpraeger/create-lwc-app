@@ -52,7 +52,7 @@ class CreateGenerator extends Generator {
     }
 
     async prompting() {
-        this.githubUser = await this.user.github.username().catch(debug)
+        const gitName = this.user.git.name()
         this.pjson = {
             scripts: {},
             engines: {},
@@ -64,16 +64,13 @@ class CreateGenerator extends Generator {
             .split(path.sep)
             .slice(-1)
             .join('/')
-        if (this.githubUser)
-            repository = `${this.githubUser}/${repository.split('/')[1]}`
+        if (gitName) repository = `${gitName}/${repository.split('/')[1]}`
         const defaults = {
             name: this.determineAppname().replace(/ /g, '-'),
             webcomponent: true,
             version: '0.0.0',
             license: 'MIT',
-            author: this.githubUser
-                ? `${this.user.git.name()} @${this.githubUser}`
-                : this.user.git.name(),
+            author: gitName,
             dependencies: {},
             repository,
             ...this.pjson,
@@ -96,12 +93,6 @@ class CreateGenerator extends Generator {
                     name: 'name',
                     message: messages.questions.name,
                     default: this.name !== '' ? this.name : defaults.name
-                },
-                {
-                    type: 'confirm',
-                    name: 'webcomponent',
-                    message: messages.questions.webcomponent,
-                    default: defaults.webcomponent
                 },
                 {
                     type: 'input',
@@ -160,6 +151,12 @@ class CreateGenerator extends Generator {
                         { name: 'yarn', value: 'yarn' }
                     ],
                     default: () => (this.options.yarn || hasYarn ? 1 : 0)
+                },
+                {
+                    type: 'confirm',
+                    name: 'webcomponent',
+                    message: messages.questions.webcomponent,
+                    default: defaults.webcomponent
                 }
             ]
             this.answers = (await this.prompt(questions)) as any
@@ -322,12 +319,20 @@ class CreateGenerator extends Generator {
         )
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
-                this.templatePath(this.answers.webcomponent ? 'src/index.html' : 'src/index.non-wc.html'),
+                this.templatePath(
+                    this.answers.webcomponent
+                        ? 'src/index.html'
+                        : 'src/index.non-wc.html'
+                ),
                 this.destinationPath('src/index.html'),
                 this
             )
             this.fs.copyTpl(
-                this.templatePath(this.answers.webcomponent ? 'src/index.js' : 'src/index.non-wc.js'),
+                this.templatePath(
+                    this.answers.webcomponent
+                        ? 'src/index.js'
+                        : 'src/index.non-wc.js'
+                ),
                 this.destinationPath('src/index.js'),
                 this
             )

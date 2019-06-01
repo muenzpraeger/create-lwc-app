@@ -23,7 +23,7 @@ export default class Test extends Command {
         debug: flags.boolean({ char: 'd', description: messages.flags.debug }),
         watch: flags.boolean({ char: 'w', description: messages.flags.watch }),
         runInBand: flags.boolean({
-            char: 'w',
+            char: 'r',
             description: messages.flags.runInBand
         })
     }

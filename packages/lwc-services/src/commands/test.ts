@@ -21,7 +21,11 @@ export default class Test extends Command {
             description: messages.flags.coverage
         }),
         debug: flags.boolean({ char: 'd', description: messages.flags.debug }),
-        watch: flags.boolean({ char: 'w', description: messages.flags.watch })
+        watch: flags.boolean({ char: 'w', description: messages.flags.watch }),
+        runInBand: flags.boolean({
+            char: 'r',
+            description: messages.flags.runInBand
+        })
     }
 
     async run() {
@@ -93,6 +97,9 @@ export default class Test extends Command {
             }
             if (flags.coverage) {
                 jestArguments.push('--coverage')
+            }
+            if (flags.runInBand) {
+                jestArguments.push('--runInBand')
             }
 
             const jest = require('jest')

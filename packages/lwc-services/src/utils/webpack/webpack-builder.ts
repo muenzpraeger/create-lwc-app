@@ -33,7 +33,7 @@ const optimization = {
 }
 
 // @ts-ignore
-function buildWebpackConfig({ entries, outputDir, moduleDir }, mode: string) {
+function buildWebpackConfig({ entries, outputDir, moduleDir, mode }: string) {
     let isProduction = false
 
     if (mode && mode === 'production') {
@@ -99,11 +99,13 @@ function buildWebpackConfig({ entries, outputDir, moduleDir }, mode: string) {
         serverConfig = {
             ...serverConfig,
             ...{
-                watchContentBase: false,
-                hot: false,
-                quiet: true,
-                compress: true,
-                publicPath: '/'
+                devServer: {
+                    watchContentBase: false,
+                    hot: false,
+                    quiet: true,
+                    compress: true,
+                    publicPath: '/'
+                }
             }
         }
     }

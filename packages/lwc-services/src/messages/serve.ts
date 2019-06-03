@@ -1,6 +1,6 @@
 export const messages = {
     description:
-        'Runs a Lightning Web Components project with a local express server',
+        'Runs a Lightning Web Components project with a local Express server',
     help: {
         examples: [
             'lwc-services serve',
@@ -11,16 +11,11 @@ export const messages = {
         directory: 'defines the directory where the build is stored',
         open: 'opens the site in the default browser',
         host: 'sets the hostname',
-        port: 'configures the port of the server',
-        webpack: 'location of custom webpack configuration file'
+        port: 'configures the port of the server'
     },
     errors: {
         no_build_dir: {
             message: "The build directory '%s' does not exist.",
-            emoji: 'sos'
-        },
-        no_webpack: {
-            message: 'The custom webpack configuration file does not exist.',
             emoji: 'sos'
         }
     },
@@ -28,10 +23,6 @@ export const messages = {
         build_dir_available: {
             message: "Build directory '%s' exists.",
             emoji: 'closed_book'
-        },
-        custom_configuration: {
-            message: 'Using custom configuration from webpack.config.js.',
-            emoji: 'star2'
         },
         local_server_listening: {
             message: 'Local server listening: %s',

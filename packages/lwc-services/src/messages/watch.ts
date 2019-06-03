@@ -3,7 +3,7 @@ export const messages = {
     help: {
         examples: [
             'lwc-services watch',
-            'lwc-services watch -p 3998 -h 192.168.178.12 -m production'
+            'lwc-services watch -p 3998 -i 192.168.178.12 -m production'
         ]
     },
     errors: {

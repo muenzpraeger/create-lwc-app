@@ -74,7 +74,7 @@ EXAMPLES
 
 #### `lwc-services serve`
 
-Runs a Lightning Web Components project with a local Express server (likely not to use for production if you know what I mean ;-))
+Runs a Lightning Web Components project with a local Express server
 
 ```
 USAGE
@@ -82,10 +82,9 @@ USAGE
 
 OPTIONS
   -d, --directory=directory  [default: ./dist] defines the directory where the build is stored
-  -i, --host=host            [default: localhost] sets the hostname
+  -i, --host=host            [default: 0.0.0.0] sets the hostname/IP address
   -o, --open                 opens the site in the default browser
   -p, --port=port            [default: 3002] configures the port of the application
-  -w, --webpack=webpack      location of custom webpack configuration file
 
 EXAMPLES
   lwc-services serve
@@ -137,15 +136,15 @@ USAGE
   $ lwc-services watch
 
 OPTIONS
-  -i, --host=host        [default: localhost] sets the hostname
+  -i, --host=host        [default: 0.0.0.0] sets the hostname/IP address
   -m, --mode=mode        [default: development] defines the mode for the build (production|development)
   -o, --open             opens the site in the default browser
   -p, --port=port        [default: 3001] configures the port of the application
   -w, --webpack=webpack  location of custom webpack configuration file
 
 EXAMPLES
-  lwc-services serve
-  lwc-services serve -p 3998 -h 192.168.178.12 -m production
+  lwc-services watch
+  lwc-services watch -p 3998 -i 192.168.178.12 -m production
 ```
 
 <!-- commandsstop -->

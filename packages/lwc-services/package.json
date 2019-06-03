@@ -28,6 +28,7 @@
         "babel-loader": "^8.0.5",
         "chalk": "^2.4.2",
         "copy-webpack-plugin": "^5.0.2",
+        "deepmerge": "^3.2.0",
         "error-overlay-webpack-plugin": "^0.2.0",
         "eslint": "^5.13",
         "helmet": "^3.18.0",

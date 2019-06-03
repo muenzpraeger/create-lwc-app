@@ -326,19 +326,16 @@ class CreateGenerator extends Generator {
             this.destinationPath('jsconfig.json'),
             this
         )
-        if (this.clientserver) {
-            this.fs.copyTpl(
-                this.templatePath('lwc-services.server.js'),
-                this.destinationPath('lwc-services.config.js'),
-                this
-            )
-        } else {
-            this.fs.copyTpl(
-                this.templatePath('lwc-services.client.js'),
-                this.destinationPath('lwc-services.config.js'),
-                this
-            )
-        }
+        this.fs.copyTpl(
+            this.templatePath('jest.config.js'),
+            this.destinationPath('jest.config.js'),
+            this
+        )
+        this.fs.copyTpl(
+            this.templatePath('lwc-services.config.js'),
+            this.destinationPath('lwc-services.config.js'),
+            this
+        )
         this.fs.copyTpl(
             this.templatePath('README.md'),
             this.destinationPath('README.md'),

@@ -18,10 +18,10 @@ jobs:
             - run: ./packages/lwc-services/bin/run --version
             - run:
                   name: Prettier verification
-                  commany: yarn prettier:verify
+                  command: yarn prettier:verify
             - run:
                   name: ESlint verification
-                  commany: yarn lint
+                  command: yarn lint
             # - run:
             #       name: Testing
             #       command: yarn test:unit

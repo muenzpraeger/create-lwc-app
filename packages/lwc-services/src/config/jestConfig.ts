@@ -1,6 +1,8 @@
+const jestLwcConfig = require('@lwc/jest-preset')
+import merge = require('deepmerge')
 import * as path from 'path'
 
-export const jestConfig = {
+const jestDefaultConfig = {
     rootDir: process.cwd(),
     transformIgnorePatterns: [
         '/node_modules/(?:(?!lightning-mocks.*(js|html|css)))*$'
@@ -13,3 +15,5 @@ export const jestConfig = {
     collectCoverageFrom: ['src/**/*.js'],
     snapshotSerializers: [require.resolve('@lwc/jest-serializer')]
 }
+
+export const jestConfig = merge(jestLwcConfig, jestDefaultConfig)

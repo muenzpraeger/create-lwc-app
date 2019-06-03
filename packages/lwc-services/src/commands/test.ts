@@ -1,4 +1,3 @@
-const jestDefaultConfig = require('@lwc/jest-preset')
 import { Command, flags } from '@oclif/command'
 // tslint:disable-next-line: no-implicit-dependencies
 import merge = require('deepmerge')
@@ -39,7 +38,7 @@ export default class Test extends Command {
         welcome()
 
         // Inspiration of this implementation taken from https://github.com/salesforce/lwc-jest. Thank you, Trevor!
-        let jestFinalConfig = merge(jestDefaultConfig, jestConfig)
+        let jestFinalConfig = jestConfig
 
         if (
             !fs.existsSync('jest.config.js') &&

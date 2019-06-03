@@ -1,10 +1,9 @@
 ---
 version: 2
 jobs:
-    node-latest: &test
+    build:
         docker:
-            - image: node:latest
-        working_directory: ~/cli
+            - image: circleci/node:10.2.0
         steps:
             - checkout
             - restore_cache: &restore_cache
@@ -13,44 +12,37 @@ jobs:
                       - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "./packages/lwc-services/yarn.lock"}}
                       - v1-npm-{{checksum ".circleci/config.yml"}}
             - run:
-                  name: Install dependencies lwc-create-app
-                  command: cd ./packages/lwc-create-app/
-                      yarn
-            - run:
-                  name: Install dependencies lwc-services
-                  command: cd ./packages/lwc-services/
-                      yarn
+                  name: Install dependencies
+                  command: yarn install
             - run: ./packages/lwc-create-app/bin/run --version
             - run: ./packages/lwc-services/bin/run --version
+            - run:
+                  name: Prettier verification
+                  commany: yarn prettier:verify
+            - run:
+                  name: ESlint verification
+                  commany: yarn lint
             # - run:
             #       name: Testing
-            #       command: yarn test
+            #       command: yarn test:unit
             # - run:
             #       name: Submitting code coverage to codecov
             #       command: |
             #           ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
             #           curl -s https://codecov.io/bash | bash
-    node-8:
-        <<: *test
-        docker:
-            - image: node:8
-    node-10:
-        <<: *test
-        docker:
-            - image: node:10
-    cache:
-        <<: *test
-        steps:
-            - checkout
-            - run:
-                  name: Install dependencies
-                  command: yarn
-            - save_cache:
-                  key: v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
-                  paths:
-                      - ~/cli/node_modules
-                      - /usr/local/share/.cache/yarn
-                      - /usr/local/share/.config/yarn
+
+        cache:
+            steps:
+                - checkout
+                - run:
+                      name: Install dependencies
+                      command: yarn
+                - save_cache:
+                      key: v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+                      paths:
+                          - ~/cli/node_modules
+                          - /usr/local/share/.cache/yarn
+                          - /usr/local/share/.config/yarn
 
 workflows:
     version: 2

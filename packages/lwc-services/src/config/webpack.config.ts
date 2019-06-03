@@ -2,6 +2,8 @@ const { buildWebpackConfig } = require('../utils/webpack/webpack-builder')
 const CopyPlugin = require('copy-webpack-plugin')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+// tslint:disable-next-line: no-implicit-dependencies
+import merge = require('deepmerge')
 import * as path from 'path'
 
 import { lwcConfig } from './lwcConfig'
@@ -26,7 +28,10 @@ export function generateWebpackConfig(mode?: string, config?: any) {
         })
     ])
 
-    lwcWebpackConfig = { ...lwcWebpackConfig, ...config }
+    if (config) {
+        lwcWebpackConfig = merge(lwcWebpackConfig, config)
+    }
+
     if (lwcConfig.resources.length) {
         let resources: any = []
         lwcConfig.resources.forEach((resource: any) => {

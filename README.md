@@ -2,13 +2,13 @@
 
 A tool for setting up your Lightning Web Components projects.
 
+[![CircleCI](https://circleci.com/gh/muenzpraeger/lwc-create-app.svg?style=svg)](https://circleci.com/gh/muenzpraeger/lwc-create-app)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![Version](https://img.shields.io/npm/v/lwc-create-app.svg)](https://npmjs.org/package/lwc-create-app)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
-[![Downloads/week](https://img.shields.io/npm/dw/lwc-create-app.svg)](https://npmjs.org/package/lwc-create-app) lwc-create-app
+[![Version](https://img.shields.io/npm/v/lwc-create-app.svg)](https://npmjs.org/package/lwc-create-app) [![Downloads/week](https://img.shields.io/npm/dw/lwc-create-app.svg)](https://npmjs.org/package/lwc-create-app) lwc-create-app
 
-[![Downloads/week](https://img.shields.io/npm/dw/lwc-services.svg)](https://npmjs.org/package/lwc-services) lwc-services
+[![Version](https://img.shields.io/npm/v/lwc-services.svg)](https://npmjs.org/package/lwc-services) [![Downloads/week](https://img.shields.io/npm/dw/lwc-services.svg)](https://npmjs.org/package/lwc-services) lwc-services
 
 ## Quick Start
 

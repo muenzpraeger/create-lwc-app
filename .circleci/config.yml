@@ -46,14 +46,6 @@ jobs:
 
 workflows:
     version: 2
-    'lwc-create-app':
+    commit-workflow:
         jobs:
-            - node-latest
-            - node-8
-            - node-10
-            - cache:
-                  filters:
-                      tags:
-                          only: /^v.*/
-                      branches:
-                          ignore: /.*/
+            - build

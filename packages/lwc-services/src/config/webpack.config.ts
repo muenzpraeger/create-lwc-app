@@ -16,7 +16,7 @@ const TEMPLATES_DIR = path.resolve(ROOT_DIR, lwcConfig.sourceDir)
 // Simple mechanism to pass any arbitrary config values from the CLI for webpack
 export function generateWebpackConfig(mode?: string, config?: any) {
     let lwcWebpackConfig = buildWebpackConfig({
-        entries: [path.resolve(ROOT_DIR, 'src/index.js')],
+        entries: [path.resolve(TEMPLATES_DIR, 'index.js')],
         outputDir: OUTPUT_DIR,
         moduleDir: MODULE_DIR,
         mode

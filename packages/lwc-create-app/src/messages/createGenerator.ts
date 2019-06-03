@@ -20,7 +20,8 @@ export const messages = {
         pkg: 'Select a package manager',
         language: 'Select a language (not available yet)',
         eslint: 'Use ESlint',
-        prettier: 'Use Prettier (formatting)'
+        prettier: 'Use Prettier (formatting)',
+        clientserver: 'Use custom Express server configuration'
     },
     errors: {
         no_node_installed: {

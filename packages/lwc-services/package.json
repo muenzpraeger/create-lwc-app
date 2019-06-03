@@ -30,6 +30,7 @@
         "copy-webpack-plugin": "^5.0.2",
         "error-overlay-webpack-plugin": "^0.2.0",
         "eslint": "^5.13",
+        "helmet": "^3.18.0",
         "html-webpack-plugin": "^3.2.0",
         "jest": "~24",
         "node-emoji": "^1.10.0",

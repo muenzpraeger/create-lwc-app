@@ -2,11 +2,14 @@ import { Command, flags } from '@oclif/command'
 import cli from 'cli-ux'
 import * as fs from 'fs'
 import * as path from 'path'
-import * as webpack from 'webpack'
-import * as webpackMerge from 'webpack-merge'
+
+// tslint:disable-next-line: no-implicit-dependencies
+const compression = require('compression')
+const helmet = require('helmet')
+// tslint:disable-next-line: no-implicit-dependencies
+const express = require('express')
 
 import { lwcConfig } from '../config/lwcConfig'
-import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/serve'
 import { log, welcome } from '../utils/logger'
 
@@ -36,10 +39,6 @@ export default class Serve extends Command {
             char: 'p',
             description: messages.flags.port,
             default: lwcConfig.server.port
-        }),
-        webpack: flags.string({
-            char: 'w',
-            description: messages.flags.webpack
         })
     }
 
@@ -60,6 +59,9 @@ export default class Serve extends Command {
         if (process.env.PORT) {
             lwcConfig.server.port = Number(process.env.PORT)
         }
+        if (process.env.HOST) {
+            lwcConfig.server.host = process.env.HOST
+        }
 
         // Check if given source directory exists. If not we're exiting.
         if (!fs.existsSync(BUILD_DIR)) {
@@ -67,66 +69,37 @@ export default class Serve extends Command {
             return
         }
 
-        // Check if custom webpack config is passed, and if it really exists.
-        if (flags.webpack) {
-            if (!fs.existsSync(flags.webpack)) {
-                log(messages.errors.no_webpack)
-                return
-            }
-        }
+        const app = express()
+        app.use(helmet())
+        app.use(compression())
+        app.use(express.static(BUILD_DIR))
 
-        let webpackConfig = generateWebpackConfig('production')
-        lwcConfig.devServer.contentBase = lwcConfig.sourceDir
-        webpackConfig.devServer = {
-            ...lwcConfig.devServer,
-            ...lwcConfig.server
-        }
-
-        // Merging custom webpack config file
-        if (flags.webpack) {
-            log(messages.logs.custom_configuration)
-            const webpackConfigCustom = require(path.resolve(
-                process.cwd(),
-                flags.webpack
+        if (
+            lwcConfig.server.customConfig &&
+            fs.existsSync(lwcConfig.server.customConfig)
+        ) {
+            const customExpressConfig = require(path.resolve(
+                lwcConfig.server.customConfig
             ))
-            webpackConfig = webpackMerge.smart(
-                webpackConfig,
-                webpackConfigCustom
-            )
+            customExpressConfig(app)
         }
-
-        if (flags.host && flags.host !== lwcConfig.server.host) {
-            webpackConfig.devServer.host = flags.host
-        }
-
-        if (flags.port && flags.port !== lwcConfig.server.port) {
-            webpackConfig.devServer.port = flags.port
-        }
-
-        // Lazy loading
-        const WebpackDevServer = require('webpack-dev-server')
 
         // tslint:disable-next-line: no-unused
-        const compiler = webpack(webpackConfig)
+        app.use('*', (req: any, res: any) => {
+            res.sendFile(path.resolve(BUILD_DIR, 'index.html'))
+        })
+        app.listen(lwcConfig.server.port, () => {
+            const protocol = 'http'
+            const url = `${protocol}://${lwcConfig.server.host}:${
+                lwcConfig.server.port
+            }`
 
-        const app = new WebpackDevServer(compiler, webpackConfig.devServer)
+            log(messages.logs.local_server_listening, url)
 
-        app.listen(
-            webpackConfig.devServer.port,
-            webpackConfig.devServer.host,
-            () => {
-                const protocol = 'http'
-                const url = `${protocol}://${webpackConfig.devServer.host}:${
-                    webpackConfig.devServer.port
-                }`
-
-                log(messages.logs.local_server_listening, url)
-
-                if (flags.open) {
-                    // tslint:disable-next-line: no-floating-promises
-                    cli.open(url)
-                }
+            if (flags.open) {
+                // tslint:disable-next-line: no-floating-promises
+                cli.open(url)
             }
-        )
+        })
     }
 }

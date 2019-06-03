@@ -23,6 +23,7 @@ class CreateGenerator extends Generator {
     options: {
         defaults?: boolean
         yarn: boolean
+        clientserver: boolean
     }
     name: string
     args!: { [k: string]: string }
@@ -32,6 +33,7 @@ class CreateGenerator extends Generator {
         name: string
         description: string
         webcomponent: boolean
+        clientserver: boolean
         version: string
         github: { repo: string; user: string }
         author: string
@@ -41,12 +43,15 @@ class CreateGenerator extends Generator {
     }
     yarn!: boolean
     repository?: string
+    clientserver?: boolean
+    targetPathClient = 'src'
 
     constructor(args: any, opts: any) {
         super(args, opts)
         this.options = {
             defaults: opts.defaults,
-            yarn: opts.options.includes('yarn') || hasYarn
+            yarn: opts.options.includes('yarn') || hasYarn,
+            clientserver: opts.options.includes('express')
         }
         this.name = opts.name
     }
@@ -68,6 +73,7 @@ class CreateGenerator extends Generator {
         const defaults = {
             name: this.determineAppname().replace(/ /g, '-'),
             webcomponent: true,
+            clientserver: false,
             version: '0.0.0',
             license: 'MIT',
             author: gitName,
@@ -157,6 +163,12 @@ class CreateGenerator extends Generator {
                     name: 'webcomponent',
                     message: messages.questions.webcomponent,
                     default: defaults.webcomponent
+                },
+                {
+                    type: 'confirm',
+                    name: 'clientserver',
+                    message: messages.questions.clientserver,
+                    default: defaults.clientserver
                 }
             ]
             this.answers = (await this.prompt(questions)) as any
@@ -164,10 +176,16 @@ class CreateGenerator extends Generator {
         debug(this.answers)
         if (!this.options.defaults) {
             this.options = {
-                yarn: this.answers.pkg === 'yarn'
+                yarn: this.answers.pkg === 'yarn',
+                clientserver: this.answers.clientserver
             }
         }
         this.yarn = this.options.yarn
+        this.clientserver = this.options.clientserver
+
+        if (this.clientserver) {
+            this.targetPathClient = 'src/client'
+        }
 
         if (!this.yarn) {
             const nodeVersionRet = spawnSync('node', ['-v'])
@@ -199,9 +217,10 @@ class CreateGenerator extends Generator {
             "prettier --write '**/*.{css,html,js,json,md,yaml,yml}'"
         this.pjson.scripts['prettier:verify'] =
             "prettier --list-different '**/*.{css,html,js,json,md,yaml,yml}'"
-        this.pjson.scripts.build = 'lwc-services build'
+        this.pjson.scripts.build = 'lwc-services build -m production'
+        this.pjson.scripts['build:development'] = 'lwc-services build'
         this.pjson.scripts.watch = 'lwc-services watch'
-        this.pjson.scripts.serve = 'lwc-services build && lwc-services serve'
+        this.pjson.scripts.serve = 'lwc-services serve'
         this.pjson.scripts['test:unit'] = 'lwc-services test'
         this.pjson.scripts['test:unit:watch'] = 'lwc-services test --watch'
         this.pjson.scripts['test:unit:debug'] = 'lwc-services test --debug'
@@ -307,11 +326,19 @@ class CreateGenerator extends Generator {
             this.destinationPath('jsconfig.json'),
             this
         )
-        this.fs.copyTpl(
-            this.templatePath('lwc-services.config.js'),
-            this.destinationPath('lwc-services.config.js'),
-            this
-        )
+        if (this.clientserver) {
+            this.fs.copyTpl(
+                this.templatePath('lwc-services.server.js'),
+                this.destinationPath('lwc-services.config.js'),
+                this
+            )
+        } else {
+            this.fs.copyTpl(
+                this.templatePath('lwc-services.client.js'),
+                this.destinationPath('lwc-services.config.js'),
+                this
+            )
+        }
         this.fs.copyTpl(
             this.templatePath('README.md'),
             this.destinationPath('README.md'),
@@ -321,77 +348,121 @@ class CreateGenerator extends Generator {
             this.fs.copyTpl(
                 this.templatePath(
                     this.answers.webcomponent
-                        ? 'src/index.html'
-                        : 'src/index.non-wc.html'
+                        ? 'src/client/index.html'
+                        : 'src/client/index.non-wc.html'
                 ),
-                this.destinationPath('src/index.html'),
+                this.destinationPath(
+                    this.targetPathClient.concat('index.html')
+                ),
                 this
             )
             this.fs.copyTpl(
                 this.templatePath(
                     this.answers.webcomponent
-                        ? 'src/index.js'
-                        : 'src/index.non-wc.js'
+                        ? 'src/client/index.js'
+                        : 'src/client/index.non-wc.js'
                 ),
-                this.destinationPath('src/index.js'),
+                this.destinationPath(this.targetPathClient.concat('index.js')),
                 this
             )
             this.fs.copyTpl(
-                this.templatePath('src/modules/my/app/app.css'),
-                this.destinationPath('src/modules/my/app/app.css'),
-                this
-            )
-            this.fs.copyTpl(
-                this.templatePath('src/modules/my/app/app.js'),
-                this.destinationPath('src/modules/my/app/app.js'),
-                this
-            )
-            this.fs.copyTpl(
-                this.templatePath('src/modules/my/app/app.html'),
-                this.destinationPath('src/modules/my/app/app.html'),
-                this
-            )
-            this.fs.copyTpl(
-                this.templatePath('src/modules/my/greeting/greeting.css'),
-                this.destinationPath('src/modules/my/greeting/greeting.css'),
-                this
-            )
-            this.fs.copyTpl(
-                this.templatePath('src/modules/my/greeting/greeting.js'),
-                this.destinationPath('src/modules/my/greeting/greeting.js'),
-                this
-            )
-            this.fs.copyTpl(
-                this.templatePath('src/modules/my/greeting/greeting.html'),
-                this.destinationPath('src/modules/my/greeting/greeting.html'),
-                this
-            )
-            this.fs.copyTpl(
-                this.templatePath('src/modules/my/app/__tests__/app.test.js'),
+                this.templatePath('src/client/modules/my/app/app.css'),
                 this.destinationPath(
-                    'src/modules/my/app/__tests__/app.test.js'
+                    this.targetPathClient.concat('modules/my/app/app.css')
+                ),
+                this
+            )
+            this.fs.copyTpl(
+                this.templatePath('src/client/modules/my/app/app.js'),
+                this.destinationPath(
+                    this.targetPathClient.concat('modules/my/app/app.js')
+                ),
+                this
+            )
+            this.fs.copyTpl(
+                this.templatePath('src/client/modules/my/app/app.html'),
+                this.destinationPath(
+                    this.targetPathClient.concat('modules/my/app/app.html')
                 ),
                 this
             )
             this.fs.copyTpl(
                 this.templatePath(
-                    'src/modules/my/greeting/__tests__/greeting.test.js'
+                    'src/client/modules/my/greeting/greeting.css'
                 ),
                 this.destinationPath(
-                    'src/modules/my/greeting/__tests__/greeting.test.js'
+                    this.targetPathClient.concat(
+                        'modules/my/greeting/greeting.css'
+                    )
                 ),
                 this
             )
             this.fs.copyTpl(
-                this.templatePath('src/resources/lwc.png'),
-                this.destinationPath('src/resources/lwc.png'),
+                this.templatePath('src/client/modules/my/greeting/greeting.js'),
+                this.destinationPath(
+                    this.targetPathClient.concat(
+                        'modules/my/greeting/greeting.js'
+                    )
+                ),
                 this
             )
             this.fs.copyTpl(
-                this.templatePath('src/resources/favicon.ico'),
-                this.destinationPath('src/resources/favicon.ico'),
+                this.templatePath(
+                    'src/client/modules/my/greeting/greeting.html'
+                ),
+                this.destinationPath(
+                    this.targetPathClient.concat(
+                        'modules/my/greeting/greeting.html'
+                    )
+                ),
                 this
             )
+            this.fs.copyTpl(
+                this.templatePath(
+                    'src/client/modules/my/app/__tests__/app.test.js'
+                ),
+                this.destinationPath(
+                    this.targetPathClient.concat(
+                        'modules/my/app/__tests__/app.test.js'
+                    )
+                ),
+                this
+            )
+            this.fs.copyTpl(
+                this.templatePath(
+                    'src/client/modules/my/greeting/__tests__/greeting.test.js'
+                ),
+                this.destinationPath(
+                    this.targetPathClient.concat(
+                        '/modules/my/greeting/__tests__/greeting.test.js'
+                    )
+                ),
+                this
+            )
+            this.fs.copyTpl(
+                this.templatePath('src/client/resources/lwc.png'),
+                this.destinationPath(
+                    this.targetPathClient.concat('resources/lwc.png')
+                ),
+                this
+            )
+            this.fs.copyTpl(
+                this.templatePath('src/client/resources/favicon.ico'),
+                this.destinationPath(
+                    this.targetPathClient.concat('resources/favicon.ico')
+                ),
+                this
+            )
+        }
+
+        if (this.clientserver) {
+            if (!fs.existsSync('src')) {
+                this.fs.copyTpl(
+                    this.templatePath('src/server/index.js'),
+                    this.destinationPath('src/server/index.js'),
+                    this
+                )
+            }
         }
     }
 }

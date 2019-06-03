@@ -1,7 +1,5 @@
-const jestDefaultConfig = require('@lwc/jest-preset')
 import { Command, flags } from '@oclif/command'
 // tslint:disable-next-line: no-implicit-dependencies
-import merge = require('deepmerge')
 import * as fs from 'fs'
 import * as path from 'path'
 import util = require('util')
@@ -68,11 +66,9 @@ export default class Sniff extends Command {
 
         const inspectOptions = { depth: null }
 
-        let jestFinalConfig = merge(jestDefaultConfig, jestConfig)
-
         fs.writeFileSync(
             path.join(flags.directory, 'jest.config.js'),
-            'module.exports = ' + util.inspect(jestFinalConfig, inspectOptions)
+            'module.exports = ' + util.inspect(jestConfig, inspectOptions)
         )
         log(messages.logs.write_webpack_config)
         fs.writeFileSync(

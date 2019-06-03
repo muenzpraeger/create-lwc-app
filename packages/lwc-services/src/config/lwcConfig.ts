@@ -1,3 +1,5 @@
+// tslint:disable-next-line: no-implicit-dependencies
+import merge = require('deepmerge')
 import * as path from 'path'
 
 interface ResourceFolder {
@@ -37,6 +39,7 @@ interface Config {
         port: number
         host: string
         open: boolean
+        customConfig?: string
     }
     // LWC Compiler options for production mode.
     // Find the detailed description here: https://www.npmjs.com/package/@lwc/compiler
@@ -63,7 +66,7 @@ export const defaultLwcConfig: Config = {
     moduleDir: 'src/modules',
     // Array of directories where to look for additional
     // modules that don't live in `moduleDir`
-    localModulesDirs: ['node_modules'],
+    localModulesDirs: [],
     // Defines the directory layout. Using `namespaced` is easiest. Or so.
     layout: 'namespaced',
     // Default directory for source files
@@ -73,7 +76,7 @@ export const defaultLwcConfig: Config = {
     // Default server options for watch command
     devServer: {
         port: 3001,
-        host: 'localhost',
+        host: '0.0.0.0',
         open: false,
         stats: 'errors-only',
         noInfo: true,
@@ -82,7 +85,7 @@ export const defaultLwcConfig: Config = {
     // Default server options for serve command
     server: {
         port: 3002,
-        host: 'localhost',
+        host: '0.0.0.0',
         open: false
     },
     // LWC Compiler options for production mode.
@@ -103,7 +106,7 @@ function buildConfig(): Config {
     try {
         const fileName = path.resolve(process.cwd(), 'lwc-services.config.js')
         let config = require(fileName)
-        combinedConfig = { ...defaultLwcConfig, ...config }
+        combinedConfig = merge(defaultLwcConfig, config)
         return combinedConfig
         // tslint:disable-next-line: no-unused
     } catch (error) {

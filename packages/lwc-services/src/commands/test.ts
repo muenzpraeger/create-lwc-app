@@ -1,5 +1,7 @@
 const jestDefaultConfig = require('@lwc/jest-preset')
 import { Command, flags } from '@oclif/command'
+// tslint:disable-next-line: no-implicit-dependencies
+import merge = require('deepmerge')
 import * as fs from 'fs'
 import * as path from 'path'
 
@@ -37,7 +39,7 @@ export default class Test extends Command {
         welcome()
 
         // Inspiration of this implementation taken from https://github.com/salesforce/lwc-jest. Thank you, Trevor!
-        let jestFinalConfig = { ...jestDefaultConfig, ...jestConfig }
+        let jestFinalConfig = merge(jestDefaultConfig, jestConfig)
 
         if (
             !fs.existsSync('jest.config.js') &&
@@ -52,7 +54,7 @@ export default class Test extends Command {
                     process.cwd(),
                     'jest.config.js'
                 ))
-                jestFinalConfig = { ...jestFinalConfig, ...jestCustomConfigJs }
+                jestFinalConfig = merge(jestFinalConfig, jestCustomConfigJs)
             }
             if (fs.existsSync('jest.config.json')) {
                 const jestCustomConfigJson = require(path.resolve(

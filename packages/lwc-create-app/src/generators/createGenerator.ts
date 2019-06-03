@@ -44,7 +44,7 @@ class CreateGenerator extends Generator {
     yarn!: boolean
     repository?: string
     clientserver?: boolean
-    targetPathClient = 'src'
+    targetPathClient = 'src/'
 
     constructor(args: any, opts: any) {
         super(args, opts)
@@ -184,7 +184,7 @@ class CreateGenerator extends Generator {
         this.clientserver = this.options.clientserver
 
         if (this.clientserver) {
-            this.targetPathClient = 'src/client'
+            this.targetPathClient = 'src/client/'
         }
 
         if (!this.yarn) {
@@ -229,7 +229,7 @@ class CreateGenerator extends Generator {
 
         this.pjson.husky = { hooks: {} }
         this.pjson['lint-staged'] = {}
-        this.pjson.husky.hooks['pre-push'] = 'lint-staged'
+        this.pjson.husky.hooks['pre-commit'] = 'lint-staged'
 
         this.pjson['lint-staged']['**/*.{css,html,js,json,md,yaml,yml}'] = [
             'prettier --write'
@@ -434,7 +434,7 @@ class CreateGenerator extends Generator {
                 ),
                 this.destinationPath(
                     this.targetPathClient.concat(
-                        '/modules/my/greeting/__tests__/greeting.test.js'
+                        'modules/my/greeting/__tests__/greeting.test.js'
                     )
                 ),
                 this

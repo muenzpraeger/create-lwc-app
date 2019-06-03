@@ -1,67 +1,55 @@
 ---
 version: 2
 jobs:
-    node-latest: &test
+    build:
         docker:
-            - image: node:latest
-        working_directory: ~/cli
+            - image: circleci/node:10.2.0
         steps:
             - checkout
             - restore_cache: &restore_cache
                   keys:
-                      - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "./packages/lwc-create-app/yarn.lock"}}
-                      - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "./packages/lwc-services/yarn.lock"}}
-                      - v1-npm-{{checksum ".circleci/config.yml"}}
+                      - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
             - run:
-                  name: Install dependencies lwc-create-app
-                  command: cd ./packages/lwc-create-app/
-                      yarn
+                  name: Install dependencies
+                  command: yarn install
             - run:
-                  name: Install dependencies lwc-services
-                  command: cd ./packages/lwc-services/
-                      yarn
-            - run: ./packages/lwc-create-app/bin/run --version
-            - run: ./packages/lwc-services/bin/run --version
+                  name: Prettier verification
+                  command: yarn prettier:verify
+            - run:
+                  name: ESlint verification
+                  command: yarn lint
+            - run:
+                  name: Test TypeScript compilation lwc-create-app
+                  command: cd ./packages/lwc-create-app
+                      tsc -b
+            - run:
+                  name: Test TypeScript compilation lwc-services
+                  command: cd ./packages/lwc-services
+                      tsc -b
             # - run:
             #       name: Testing
-            #       command: yarn test
+            #       command: yarn test:unit
             # - run:
             #       name: Submitting code coverage to codecov
             #       command: |
             #           ./node_modules/.bin/nyc report --reporter text-lcov > coverage.lcov
             #           curl -s https://codecov.io/bash | bash
-    node-8:
-        <<: *test
-        docker:
-            - image: node:8
-    node-10:
-        <<: *test
-        docker:
-            - image: node:10
-    cache:
-        <<: *test
-        steps:
-            - checkout
-            - run:
-                  name: Install dependencies
-                  command: yarn
-            - save_cache:
-                  key: v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
-                  paths:
-                      - ~/cli/node_modules
-                      - /usr/local/share/.cache/yarn
-                      - /usr/local/share/.config/yarn
+
+        cache:
+            steps:
+                - checkout
+                - run:
+                      name: Install dependencies
+                      command: yarn
+                - save_cache:
+                      key: v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
+                      paths:
+                          - ~/cli/node_modules
+                          - /usr/local/share/.cache/yarn
+                          - /usr/local/share/.config/yarn
 
 workflows:
     version: 2
-    'lwc-create-app':
+    commit-workflow:
         jobs:
-            - node-latest
-            - node-8
-            - node-10
-            - cache:
-                  filters:
-                      tags:
-                          only: /^v.*/
-                      branches:
-                          ignore: /.*/
+            - build

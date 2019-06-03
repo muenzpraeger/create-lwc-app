@@ -88,7 +88,7 @@ export default class Serve extends Command {
         app.use('*', (req: any, res: any) => {
             res.sendFile(path.resolve(BUILD_DIR, 'index.html'))
         })
-        app.listen(lwcConfig.server.port, () => {
+        app.listen(lwcConfig.server.port, lwcConfig.server.host, () => {
             const protocol = 'http'
             const url = `${protocol}://${lwcConfig.server.host}:${
                 lwcConfig.server.port

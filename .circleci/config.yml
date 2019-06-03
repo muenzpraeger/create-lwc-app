@@ -8,20 +8,28 @@ jobs:
             - checkout
             - restore_cache: &restore_cache
                   keys:
-                      - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "./packages/lwc-create-app/yarn.lock"}}
-                      - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "./packages/lwc-services/yarn.lock"}}
-                      - v1-npm-{{checksum ".circleci/config.yml"}}
+                      - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
             - run:
                   name: Install dependencies
                   command: yarn install
-            - run: ./packages/lwc-create-app/bin/run --version
-            - run: ./packages/lwc-services/bin/run --version
+            - run: cd ./packages/lwc-create-app
+                   /bin/run --version
+            - run: cd ./packages/lwc-services
+                   /bin/run --version
             - run:
                   name: Prettier verification
                   command: yarn prettier:verify
             - run:
                   name: ESlint verification
                   command: yarn lint
+            - run:
+                  name: Test TypeScript compilation lwc-create-app
+                  command: cd ./packages/lwc-create-app
+                           tsc -b
+            - run:
+                  name: Test TypeScript compilation lwc-services
+                  command: cd ./packages/lwc-services
+                           tsc -b
             # - run:
             #       name: Testing
             #       command: yarn test:unit

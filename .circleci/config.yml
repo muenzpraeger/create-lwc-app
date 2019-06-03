@@ -12,10 +12,6 @@ jobs:
             - run:
                   name: Install dependencies
                   command: yarn install
-            - run: cd ./packages/lwc-create-app
-                   /bin/run --version
-            - run: cd ./packages/lwc-services
-                   /bin/run --version
             - run:
                   name: Prettier verification
                   command: yarn prettier:verify
@@ -25,11 +21,11 @@ jobs:
             - run:
                   name: Test TypeScript compilation lwc-create-app
                   command: cd ./packages/lwc-create-app
-                           tsc -b
+                      tsc -b
             - run:
                   name: Test TypeScript compilation lwc-services
                   command: cd ./packages/lwc-services
-                           tsc -b
+                      tsc -b
             # - run:
             #       name: Testing
             #       command: yarn test:unit

@@ -1,5 +1,18 @@
 ## Changelog
 
+### 2019-06-03
+
+**lwc-create-app 1.1.0**
+
+-   Added new option to create scaffolding for client/server structure using `Express`
+-   Add Jest configuration file as default to project root
+
+**lwc-services 1.1.0**
+
+-   Using `Express` instead of `webpack-dev-server` for webpack bundle serving
+-   Added custom server configuration option for `Express`
+-   Switched `build` script to production mode, and added a new `build:development` script
+
 ### 2019-06-01
 
 **lwc-create-app 1.0.4**

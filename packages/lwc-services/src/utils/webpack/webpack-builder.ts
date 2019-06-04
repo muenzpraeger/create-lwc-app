@@ -34,10 +34,12 @@ const optimization: webpack.Options.Optimization = {
 }
 
 function isWebpackEntryFunc(entry: any): entry is webpack.EntryFunc {
-    return (typeof entry === 'function')
+    return typeof entry === 'function'
 }
 
-function getWebpackEntryPaths(entry: string | string[] | webpack.Entry): string[] {
+function getWebpackEntryPaths(
+    entry: string | string[] | webpack.Entry
+): string[] {
     if (typeof entry === 'string') {
         return [entry]
     }

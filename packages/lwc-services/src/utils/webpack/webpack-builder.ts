@@ -1,4 +1,4 @@
-const webpack = require('webpack')
+import * as webpack from 'webpack'
 import * as webpackMerge from 'webpack-merge'
 
 const { npmmodules, LAYOUT } = require('./module')
@@ -21,7 +21,7 @@ const BABEL_LOADER = {
     }
 }
 
-const optimization = {
+const optimization: webpack.Options.Optimization = {
     splitChunks: {
         cacheGroups: {
             node_vendors: {
@@ -33,6 +33,31 @@ const optimization = {
     }
 }
 
+function isWebpackEntryFunc(entry: any): entry is webpack.EntryFunc {
+    return (typeof entry === 'function')
+}
+
+function getWebpackEntryPaths(entry: string | string[] | webpack.Entry): string[] {
+    if (typeof entry === 'string') {
+        return [entry]
+    }
+
+    if (entry instanceof Array) {
+        return entry
+    }
+
+    let paths: string[] = []
+    Object.keys(entry).forEach(name => {
+        let path = entry[name]
+        if (typeof path === 'string') {
+            paths.push(path)
+        } else {
+            paths.concat(path)
+        }
+    })
+    return paths
+}
+
 // @ts-ignore
 function buildWebpackConfig({
     entries,
@@ -40,7 +65,7 @@ function buildWebpackConfig({
     moduleDir,
     mode,
     customConfig
-}: string) {
+}: any) {
     let isProduction = false
 
     if (mode && mode === 'production') {
@@ -60,7 +85,7 @@ function buildWebpackConfig({
 
     const devToolOption = isProduction ? undefined : 'source-map'
 
-    let serverConfig = {
+    let serverConfig: webpack.Configuration = {
         entry: entries,
         mode: isProduction ? 'production' : 'development',
         output: {
@@ -109,7 +134,13 @@ function buildWebpackConfig({
         serverConfig = webpackMerge.smart(serverConfig, customConfig)
     }
 
-    const lwc_module_resolver = {
+    if (!serverConfig.entry || isWebpackEntryFunc(serverConfig.entry)) {
+        // Webpack API specifies that entry be a string | string[] | {[entryChunkName: string]: string|Array<string>}
+        return serverConfig
+    }
+
+    let entryPaths = getWebpackEntryPaths(serverConfig.entry)
+    const lwcModuleResolver = {
         resolve: {
             alias: {
                 lwc: require.resolve('@lwc/engine'),
@@ -118,14 +149,12 @@ function buildWebpackConfig({
             plugins: [
                 new ModuleResolver({
                     module: MODULE_CONFIG,
-                    entries: Object.keys(serverConfig.entry).map(
-                        key => serverConfig.entry[key]
-                    )
+                    entries: entryPaths
                 })
             ]
         }
     }
-    serverConfig = webpackMerge.smart(serverConfig, lwc_module_resolver)
+    serverConfig = webpackMerge.smart(serverConfig, lwcModuleResolver)
 
     return serverConfig
 }

@@ -1,4 +1,5 @@
 const webpack = require('webpack')
+import * as webpackMerge from 'webpack-merge'
 
 const { npmmodules, LAYOUT } = require('./module')
 import * as path from 'path'
@@ -33,7 +34,13 @@ const optimization = {
 }
 
 // @ts-ignore
-function buildWebpackConfig({ entries, outputDir, moduleDir, mode }: string) {
+function buildWebpackConfig({
+    entries,
+    outputDir,
+    moduleDir,
+    mode,
+    customConfig
+}: string) {
     let isProduction = false
 
     if (mode && mode === 'production') {
@@ -59,18 +66,6 @@ function buildWebpackConfig({ entries, outputDir, moduleDir, mode }: string) {
         output: {
             path: outputDir,
             filename: 'app.js'
-        },
-        resolve: {
-            alias: {
-                lwc: require.resolve('@lwc/engine'),
-                '@lwc/wire-service': require.resolve('@lwc/wire-service')
-            },
-            plugins: [
-                new ModuleResolver({
-                    module: MODULE_CONFIG,
-                    entries
-                })
-            ]
         },
 
         module: {
@@ -109,6 +104,29 @@ function buildWebpackConfig({ entries, outputDir, moduleDir, mode }: string) {
             }
         }
     }
+
+    if (customConfig) {
+        serverConfig = webpackMerge.smart(serverConfig, customConfig)
+    }
+
+    const lwc_module_resolver = {
+        resolve: {
+            alias: {
+                lwc: require.resolve('@lwc/engine'),
+                '@lwc/wire-service': require.resolve('@lwc/wire-service')
+            },
+            plugins: [
+                new ModuleResolver({
+                    module: MODULE_CONFIG,
+                    entries: Object.keys(serverConfig.entry).map(
+                        key => serverConfig.entry[key]
+                    )
+                })
+            ]
+        }
+    }
+    serverConfig = webpackMerge.smart(serverConfig, lwc_module_resolver)
+
     return serverConfig
 }
 

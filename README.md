@@ -88,7 +88,7 @@ OPTIONS
 
 EXAMPLES
   lwc-services serve
-  lwc-services serve -p 3998 -h 192.168.178.12 -m production
+  lwc-services serve -p 3998 -i 192.168.178.12
 ```
 
 #### `lwc-services sniff`

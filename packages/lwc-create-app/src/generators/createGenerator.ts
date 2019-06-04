@@ -235,7 +235,7 @@ class CreateGenerator extends Generator {
             'prettier --write'
         ]
 
-        this.pjson['lint-staged']['**/modules/**'] = ['eslint']
+        this.pjson['lint-staged']['**/modules/**/*.js'] = ['eslint']
 
         this.pjson['lint-staged']['*'] = ['git add']
 

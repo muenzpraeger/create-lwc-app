@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2019-06-04
+
+**lwc-create-app 1.1.1**
+
+-   Limit pre-commit linting to JS files
+
 ### 2019-06-03
 
 **lwc-create-app 1.1.0**

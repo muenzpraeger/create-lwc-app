@@ -75,22 +75,20 @@ export default class Build extends Command {
         }
 
         log(messages.logs.creating_build_configuration)
-        let webpackConfig = generateWebpackConfig(flags.mode!)
 
-        log(messages.logs.build_start)
-
-        // Merging custom webpack config file
         if (flags.webpack) {
             log(messages.logs.custom_configuration)
-            const webpackConfigCustom = require(path.resolve(
+            var webpackConfigCustom = require(path.resolve(
                 process.cwd(),
                 flags.webpack
             ))
-            webpackConfig = webpackMerge.smart(
-                webpackConfig,
-                webpackConfigCustom
-            )
         }
+        let webpackConfig = generateWebpackConfig(
+            flags.mode!,
+            webpackConfigCustom
+        )
+
+        log(messages.logs.build_start)
 
         if (flags.mode && flags.mode !== lwcConfig.mode) {
             webpackConfig.mode = flags.mode

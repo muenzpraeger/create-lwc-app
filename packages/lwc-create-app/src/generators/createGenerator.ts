@@ -13,7 +13,12 @@ import { log } from '../utils/logger'
 const sortPjson = require('sort-pjson')
 const debug = require('debug')('generator-oclif')
 
+let hasGit = false
 let hasYarn = false
+try {
+    execSync('git --version', { stdio: 'ignore' })
+    hasGit = true
+} catch {}
 try {
     execSync('yarn -v', { stdio: 'ignore' })
     hasYarn = true
@@ -251,6 +256,12 @@ class CreateGenerator extends Generator {
         }
         this.destinationRoot(targetPath)
         process.chdir(this.destinationRoot())
+        if (hasGit) {
+            try {
+                execSync('git init', { stdio: 'ignore' })
+                hasGit = true
+            } catch {}
+        }
     }
 
     writing() {
@@ -285,6 +296,7 @@ class CreateGenerator extends Generator {
             this.destinationPath('.gitignore'),
             this
         )
+
         this._write()
     }
 
@@ -292,7 +304,7 @@ class CreateGenerator extends Generator {
         const dependencies: string[] = []
         const devDependencies: string[] = []
         dependencies.push('lwc-services@^1')
-        devDependencies.push('husky@^1.3.1', 'lint-staged@^8.1.5')
+        devDependencies.push('husky@^2.3', 'lint-staged@^8.1.5')
 
         let yarnOpts = {} as any
         if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
@@ -306,7 +318,7 @@ class CreateGenerator extends Generator {
             install(devDependencies, {
                 ...yarnOpts,
                 ...dev,
-                ignoreScripts: true
+                ignoreScripts: false
             }),
             install(dependencies, { ...yarnOpts, ...save })
         ]).then(() => {})

@@ -5,4 +5,4 @@ coverage/
 dist/
 
 # Default resources folder
-src/resources
+<% if (clientserver) { %>src/client/resources<% } else { %>src/resources<% } %>

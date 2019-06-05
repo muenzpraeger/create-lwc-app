@@ -92,7 +92,8 @@ function buildWebpackConfig({
         mode: isProduction ? 'production' : 'development',
         output: {
             path: outputDir,
-            filename: 'app.js'
+            filename: 'app.js',
+            publicPath: '/'
         },
 
         module: {
@@ -126,7 +127,8 @@ function buildWebpackConfig({
                     hot: false,
                     quiet: true,
                     compress: true,
-                    publicPath: '/'
+                    publicPath: '/',
+                    historyApiFallback: true
                 }
             }
         }

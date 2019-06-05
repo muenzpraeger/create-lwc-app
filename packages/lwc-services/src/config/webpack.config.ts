@@ -44,6 +44,7 @@ export function generateWebpackConfig(mode?: string, customConfig?: any) {
     // error-overlay-webpack-plugin has a bug that breaks the build when > 1 entry point is specified
     if (Object.keys(lwcWebpackConfig.entry).length == 1) {
         lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
+            // TODO Test potential alternatives for multiple entries
             new ErrorOverlayPlugin()
         ])
     }

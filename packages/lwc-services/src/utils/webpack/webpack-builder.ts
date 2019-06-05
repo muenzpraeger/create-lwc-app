@@ -24,10 +24,15 @@ const BABEL_LOADER = {
 const optimization: webpack.Options.Optimization = {
     splitChunks: {
         cacheGroups: {
+            lwc: {
+                test: /[\\/]node_modules[\\/]@lwc[\\/]engine/,
+                chunks: 'all',
+                priority: 1
+            },
             node_vendors: {
                 test: /[\\/]node_modules[\\/]/,
                 chunks: 'all',
-                priority: 1
+                priority: -10
             }
         }
     }

@@ -279,7 +279,11 @@ class CreateGenerator extends Generator {
             this.destinationPath('.eslintrc.json'),
             this
         )
-
+        this.fs.copyTpl(
+            this.templatePath('eslintignore'),
+            this.destinationPath('.eslintignore'),
+            this
+        )
         this.fs.copyTpl(
             this.templatePath('prettierignore'),
             this.destinationPath('.prettierignore'),

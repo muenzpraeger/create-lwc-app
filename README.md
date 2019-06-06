@@ -24,6 +24,10 @@ This will run a npx installation of [lwc-create-app](./packages/lwc-create-app),
 
 Then run `yarn watch` (or `npm run watch`, depending on your personal preference and what you've chosen during the npx installation). **Done!**
 
+## Live App
+
+If you want to see Lightning Web Components in action - check out [https://recipes.lwc.dev](https://recipes.lwc.dev).
+
 ## So what's this tool about?
 
 Technically it's a toolchain that gives you a quickstart experience for developing with Lightning web components. This project consists out of two packages:

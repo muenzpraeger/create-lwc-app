@@ -34,7 +34,7 @@
         "**/*.{html,js,json,ts,yaml,yml,md}": [
             "prettier --write"
         ],
-        "**/packages/**": [
+        "**/packages/**/*.ts": [
             "eslint"
         ],
         "*": [

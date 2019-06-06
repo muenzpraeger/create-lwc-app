@@ -1,6 +1,6 @@
 {
     "author": "René Winkelmeyer @muenzpraeger",
-    "homepage": "https://github.com/muenzpraeger/lwc-create-app",
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
     "name": "root",
     "workspaces": [
         "packages/*"

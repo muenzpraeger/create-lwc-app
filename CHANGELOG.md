@@ -2,7 +2,7 @@
 
 ### 2019-06-05
 
-**lwc-create-app 1.2.0**
+**create-lwc-app 1.2.0**
 
 -   Automatically init Git repo after project initialization for pre-commit hooks
 -   Adding default .eslintignore
@@ -10,19 +10,19 @@
 
 **lwc-services 1.2.0**
 
--   Adding webpack default config for SPA (Single Page Application), see [issue #33](https://github.com/muenzpraeger/lwc-create-app/issues/33)
+-   Adding webpack default config for SPA (Single Page Application), see [issue #33](https://github.com/muenzpraeger/create-lwc-app/issues/33)
 -   Allowing multiple entry points for custom webpack configuration files
 -   Optimizing default chunking for webpack
 
 ### 2019-06-04
 
-**lwc-create-app 1.1.1**
+**create-lwc-app 1.1.1**
 
 -   Limit pre-commit linting to JS files
 
 ### 2019-06-03
 
-**lwc-create-app 1.1.0**
+**create-lwc-app 1.1.0**
 
 -   Added new option to create scaffolding for client/server structure using `Express`
 -   Add Jest configuration file as default to project root
@@ -35,7 +35,7 @@
 
 ### 2019-06-01
 
-**lwc-create-app 1.0.4**
+**create-lwc-app 1.0.4**
 
 -   Updating default README
 -   Updating formatting of default `.prettierrc` file
@@ -49,7 +49,7 @@
 
 ### 2019-05-30
 
-**lwc-create-app 1.0.2**
+**create-lwc-app 1.0.2**
 
 -   Updating min node version to >=10.0
 -   Defaulting to register a custom element on app creation

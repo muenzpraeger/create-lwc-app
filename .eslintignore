@@ -1,5 +1,5 @@
-packages/lwc-create-app/templates/README.md
-packages/lwc-create-app/templates/lwc-services.config.js
-packages/lwc-create-app/templates/eslintignore
-packages/lwc-create-app/templates/prettierignore
+packages/create-lwc-app/templates/README.md
+packages/create-lwc-app/templates/lwc-services.config.js
+packages/create-lwc-app/templates/eslintignore
+packages/create-lwc-app/templates/prettierignore
 *.json

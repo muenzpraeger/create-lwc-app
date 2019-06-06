@@ -1,4 +1,4 @@
-# lwc-services
+# create-lwc-app
 
 Creating Lightning Web Components projects is a breeze.
 

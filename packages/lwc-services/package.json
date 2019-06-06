@@ -5,7 +5,7 @@
     "bin": {
         "lwc-services": "./bin/run"
     },
-    "bugs": "https://github.com/muenzpraeger/lwc-create-app/issues",
+    "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
         "@babel/core": "^7.4.5",
         "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
@@ -65,7 +65,7 @@
         "/bin",
         "/lib"
     ],
-    "homepage": "https://github.com/muenzpraeger/lwc-create-app",
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
     "keywords": [
         "oclif",
         "lwc",
@@ -83,7 +83,7 @@
             "@oclif/plugin-help"
         ]
     },
-    "repository": "muenzpraeger/lwc-create-app",
+    "repository": "muenzpraeger/create-lwc-app",
     "scripts": {
         "posttest": "tslint -p test -t stylish",
         "prepack": "tsc -b",

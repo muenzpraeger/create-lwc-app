@@ -1,12 +1,12 @@
-# lwc-create-app
+# create-lwc-app
 
 A tool for setting up your Lightning Web Components projects.
 
-[![CircleCI](https://circleci.com/gh/muenzpraeger/lwc-create-app.svg?style=svg)](https://circleci.com/gh/muenzpraeger/lwc-create-app)
+[![CircleCI](https://circleci.com/gh/muenzpraeger/create-lwc-app.svg?style=svg)](https://circleci.com/gh/muenzpraeger/create-lwc-app)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 
-[![Version](https://img.shields.io/npm/v/lwc-create-app.svg)](https://npmjs.org/package/lwc-create-app) [![Downloads/week](https://img.shields.io/npm/dw/lwc-create-app.svg)](https://npmjs.org/package/lwc-create-app) lwc-create-app
+[![Version](https://img.shields.io/npm/v/create-lwc-app.svg)](https://npmjs.org/package/create-lwc-app) [![Downloads/week](https://img.shields.io/npm/dw/create-lwc-app.svg)](https://npmjs.org/package/create-lwc-app) create-lwc-app
 
 [![Version](https://img.shields.io/npm/v/lwc-services.svg)](https://npmjs.org/package/lwc-services) [![Downloads/week](https://img.shields.io/npm/dw/lwc-services.svg)](https://npmjs.org/package/lwc-services) lwc-services
 
@@ -15,12 +15,12 @@ A tool for setting up your Lightning Web Components projects.
 To get up and running execute the following command in a shell/terminal:
 
 ```
-npx lwc-create-app your-app-name
+npx create-lwc-app your-app-name
 ```
 
 > To run this, you must have Node.js installed, with at least npm 5.2+. You should be familiar with either npm or yarn. The npx tool is a package runner that installs with npm 5.2+.
 
-This will run a npx installation of [lwc-create-app](./packages/lwc-create-app), guide you with a couple of steps through the setup, and then create a new Lightning Web Components project for you.
+This will run a npx installation of [create-lwc-app](./packages/create-lwc-app), guide you with a couple of steps through the setup, and then create a new Lightning Web Components project for you.
 
 Then run `yarn watch` (or `npm run watch`, depending on your personal preference and what you've chosen during the npx installation). **Done!**
 
@@ -28,7 +28,7 @@ Then run `yarn watch` (or `npm run watch`, depending on your personal preference
 
 Technically it's a toolchain that gives you a quickstart experience for developing with Lightning web components. This project consists out of two packages:
 
--   [lwc-create-app](./packages/lwc-create-app)
+-   [create-lwc-app](./packages/create-lwc-app)
 -   [lwc-services](./packages/lwc-services)
 
 It is focused on providing a quick, but also if needed customizable, onboarding experience when you want to develop with Lightning Web Components. If you want to develop Lightning Web Components on the Salesforce Platform you may want to look into using [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) instead.
@@ -37,7 +37,7 @@ If you haven't heard about Lightning Web Components - it's a new framework, intr
 
 ## lwc-services
 
-Using `lwc-create-app` is meant to be a one-stop-shop solution. The created project contains everything you need to get started. It adds one dependecy, which is `lwc-services`. Find below a list of all the things that are bundled with it. When you create a project with `lwc-create-app` also a number of predefined scripts gets added to your `package.json`.
+Using `create-lwc-app` is meant to be a one-stop-shop solution. The created project contains everything you need to get started. It adds one dependecy, which is `lwc-services`. Find below a list of all the things that are bundled with it. When you create a project with `create-lwc-app` also a number of predefined scripts gets added to your `package.json`.
 
 ### Configuration
 

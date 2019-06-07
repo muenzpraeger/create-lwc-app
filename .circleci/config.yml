@@ -19,13 +19,8 @@ jobs:
                   name: ESlint verification
                   command: yarn lint
             - run:
-                  name: Test TypeScript compilation lwc-create-app
-                  command: cd ./packages/lwc-create-app
-                      tsc -b
-            - run:
-                  name: Test TypeScript compilation lwc-services
-                  command: cd ./packages/lwc-services
-                      tsc -b
+                  name: Build
+                  command: yarn build
             # - run:
             #       name: Testing
             #       command: yarn test:unit

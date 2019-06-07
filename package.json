@@ -21,6 +21,7 @@
         "typescript": "^3.3"
     },
     "scripts": {
+        "build": "lerna run build",
         "lint": "eslint ./packages/**/src/**/*.ts",
         "prettier": "prettier --write '**/*.{html,css,js,json,md,ts,yaml,yml}'",
         "prettier:verify": "prettier --list-different '**/*.{html,css,js,json,md,ts,yaml,yml}'"

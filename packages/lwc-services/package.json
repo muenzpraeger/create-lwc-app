@@ -86,7 +86,7 @@
     "repository": "muenzpraeger/lwc-create-app",
     "scripts": {
         "posttest": "tslint -p test -t stylish",
-        "prepack": "tsc -b",
+        "build": "tsc -b",
         "genreadme": "oclif-dev readme && git add README.md"
     },
     "types": "lib/index.d.ts"

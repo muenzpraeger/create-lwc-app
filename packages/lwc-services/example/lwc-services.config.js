@@ -18,7 +18,7 @@ module.exports = {
     // Default directory for source files
     sourceDir: './src/client',
     // List of resources for copying to the build folder
-    resources: [],
+    resources: [{ from: 'src/resources', to: 'dist/resources' }],
     // Default server options for watch command
     devServer: {
         port: 3001,

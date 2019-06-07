@@ -4,9 +4,11 @@ const lwcResolver = require('@lwc/jest-resolver')
 const { LAYOUT, isValidModuleName, getInfoFromId } = require('./webpack/module')
 import { lwcConfig } from '../config/lwcConfig'
 
-function getProjectInfo(layout: string): {
-    modulesDir: string;
-    namespaces: string;
+function getProjectInfo(
+    layout: string
+): {
+    modulesDir: string
+    namespaces: string
 } {
     const cwd = fs.realpathSync(process.cwd())
     const modulesDir = path.join(cwd + '', 'src', 'modules')
@@ -18,7 +20,7 @@ function getProjectInfo(layout: string): {
 }
 
 function isFile(file: string): boolean {
-    let result = false;
+    let result = false
 
     try {
         const stat = fs.statSync(file)
@@ -46,7 +48,6 @@ function resolveAsFile(name: string, extensions: string[]): string | null {
     }
     return null
 }
-
 
 module.exports = function(modulePath: string, options: any): string {
     const layout = lwcConfig.layout

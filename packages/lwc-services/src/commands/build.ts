@@ -11,34 +11,29 @@ import { log, welcome } from '../utils/logger'
 import { analyzeStats } from '../utils/webpack/statsAnalyzer'
 
 function buildWebpack(webpackConfig: any) {
-    return new Promise(
-        (resolve, reject): void => {
-            webpack(
-                webpackConfig,
-                (err: any, stats: any): void => {
-                    if (err) {
-                        reject(err)
-                    }
-                    if (!stats || !stats.compilation) {
-                        log(messages.errors.no_compilation)
-                    }
-                    // Parsing out error messages during compilation. Makes life MUCH easier.
-                    const { errors } = stats.compilation
-                    if (errors.length) {
-                        let errorMessages = ''
-                        errors.forEach((error: any) => {
-                            errorMessages = errorMessages
-                                .concat(error.message)
-                                .concat('\n')
-                        })
-                        return reject(errorMessages)
-                    }
-                    analyzeStats(stats)
-                    return resolve()
-                }
-            )
-        }
-    )
+    return new Promise((resolve, reject): void => {
+        webpack(webpackConfig, (err: any, stats: any): void => {
+            if (err) {
+                reject(err)
+            }
+            if (!stats || !stats.compilation) {
+                log(messages.errors.no_compilation)
+            }
+            // Parsing out error messages during compilation. Makes life MUCH easier.
+            const { errors } = stats.compilation
+            if (errors.length) {
+                let errorMessages = ''
+                errors.forEach((error: any) => {
+                    errorMessages = errorMessages
+                        .concat(error.message)
+                        .concat('\n')
+                })
+                return reject(errorMessages)
+            }
+            analyzeStats(stats)
+            return resolve()
+        })
+    })
 }
 
 export default class Build extends Command {

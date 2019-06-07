@@ -3,10 +3,8 @@ import cli from 'cli-ux'
 import * as fs from 'fs'
 import * as path from 'path'
 
-// tslint:disable-next-line: no-implicit-dependencies
 const compression = require('compression')
 const helmet = require('helmet')
-// tslint:disable-next-line: no-implicit-dependencies
 const express = require('express')
 
 import { lwcConfig } from '../config/lwcConfig'
@@ -45,7 +43,6 @@ export default class Serve extends Command {
     async run() {
         const { flags } = this.parse(Serve)
 
-        // tslint:disable-next-line: no-console
         console.clear()
 
         welcome()
@@ -84,7 +81,6 @@ export default class Serve extends Command {
             customExpressConfig(app)
         }
 
-        // tslint:disable-next-line: no-unused
         app.use('*', (req: any, res: any) => {
             res.sendFile(path.resolve(BUILD_DIR, 'index.html'))
         })
@@ -95,7 +91,6 @@ export default class Serve extends Command {
             log(messages.logs.local_server_listening, url)
 
             if (flags.open) {
-                // tslint:disable-next-line: no-floating-promises
                 cli.open(url)
             }
         })

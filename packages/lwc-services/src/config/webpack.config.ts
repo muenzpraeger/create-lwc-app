@@ -2,7 +2,6 @@ const { buildWebpackConfig } = require('../utils/webpack/webpack-builder')
 const CopyPlugin = require('copy-webpack-plugin')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// tslint:disable-next-line: no-implicit-dependencies
 import * as path from 'path'
 
 import { lwcConfig } from './lwcConfig'

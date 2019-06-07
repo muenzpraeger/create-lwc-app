@@ -1,5 +1,4 @@
 import { Command, flags } from '@oclif/command'
-// tslint:disable-next-line: no-implicit-dependencies
 import merge = require('deepmerge')
 import * as fs from 'fs'
 import * as path from 'path'
@@ -32,7 +31,6 @@ export default class Test extends Command {
     async run() {
         const { flags } = this.parse(Test)
 
-        // tslint:disable-next-line: no-console
         console.clear()
 
         welcome()

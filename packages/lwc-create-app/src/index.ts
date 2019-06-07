@@ -32,14 +32,12 @@ class Create extends Command {
             'CreateGenerator'
         )
 
-        // tslint:disable-next-line: no-console
         console.clear()
         welcome()
 
         await new Promise((resolve, reject) => {
             env.run(
                 'CreateGenerator',
-                // tslint:disable-next-line: object-literal-shorthand
                 { options: options, name: name },
                 (err: null | Error) => {
                     if (err) reject(err)

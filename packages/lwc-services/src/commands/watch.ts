@@ -46,7 +46,6 @@ export default class Watch extends Command {
     async run() {
         const { flags } = this.parse(Watch)
 
-        // tslint:disable-next-line: no-console
         console.clear()
 
         welcome()
@@ -88,7 +87,6 @@ export default class Watch extends Command {
         // Lazy loading
         const WebpackDevServer = require('webpack-dev-server')
 
-        // tslint:disable-next-line: no-unused
         const compiler = webpack(webpackConfig)
 
         const app = new WebpackDevServer(compiler, webpackConfig.devServer)
@@ -103,7 +101,6 @@ export default class Watch extends Command {
                 log(messages.logs.local_server_listening, url)
 
                 if (flags.open) {
-                    // tslint:disable-next-line: no-floating-promises
                     cli.open(url)
                 }
             }

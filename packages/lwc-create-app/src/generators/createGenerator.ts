@@ -1,6 +1,3 @@
-// tslint:disable no-floating-promises
-// tslint:disable no-console
-
 import { execSync, spawnSync } from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'

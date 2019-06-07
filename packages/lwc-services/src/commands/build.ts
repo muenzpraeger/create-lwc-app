@@ -42,7 +42,6 @@ export default class Build extends Command {
     async run() {
         const { flags } = this.parse(Build)
 
-        // tslint:disable-next-line: no-console
         console.clear()
         welcome()
 

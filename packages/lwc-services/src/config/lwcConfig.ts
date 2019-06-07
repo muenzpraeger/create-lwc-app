@@ -1,4 +1,3 @@
-// tslint:disable-next-line: no-implicit-dependencies
 import merge = require('deepmerge')
 import * as path from 'path'
 
@@ -108,7 +107,6 @@ function buildConfig(): Config {
         let config = require(fileName)
         combinedConfig = merge(defaultLwcConfig, config)
         return combinedConfig
-        // tslint:disable-next-line: no-unused
     } catch (error) {
         // We don't need error handling atm
     }

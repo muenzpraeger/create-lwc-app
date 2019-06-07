@@ -10,14 +10,12 @@ const { getConfig, getInfoFromPath } = require('./module')
 
 module.exports = function(source: any) {
     // @ts-ignore
-    // tslint:disable-next-line: no-this-assignment
     const { resourcePath } = this
 
     const config = getConfig(loaderUtils.getOptions(this))
     let info
     try {
         info = getInfoFromPath(resourcePath, config)
-        // tslint:disable-next-line: no-unused
     } catch (e) {
         info = {
             name: '',

@@ -1,5 +1,4 @@
 import { Command, flags } from '@oclif/command'
-// tslint:disable-next-line: no-implicit-dependencies
 import * as fs from 'fs'
 import * as path from 'path'
 import util = require('util')
@@ -32,7 +31,6 @@ export default class Sniff extends Command {
     async run() {
         const { flags } = this.parse(Sniff)
 
-        // tslint:disable-next-line: no-console
         console.clear()
 
         welcome()

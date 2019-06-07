@@ -90,9 +90,7 @@ export default class Serve extends Command {
         })
         app.listen(lwcConfig.server.port, lwcConfig.server.host, () => {
             const protocol = 'http'
-            const url = `${protocol}://${lwcConfig.server.host}:${
-                lwcConfig.server.port
-            }`
+            const url = `${protocol}://${lwcConfig.server.host}:${lwcConfig.server.port}`
 
             log(messages.logs.local_server_listening, url)
 

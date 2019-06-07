@@ -31,8 +31,8 @@ export default class Sniff extends Command {
     async run() {
         const { flags } = this.parse(Sniff)
 
+        // eslint-disable-next-line no-console
         console.clear()
-
         welcome()
 
         if (!flags.directory) {

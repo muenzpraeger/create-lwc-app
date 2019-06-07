@@ -31,8 +31,8 @@ export default class Test extends Command {
     async run() {
         const { flags } = this.parse(Test)
 
+        // eslint-disable-next-line no-console
         console.clear()
-
         welcome()
 
         // Inspiration of this implementation taken from https://github.com/salesforce/lwc-jest. Thank you, Trevor!

@@ -46,8 +46,8 @@ export default class Watch extends Command {
     async run() {
         const { flags } = this.parse(Watch)
 
+        // eslint-disable-next-line no-console
         console.clear()
-
         welcome()
 
         // Check if custom webpack config is passed, and if it really exists.
@@ -58,7 +58,7 @@ export default class Watch extends Command {
             }
         }
 
-        let webpackConfig = generateWebpackConfig(flags.mode!)
+        let webpackConfig = generateWebpackConfig(flags.mode)
         lwcConfig.devServer.contentBase = lwcConfig.sourceDir
         webpackConfig.devServer = lwcConfig.devServer
 

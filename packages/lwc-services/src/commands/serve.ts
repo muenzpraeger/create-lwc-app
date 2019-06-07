@@ -43,8 +43,8 @@ export default class Serve extends Command {
     async run() {
         const { flags } = this.parse(Serve)
 
+        // eslint-disable-next-line no-console
         console.clear()
-
         welcome()
 
         const BUILD_DIR = flags.directory ? flags.directory : lwcConfig.buildDir

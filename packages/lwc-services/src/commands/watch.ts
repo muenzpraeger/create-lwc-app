@@ -98,9 +98,7 @@ export default class Watch extends Command {
             webpackConfig.devServer.host,
             () => {
                 const protocol = 'http'
-                const url = `${protocol}://${webpackConfig.devServer.host}:${
-                    webpackConfig.devServer.port
-                }`
+                const url = `${protocol}://${webpackConfig.devServer.host}:${webpackConfig.devServer.port}`
 
                 log(messages.logs.local_server_listening, url)
 

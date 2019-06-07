@@ -28,7 +28,7 @@ class Create extends Command {
         const env = createEnv()
 
         env.register(
-            require.resolve('./generators/CreateGenerator'),
+            require.resolve('./generators/createGenerator'),
             'CreateGenerator'
         )
 

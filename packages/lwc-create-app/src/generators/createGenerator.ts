@@ -1,6 +1,3 @@
-// tslint:disable no-floating-promises
-// tslint:disable no-console
-
 import { execSync, spawnSync } from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -18,11 +15,16 @@ let hasYarn = false
 try {
     execSync('git --version', { stdio: 'ignore' })
     hasGit = true
-} catch {}
+} catch {
+    // Nothing
+}
+
 try {
     execSync('yarn -v', { stdio: 'ignore' })
     hasYarn = true
-} catch {}
+} catch {
+    // Nothing
+}
 
 class CreateGenerator extends Generator {
     options: {
@@ -260,7 +262,9 @@ class CreateGenerator extends Generator {
             try {
                 execSync('git init', { stdio: 'ignore' })
                 hasGit = true
-            } catch {}
+            } catch {
+                // Do nothing
+            }
         }
     }
 

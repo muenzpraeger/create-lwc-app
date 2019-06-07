@@ -21,11 +21,9 @@
         "yeoman-generator": "^4.0.0"
     },
     "devDependencies": {
-        "@oclif/tslint": "^3",
         "@types/node": "^10",
         "@types/semver-compare": "^1.0.0",
-        "ts-node": "^8",
-        "tslint": "^5"
+        "ts-node": "^8"
     },
     "engines": {
         "node": ">=10.0.0"
@@ -50,7 +48,6 @@
     },
     "repository": "muenzpraeger/lwc-create-app",
     "scripts": {
-        "posttest": "tslint -p . -t stylish",
         "build": "tsc -b"
     },
     "types": "lib/index.d.ts"

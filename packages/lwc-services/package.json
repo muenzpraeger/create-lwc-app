@@ -47,7 +47,6 @@
     "devDependencies": {
         "@oclif/dev-cli": "^1",
         "@oclif/test": "^1",
-        "@oclif/tslint": "^3",
         "@types/chai": "^4",
         "@types/mocha": "^5",
         "@types/node": "^10",
@@ -55,8 +54,7 @@
         "@types/semver-compare": "^1.0.0",
         "@types/webpack": "^4.4.27",
         "@types/webpack-merge": "^4.1.4",
-        "cli-ux": "^5.2.1",
-        "tslint": "^5.16.0"
+        "cli-ux": "^5.2.1"
     },
     "engines": {
         "node": ">=10.0.0"
@@ -85,7 +83,6 @@
     },
     "repository": "muenzpraeger/lwc-create-app",
     "scripts": {
-        "posttest": "tslint -p test -t stylish",
         "build": "tsc -b",
         "genreadme": "oclif-dev readme && git add README.md"
     },

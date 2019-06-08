@@ -19,7 +19,7 @@ module.exports = {
     sourceDir: './src/client',
     // List of resources for copying to the build folder
     resources: [{ from: 'src/resources', to: 'dist/resources' }],
-    // Default server options for watch command
+    // Default server options for watch command.  See more options at https://webpack.js.org/configuration/dev-server
     devServer: {
         port: 3001,
         host: '0.0.0.0',
@@ -27,6 +27,8 @@ module.exports = {
         stats: 'errors-only',
         noInfo: true,
         contentBase: './src/client'
+        // run a local backend on another port (ex: nodejs) but still use watch command for lwc live re-loading
+        // proxy: { '/': 'http://localhost:8443'},
     },
     // Default server options for serve command
     server: {

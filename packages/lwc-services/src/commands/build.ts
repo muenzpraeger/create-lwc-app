@@ -3,13 +3,38 @@ import * as fs from 'fs'
 import * as path from 'path'
 import * as rimraf from 'rimraf'
 import * as webpack from 'webpack'
-import * as webpackMerge from 'webpack-merge'
 
 import { lwcConfig } from '../config/lwcConfig'
 import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/build'
 import { log, welcome } from '../utils/logger'
 import { analyzeStats } from '../utils/webpack/statsAnalyzer'
+
+function buildWebpack(webpackConfig: any) {
+    return new Promise((resolve, reject): void => {
+        webpack(webpackConfig, (err: any, stats: any): void => {
+            if (err) {
+                reject(err)
+            }
+            if (!stats || !stats.compilation) {
+                log(messages.errors.no_compilation)
+            }
+            // Parsing out error messages during compilation. Makes life MUCH easier.
+            const { errors } = stats.compilation
+            if (errors.length) {
+                let errorMessages = ''
+                errors.forEach((error: any) => {
+                    errorMessages = errorMessages
+                        .concat(error.message)
+                        .concat('\n')
+                })
+                return reject(errorMessages)
+            }
+            analyzeStats(stats)
+            return resolve()
+        })
+    })
+}
 
 export default class Build extends Command {
     static description = messages.description
@@ -42,7 +67,7 @@ export default class Build extends Command {
     async run() {
         const { flags } = this.parse(Build)
 
-        // tslint:disable-next-line: no-console
+        // eslint-disable-next-line no-console
         console.clear()
         welcome()
 
@@ -75,22 +100,20 @@ export default class Build extends Command {
         }
 
         log(messages.logs.creating_build_configuration)
-        let webpackConfig = generateWebpackConfig(flags.mode!)
 
-        log(messages.logs.build_start)
-
-        // Merging custom webpack config file
         if (flags.webpack) {
             log(messages.logs.custom_configuration)
-            const webpackConfigCustom = require(path.resolve(
+            var webpackConfigCustom = require(path.resolve(
                 process.cwd(),
                 flags.webpack
             ))
-            webpackConfig = webpackMerge.smart(
-                webpackConfig,
-                webpackConfigCustom
-            )
         }
+        let webpackConfig = generateWebpackConfig(
+            flags.mode,
+            webpackConfigCustom
+        )
+
+        log(messages.logs.build_start)
 
         if (flags.mode && flags.mode !== lwcConfig.mode) {
             webpackConfig.mode = flags.mode
@@ -104,36 +127,10 @@ export default class Build extends Command {
         }
 
         try {
-            await buildWebpack()
+            await buildWebpack(webpackConfig)
             log(messages.logs.build_end)
         } catch (error) {
             log({ message: error, emoji: 'sos' })
-        }
-
-        function buildWebpack() {
-            return new Promise((resolve, reject) => {
-                webpack(webpackConfig, (err: any, stats: any) => {
-                    if (err) {
-                        reject(err)
-                    }
-                    if (!stats || !stats.compilation) {
-                        log(messages.errors.no_compilation)
-                    }
-                    // Parsing out error messages during compilation. Makes life MUCH easier.
-                    const { errors } = stats.compilation
-                    if (errors.length) {
-                        let errorMessages = ''
-                        errors.forEach((error: any) => {
-                            errorMessages = errorMessages
-                                .concat(error.message)
-                                .concat('\n')
-                        })
-                        return reject(errorMessages)
-                    }
-                    analyzeStats(stats)
-                    return resolve()
-                })
-            })
         }
     }
 }

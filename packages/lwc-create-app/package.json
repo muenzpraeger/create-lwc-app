@@ -1,6 +1,6 @@
 {
     "name": "lwc-create-app",
-    "version": "1.1.1",
+    "version": "1.2.0",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-create-app": "./bin/run"
@@ -21,12 +21,9 @@
         "yeoman-generator": "^4.0.0"
     },
     "devDependencies": {
-        "@oclif/tslint": "^3",
         "@types/node": "^10",
         "@types/semver-compare": "^1.0.0",
-        "ts-node": "^8",
-        "tslint": "^5",
-        "typescript": "^3.3"
+        "ts-node": "^8"
     },
     "engines": {
         "node": ">=10.0.0"
@@ -51,8 +48,7 @@
     },
     "repository": "muenzpraeger/lwc-create-app",
     "scripts": {
-        "posttest": "tslint -p . -t stylish",
-        "prepack": "tsc -b"
+        "build": "tsc -b"
     },
     "types": "lib/index.d.ts"
 }

@@ -3,10 +3,8 @@ import cli from 'cli-ux'
 import * as fs from 'fs'
 import * as path from 'path'
 
-// tslint:disable-next-line: no-implicit-dependencies
 const compression = require('compression')
 const helmet = require('helmet')
-// tslint:disable-next-line: no-implicit-dependencies
 const express = require('express')
 
 import { lwcConfig } from '../config/lwcConfig'
@@ -45,9 +43,8 @@ export default class Serve extends Command {
     async run() {
         const { flags } = this.parse(Serve)
 
-        // tslint:disable-next-line: no-console
+        // eslint-disable-next-line no-console
         console.clear()
-
         welcome()
 
         const BUILD_DIR = flags.directory ? flags.directory : lwcConfig.buildDir
@@ -84,20 +81,16 @@ export default class Serve extends Command {
             customExpressConfig(app)
         }
 
-        // tslint:disable-next-line: no-unused
         app.use('*', (req: any, res: any) => {
             res.sendFile(path.resolve(BUILD_DIR, 'index.html'))
         })
         app.listen(lwcConfig.server.port, lwcConfig.server.host, () => {
             const protocol = 'http'
-            const url = `${protocol}://${lwcConfig.server.host}:${
-                lwcConfig.server.port
-            }`
+            const url = `${protocol}://${lwcConfig.server.host}:${lwcConfig.server.port}`
 
             log(messages.logs.local_server_listening, url)
 
             if (flags.open) {
-                // tslint:disable-next-line: no-floating-promises
                 cli.open(url)
             }
         })

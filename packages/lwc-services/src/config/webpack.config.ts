@@ -2,8 +2,6 @@ const { buildWebpackConfig } = require('../utils/webpack/webpack-builder')
 const CopyPlugin = require('copy-webpack-plugin')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// tslint:disable-next-line: no-implicit-dependencies
-import merge = require('deepmerge')
 import * as path from 'path'
 
 import { lwcConfig } from './lwcConfig'
@@ -14,12 +12,13 @@ const MODULE_DIR = path.resolve(ROOT_DIR, lwcConfig.moduleDir)
 const TEMPLATES_DIR = path.resolve(ROOT_DIR, lwcConfig.sourceDir)
 
 // Simple mechanism to pass any arbitrary config values from the CLI for webpack
-export function generateWebpackConfig(mode?: string, config?: any) {
+export function generateWebpackConfig(mode?: string, customConfig?: any) {
     let lwcWebpackConfig = buildWebpackConfig({
         entries: [path.resolve(TEMPLATES_DIR, 'index.js')],
         outputDir: OUTPUT_DIR,
         moduleDir: MODULE_DIR,
-        mode
+        mode,
+        customConfig
     })
 
     lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
@@ -27,10 +26,6 @@ export function generateWebpackConfig(mode?: string, config?: any) {
             template: path.resolve(TEMPLATES_DIR, 'index.html')
         })
     ])
-
-    if (config) {
-        lwcWebpackConfig = merge(lwcWebpackConfig, config)
-    }
 
     if (lwcConfig.resources.length) {
         let resources: any = []
@@ -44,8 +39,14 @@ export function generateWebpackConfig(mode?: string, config?: any) {
             new CopyPlugin(resources)
         ])
     }
-    lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
-        new ErrorOverlayPlugin()
-    ])
+
+    // error-overlay-webpack-plugin has a bug that breaks the build when > 1 entry point is specified
+    if (Object.keys(lwcWebpackConfig.entry).length == 1) {
+        lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
+            // TODO Test potential alternatives for multiple entries
+            new ErrorOverlayPlugin()
+        ])
+    }
+
     return lwcWebpackConfig
 }

@@ -1,4 +1,5 @@
-const webpack = require('webpack')
+import * as webpack from 'webpack'
+import * as webpackMerge from 'webpack-merge'
 
 const { npmmodules, LAYOUT } = require('./module')
 import * as path from 'path'
@@ -20,20 +21,58 @@ const BABEL_LOADER = {
     }
 }
 
-const optimization = {
+const optimization: webpack.Options.Optimization = {
     splitChunks: {
         cacheGroups: {
+            lwc: {
+                test: /[\\/]node_modules[\\/]@lwc[\\/]engine/,
+                chunks: 'all',
+                priority: 1
+            },
             node_vendors: {
                 test: /[\\/]node_modules[\\/]/,
                 chunks: 'all',
-                priority: 1
+                priority: -10
             }
         }
     }
 }
 
+function isWebpackEntryFunc(entry: any): entry is webpack.EntryFunc {
+    return typeof entry === 'function'
+}
+
+function getWebpackEntryPaths(
+    entry: string | string[] | webpack.Entry
+): string[] {
+    if (typeof entry === 'string') {
+        return [entry]
+    }
+
+    if (entry instanceof Array) {
+        return entry
+    }
+
+    let paths: string[] = []
+    Object.keys(entry).forEach(name => {
+        let path = entry[name]
+        if (typeof path === 'string') {
+            paths.push(path)
+        } else {
+            paths.concat(path)
+        }
+    })
+    return paths
+}
+
 // @ts-ignore
-function buildWebpackConfig({ entries, outputDir, moduleDir, mode }: string) {
+function buildWebpackConfig({
+    entries,
+    outputDir,
+    moduleDir,
+    mode,
+    customConfig
+}: any) {
     let isProduction = false
 
     if (mode && mode === 'production') {
@@ -53,24 +92,13 @@ function buildWebpackConfig({ entries, outputDir, moduleDir, mode }: string) {
 
     const devToolOption = isProduction ? undefined : 'source-map'
 
-    let serverConfig = {
+    let serverConfig: webpack.Configuration = {
         entry: entries,
         mode: isProduction ? 'production' : 'development',
         output: {
             path: outputDir,
-            filename: 'app.js'
-        },
-        resolve: {
-            alias: {
-                lwc: require.resolve('@lwc/engine'),
-                '@lwc/wire-service': require.resolve('@lwc/wire-service')
-            },
-            plugins: [
-                new ModuleResolver({
-                    module: MODULE_CONFIG,
-                    entries
-                })
-            ]
+            filename: 'app.js',
+            publicPath: '/'
         },
 
         module: {
@@ -104,11 +132,39 @@ function buildWebpackConfig({ entries, outputDir, moduleDir, mode }: string) {
                     hot: false,
                     quiet: true,
                     compress: true,
-                    publicPath: '/'
+                    publicPath: '/',
+                    historyApiFallback: true
                 }
             }
         }
     }
+
+    if (customConfig) {
+        serverConfig = webpackMerge.smart(serverConfig, customConfig)
+    }
+
+    if (!serverConfig.entry || isWebpackEntryFunc(serverConfig.entry)) {
+        // Webpack API specifies that entry be a string | string[] | {[entryChunkName: string]: string|Array<string>}
+        return serverConfig
+    }
+
+    let entryPaths = getWebpackEntryPaths(serverConfig.entry)
+    const lwcModuleResolver = {
+        resolve: {
+            alias: {
+                lwc: require.resolve('@lwc/engine'),
+                '@lwc/wire-service': require.resolve('@lwc/wire-service')
+            },
+            plugins: [
+                new ModuleResolver({
+                    module: MODULE_CONFIG,
+                    entries: entryPaths
+                })
+            ]
+        }
+    }
+    serverConfig = webpackMerge.smart(serverConfig, lwcModuleResolver)
+
     return serverConfig
 }
 

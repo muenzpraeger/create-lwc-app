@@ -1,6 +1,3 @@
-// tslint:disable no-floating-promises
-// tslint:disable no-console
-
 import { execSync, spawnSync } from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -13,11 +10,21 @@ import { log } from '../utils/logger'
 const sortPjson = require('sort-pjson')
 const debug = require('debug')('generator-oclif')
 
+let hasGit = false
 let hasYarn = false
+try {
+    execSync('git --version', { stdio: 'ignore' })
+    hasGit = true
+} catch {
+    // Nothing
+}
+
 try {
     execSync('yarn -v', { stdio: 'ignore' })
     hasYarn = true
-} catch {}
+} catch {
+    // Nothing
+}
 
 class CreateGenerator extends Generator {
     options: {
@@ -251,6 +258,14 @@ class CreateGenerator extends Generator {
         }
         this.destinationRoot(targetPath)
         process.chdir(this.destinationRoot())
+        if (hasGit) {
+            try {
+                execSync('git init', { stdio: 'ignore' })
+                hasGit = true
+            } catch {
+                // Do nothing
+            }
+        }
     }
 
     writing() {
@@ -268,7 +283,11 @@ class CreateGenerator extends Generator {
             this.destinationPath('.eslintrc.json'),
             this
         )
-
+        this.fs.copyTpl(
+            this.templatePath('eslintignore'),
+            this.destinationPath('.eslintignore'),
+            this
+        )
         this.fs.copyTpl(
             this.templatePath('prettierignore'),
             this.destinationPath('.prettierignore'),
@@ -285,6 +304,7 @@ class CreateGenerator extends Generator {
             this.destinationPath('.gitignore'),
             this
         )
+
         this._write()
     }
 
@@ -292,7 +312,7 @@ class CreateGenerator extends Generator {
         const dependencies: string[] = []
         const devDependencies: string[] = []
         dependencies.push('lwc-services@^1')
-        devDependencies.push('husky@^1.3.1', 'lint-staged@^8.1.5')
+        devDependencies.push('husky@^2.3', 'lint-staged@^8.1.5')
 
         let yarnOpts = {} as any
         if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
@@ -306,7 +326,7 @@ class CreateGenerator extends Generator {
             install(devDependencies, {
                 ...yarnOpts,
                 ...dev,
-                ignoreScripts: true
+                ignoreScripts: false
             }),
             install(dependencies, { ...yarnOpts, ...save })
         ]).then(() => {})

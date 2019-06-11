@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2019-06-11
+
+**lwc-create-app 1.2.1**
+
+-   Fix an issue where `npx lwc-create-app your-app` fails on Linux systems
+
 ### 2019-06-05
 
 **lwc-create-app 1.2.0**

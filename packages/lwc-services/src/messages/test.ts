@@ -4,7 +4,8 @@ export const messages = {
         examples: [
             'lwc-services test',
             'lwc-services test --coverage',
-            'lwc-services test -w'
+            'lwc-services test -w',
+            'lwc-services test -p --updateSnapshots'
         ]
     },
     flags: {
@@ -13,7 +14,9 @@ export const messages = {
         debug:
             'runs tests in debug mode (https://jestjs.io/docs/en/troubleshooting)',
         runInBand:
-            'runs tests serially (slower, but often needed when running on CI systems)'
+            'runs tests serially (slower, but often needed when running on CI systems)',
+        passThrough:
+            'subsequent command line args are passed through to lwc-jest'
     },
     logs: {
         default_configuration: {

@@ -25,6 +25,11 @@ export default class Test extends Command {
         runInBand: flags.boolean({
             char: 'r',
             description: messages.flags.runInBand
+        }),
+        passThrough: flags.string({
+            char: 'p',
+            multiple: true,
+            description: messages.flags.passThrough 
         })
     }
 
@@ -99,6 +104,9 @@ export default class Test extends Command {
             }
             if (flags.runInBand) {
                 jestArguments.push('--runInBand')
+            }
+            if (flags.passThrough) {
+                flags.passThrough.forEach(arg => jestArguments.push(arg))
             }
 
             const jest = require('jest')

@@ -1,10 +1,16 @@
 ## Changelog
 
+### 2019-06-12
+
+**lwc-services 1.2.2**
+
+-   Added the `--passthrough` flag for the `test` command to allow any Jest CLI flag (thanks to [@rcurry-sf](https://github.com/rcurry-sf) and [his contribution](https://github.com/muenzpraeger/lwc-create-app/pull/54))
+
 ### 2019-06-11
 
 **lwc-create-app 1.2.1**
 
--   Fix an issue where `npx lwc-create-app your-app` fails on Linux systems
+-   Fix an issue where `npx lwc-create-app your-app` fails on Linux systems (thanks to [@adamSellers](https://github.com/adamSellers) and [his contribution](https://github.com/muenzpraeger/lwc-create-app/pull/49))
 
 ### 2019-06-05
 

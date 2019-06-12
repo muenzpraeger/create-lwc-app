@@ -15,8 +15,8 @@ export const messages = {
             'runs tests in debug mode (https://jestjs.io/docs/en/troubleshooting)',
         runInBand:
             'runs tests serially (slower, but often needed when running on CI systems)',
-        passThrough:
-            'subsequent command line args are passed through to lwc-jest'
+        passthrough:
+            'subsequent command line args are passed through (https://jestjs.io/docs/en/cli)'
     },
     logs: {
         default_configuration: {

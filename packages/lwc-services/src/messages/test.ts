@@ -5,7 +5,7 @@ export const messages = {
             'lwc-services test',
             'lwc-services test --coverage',
             'lwc-services test -w',
-            'lwc-services test -p --updateSnapshots'
+            'lwc-services test -p --updateSnapshot'
         ]
     },
     flags: {

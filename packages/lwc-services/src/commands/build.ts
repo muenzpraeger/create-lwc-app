@@ -131,6 +131,7 @@ export default class Build extends Command {
             log(messages.logs.build_end)
         } catch (error) {
             log({ message: error, emoji: 'sos' })
+            process.exit(1)
         }
     }
 }

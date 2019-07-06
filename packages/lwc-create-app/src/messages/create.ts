@@ -2,9 +2,9 @@ export const messages = {
     description: 'Creates a new Lightning Web Components project',
     help: {
         examples: [
-            'lwc create',
-            'lwc create my-app',
-            'lwc create my-app -o prettier,yarn'
+            'create-lwc-app',
+            'npm init lwc-app my-app',
+            'yarn init lwc-app my-app -o prettier,yarn'
         ]
     },
     args: {
@@ -12,6 +12,6 @@ export const messages = {
         required: false
     },
     flags: {
-        options: 'set project options (yarn|prettier|eslint)'
+        options: 'set project options (yarn|prettier|eslint|typescript)'
     }
 }

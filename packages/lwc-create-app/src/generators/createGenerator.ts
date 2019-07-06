@@ -31,6 +31,7 @@ class CreateGenerator extends Generator {
         defaults?: boolean
         yarn: boolean
         clientserver: boolean
+        typescript: boolean
     }
     name: string
     args!: { [k: string]: string }
@@ -47,10 +48,12 @@ class CreateGenerator extends Generator {
         files: string
         license: string
         pkg: string
+        typescript: string
     }
     yarn!: boolean
     repository?: string
     clientserver?: boolean
+    typescript?: false
     targetPathClient = 'src/'
 
     constructor(args: any, opts: any) {
@@ -58,7 +61,8 @@ class CreateGenerator extends Generator {
         this.options = {
             defaults: opts.defaults,
             yarn: opts.options.includes('yarn') || hasYarn,
-            clientserver: opts.options.includes('express')
+            clientserver: opts.options.includes('express'),
+            typescript: opts.options.includes('typescript')
         }
         this.name = opts.name
     }
@@ -172,6 +176,16 @@ class CreateGenerator extends Generator {
                     default: defaults.webcomponent
                 },
                 {
+                    type: 'list',
+                    name: 'typescript',
+                    message: messages.questions.typescript,
+                    choices: [
+                        { name: 'TypeScript', value: 'ts' },
+                        { name: 'JavaScript', value: 'js' }
+                    ],
+                    default: () => (this.options.typescript ? 1 : 0)
+                },
+                {
                     type: 'confirm',
                     name: 'clientserver',
                     message: messages.questions.clientserver,
@@ -184,7 +198,8 @@ class CreateGenerator extends Generator {
         if (!this.options.defaults) {
             this.options = {
                 yarn: this.answers.pkg === 'yarn',
-                clientserver: this.answers.clientserver
+                clientserver: this.answers.clientserver,
+                typescript: this.answers.typescript === 'ts'
             }
         }
         this.yarn = this.options.yarn
@@ -304,6 +319,14 @@ class CreateGenerator extends Generator {
             this.destinationPath('.gitignore'),
             this
         )
+
+        if (this.typescript) {
+            this.fs.copyTpl(
+                this.templatePath('tsconfig.json'),
+                this.destinationPath('tsconfig.json'),
+                this
+            )
+        }
 
         this._write()
     }

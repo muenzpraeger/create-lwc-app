@@ -11,7 +11,7 @@ function getProjectInfo(
     namespaces: string
 } {
     const cwd = fs.realpathSync(process.cwd())
-    const modulesDir = path.join(cwd + '', 'src', 'modules')
+    const modulesDir = path.resolve(cwd, lwcConfig.moduleDir)
     let namespaces = []
     if (layout === LAYOUT.NAMESPACED) {
         namespaces = fs.readdirSync(modulesDir)

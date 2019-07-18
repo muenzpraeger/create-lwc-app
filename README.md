@@ -18,30 +18,30 @@ To get up and running execute the following command in a shell/terminal:
 npx lwc-create-app your-app-name
 ```
 
-> To run this, you must have Node.js installed, with at least npm 5.2+. You should be familiar with either npm or yarn. The npx tool is a package runner that installs with npm 5.2+.
+> To run this you must have Node.js installed with at least npm 5.2+. You should be familiar with either npm or yarn. The npx tool is a package runner that installs with npm 5.2+.
 
-This will run a npx installation of [lwc-create-app](./packages/lwc-create-app), guide you with a couple of steps through the setup, and then create a new Lightning Web Components project for you.
+This will run a npx installation of [lwc-create-app](./packages/lwc-create-app), guide you through the short setup, and then create a new Lightning Web Components project for you.
 
-Then run `yarn watch` (or `npm run watch`, depending on your personal preference and what you've chosen during the npx installation). **Done!**
+Then run `yarn watch` (or `npm run watch` depending on what you chose during the npx installation). **Done!**
 
 ## Live App
 
-If you want to see Lightning Web Components in action - check out [https://recipes.lwc.dev](https://recipes.lwc.dev).
+If you want to see Lightning Web Components in action check out [https://recipes.lwc.dev](https://recipes.lwc.dev).
 
 ## So what's this tool about?
 
-Technically it's a toolchain that gives you a quickstart experience for developing with Lightning web components. This project consists out of two packages:
+Technically it's a toolchain that gives you a quickstart experience for developing with Lightning web components. This project consists of two packages:
 
 -   [lwc-create-app](./packages/lwc-create-app)
 -   [lwc-services](./packages/lwc-services)
 
-It is focused on providing a quick, but also if needed customizable, onboarding experience when you want to develop with Lightning Web Components. If you want to develop Lightning Web Components on the Salesforce Platform you may want to look into using [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) instead.
+It is focused on providing a quick and customizable onboarding experience when you want to develop with Lightning Web Components. If you want to develop Lightning Web Components on the Salesforce Platform you likely want to use [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli) instead.
 
 If you haven't heard about Lightning Web Components - it's a new framework, introduced by [Salesforce](https://www.salesforce.com/), based on the Web Components specifications. Read more about it in the [official documentation](https://lwc.dev).
 
 ## lwc-services
 
-Using `lwc-create-app` is meant to be a one-stop-shop solution. The created project contains everything you need to get started. It adds one dependecy, which is `lwc-services`. Find below a list of all the things that are bundled with it. When you create a project with `lwc-create-app` also a number of predefined scripts gets added to your `package.json`.
+`lwc-create-app` is meant to be a one-stop-shop solution. The created project contains everything you need to get started. It adds one dependecy, `lwc-services`. Find below the list of all the things that are bundled with it. When you create a project with `lwc-create-app` a number of predefined scripts get added to your `package.json`.
 
 ### Configuration
 

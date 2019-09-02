@@ -9,26 +9,6 @@ const __PROD__ = process.env.NODE_ENV === 'production'
 
 const { getConfig, getInfoFromPath } = require('./module')
 
-const TS_LOADER = {
-    test: /\.ts$/,
-    exclude: /(node_modules|modules|lwc)/,
-    use: {
-        loader: require.resolve('babel-loader'),
-        options: {
-            plugins: [
-                '@babel/plugin-syntax-class-properties',
-                [
-                    '@babel/plugin-syntax-decorators',
-                    {
-                        decoratorsBeforeExport: true
-                    }
-                ]
-            ],
-            presets: ['@babel/preset-typescript']
-        }
-    }
-}
-
 module.exports = function(source: any) {
     // @ts-ignore
     const { resourcePath } = this

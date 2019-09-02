@@ -124,7 +124,7 @@ function buildWebpackConfig({
         module: {
             rules: [
                 {
-                    test: /\.(js|html|css)$/,
+                    test: /\.(js|ts|html|css)$/,
                     include: [moduleDir, ...npms],
                     use: [
                         {

@@ -1,5 +1,6 @@
 const loaderUtils = require('loader-utils')
 const compiler = require('@lwc/compiler')
+const babel = require('@babel/core')
 
 import { lwcConfig } from '../../config/lwcConfig'
 const productionConfig = lwcConfig.lwcCompilerOutput.production
@@ -7,6 +8,26 @@ const productionConfig = lwcConfig.lwcCompilerOutput.production
 const __PROD__ = process.env.NODE_ENV === 'production'
 
 const { getConfig, getInfoFromPath } = require('./module')
+
+const TS_LOADER = {
+    test: /\.ts$/,
+    exclude: /(node_modules|modules|lwc)/,
+    use: {
+        loader: require.resolve('babel-loader'),
+        options: {
+            plugins: [
+                '@babel/plugin-syntax-class-properties',
+                [
+                    '@babel/plugin-syntax-decorators',
+                    {
+                        decoratorsBeforeExport: true
+                    }
+                ]
+            ],
+            presets: ['@babel/preset-typescript']
+        }
+    }
+}
 
 module.exports = function(source: any) {
     // @ts-ignore
@@ -25,11 +46,30 @@ module.exports = function(source: any) {
 
     const compilerOutput = __PROD__ ? productionConfig : {}
 
+    let codeTransformed = source
+
+    if (resourcePath.endsWith('.ts')) {
+        let { code } = babel.transform(source, {
+            filename: resourcePath,
+            plugins: [
+                '@babel/plugin-syntax-class-properties',
+                [
+                    '@babel/plugin-syntax-decorators',
+                    {
+                        decoratorsBeforeExport: true
+                    }
+                ]
+            ],
+            presets: ['@babel/preset-typescript']
+        })
+        codeTransformed = code
+    }
+
     // @ts-ignore
     const cb = this.async()
 
     compiler
-        .transform(source, resourcePath, {
+        .transform(codeTransformed, resourcePath, {
             name: info.name,
             namespace: info.ns,
             outputConfig: compilerOutput

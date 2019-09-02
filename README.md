@@ -120,10 +120,11 @@ USAGE
   $ lwc-services test
 
 OPTIONS
-  -c, --coverage  collects a coverage report
-  -d, --debug     runs tests in debug mode (https://jestjs.io/docs/en/troubleshooting)
-  -w, --watch     runs in watch mode and re-runs tests on file changes
-  -r, --runInBand runs tests serially (slower, but often needed when running on CI systems)
+  -c, --coverage                 collects a coverage report
+  -d, --debug                    runs tests in debug mode (https://jestjs.io/docs/en/troubleshooting)
+  -p, --passthrough=passthrough  subsequent command line args are passed through (https://jestjs.io/docs/en/cli)
+  -r, --runInBand                runs tests serially (slower, but often needed when running on CI systems)
+  -w, --watch                    runs in watch mode and re-runs tests on file changes
 
 EXAMPLES
   lwc-services test

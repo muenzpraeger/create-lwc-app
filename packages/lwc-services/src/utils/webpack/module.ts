@@ -1,7 +1,4 @@
-const {
-    resolveModulesInDir,
-    resolveLwcNpmModules
-} = require('@lwc/module-resolver')
+const { resolveModulesInDir, resolveModules } = require('@lwc/module-resolver')
 import * as path from 'path'
 
 import { lwcConfig } from '../../config/lwcConfig'
@@ -13,7 +10,7 @@ lwcConfig.localModulesDirs.forEach(dir => {
     npmmodules = { ...npmmodules, ...resolveModulesInDir(lookupDir) }
 })
 
-npmmodules = { ...npmmodules, ...resolveLwcNpmModules() }
+npmmodules = { ...npmmodules, ...resolveModules() }
 
 const LAYOUT = {
     /**

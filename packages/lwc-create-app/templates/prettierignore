@@ -1,7 +1,10 @@
 # Jest coverage
 coverage/
 
-# Default build folder
+# Default lib folder
+lib/
+
+# Default dist folder
 dist/
 
 # Default resources folder

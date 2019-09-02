@@ -1,3 +1,5 @@
 **/lib/**
 packages/lwc-create-app/templates/README.md
 packages/lwc-create-app/templates/lwc-services.config.js
+packages/lwc-create-app/templates/scripts/express-dev.js
+packages/lwc-create-app/templates/src/client/modules/my/app/app.html

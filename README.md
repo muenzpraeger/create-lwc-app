@@ -113,11 +113,14 @@ EXAMPLE
 
 #### `lwc-services test`
 
-Runs Jest tests for Lightning Web Components
+Runs tests for Lightning Web Components
 
 ```
+
+Runs Jest tests for Lightning Web Components
+
 USAGE
-  $ lwc-services test
+  $ lwc-services test:unit
 
 OPTIONS
   -c, --coverage                 collects a coverage report
@@ -127,9 +130,20 @@ OPTIONS
   -w, --watch                    runs in watch mode and re-runs tests on file changes
 
 EXAMPLES
-  lwc-services test
-  lwc-services test --coverage
-  lwc-services test -w
+  lwc-services test:unit
+  lwc-services test:unit --coverage
+  lwc-services test:unit -w
+```
+
+```
+
+Runs WebDriver tests for Lightning Web Components
+
+USAGE
+  $ lwc-services test:wdio
+
+EXAMPLES
+  lwc-services test:wdio
 ```
 
 #### `lwc-services watch`

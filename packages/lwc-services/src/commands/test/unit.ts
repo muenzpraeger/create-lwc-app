@@ -3,9 +3,9 @@ import merge = require('deepmerge')
 import * as fs from 'fs'
 import * as path from 'path'
 
-import { jestConfig } from '../config/jestConfig'
-import { messages } from '../messages/test'
-import { log, welcome } from '../utils/logger'
+import { jestConfig } from '../../config/jestConfig'
+import { messages } from '../../messages/test'
+import { log, welcome } from '../../utils/logger'
 
 const spawn = require('child_process').spawn
 

@@ -274,11 +274,11 @@ class CreateGenerator extends Generator {
             this.pjson.scripts.watch = 'lwc-services watch'
         }
         this.pjson.scripts.serve = 'lwc-services serve'
-        this.pjson.scripts['test:unit'] = 'lwc-services test'
-        this.pjson.scripts['test:unit:watch'] = 'lwc-services test --watch'
-        this.pjson.scripts['test:unit:debug'] = 'lwc-services test --debug'
+        this.pjson.scripts['test:unit'] = 'lwc-services test:unit'
+        this.pjson.scripts['test:unit:watch'] = 'lwc-services test:unit --watch'
+        this.pjson.scripts['test:unit:debug'] = 'lwc-services test:unit --debug'
         this.pjson.scripts['test:unit:coverage'] =
-            'lwc-services test --coverage'
+            'lwc-services test:unit --coverage'
 
         this.pjson.husky = { hooks: {} }
         this.pjson['lint-staged'] = {}

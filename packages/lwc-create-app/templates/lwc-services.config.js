@@ -5,6 +5,9 @@ module.exports = {
     sourceDir: './src/client',
     moduleDir: './src/client/modules',
     server: {
-        customConfig: './src/server/index.js'
+        customConfig: './<% if (typescript) { %>lib<% } else { %>src<% } %>/server/index.js'
+    },
+    devServer: {
+        proxy: { '/': 'http://localhost:3002' }
     }<% } %>
 };

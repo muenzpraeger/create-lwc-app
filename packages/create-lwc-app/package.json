@@ -1,11 +1,11 @@
 {
-    "name": "lwc-create-app",
-    "version": "1.3.0-beta.3",
+    "name": "create-lwc-app",
+    "version": "1.3.0-beta.5",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
-        "lwc-create-app": "./bin/run"
+        "create-lwc-app": "./bin/run"
     },
-    "bugs": "https://github.com/muenzpraeger/lwc-create-app/issues",
+    "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
         "@oclif/command": "^1",
         "@oclif/config": "^1",
@@ -41,7 +41,7 @@
         "/lib",
         "/templates"
     ],
-    "homepage": "https://github.com/muenzpraeger/lwc-create-app",
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
     "keywords": [
         "oclif",
         "lwc",
@@ -52,9 +52,9 @@
     "license": "MIT",
     "main": "lib/index.js",
     "oclif": {
-        "bin": "lwc-create-app"
+        "bin": "create-lwc-app"
     },
-    "repository": "muenzpraeger/lwc-create-app",
+    "repository": "muenzpraeger/create-lwc-app",
     "scripts": {
         "build": "tsc -b"
     },

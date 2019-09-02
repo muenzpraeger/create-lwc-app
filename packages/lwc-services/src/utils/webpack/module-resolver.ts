@@ -10,6 +10,25 @@ const {
 
 const EMPTY_STYLE = path.resolve(__dirname, 'mocks', 'empty-style.js')
 
+const EXTENSIONS = ['.js', '.ts']
+
+function getExtension(
+    fileSystem: any,
+    directoryPath: string,
+    fileName: string
+) {
+    return EXTENSIONS.find(extension => {
+        const pathWithExtension = `${directoryPath}/${fileName}${extension}`
+        // TODO: Use async version of state instead of try catch?
+        try {
+            fileSystem.statSync(pathWithExtension)
+            return true
+        } catch (e) {
+            return false
+        }
+    })
+}
+
 /**
  * Webpack plugin to resolve LWC modules.
  */
@@ -73,10 +92,15 @@ module.exports = class ModuleResolver {
 
         let resolved: string
         if (layout === LAYOUT.STANDARD) {
-            resolved = path.resolve(root, request, `${request}.js`)
+            // TODO Proper resolve
+            const directoryPath = path.resolve(root, request)
+            const extension = getExtension(this.fs, directoryPath, name)
+            resolved = path.resolve(root, request, `${request}${extension}`)
         } else {
             const { ns, name } = getInfoFromId(request)
-            resolved = path.resolve(root, ns, name, `${name}.js`)
+            const directoryPath = path.resolve(root, ns, name)
+            const extension = getExtension(this.fs, directoryPath, name)
+            resolved = path.resolve(root, ns, name, `${name}${extension}`)
         }
 
         this.fs.stat(resolved, (err: { code: string } | null) => {

@@ -75,6 +75,7 @@ export default class Serve extends Command {
             lwcConfig.server.customConfig &&
             fs.existsSync(lwcConfig.server.customConfig)
         ) {
+            // TODO: Add .default for TypeScript
             const customExpressConfig = require(path.resolve(
                 lwcConfig.server.customConfig
             ))

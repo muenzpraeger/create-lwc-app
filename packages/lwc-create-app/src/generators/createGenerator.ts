@@ -53,7 +53,7 @@ class CreateGenerator extends Generator {
     yarn!: boolean
     repository?: string
     clientserver?: boolean
-    typescript?: false
+    typescript?: boolean
     targetPathClient = 'src/'
 
     constructor(args: any, opts: any) {
@@ -85,6 +85,7 @@ class CreateGenerator extends Generator {
             name: this.determineAppname().replace(/ /g, '-'),
             webcomponent: true,
             clientserver: false,
+            typescript: false,
             version: '0.0.0',
             license: 'MIT',
             author: gitName,
@@ -170,12 +171,6 @@ class CreateGenerator extends Generator {
                     default: () => (this.options.yarn || hasYarn ? 1 : 0)
                 },
                 {
-                    type: 'confirm',
-                    name: 'webcomponent',
-                    message: messages.questions.webcomponent,
-                    default: defaults.webcomponent
-                },
-                {
                     type: 'list',
                     name: 'typescript',
                     message: messages.questions.typescript,
@@ -184,6 +179,12 @@ class CreateGenerator extends Generator {
                         { name: 'JavaScript', value: 'js' }
                     ],
                     default: () => (this.options.typescript ? 1 : 0)
+                },
+                {
+                    type: 'confirm',
+                    name: 'webcomponent',
+                    message: messages.questions.webcomponent,
+                    default: defaults.webcomponent
                 },
                 {
                     type: 'confirm',
@@ -204,6 +205,7 @@ class CreateGenerator extends Generator {
         }
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
+        this.typescript = this.options.typescript
 
         if (this.clientserver) {
             this.targetPathClient = 'src/client/'
@@ -234,14 +236,43 @@ class CreateGenerator extends Generator {
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
         this.pjson.dependencies = { 'lwc-services': '^1' }
-        this.pjson.scripts.lint = 'eslint ./src/**/*.js'
+        if (this.typescript) {
+            this.pjson.scripts.lint = 'eslint ./src/**/*.{js,ts}'
+        } else {
+            this.pjson.scripts.lint = 'eslint ./src/**/*.js'
+        }
         this.pjson.scripts.prettier =
-            "prettier --write '**/*.{css,html,js,json,md,yaml,yml}'"
+            "prettier --write '**/*.{css,html,js,json,md,ts,yaml,yml}'"
         this.pjson.scripts['prettier:verify'] =
-            "prettier --list-different '**/*.{css,html,js,json,md,yaml,yml}'"
-        this.pjson.scripts.build = 'lwc-services build -m production'
+            "prettier --list-different '**/*.{css,html,js,json,md,ts,yaml,yml}'"
+        if (this.clientserver) {
+            if (this.typescript) {
+                this.pjson.scripts.build =
+                    'lwc-services build -m production && tsc -b ./src/server'
+            } else {
+                this.pjson.scripts.build = 'lwc-services build -m production'
+            }
+        } else {
+            this.pjson.scripts.build = 'lwc-services build -m production'
+        }
         this.pjson.scripts['build:development'] = 'lwc-services build'
-        this.pjson.scripts.watch = 'lwc-services watch'
+        if (this.clientserver) {
+            const pkg = this.yarn ? 'yarn' : 'node'
+            this.pjson.scripts.watch =
+                'lwc-services watch & ' +
+                pkg +
+                (this.yarn ? '' : ' run') +
+                ' watch:server'
+            if (this.typescript) {
+                this.pjson.scripts['watch:server'] =
+                    'tsc -b ./src/server && node scripts/express-dev.js'
+            } else {
+                this.pjson.scripts['watch:server'] =
+                    'node scripts/express-dev.js'
+            }
+        } else {
+            this.pjson.scripts.watch = 'lwc-services watch'
+        }
         this.pjson.scripts.serve = 'lwc-services serve'
         this.pjson.scripts['test:unit'] = 'lwc-services test'
         this.pjson.scripts['test:unit:watch'] = 'lwc-services test --watch'
@@ -253,11 +284,15 @@ class CreateGenerator extends Generator {
         this.pjson['lint-staged'] = {}
         this.pjson.husky.hooks['pre-commit'] = 'lint-staged'
 
-        this.pjson['lint-staged']['**/*.{css,html,js,json,md,yaml,yml}'] = [
+        this.pjson['lint-staged']['**/*.{css,html,js,json,md,ts,yaml,yml}'] = [
             'prettier --write'
         ]
 
-        this.pjson['lint-staged']['**/modules/**/*.js'] = ['eslint']
+        if (this.typescript) {
+            this.pjson['lint-staged']['**/modules/**/*.{js,ts}'] = ['eslint']
+        } else {
+            this.pjson['lint-staged']['**/modules/**/*.js'] = ['eslint']
+        }
 
         this.pjson['lint-staged']['*'] = ['git add']
 
@@ -336,6 +371,9 @@ class CreateGenerator extends Generator {
         const devDependencies: string[] = []
         dependencies.push('lwc-services@^1')
         devDependencies.push('husky@^2.3', 'lint-staged@^8.1.5')
+        if (this.typescript) {
+            devDependencies.push('@types/express@^4.17')
+        }
 
         let yarnOpts = {} as any
         if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
@@ -384,6 +422,7 @@ class CreateGenerator extends Generator {
             this.destinationPath('README.md'),
             this
         )
+        const fileExtension = this.typescript ? '.ts' : '.js'
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
                 this.templatePath(
@@ -399,10 +438,12 @@ class CreateGenerator extends Generator {
             this.fs.copyTpl(
                 this.templatePath(
                     this.answers.webcomponent
-                        ? 'src/client/index.js'
-                        : 'src/client/index.non-wc.js'
+                        ? 'src/client/index'.concat(fileExtension)
+                        : 'src/client/index'.concat(fileExtension)
                 ),
-                this.destinationPath(this.targetPathClient.concat('index.js')),
+                this.destinationPath(
+                    this.targetPathClient.concat('index'.concat(fileExtension))
+                ),
                 this
             )
             this.fs.copyTpl(
@@ -413,9 +454,13 @@ class CreateGenerator extends Generator {
                 this
             )
             this.fs.copyTpl(
-                this.templatePath('src/client/modules/my/app/app.js'),
+                this.templatePath(
+                    'src/client/modules/my/app/app'.concat(fileExtension)
+                ),
                 this.destinationPath(
-                    this.targetPathClient.concat('modules/my/app/app.js')
+                    this.targetPathClient.concat(
+                        'modules/my/app/app'.concat(fileExtension)
+                    )
                 ),
                 this
             )
@@ -438,10 +483,14 @@ class CreateGenerator extends Generator {
                 this
             )
             this.fs.copyTpl(
-                this.templatePath('src/client/modules/my/greeting/greeting.js'),
+                this.templatePath(
+                    'src/client/modules/my/greeting/greeting'.concat(
+                        fileExtension
+                    )
+                ),
                 this.destinationPath(
                     this.targetPathClient.concat(
-                        'modules/my/greeting/greeting.js'
+                        'modules/my/greeting/greeting'.concat(fileExtension)
                     )
                 ),
                 this
@@ -498,11 +547,25 @@ class CreateGenerator extends Generator {
         if (this.clientserver) {
             if (!fs.existsSync('src')) {
                 this.fs.copyTpl(
-                    this.templatePath('src/server/index.js'),
-                    this.destinationPath('src/server/index.js'),
+                    this.templatePath('src/server/index'.concat(fileExtension)),
+                    this.destinationPath(
+                        'src/server/index'.concat(fileExtension)
+                    ),
                     this
                 )
+                if (this.typescript) {
+                    this.fs.copyTpl(
+                        this.templatePath('src/server/tsconfig.json'),
+                        this.destinationPath('src/server/tsconfig.json'),
+                        this
+                    )
+                }
             }
+            this.fs.copyTpl(
+                this.templatePath('scripts/express-dev.js'),
+                this.destinationPath('scripts/express-dev.js'),
+                this
+            )
         }
     }
 }

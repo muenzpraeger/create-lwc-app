@@ -7,7 +7,7 @@ const npms = Object.values(npmmodules).map((f: any) => path.dirname(f.entry))
 const ModuleResolver = require('./module-resolver')
 const moduleLoader = require.resolve('./module-loader')
 
-const BABEL_LOADER = {
+const JS_LOADER = {
     test: /\.js$/,
     exclude: /(node_modules|modules|lwc)/,
     use: {
@@ -17,6 +17,26 @@ const BABEL_LOADER = {
                 require.resolve('@babel/plugin-proposal-object-rest-spread')
             ],
             babelrc: false
+        }
+    }
+}
+
+const TS_LOADER = {
+    test: /\.ts$/,
+    exclude: /(node_modules|modules|lwc)/,
+    use: {
+        loader: require.resolve('babel-loader'),
+        options: {
+            plugins: [
+                '@babel/plugin-syntax-class-properties',
+                [
+                    '@babel/plugin-syntax-decorators',
+                    {
+                        decoratorsBeforeExport: true
+                    }
+                ]
+            ],
+            presets: ['@babel/preset-typescript']
         }
     }
 }
@@ -115,7 +135,8 @@ function buildWebpackConfig({
                         }
                     ]
                 },
-                BABEL_LOADER
+                JS_LOADER,
+                TS_LOADER
             ]
         },
 
@@ -170,5 +191,6 @@ function buildWebpackConfig({
 
 module.exports = {
     buildWebpackConfig,
-    BABEL_LOADER
+    JS_LOADER,
+    TS_LOADER
 }

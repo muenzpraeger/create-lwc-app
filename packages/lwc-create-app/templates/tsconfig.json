@@ -1,8 +1,17 @@
 {
     "compilerOptions": {
-        "target": "es2018"
+        "experimentalDecorators": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "declaration": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "target": "es2018",
+        "lib": ["dom", "es2015", "es2016", "es2017", "es2018"]
     },
     "typeAcquisition": {
         "include": ["jest"]
-    }
+    },
+    "include": ["src/", "node_modules/@lwc/engine/types", "typings"]
 }

@@ -10,6 +10,7 @@ export const messages = {
         mode: 'defines the mode for the build (production|development)',
         destination: 'defines the directory where the build is stored',
         noclear: 'setting this will not re-create the build dir',
+        verbose: 'print the webpack build configuration to console',
         webpack: 'location of custom webpack configuration file'
     },
     errors: {
@@ -46,6 +47,10 @@ export const messages = {
         custom_configuration: {
             message: 'Using custom configuration from webpack.config.js.',
             emoji: 'star2'
+        },
+        webpack_config: {
+            message: 'Webpack build config:',
+            emoji: 'hammer'
         }
     }
 }

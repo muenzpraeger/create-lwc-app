@@ -69,6 +69,7 @@ OPTIONS
   -d, --destination=destination  [default: ./dist] defines the directory where the build is stored
   -m, --mode=mode                [default: development] defines the mode for the build (production|development)
   -n, --noclear                  setting this will not re-create the build dir
+  -v, --verbose                  print the webpack build configuration to console
   -w, --webpack=webpack          location of custom webpack configuration file
 
 EXAMPLES

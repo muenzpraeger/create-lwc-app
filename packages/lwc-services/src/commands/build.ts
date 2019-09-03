@@ -58,6 +58,11 @@ export default class Build extends Command {
             description: messages.flags.noclear,
             default: lwcConfig.noclear
         }),
+        verbose: flags.boolean({
+            char: 'v',
+            description: messages.flags.verbose,
+            default: false
+        }),
         webpack: flags.string({
             char: 'w',
             description: messages.flags.webpack
@@ -124,6 +129,15 @@ export default class Build extends Command {
                 process.cwd(),
                 flags.destination
             )
+        }
+
+        if (flags.verbose) {
+            log(messages.logs.webpack_config);
+            let jsonConfig: string = JSON.stringify(webpackConfig, null, 2);
+            log({
+                message: jsonConfig,
+                emoji: 'hammer'
+            });
         }
 
         try {

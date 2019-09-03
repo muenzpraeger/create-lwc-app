@@ -3,6 +3,7 @@ const CopyPlugin = require('copy-webpack-plugin')
 const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 import * as path from 'path'
+const fs = require('fs')
 
 import { lwcConfig } from './lwcConfig'
 
@@ -11,8 +12,8 @@ const OUTPUT_DIR = path.resolve(ROOT_DIR, lwcConfig.buildDir)
 const MODULE_DIR = path.resolve(ROOT_DIR, lwcConfig.moduleDir)
 const TEMPLATES_DIR = path.resolve(ROOT_DIR, lwcConfig.sourceDir)
 let ENTRIES = path.resolve(TEMPLATES_DIR, 'index.js')
-if (!ENTRIES) {
-    path.resolve(TEMPLATES_DIR, 'index.ts')
+if (ENTRIES && !fs.existsSync(ENTRIES)) {
+    ENTRIES = path.resolve(TEMPLATES_DIR, 'index.ts')
 }
 
 // Simple mechanism to pass any arbitrary config values from the CLI for webpack

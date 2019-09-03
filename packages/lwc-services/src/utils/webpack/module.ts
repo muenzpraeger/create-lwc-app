@@ -54,7 +54,7 @@ function getConfig(opts: any) {
         )
     }
 
-    return { ...opts, mode: 'dev', module: moduleConfig }
+    return { ...opts, module: moduleConfig }
 }
 
 function isValidModuleName(id: string) {

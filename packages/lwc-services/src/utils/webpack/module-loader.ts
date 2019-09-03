@@ -24,7 +24,7 @@ module.exports = function(source: any) {
         }
     }
 
-    const compilerOutput = __PROD__ ? productionConfig : {}
+    const compilerOutput = config.mode ? productionConfig : {}
 
     let codeTransformed = source
 

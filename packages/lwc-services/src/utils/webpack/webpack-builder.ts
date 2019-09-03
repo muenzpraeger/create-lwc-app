@@ -130,7 +130,8 @@ function buildWebpackConfig({
                         {
                             loader: moduleLoader,
                             options: {
-                                module: MODULE_CONFIG
+                                module: MODULE_CONFIG,
+                                mode: isProduction
                             }
                         }
                     ]

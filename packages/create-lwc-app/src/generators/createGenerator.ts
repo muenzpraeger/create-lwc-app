@@ -235,7 +235,7 @@ class CreateGenerator extends Generator {
         this.repository = this.pjson.repository = this.answers.github
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
-        this.pjson.dependencies = { 'lwc-services': '^1' }
+        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.10' }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.{js,ts}'
         } else {
@@ -369,7 +369,7 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push('lwc-services@^1')
+        dependencies.push('lwc-services@1.3.0-beta.10')
         devDependencies.push('husky@^2.3', 'lint-staged@^8.1.5')
         if (this.typescript) {
             devDependencies.push('@types/express@^4.17')

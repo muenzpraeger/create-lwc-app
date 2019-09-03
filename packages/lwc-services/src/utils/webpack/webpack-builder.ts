@@ -28,15 +28,15 @@ const TS_LOADER = {
         loader: require.resolve('babel-loader'),
         options: {
             plugins: [
-                '@babel/plugin-syntax-class-properties',
+                require.resolve('@babel/plugin-syntax-class-properties'),
                 [
-                    '@babel/plugin-syntax-decorators',
+                    require.resolve('@babel/plugin-syntax-decorators'),
                     {
                         decoratorsBeforeExport: true
                     }
                 ]
             ],
-            presets: ['@babel/preset-typescript']
+            presets: [require.resolve('@babel/preset-typescript')]
         }
     }
 }

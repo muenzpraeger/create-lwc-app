@@ -32,15 +32,15 @@ module.exports = function(source: any) {
         let { code } = babel.transform(source, {
             filename: resourcePath,
             plugins: [
-                '@babel/plugin-syntax-class-properties',
+                require.resolve('@babel/plugin-syntax-class-properties'),
                 [
-                    '@babel/plugin-syntax-decorators',
+                    require.resolve('@babel/plugin-syntax-decorators'),
                     {
                         decoratorsBeforeExport: true
                     }
                 ]
             ],
-            presets: ['@babel/preset-typescript']
+            presets: [require.resolve('@babel/preset-typescript')]
         })
         codeTransformed = code
     }

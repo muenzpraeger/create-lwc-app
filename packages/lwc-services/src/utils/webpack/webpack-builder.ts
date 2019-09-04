@@ -173,6 +173,7 @@ function buildWebpackConfig({
     let entryPaths = getWebpackEntryPaths(serverConfig.entry)
     const lwcModuleResolver = {
         resolve: {
+            extensions: ['.js', '.ts', '.json'],
             alias: {
                 lwc: require.resolve('@lwc/engine'),
                 '@lwc/wire-service': require.resolve('@lwc/wire-service')

@@ -257,12 +257,8 @@ class CreateGenerator extends Generator {
         }
         this.pjson.scripts['build:development'] = 'lwc-services build'
         if (this.clientserver) {
-            const pkg = this.yarn ? 'yarn' : 'node'
-            this.pjson.scripts.watch =
-                'lwc-services watch & ' +
-                pkg +
-                (this.yarn ? '' : ' run') +
-                ' watch:server'
+            this.pjson.scripts.watch = 'run-p watch:client watch:server'
+            this.pjson.scripts['watch:client'] = 'lwc-services watch'
             if (this.typescript) {
                 this.pjson.scripts['watch:server'] =
                     'tsc -b ./src/server && node scripts/express-dev.js'
@@ -371,6 +367,9 @@ class CreateGenerator extends Generator {
         const devDependencies: string[] = []
         dependencies.push('lwc-services@1.3.0-beta.10')
         devDependencies.push('husky@^2.3', 'lint-staged@^8.1.5')
+        if (this.clientserver) {
+            devDependencies.push('npm-run-all@^4.1.5')
+        }
         if (this.typescript) {
             devDependencies.push('@types/express@^4.17')
         }

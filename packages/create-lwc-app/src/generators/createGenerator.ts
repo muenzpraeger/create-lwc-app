@@ -365,8 +365,8 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push('lwc-services@1.3.0-beta.10')
-        devDependencies.push('husky@^2.3', 'lint-staged@^8.1.5')
+        dependencies.push('lwc-services@1.3.0-beta.13')
+        devDependencies.push('husky@^3', 'lint-staged@^9.2')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
         }

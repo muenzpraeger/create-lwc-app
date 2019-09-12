@@ -121,7 +121,7 @@ module.exports = class ModuleResolver {
         const { path: resourcePath, query } = req
         const extname = path.extname(resourcePath)
 
-        if (extname !== '.css') {
+        if (extname !== '.css' && extname !== '.html') {
             return cb()
         }
 

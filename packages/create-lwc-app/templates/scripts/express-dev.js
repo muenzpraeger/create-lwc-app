@@ -1,7 +1,7 @@
 const path = require('path');
 const express = require('express');
 
-<% if (typescript) { %>const customServer = require(path.resolve('./lib/server/')).default;<% } else { %>const customServer = require(path.resolve('./src/server/'));<% } %>
+<% if (typescript) { %>const customServer = require(path.resolve('./src/server/index.ts')).default;<% } else { %>const customServer = require(path.resolve('./src/server/'));<% } %>
 
 const app = express();
 

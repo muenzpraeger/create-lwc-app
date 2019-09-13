@@ -235,7 +235,7 @@ class CreateGenerator extends Generator {
         this.repository = this.pjson.repository = this.answers.github
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
-        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.10' }
+        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.15' }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.{js,ts}'
         } else {
@@ -259,12 +259,28 @@ class CreateGenerator extends Generator {
         if (this.clientserver) {
             this.pjson.scripts.watch = 'run-p watch:client watch:server'
             this.pjson.scripts['watch:client'] = 'lwc-services watch'
+            this.pjson.scripts['watch:server'] = 'nodemon'
+
+            const fileExtension = this.typescript ? 'ts' : 'js'
+
+            this.pjson.nodemonConfig = {}
+            this.pjson.nodemonConfig.watch = [
+                'src/server/**/*.'.concat(fileExtension),
+                'scripts/express-dev.'.concat(fileExtension)
+            ]
+            this.pjson.nodemonConfig.ext = fileExtension
+            this.pjson.nodemonConfig.ignore = [
+                'src/**/*.spec.'.concat(fileExtension),
+                'src/**/*.test.'.concat(fileExtension)
+            ]
             if (this.typescript) {
-                this.pjson.scripts['watch:server'] =
-                    'tsc -b ./src/server && node scripts/express-dev.js'
+                this.pjson.nodemonConfig.exec = 'ts-node ./scripts/express-dev.'.concat(
+                    fileExtension
+                )
             } else {
-                this.pjson.scripts['watch:server'] =
-                    'node scripts/express-dev.js'
+                this.pjson.nodemonConfig.exec = 'node ./scripts/express-dev.'.concat(
+                    fileExtension
+                )
             }
         } else {
             this.pjson.scripts.watch = 'lwc-services watch'
@@ -365,7 +381,7 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push('lwc-services@1.3.0-beta.13')
+        dependencies.push('lwc-services@1.3.0-beta.15')
         devDependencies.push('husky@^3', 'lint-staged@^9.2')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
@@ -561,13 +577,19 @@ class CreateGenerator extends Generator {
                         this.destinationPath('src/server/tsconfig.json'),
                         this
                     )
+                    this.fs.copyTpl(
+                        this.templatePath('scripts/express-dev.js'),
+                        this.destinationPath('scripts/express-dev.ts'),
+                        this
+                    )
+                } else {
+                    this.fs.copyTpl(
+                        this.templatePath('scripts/express-dev.js'),
+                        this.destinationPath('scripts/express-dev.js'),
+                        this
+                    )
                 }
             }
-            this.fs.copyTpl(
-                this.templatePath('scripts/express-dev.js'),
-                this.destinationPath('scripts/express-dev.js'),
-                this
-            )
         }
     }
 }

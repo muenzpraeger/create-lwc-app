@@ -370,8 +370,11 @@ class CreateGenerator extends Generator {
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
         }
-        if (this.typescript) {
+        if (this.typescript && this.clientserver) {
             devDependencies.push('@types/express@^4.17')
+        }
+        if (this.typescript) {
+            devDependencies.push('@types/jest@^24')
         }
 
         let yarnOpts = {} as any

@@ -34,7 +34,7 @@ module.exports = function(source: any) {
             plugins: [
                 require.resolve('@babel/plugin-syntax-class-properties'),
                 [
-                    require.resolve('@babel/plugin-syntax-decorators'),
+                    require.resolve('@babel/plugin-proposal-decorators'),
                     {
                         decoratorsBeforeExport: true
                     }

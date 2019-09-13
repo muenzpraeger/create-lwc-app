@@ -32,7 +32,7 @@ module.exports = function(source: any) {
         let { code } = babel.transform(source, {
             filename: resourcePath,
             plugins: [
-                require.resolve('@babel/plugin-syntax-class-properties'),
+                require.resolve('@babel/plugin-proposal-class-properties'),
                 [
                     require.resolve('@babel/plugin-proposal-decorators'),
                     {

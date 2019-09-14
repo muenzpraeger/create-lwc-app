@@ -235,7 +235,7 @@ class CreateGenerator extends Generator {
         this.repository = this.pjson.repository = this.answers.github
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
-        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.15' }
+        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.18' }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.{js,ts}'
         } else {
@@ -381,7 +381,7 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push('lwc-services@1.3.0-beta.15')
+        dependencies.push('lwc-services@1.3.0-beta.18')
         devDependencies.push('husky@^3', 'lint-staged@^9.2')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
@@ -526,22 +526,30 @@ class CreateGenerator extends Generator {
             )
             this.fs.copyTpl(
                 this.templatePath(
-                    'src/client/modules/my/app/__tests__/app.test.js'
+                    'src/client/modules/my/app/__tests__/app.test'.concat(
+                        fileExtension
+                    )
                 ),
                 this.destinationPath(
                     this.targetPathClient.concat(
-                        'modules/my/app/__tests__/app.test.js'
+                        'modules/my/app/__tests__/app.test'.concat(
+                            fileExtension
+                        )
                     )
                 ),
                 this
             )
             this.fs.copyTpl(
                 this.templatePath(
-                    'src/client/modules/my/greeting/__tests__/greeting.test.js'
+                    'src/client/modules/my/greeting/__tests__/greeting.test'.concat(
+                        fileExtension
+                    )
                 ),
                 this.destinationPath(
                     this.targetPathClient.concat(
-                        'modules/my/greeting/__tests__/greeting.test.js'
+                        'modules/my/greeting/__tests__/greeting.test'.concat(
+                            fileExtension
+                        )
                     )
                 ),
                 this

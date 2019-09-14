@@ -28,9 +28,9 @@ const TS_LOADER = {
         loader: require.resolve('babel-loader'),
         options: {
             plugins: [
-                require.resolve('@babel/plugin-proposal-class-properties'),
+                require.resolve('@babel/plugin-syntax-class-properties'),
                 [
-                    require.resolve('@babel/plugin-proposal-decorators'),
+                    require.resolve('@babel/plugin-syntax-decorators'),
                     {
                         decoratorsBeforeExport: true
                     }

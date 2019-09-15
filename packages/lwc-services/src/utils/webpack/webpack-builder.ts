@@ -1,5 +1,6 @@
 import * as webpack from 'webpack'
 import * as webpackMerge from 'webpack-merge'
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 const { npmmodules, LAYOUT } = require('./module')
 import * as path from 'path'
@@ -28,7 +29,7 @@ const TS_LOADER = {
         loader: require.resolve('babel-loader'),
         options: {
             plugins: [
-                require.resolve('@babel/plugin-syntax-class-properties'),
+                require.resolve('@babel/plugin-proposal-class-properties'),
                 [
                     require.resolve('@babel/plugin-syntax-decorators'),
                     {
@@ -179,6 +180,7 @@ function buildWebpackConfig({
                 '@lwc/wire-service': require.resolve('@lwc/wire-service')
             },
             plugins: [
+                new TsconfigPathsPlugin(),
                 new ModuleResolver({
                     module: MODULE_CONFIG,
                     entries: entryPaths

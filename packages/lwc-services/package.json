@@ -8,6 +8,7 @@
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
         "@babel/core": "^7.4.5",
+        "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
         "@babel/plugin-syntax-class-properties": "^7.2.0",
         "@babel/plugin-syntax-decorators": "^7.2.0",
@@ -72,7 +73,8 @@
         "@types/semver-compare": "^1.0.0",
         "@types/webpack": "^4.4.27",
         "@types/webpack-merge": "^4.1.4",
-        "cli-ux": "^5.2.1"
+        "cli-ux": "^5.2.1",
+        "tsconfig-paths-webpack-plugin": "^3.2.0"
     },
     "engines": {
         "node": ">=10.0.0 <11.0.0"

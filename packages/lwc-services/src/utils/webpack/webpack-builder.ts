@@ -1,6 +1,6 @@
 import * as webpack from 'webpack'
 import * as webpackMerge from 'webpack-merge'
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 
 const { npmmodules, LAYOUT } = require('./module')
 import * as path from 'path'

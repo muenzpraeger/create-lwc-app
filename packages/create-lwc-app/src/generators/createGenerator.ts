@@ -367,13 +367,14 @@ class CreateGenerator extends Generator {
             this
         )
 
-        if (this.typescript) {
-            this.fs.copyTpl(
-                this.templatePath('tsconfig.json'),
-                this.destinationPath('tsconfig.json'),
-                this
-            )
-        }
+        // TODO: Verify later
+        // if (this.typescript) {
+        //     this.fs.copyTpl(
+        //         this.templatePath('tsconfig.json'),
+        //         this.destinationPath('tsconfig.json'),
+        //         this
+        //     )
+        // }
 
         this._write()
     }
@@ -422,7 +423,7 @@ class CreateGenerator extends Generator {
     private _write() {
         this.fs.copyTpl(
             this.templatePath('jsconfig.json'),
-            this.destinationPath('jsconfig.json'),
+            this.targetPathClient.concat('modules/jsconfig.json'),
             this
         )
         this.fs.copyTpl(

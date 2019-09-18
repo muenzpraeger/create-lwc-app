@@ -12,6 +12,5 @@
     },
     "typeAcquisition": {
         "include": ["jest"]
-    },
-    "include": ["src/", "node_modules/@lwc/engine/types", "typings"]
+    }
 }

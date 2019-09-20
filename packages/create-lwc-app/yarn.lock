@@ -790,13 +790,15 @@
   resolved "https://npmregistry-rw.herokuapp.com/@nodelib/fs.stat/-/fs.stat-1.1.3/2b5a3ab3f918cca48a8c754c08168e3f03eba61b.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha512-shAmDyaQC4H92APFoIaVDHCx5bStIocgvbwQyxPRrbUY20V1EYTbSDchWbuwlMG3V17cprZhA6+78JfB+3DTPw==
 
-"@oclif/command@^1", "@oclif/command@^1.5.1", "@oclif/command@^1.5.8":
-  version "1.5.13"
-  resolved "https://npmregistry-rw.herokuapp.com/@oclif/command/-/command-1.5.13/7047f3e5c3abb8a08fb88ba3bf00ea96ea9a1d77.tgz#7047f3e5c3abb8a08fb88ba3bf00ea96ea9a1d77"
-  integrity sha512-zkO8hRd5Sjl7a+GM9ZMNHLD8rneAPjFBFjkAwLPs/hEv72RnFeWSyW6eE1nDbKVzMyDUYmmWNQFp0lQuwhHCdA==
+"@oclif/command@^1", "@oclif/command@^1.5.1", "@oclif/command@^1.5.13":
+  version "1.5.19"
+  resolved "https://registry.yarnpkg.com/@oclif/command/-/command-1.5.19.tgz#13f472450eb83bd6c6871a164c03eadb5e1a07ed"
+  integrity sha512-6+iaCMh/JXJaB2QWikqvGE9//wLEVYYwZd5sud8aLoLKog1Q75naZh2vlGVtg5Mq/NqpqGQvdIjJb3Bm+64AUQ==
   dependencies:
+    "@oclif/config" "^1"
     "@oclif/errors" "^1.2.2"
-    "@oclif/parser" "^3.7.3"
+    "@oclif/parser" "^3.8.3"
+    "@oclif/plugin-help" "^2"
     debug "^4.1.1"
     semver "^5.6.0"
 
@@ -835,7 +837,7 @@
   resolved "https://npmregistry-rw.herokuapp.com/@oclif/linewrap/-/linewrap-1.0.0/aedcb64b479d4db7be24196384897b5000901d91.tgz#aedcb64b479d4db7be24196384897b5000901d91"
   integrity sha512-Ups2dShK52xXa8w6iBWLgcjPJWjais6KPJQq3gQ/88AY6BXoTX+MIGFPrWQO1KLMiQfoTpcLnUwloN4brrVUHw==
 
-"@oclif/parser@^3.7.3", "@oclif/parser@^3.8.0":
+"@oclif/parser@^3.8.0", "@oclif/parser@^3.8.3":
   version "3.8.4"
   resolved "https://registry.yarnpkg.com/@oclif/parser/-/parser-3.8.4.tgz#1a90fc770a42792e574fb896325618aebbe8c9e4"
   integrity sha512-cyP1at3l42kQHZtqDS3KfTeyMvxITGwXwH1qk9ktBYvqgMp5h4vHT+cOD74ld3RqJUOZY/+Zi9lb4Tbza3BtuA==
@@ -845,11 +847,11 @@
     tslib "^1.9.3"
 
 "@oclif/plugin-help@^2":
-  version "2.1.6"
-  resolved "https://npmregistry-rw.herokuapp.com/@oclif/plugin-help/-/plugin-help-2.1.6/ae14cbe2c5cd3eaf5f796d205ffbe66d3e369173.tgz#ae14cbe2c5cd3eaf5f796d205ffbe66d3e369173"
-  integrity sha512-M4kTERpPWNSM1Mga7K/zo9DWHLCVf2FRaIeXPoytmTPd+0kSvG3TR0Vc1bwx9/cxXoYyYGgEejwNlrfayr8FZw==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@oclif/plugin-help/-/plugin-help-2.2.1.tgz#cb4d23e453b19340b07c48fb299948b7c74366d3"
+  integrity sha512-psEA3t41MSGBErLk6xCaAq2jKrRtx3Br+kHpd43vZeGEeZ7Gos4wgK0JAaHBbvhvUQskCHg8dzoqv4XEeTWeVQ==
   dependencies:
-    "@oclif/command" "^1.5.8"
+    "@oclif/command" "^1.5.13"
     chalk "^2.4.1"
     indent-string "^3.2.0"
     lodash.template "^4.4.0"

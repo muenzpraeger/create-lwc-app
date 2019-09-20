@@ -10,7 +10,7 @@
         "@oclif/command": "^1",
         "@oclif/config": "^1",
         "@oclif/plugin-help": "^2",
-        "@types/yeoman-environment": "^2.3.0",
+        "@types/yeoman-environment": "^2.3.2",
         "@types/yeoman-generator": "^3.1.2",
         "@typescript-eslint/eslint-plugin": "^1.8.0",
         "@typescript-eslint/parser": "^1.8.0",

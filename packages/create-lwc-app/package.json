@@ -26,7 +26,7 @@
         "tslib": "^1",
         "typescript": "^3.3",
         "yeoman-environment": "^2.4.0",
-        "yeoman-generator": "^4.0.0"
+        "yeoman-generator": "^4.0.2"
     },
     "devDependencies": {
         "@types/node": "^12",

@@ -1616,15 +1616,10 @@
   resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.1.0-alpha12.tgz#a0226fed738f62993e25830b4251d85f319e8d02"
   integrity sha512-nbrJmh5KYLDTIEk6I6dGTInewP1aXesNscA1SQDsXIjMcxuubyv+Bfd3nRWKNM2NBFSXbHq6JrpHKQE8LmmycQ==
 
-"@lwc/eslint-plugin-lwc@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.6.0.tgz#aa283547bb78a3843db49eb595a03ff91ef083f1"
-  integrity sha512-2iAzQTSUNYwmojh0Ey/ma4uRVpbU2t85Wf9+nkVqXkEyQBR1IFDB9PdPREbPZ8FrjQTlDek0TxSyzwz4wsdiSQ==
-
-"@lwc/eslint-plugin-lwc@^0.7":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.7.0.tgz#95f3be7896e1a06432842ff917052bd6d7893711"
-  integrity sha512-vjOQ0zH5F0iOi2VHu68D7jB2r9Phm+SaqN+rz1pcmSavtoXsoqkLR25Snu0q+KRZRgHHSMEezL2GaE6KhHP95Q==
+"@lwc/eslint-plugin-lwc@^0.8", "@lwc/eslint-plugin-lwc@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.8.0.tgz#40ed5b9809434f3bd901309359273d19c6c3e888"
+  integrity sha512-HV5gEcB9PuusAGgMtPWFEzal8cw3LmpXgVUOIpHQ1a/yoNyn9Jofo8eur51yjgTSjHJGH0iqmjSLxmcvc1IAYA==
 
 "@lwc/jest-preset@muenzpraeger/lwc-jest-preset-ts-fix":
   version "1.1.0-alpha1"
@@ -1641,6 +1636,11 @@
   version "1.1.0-alpha1"
   resolved "https://registry.yarnpkg.com/@lwc/jest-resolver/-/jest-resolver-1.1.0-alpha1.tgz#09ed751dd0d41ba1a340dab67e58f39fd526237d"
   integrity sha512-jexhw4p78jWbnv28eRWTLCdBHnfycUCaaY642njrfXlJQYuu//HTVqqi3anmWF/fEs9nd7zcpCR+UTe+tv5lwQ==
+
+"@lwc/jest-resolver@2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@lwc/jest-resolver/-/jest-resolver-2.1.0.tgz#d337c23f2932279dd411934e84a611661525935a"
+  integrity sha512-aWTzPelb5YgMc3J0H15t/Ib62YnlJjzCbPsDZxXHGMDkjcqx1//TFri5PfupeIxt784+s9ASvoWEH92tHKSdvg==
 
 "@lwc/jest-serializer@1.1.0-alpha1":
   version "1.1.0-alpha1"
@@ -1930,15 +1930,16 @@
   resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.9.4.tgz#52f23650cad7ced6116913d7b634fc585e974599"
   integrity sha512-CDEjw/C2ymzNtBNnX/C62i7Lq8BmdmueTNIkrru2PU87NHOBTx5oP1Eo+buX8+qpnrODKgM8hiqQ+yqBOH7DjA==
 
-"@salesforce/eslint-config-lwc@^0.3":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/eslint-config-lwc/-/eslint-config-lwc-0.3.0.tgz#92ea44fd8f38728f769a021bcd3c03d30ee9e75f"
-  integrity sha512-MGZgw8y1p15P9T5sbNXE8U96oEdvfvyFufAblSbDIteaIl5b55ijCthFADJOUahn61DDtDK67KDYtxNqC7KzpQ==
+"@salesforce/eslint-config-lwc@^0.4":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/eslint-config-lwc/-/eslint-config-lwc-0.4.0.tgz#bcf274c71a923ed3733edb4031f978c7f3064384"
+  integrity sha512-gwdJVIYTjcOgCLfPXhpKzCJILkHB9JODO5+Kjfrr6hXHUYZ7TgA75R7vyVxw2rU51PsUkMvw+mgSM9CnJZ2LFw==
   dependencies:
-    "@lwc/eslint-plugin-lwc" "^0.6.0"
+    "@lwc/eslint-plugin-lwc" "^0.8.0"
     babel-eslint "^10.0.1"
     eslint-plugin-import "^2.14.0"
     eslint-plugin-jest "^22.0.0"
+    eslint-restricted-globals "^0.2.0"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -5331,6 +5332,11 @@ eslint-plugin-wdio@^5.7.8:
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-wdio/-/eslint-plugin-wdio-5.12.1.tgz#f3d9b7c3d5e2266e2620b13593153dd3901a84a4"
   integrity sha512-1OV3sM5t2MBGx3ai/ehhXXBmwIMFZiPowPwFxy/22vqBsOkVPFPnwt2sZsJK8m8dd46V92oukf4v05VfCoJkMw==
+
+eslint-restricted-globals@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.2.0.tgz#7729f326af97bec7a7e56d9f7d9c064b79285c50"
+  integrity sha512-kwYJALm5KS2QW3Mc1PgObO4V+pTR6RQtRT65L1GQILlEnAhabUQqGAX7/qUjoQR4KZJKehWpBtyDEiDecwmY9A==
 
 eslint-scope@^4.0.0, eslint-scope@^4.0.3:
   version "4.0.3"

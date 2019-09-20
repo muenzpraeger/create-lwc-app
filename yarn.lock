@@ -1599,13 +1599,6 @@
     rollup-plugin-replace "^2.1.0"
     terser "^3.17.0"
 
-"@lwc/engine@1.1.0-alpha12":
-  version "1.1.0-alpha12"
-  resolved "https://registry.yarnpkg.com/@lwc/engine/-/engine-1.1.0-alpha12.tgz#7b25148853430f61f5a19e9326f690627b503a21"
-  integrity sha512-e1XC/pjD+oSKGKm7qVz/Ezt9v8chnHqfFEqqtuH5mu18U/Uh1mqZ76Ml7UbCKPvCJLlJX8KFpPhtqrohjiduYg==
-  dependencies:
-    observable-membrane "0.26.1"
-
 "@lwc/errors@1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.0.0.tgz#378a4fce92bdf75d6fd8b63a5c8bbeaf25d45693"
@@ -1616,15 +1609,10 @@
   resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.1.0-alpha12.tgz#a0226fed738f62993e25830b4251d85f319e8d02"
   integrity sha512-nbrJmh5KYLDTIEk6I6dGTInewP1aXesNscA1SQDsXIjMcxuubyv+Bfd3nRWKNM2NBFSXbHq6JrpHKQE8LmmycQ==
 
-"@lwc/eslint-plugin-lwc@^0.6.0":
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.6.0.tgz#aa283547bb78a3843db49eb595a03ff91ef083f1"
-  integrity sha512-2iAzQTSUNYwmojh0Ey/ma4uRVpbU2t85Wf9+nkVqXkEyQBR1IFDB9PdPREbPZ8FrjQTlDek0TxSyzwz4wsdiSQ==
-
-"@lwc/eslint-plugin-lwc@^0.7":
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.7.0.tgz#95f3be7896e1a06432842ff917052bd6d7893711"
-  integrity sha512-vjOQ0zH5F0iOi2VHu68D7jB2r9Phm+SaqN+rz1pcmSavtoXsoqkLR25Snu0q+KRZRgHHSMEezL2GaE6KhHP95Q==
+"@lwc/eslint-plugin-lwc@^0.8", "@lwc/eslint-plugin-lwc@^0.8.0":
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.8.0.tgz#40ed5b9809434f3bd901309359273d19c6c3e888"
+  integrity sha512-HV5gEcB9PuusAGgMtPWFEzal8cw3LmpXgVUOIpHQ1a/yoNyn9Jofo8eur51yjgTSjHJGH0iqmjSLxmcvc1IAYA==
 
 "@lwc/jest-preset@muenzpraeger/lwc-jest-preset-ts-fix":
   version "1.1.0-alpha1"
@@ -1686,11 +1674,6 @@
     postcss-selector-parser "6.0.2"
     postcss-value-parser "3.3.1"
 
-"@lwc/synthetic-shadow@1.1.0-alpha12":
-  version "1.1.0-alpha12"
-  resolved "https://registry.yarnpkg.com/@lwc/synthetic-shadow/-/synthetic-shadow-1.1.0-alpha12.tgz#7584ba329cceec7a007128d71535c812818883ee"
-  integrity sha512-LAsmygXCQ+SuGliwffLNxS64rpRA0i/oSP/e6XzcSx1g7ZvBCPJoAYXDiEaueosoxSjqEe4KQIeKWr9Hwp0tjQ==
-
 "@lwc/template-compiler@1.1.0-alpha12":
   version "1.1.0-alpha12"
   resolved "https://registry.yarnpkg.com/@lwc/template-compiler/-/template-compiler-1.1.0-alpha12.tgz#9e0192a788582d3accd7b36e52a7348ac3fde8ec"
@@ -1710,11 +1693,6 @@
   version "1.1.0-alpha1"
   resolved "https://registry.yarnpkg.com/@lwc/test-utils/-/test-utils-1.1.0-alpha1.tgz#fa1097cf396b22a8036efa7f3730465d7cd7bac3"
   integrity sha512-D7CvyvWI5VcMLgWzu+SZbvu+ofbCshP28SZo3asP9tdjEPMGDcwg5mKVjwqZ9bi3TWHjlTLYpkPsTnrqfaYmxg==
-
-"@lwc/wire-service@1.1.0-alpha12":
-  version "1.1.0-alpha12"
-  resolved "https://registry.yarnpkg.com/@lwc/wire-service/-/wire-service-1.1.0-alpha12.tgz#7e6515cc61fd2f8ba9eec74a28e077257a074bb7"
-  integrity sha512-XfMbxgE8hKBOmbsg18z7o63UUa2kvQr1Rbpgrz3vK4LVaCYQVMKqiVaM5V+0ZX8xThfenRMPq6yCMB8eD8HlFQ==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -1930,15 +1908,16 @@
   resolved "https://registry.yarnpkg.com/@salesforce-ux/design-system/-/design-system-2.9.4.tgz#52f23650cad7ced6116913d7b634fc585e974599"
   integrity sha512-CDEjw/C2ymzNtBNnX/C62i7Lq8BmdmueTNIkrru2PU87NHOBTx5oP1Eo+buX8+qpnrODKgM8hiqQ+yqBOH7DjA==
 
-"@salesforce/eslint-config-lwc@^0.3":
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/eslint-config-lwc/-/eslint-config-lwc-0.3.0.tgz#92ea44fd8f38728f769a021bcd3c03d30ee9e75f"
-  integrity sha512-MGZgw8y1p15P9T5sbNXE8U96oEdvfvyFufAblSbDIteaIl5b55ijCthFADJOUahn61DDtDK67KDYtxNqC7KzpQ==
+"@salesforce/eslint-config-lwc@^0.4":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/eslint-config-lwc/-/eslint-config-lwc-0.4.0.tgz#bcf274c71a923ed3733edb4031f978c7f3064384"
+  integrity sha512-gwdJVIYTjcOgCLfPXhpKzCJILkHB9JODO5+Kjfrr6hXHUYZ7TgA75R7vyVxw2rU51PsUkMvw+mgSM9CnJZ2LFw==
   dependencies:
-    "@lwc/eslint-plugin-lwc" "^0.6.0"
+    "@lwc/eslint-plugin-lwc" "^0.8.0"
     babel-eslint "^10.0.1"
     eslint-plugin-import "^2.14.0"
     eslint-plugin-jest "^22.0.0"
+    eslint-restricted-globals "^0.2.0"
 
 "@samverschueren/stream-to-observable@^0.3.0":
   version "0.3.0"
@@ -2193,7 +2172,7 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/yeoman-environment@^2.3.0":
+"@types/yeoman-environment@^2.3.2":
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/@types/yeoman-environment/-/yeoman-environment-2.3.2.tgz#6dea34595508bec714fc2275943685656e0ad860"
   integrity sha512-5+GphmX9+BWdbEVVUF+6MJHtVXtCyfAHj6fudLv82yUFC1zCCmePcEDrL7o8cD6qksIbA9PNiAwDIo06M3WQMA==
@@ -2643,6 +2622,13 @@ alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/alphanum-sort/-/alphanum-sort-1.0.2.tgz#97a1119649b211ad33691d9f9f486a8ec9fbe0a3"
   integrity sha1-l6ERlkmyEa0zaR2fn0hqjsn74KM=
+
+angular-youtube-player@^1.0.1:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/angular-youtube-player/-/angular-youtube-player-1.0.2.tgz#110ba641d783b52811d83eff2dff7c074b8b2f28"
+  integrity sha512-FbT3sFJt1VRY1w5co/iq1JVwX70UHKFSR4QS3tS6PtTjHgKVRL+ovkj7FGJcPUk5fZKMxv/iyKglsSSbAeR2VA==
+  dependencies:
+    tslib "^1.9.0"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -3878,7 +3864,7 @@ cli-ux@^4.9.0:
     treeify "^1.1.0"
     tslib "^1.9.3"
 
-cli-ux@^5.2.1:
+cli-ux@^5.2.1, cli-ux@^5.3.2:
   version "5.3.2"
   resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-5.3.2.tgz#6f433539bf17a61eb6dbe8fb6a6cd8d7bdf3b96f"
   integrity sha512-H7gFNM5FxAZ+DUGTQNZfKs6lUOPKZGCIUNsYiQ1FuoeJjo9RLnBbUUnKhQ68DqfrH6i/BRmv8edOY0EfUHD6Mg==
@@ -4359,7 +4345,7 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-cosmiconfig@^5.1.0, cosmiconfig@^5.2.0:
+cosmiconfig@^5.1.0, cosmiconfig@^5.2.0, cosmiconfig@^5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-5.2.1.tgz#040f726809c591e77a17c0a3626ca45b4f168b1a"
   integrity sha512-H65gsXo1SKjf8zmrJ67eJk8aIRKV5ff2D4uKZIBZShbhGSpEmsQOPW/SKMKYhSTrqR7ufy6RP69rPogdaPh/kA==
@@ -5326,6 +5312,11 @@ eslint-plugin-wdio@^5.7.8:
   version "5.12.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-wdio/-/eslint-plugin-wdio-5.12.1.tgz#f3d9b7c3d5e2266e2620b13593153dd3901a84a4"
   integrity sha512-1OV3sM5t2MBGx3ai/ehhXXBmwIMFZiPowPwFxy/22vqBsOkVPFPnwt2sZsJK8m8dd46V92oukf4v05VfCoJkMw==
+
+eslint-restricted-globals@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/eslint-restricted-globals/-/eslint-restricted-globals-0.2.0.tgz#7729f326af97bec7a7e56d9f7d9c064b79285c50"
+  integrity sha512-kwYJALm5KS2QW3Mc1PgObO4V+pTR6RQtRT65L1GQILlEnAhabUQqGAX7/qUjoQR4KZJKehWpBtyDEiDecwmY9A==
 
 eslint-scope@^4.0.0, eslint-scope@^4.0.3:
   version "4.0.3"
@@ -6881,6 +6872,23 @@ husky@^2.2.0:
     run-node "^1.0.0"
     slash "^3.0.0"
 
+husky@^3.0.5:
+  version "3.0.5"
+  resolved "https://registry.yarnpkg.com/husky/-/husky-3.0.5.tgz#d7db27c346645a8dc52df02aa534a377ad7925e0"
+  integrity sha512-cKd09Jy9cDyNIvAdN2QQAP/oA21sle4FWXjIMDttailpLAYZuBE7WaPmhrkj+afS8Sj9isghAtFvWSQ0JiwOHg==
+  dependencies:
+    chalk "^2.4.2"
+    cosmiconfig "^5.2.1"
+    execa "^1.0.0"
+    get-stdin "^7.0.0"
+    is-ci "^2.0.0"
+    opencollective-postinstall "^2.0.2"
+    pkg-dir "^4.2.0"
+    please-upgrade-node "^3.2.0"
+    read-pkg "^5.1.1"
+    run-node "^1.0.0"
+    slash "^3.0.0"
+
 hyperlinker@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hyperlinker/-/hyperlinker-1.0.0.tgz#23dc9e38a206b208ee49bc2d6c8ef47027df0c0e"
@@ -7120,6 +7128,11 @@ ipaddr.js@^1.9.0:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/ipaddr.js/-/ipaddr.js-1.9.1.tgz#bff38543eeb8984825079ff3a2a8e6cbd46781b3"
   integrity sha512-0KI/607xoxSToH7GjN1FfSbLoU0+btTicjsQSWQlh/hZykN8KpmMf7uYwPW3R+akZ6R/w18ZlXSHBYXiYUPO3g==
+
+ipv4s@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ipv4s/-/ipv4s-1.0.0.tgz#92a2be2382469ed36f81775bfd377461f6066555"
+  integrity sha512-2IJww2Z5KbaKXXzyX8sSbwmH7BYBd/QI1J7SnZTmKZXJ6/ziqR5Yc9iiQlCbQBtkhNy033TGpUhJBjcJ4NUHmw==
 
 is-absolute-url@^2.0.0:
   version "2.1.0"
@@ -8662,15 +8675,15 @@ lru-cache@^5.1.1:
   dependencies:
     yallist "^3.0.2"
 
-lwc@1.1.0-alpha12:
-  version "1.1.0-alpha12"
-  resolved "https://registry.yarnpkg.com/lwc/-/lwc-1.1.0-alpha12.tgz#c016f3527da49ce56aaa1dcf009aa1550ba94f9c"
-  integrity sha512-1Iiv9ikhKF0dxXds5A1BYZW5oY34Wu5CT9kIOZYT+yZ3OnRv3hM8pp5opmhtPexAO+p2nhg8MUe/wG5VQ6aQng==
+lwc@2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/lwc/-/lwc-2.0.0.tgz#71679bc1a99da05d62408b028aa9648949bf8ee8"
+  integrity sha512-k2u3OxbtSZlOs+a6OKi066QwDDYhEubMUMJouJUfKHfVKfk/mYLTL6EqadzTaQgOcYVrz+OCjCB6E4rnMGsbJA==
   dependencies:
-    "@lwc/compiler" "1.1.0-alpha12"
-    "@lwc/engine" "1.1.0-alpha12"
-    "@lwc/synthetic-shadow" "1.1.0-alpha12"
-    "@lwc/wire-service" "1.1.0-alpha12"
+    angular-youtube-player "^1.0.1"
+    ipv4s "^1.0.0"
+    ng-slot-machine-button "0.0.1"
+    slot-machine-button "^0.3.0"
 
 macos-release@^2.2.0:
   version "2.3.0"
@@ -9224,6 +9237,13 @@ nested-error-stacks@^2.0.0, nested-error-stacks@^2.1.0:
   resolved "https://registry.yarnpkg.com/nested-error-stacks/-/nested-error-stacks-2.1.0.tgz#0fbdcf3e13fe4994781280524f8b96b0cdff9c61"
   integrity sha512-AO81vsIO1k1sM4Zrd6Hu7regmJN1NSiAja10gc4bX3F0wd+9rQmcuHQaHVQCYIEC8iFXnE+mavh23GOt7wBgug==
 
+ng-slot-machine-button@0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/ng-slot-machine-button/-/ng-slot-machine-button-0.0.1.tgz#60ccc45a708bd150e4ba7ff8e8415e3084a8b2f7"
+  integrity sha512-IdhClQxoytGJ28DI3BTqeKnZ9ZEpenB0vcClmsh3xAMBk48Cskz4YtE9SSCcOSXBQezpJ8e4Y+CTrGDdCGH8Kw==
+  dependencies:
+    tslib "^1.9.0"
+
 nice-try@^1.0.4:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/nice-try/-/nice-try-1.0.5.tgz#a3378a7696ce7d223e88fc9b764bd7ef1089e366"
@@ -9602,11 +9622,6 @@ object.values@^1.1.0:
     function-bind "^1.1.1"
     has "^1.0.3"
 
-observable-membrane@0.26.1:
-  version "0.26.1"
-  resolved "https://registry.yarnpkg.com/observable-membrane/-/observable-membrane-0.26.1.tgz#5619a7b2f4b0414d62b3e6cc2ea65734a08cce7a"
-  integrity sha512-fBxLHtd0pUFI/rKh6Dfn9fxjEgY4NkRIqlPEKa9fR28rC9CQDfQ5P+t292CtAArtXOQ1mF8Nq9m1cF52IdN8DA==
-
 obuf@^1.0.0, obuf@^1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/obuf/-/obuf-1.1.2.tgz#09bea3343d41859ebd446292d11c9d4db619084e"
@@ -9649,6 +9664,11 @@ open@^6.3.0:
   integrity sha512-IFenVPgF70fSm1keSd2iDBIDIBZkroLeuffXq+wKTzTJlBpesFWojV9lb8mzOfaAzM1sr7HQHuO0vtV0zYekGg==
   dependencies:
     is-wsl "^1.1.0"
+
+opencollective-postinstall@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/opencollective-postinstall/-/opencollective-postinstall-2.0.2.tgz#5657f1bede69b6e33a45939b061eb53d3c6c3a89"
+  integrity sha512-pVOEP16TrAO2/fjej1IdOyupJY8KDUM1CvsaScRbw6oddvpQoOfGk4ywha0HKKVAD6RkW4x6Q+tNBwhf3Bgpuw==
 
 opn@^5.2.0, opn@^5.5.0:
   version "5.5.0"
@@ -10155,7 +10175,7 @@ platform@1.3.5:
   resolved "https://registry.yarnpkg.com/platform/-/platform-1.3.5.tgz#fb6958c696e07e2918d2eeda0f0bc9448d733444"
   integrity sha512-TuvHS8AOIZNAlE77WUDiR4rySV/VMptyMfcfeoMgs4P8apaZM3JrnbzBiixKUv+XR6i+BXrQh8WAnjaSPFO65Q==
 
-please-upgrade-node@^3.0.2, please-upgrade-node@^3.1.1:
+please-upgrade-node@^3.0.2, please-upgrade-node@^3.1.1, please-upgrade-node@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/please-upgrade-node/-/please-upgrade-node-3.2.0.tgz#aeddd3f994c933e4ad98b99d9a556efa0e2fe942"
   integrity sha512-gQR3WpIgNIKwBMVLkpMUeR3e1/E1y42bqDQZfql+kDeXd8COYfM8PQA4X6y7a8u9Ua9FHmsrrmirW2vHs45hWg==
@@ -11719,6 +11739,11 @@ slide@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
   integrity sha1-VusCfWW00tzmyy4tMsTUr8nh1wc=
+
+slot-machine-button@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/slot-machine-button/-/slot-machine-button-0.3.0.tgz#ccadac357c528ea0185b203561802f60797e2df6"
+  integrity sha512-qx9fr4ZsJeM9v5qqd6r/aXo+olBDJj09oVarK+j+tR3U5cTXnOgLGLCl23lSp55DUXW/fOS12l59RWOx020ixQ==
 
 smart-buffer@4.0.2:
   version "4.0.2"
@@ -13632,7 +13657,7 @@ yauzl@^2.10.0:
     buffer-crc32 "~0.2.3"
     fd-slicer "~1.1.0"
 
-yeoman-environment@^2.3.4:
+yeoman-environment@^2.3.4, yeoman-environment@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/yeoman-environment/-/yeoman-environment-2.4.0.tgz#4829445dc1306b02d9f5f7027cd224bf77a8224d"
   integrity sha512-SsvoL0RNAFIX69eFxkUhwKUN2hG1UwUjxrcP+T2ytwdhqC/kHdnFOH2SXdtSN1Ju4aO4xuimmzfRoheYY88RuA==

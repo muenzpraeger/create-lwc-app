@@ -67,7 +67,7 @@
         "@oclif/test": "^1",
         "@types/chai": "^4",
         "@types/mocha": "^5",
-        "@types/node": "^10",
+        "@types/node": "^12",
         "@types/rimraf": "^2.0.2",
         "@types/semver-compare": "^1.0.0",
         "@types/webpack": "^4.4.27",

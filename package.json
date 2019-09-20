@@ -9,7 +9,7 @@
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^1.8.0",
         "@typescript-eslint/parser": "^1.8.0",
-        "eslint": "^5.16.0",
+        "eslint": "^6.4.0",
         "husky": "^2.2.0",
         "lerna": "^3.13.4",
         "lint-staged": "^8.1.6",

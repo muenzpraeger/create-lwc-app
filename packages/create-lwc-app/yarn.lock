@@ -1011,10 +1011,10 @@
     "@types/yeoman-generator" "*"
     rxjs ">=6.4.0"
 
-"@types/yeoman-generator@*", "@types/yeoman-generator@^3.1.2":
-  version "3.1.2"
-  resolved "https://npmregistry-rw.herokuapp.com/@types/yeoman-generator/-/yeoman-generator-3.1.2/930fb9d8189e222632155e19c4158239204f9ff6.tgz#930fb9d8189e222632155e19c4158239204f9ff6"
-  integrity sha512-Wr67yKgBKxKJ9eUNCL5WuKuc3e9CSCbdw8nMDiBatp+/NHgvriqUGjt5kbWBIfLG9yRdIKaxT4Tf8L+VVd7qSA==
+"@types/yeoman-generator@*", "@types/yeoman-generator@^3.1.4":
+  version "3.1.4"
+  resolved "https://registry.yarnpkg.com/@types/yeoman-generator/-/yeoman-generator-3.1.4.tgz#21d6599515d41447eb84e2bc45033f1a640bbaf2"
+  integrity sha512-5oG9Qlk119qSHQpSClGonDIs4djxZSPurtg6faHItjeg8cffhkKs4twVYE+Wa0crAKJZDOwSd/Vmc6BSqJtgMA==
   dependencies:
     "@types/inquirer" "*"
     rxjs ">=6.4.0"

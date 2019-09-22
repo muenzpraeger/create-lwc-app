@@ -105,7 +105,7 @@ class CreateGenerator extends Generator {
         if (this.options.defaults) {
             this.answers = defaults
         } else {
-            let questions: any = [
+            const questions: any = [
                 {
                     type: 'input',
                     name: 'name',
@@ -394,7 +394,7 @@ class CreateGenerator extends Generator {
             devDependencies.push('@types/jest@^24')
         }
 
-        let yarnOpts = {} as any
+        const yarnOpts = {} as any
         if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
         const install = (deps: string[], opts: object) =>
             this.yarn

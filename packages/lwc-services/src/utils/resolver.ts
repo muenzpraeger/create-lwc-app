@@ -40,7 +40,7 @@ function resolveAsFile(name: string, extensions: string[]): string | null {
         return name
     }
 
-    for (let extension of extensions) {
+    for (const extension of extensions) {
         const file = name + extension
         if (isFile(file)) {
             return file
@@ -71,5 +71,6 @@ module.exports = function(modulePath: string, options: any): string {
             return fs.realpathSync(file)
         }
     }
-    return lwcResolver.apply(null, arguments)
+    // eslint-disable-next-line prefer-rest-params
+    return lwcResolver(...arguments)
 }

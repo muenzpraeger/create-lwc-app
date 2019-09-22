@@ -18,7 +18,7 @@ if (ENTRIES && !fs.existsSync(ENTRIES)) {
 
 // Simple mechanism to pass any arbitrary config values from the CLI for webpack
 export function generateWebpackConfig(mode?: string, customConfig?: any) {
-    let lwcWebpackConfig = buildWebpackConfig({
+    const lwcWebpackConfig = buildWebpackConfig({
         entries: [ENTRIES],
         outputDir: OUTPUT_DIR,
         moduleDir: MODULE_DIR,
@@ -33,7 +33,7 @@ export function generateWebpackConfig(mode?: string, customConfig?: any) {
     ])
 
     if (lwcConfig.resources.length) {
-        let resources: any = []
+        const resources: any = []
         lwcConfig.resources.forEach((resource: any) => {
             resources.push({
                 from: path.resolve(process.cwd(), resource.from),

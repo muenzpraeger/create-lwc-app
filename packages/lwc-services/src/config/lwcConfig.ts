@@ -49,8 +49,10 @@ interface Config {
             env: {
                 NODE_ENV: string
             }
+            format: string
         }
     }
+    lwcCompilerStylesheetConfig: any
 }
 
 export const defaultLwcConfig: Config = {
@@ -95,9 +97,11 @@ export const defaultLwcConfig: Config = {
             minify: true,
             env: {
                 NODE_ENV: 'production'
-            }
+            },
+            format: 'amd'
         }
-    }
+    },
+    lwcCompilerStylesheetConfig: {}
 }
 
 function buildConfig(): Config {

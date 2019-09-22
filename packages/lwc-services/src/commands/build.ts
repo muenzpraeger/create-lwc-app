@@ -110,7 +110,7 @@ export default class Build extends Command {
                 flags.webpack
             ))
         }
-        let webpackConfig = generateWebpackConfig(
+        const webpackConfig = generateWebpackConfig(
             flags.mode,
             webpackConfigCustom
         )

@@ -104,7 +104,7 @@ function buildConfig(): Config {
     let combinedConfig: Config = defaultLwcConfig
     try {
         const fileName = path.resolve(process.cwd(), 'lwc-services.config.js')
-        let config = require(fileName)
+        const config = require(fileName)
         combinedConfig = merge(defaultLwcConfig, config)
         return combinedConfig
     } catch (error) {

@@ -101,9 +101,11 @@ export default class Build extends Command {
 
         log(messages.logs.creating_build_configuration)
 
+        let webpackConfigCustom: any
+
         if (flags.webpack) {
             log(messages.logs.custom_configuration)
-            var webpackConfigCustom = require(path.resolve(
+            webpackConfigCustom = require(path.resolve(
                 process.cwd(),
                 flags.webpack
             ))

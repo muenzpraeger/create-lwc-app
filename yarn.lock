@@ -13281,9 +13281,9 @@ wcwidth@^1.0.0:
     defaults "^1.0.3"
 
 wdio-lwc-service@^0.1:
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/wdio-lwc-service/-/wdio-lwc-service-0.1.2.tgz#e4e7ca0673e1363b37c6364c779badcf2a8ad3aa"
-  integrity sha512-QOA1d3dOoVfwyTwL5N6H8Ov772PsfXAHOXiEQ/GSo5fXkWas1OcE1KWmzfPWMQNRRWOAxDdvRq3h9s9NE+hSYg==
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/wdio-lwc-service/-/wdio-lwc-service-0.1.3.tgz#876b0994de05149677e39e4380f55b2ccf5c1250"
+  integrity sha512-uhLZPtK5Z2moKqfNWbKcUCEWPSXW1he7TIpNZiZc7C2an+RsDjTwc1WNFzISiaC22zRl9aYTg4qcWLkfYpuqdw==
   dependencies:
     "@salesforce-ux/design-system" "^2.9.3"
     fs-extra "^7.0.1"

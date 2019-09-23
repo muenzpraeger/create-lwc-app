@@ -1654,7 +1654,8 @@
 
 "@lwc/jest-preset@muenzpraeger/lwc-jest-preset-ts-fix":
   version "1.1.0-alpha1"
-  resolved "https://codeload.github.com/muenzpraeger/lwc-jest-preset-ts-fix/tar.gz/4df01eba8401c7513f5118e026f8aea5eacc51b1"
+  uid "5f2a28563055cbf674dc97f3b184bab0d4c849e2"
+  resolved "https://codeload.github.com/muenzpraeger/lwc-jest-preset-ts-fix/tar.gz/5f2a28563055cbf674dc97f3b184bab0d4c849e2"
   dependencies:
     "@lwc/jest-resolver" "1.1.0-alpha1"
     "@lwc/jest-serializer" "1.1.0-alpha1"

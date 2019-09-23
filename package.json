@@ -8,7 +8,7 @@
     "private": true,
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.3.0",
-        "@typescript-eslint/parser": "^1.8.0",
+        "@typescript-eslint/parser": "^2.3.0",
         "eslint": "^6.4.0",
         "husky": "^3.0.5",
         "lerna": "^3.13.4",

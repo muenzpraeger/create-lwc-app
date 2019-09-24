@@ -1575,14 +1575,14 @@
     "@lwc/errors" "1.1.0-alpha12"
     line-column "^1.0.2"
 
-"@lwc/babel-plugin-component@1.1.0-alpha16":
-  version "1.1.0-alpha16"
-  resolved "https://registry.yarnpkg.com/@lwc/babel-plugin-component/-/babel-plugin-component-1.1.0-alpha16.tgz#a63eced37727bc69c63d923d626229ef082fe75a"
-  integrity sha512-cryVeBTj7vq6aX+KNh0OUUhKubbvTx3DJHFhMzv666DElBbqPNXhnFoGoslwJxPRS40KIAT38yHmu0HOE2WWyw==
+"@lwc/babel-plugin-component@1.1.0-alpha19":
+  version "1.1.0-alpha19"
+  resolved "https://registry.yarnpkg.com/@lwc/babel-plugin-component/-/babel-plugin-component-1.1.0-alpha19.tgz#f828cf2835d8543869c444ae8012241e5ac5a846"
+  integrity sha512-ArqBeifPTZSJgwxKK5sCcpF9Z7gyj/NuZerOTbZJOeZTsNxFiFKjNksC1uaLsJrrsbB+bw5sNMT72oo4mcKeeQ==
   dependencies:
     "@babel/helper-module-imports" "7.0.0"
     "@babel/plugin-proposal-class-properties" "7.1.0"
-    "@lwc/errors" "1.1.0-alpha16"
+    "@lwc/errors" "1.1.0-alpha19"
     line-column "^1.0.2"
 
 "@lwc/compiler@1.1.0-alpha12":
@@ -1601,17 +1601,17 @@
     rollup-plugin-replace "^2.1.0"
     terser "^3.17.0"
 
-"@lwc/compiler@1.1.0-alpha16":
-  version "1.1.0-alpha16"
-  resolved "https://registry.yarnpkg.com/@lwc/compiler/-/compiler-1.1.0-alpha16.tgz#3452755f8c620ad8979f3b2a739b1df8cd6bbd2c"
-  integrity sha512-jQqX73JEmvchf5rlHhhq585WvEWrEH85xzihDiIVY/b6oltNW26X840yXjEwTALMszy7S0pFPUZ4X9ZU9EkdWA==
+"@lwc/compiler@1.1.0-alpha19":
+  version "1.1.0-alpha19"
+  resolved "https://registry.yarnpkg.com/@lwc/compiler/-/compiler-1.1.0-alpha19.tgz#4dca53331d2c07b7318d955c0b2be033093c9e0e"
+  integrity sha512-oZzAI62Bxc9rZhCRGqgdT1bQME7WmpZGZKieI9X1NfZf2tc2YQwb2izPDEY6yk7B8UHywuAfO+oWFwz6Qc3tFA==
   dependencies:
     "@babel/core" "7.1.0"
     "@babel/plugin-proposal-object-rest-spread" "7.0.0"
-    "@lwc/babel-plugin-component" "1.1.0-alpha16"
-    "@lwc/errors" "1.1.0-alpha16"
-    "@lwc/style-compiler" "1.1.0-alpha16"
-    "@lwc/template-compiler" "1.1.0-alpha16"
+    "@lwc/babel-plugin-component" "1.1.0-alpha19"
+    "@lwc/errors" "1.1.0-alpha19"
+    "@lwc/style-compiler" "1.1.0-alpha19"
+    "@lwc/template-compiler" "1.1.0-alpha19"
     babel-preset-compat "0.21.7"
     rollup "^1.7.4"
     rollup-plugin-replace "^2.1.0"
@@ -1634,10 +1634,10 @@
   resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.1.0-alpha12.tgz#a0226fed738f62993e25830b4251d85f319e8d02"
   integrity sha512-nbrJmh5KYLDTIEk6I6dGTInewP1aXesNscA1SQDsXIjMcxuubyv+Bfd3nRWKNM2NBFSXbHq6JrpHKQE8LmmycQ==
 
-"@lwc/errors@1.1.0-alpha16":
-  version "1.1.0-alpha16"
-  resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.1.0-alpha16.tgz#5f48c17563619f6af0a2fa46bb1867e6ab2f0737"
-  integrity sha512-2QCJwLDceoGHZh63sMJCORGTCQxiU9Aez8S+xVw6jJwJ1FwAH0oZ9ZTPZ9fIJSoYhEK/m/gMYUze0ggl/7kiiQ==
+"@lwc/errors@1.1.0-alpha19":
+  version "1.1.0-alpha19"
+  resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.1.0-alpha19.tgz#050967b00ad96bede68fec21e8c78fd8354ccbd2"
+  integrity sha512-u7G1Kw4CR1ms8cENHjpECP0wp5RffEfn7pJ1f+MY0JCP6Zg4sVSTKU03r65BsW88ZbijzH+hhOy94g1TXOXMzA==
 
 "@lwc/eslint-plugin-lwc@^0.8", "@lwc/eslint-plugin-lwc@^0.8.0":
   version "0.8.0"
@@ -1680,17 +1680,17 @@
     "@lwc/errors" "1.0.0"
     babel-preset-jest "^24.0.0"
 
-"@lwc/module-resolver@1.1.0-alpha16":
-  version "1.1.0-alpha16"
-  resolved "https://registry.yarnpkg.com/@lwc/module-resolver/-/module-resolver-1.1.0-alpha16.tgz#0f10acb2afbbbd87b6a10d2cea5c8e71939229aa"
-  integrity sha512-w4YXwvn+1vIR0DEg1kbg9foALA7lU8uymAA72MNQa7reO59wljRh9pGADsT2Tv1Uqe/HNWiF9k3BHgswmAPB+w==
+"@lwc/module-resolver@1.1.0-alpha19":
+  version "1.1.0-alpha19"
+  resolved "https://registry.yarnpkg.com/@lwc/module-resolver/-/module-resolver-1.1.0-alpha19.tgz#390972300c8200fccfb62eb6779a6170935c8591"
+  integrity sha512-AVv7v06TPrqqzv/6PySeanwQ/UHRmj4kZzYt9PNM/LSvLn53faTlK95bByGySZSxIpftTfb0SEx37GrvcPeYYg==
 
-"@lwc/rollup-plugin@1.1.0-alpha16":
-  version "1.1.0-alpha16"
-  resolved "https://registry.yarnpkg.com/@lwc/rollup-plugin/-/rollup-plugin-1.1.0-alpha16.tgz#89e5d49bb56396c36b776949650d270f65e369f6"
-  integrity sha512-sLlgDD9yKbvG5A2KcVkAgeeqxT5bLfGYU9VMCf1uk2j5gi7XIh/CSiDTZVBMJ+bI1E64+xJSGGRpcYWdxpdOAQ==
+"@lwc/rollup-plugin@1.1.0-alpha19":
+  version "1.1.0-alpha19"
+  resolved "https://registry.yarnpkg.com/@lwc/rollup-plugin/-/rollup-plugin-1.1.0-alpha19.tgz#8c5a4ff0a12d4a481a703eefe9e8303b118e06ee"
+  integrity sha512-dOCf39Oxo/YILuKk9n0prCOn0BePhmCR5msLckQKpBatu4DqZqAjiaJgucQixa50EP2fyJU9/PtFzYSf0EY0Mg==
   dependencies:
-    "@lwc/module-resolver" "1.1.0-alpha16"
+    "@lwc/module-resolver" "1.1.0-alpha19"
     rollup-pluginutils "^2.0.1"
 
 "@lwc/style-compiler@1.1.0-alpha12":
@@ -1703,10 +1703,10 @@
     postcss-selector-parser "6.0.2"
     postcss-value-parser "3.3.1"
 
-"@lwc/style-compiler@1.1.0-alpha16":
-  version "1.1.0-alpha16"
-  resolved "https://registry.yarnpkg.com/@lwc/style-compiler/-/style-compiler-1.1.0-alpha16.tgz#e2b7449a68cf23477a9b9a5d6b8f86dcf3f70306"
-  integrity sha512-Ht1XQAPfx8T3PKBBSCa5DzLenoQUSwcpVxHfuucAJCIGqD/Ld/F45tkFgRxux1qBQkEuMP37j0jlstITIWUHqQ==
+"@lwc/style-compiler@1.1.0-alpha19":
+  version "1.1.0-alpha19"
+  resolved "https://registry.yarnpkg.com/@lwc/style-compiler/-/style-compiler-1.1.0-alpha19.tgz#0cd79ab352b99c5c2dacd4e47536196693f053ef"
+  integrity sha512-BKCeZr7x4FVQBVUwfgsUAMc7XGRNmHC0U4baqTPXqf1nLV3JJFh/MrSDfxJfDYkliv/ZKuEwLiIs2PAzBymGGg==
   dependencies:
     cssnano "~3.10.0"
     postcss "~7.0.5"
@@ -1733,17 +1733,17 @@
     he "^1.1.1"
     parse5-with-errors "^4.0.1"
 
-"@lwc/template-compiler@1.1.0-alpha16":
-  version "1.1.0-alpha16"
-  resolved "https://registry.yarnpkg.com/@lwc/template-compiler/-/template-compiler-1.1.0-alpha16.tgz#75ba19104a586af651e45d91e234dc06b64498b3"
-  integrity sha512-U6ZXNaDKFSeldInryTfCcezYY7GiZA8qmRBpyIFNOgS2BuvqP1LEjxadvqdh6uUtmAFYrmmgUSjUUOWxF1eB2g==
+"@lwc/template-compiler@1.1.0-alpha19":
+  version "1.1.0-alpha19"
+  resolved "https://registry.yarnpkg.com/@lwc/template-compiler/-/template-compiler-1.1.0-alpha19.tgz#b2b9deb68a5c4214b25241279e8a720071fbc0fb"
+  integrity sha512-xybTMVVylyH0+ku+5tis7DXWGHuhqL/XY2clUdnkWIacXlqDCgdKZFNwq0D6ld150cOD3LVjl1UjZwQNTiZokA==
   dependencies:
     "@babel/generator" "~7.1.5"
     "@babel/parser" "~7.1.5"
     "@babel/template" "~7.1.2"
     "@babel/traverse" "~7.1.5"
     "@babel/types" "~7.1.5"
-    "@lwc/errors" "1.1.0-alpha16"
+    "@lwc/errors" "1.1.0-alpha19"
     camelcase "~5.0.0"
     he "^1.1.1"
     parse5-with-errors "^4.0.1"
@@ -2254,7 +2254,7 @@
     "@types/inquirer" "*"
     rxjs ">=6.4.0"
 
-"@typescript-eslint/eslint-plugin@^2.3.0":
+"@typescript-eslint/eslint-plugin@^2.3.0", "@typescript-eslint/eslint-plugin@^2.3.1":
   version "2.3.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.3.1.tgz#b0b1e6b9b3f84b3e1afbdd338f4194c8ab92db21"
   integrity sha512-VqVNEsvemviajlaWm03kVMabc6S3xCHGYuY0fReTrIIOZg+3WzB+wfw6fD3KYKerw5lYxmzogmHOZ0i7YKnuwA==
@@ -2300,6 +2300,16 @@
     "@types/eslint-visitor-keys" "^1.0.0"
     "@typescript-eslint/experimental-utils" "2.3.0"
     "@typescript-eslint/typescript-estree" "2.3.0"
+    eslint-visitor-keys "^1.1.0"
+
+"@typescript-eslint/parser@^2.3.1":
+  version "2.3.1"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/parser/-/parser-2.3.1.tgz#f2b93b614d9b338825c44e75552a433e2ebf8c33"
+  integrity sha512-ZlWdzhCJ2iZnSp/VBAJ/sowFbyHycIux8t0UEH0JsKgQvfSf7949hLYFMwTXdCMeEnpP1zRTHimrR+YHzs8LIw==
+  dependencies:
+    "@types/eslint-visitor-keys" "^1.0.0"
+    "@typescript-eslint/experimental-utils" "2.3.1"
+    "@typescript-eslint/typescript-estree" "2.3.1"
     eslint-visitor-keys "^1.1.0"
 
 "@typescript-eslint/typescript-estree@1.13.0":

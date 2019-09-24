@@ -18,7 +18,7 @@
         "@lwc/jest-resolver": "1.1.0-alpha1",
         "@lwc/jest-serializer": "1.1.0-alpha1",
         "@lwc/jest-transformer": "muenzpraeger/lwc-jest-transformer-ts-fix",
-        "@lwc/module-resolver": "1.1.0-alpha16",
+        "@lwc/module-resolver": "1.1.0-alpha19",
         "@lwc/rollup-plugin": "1.1.0-alpha16",
         "@oclif/command": "^1",
         "@oclif/config": "^1",

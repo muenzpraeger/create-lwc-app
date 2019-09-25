@@ -2372,10 +2372,10 @@
     async-exit-hook "^2.0.1"
     stream-buffers "^3.0.2"
 
-"@wdio/logger@^5.12.1":
-  version "5.12.1"
-  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.12.1.tgz#1f753b0fa0c1dae455c2a485553890661150fc01"
-  integrity sha512-KUmdS0Scj0T5UQGtcWFiQRqc0NpFLQ/vSvRxlDzzkoeGwwPINqTRkLT103KL7Lyitlm9uLfaFfYc2KSzynTung==
+"@wdio/logger@5.13.2", "@wdio/logger@^5.12.1":
+  version "5.13.2"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.13.2.tgz#417f580f0882ff6d6ec2bd2c210502f2f8fa4f2b"
+  integrity sha512-F8NlP+AoN0zKv8+0iDAJxdbb488kk5LlPA6U6XPgTT/1xxPgpM4MVQoiCGtLOU9UNPX9XLfgoCXyYWMxp96Ncg==
   dependencies:
     chalk "^2.3.0"
     loglevel "^1.6.0"
@@ -2407,12 +2407,12 @@
     webdriverio "^5.13.1"
 
 "@wdio/selenium-standalone-service@^5.7.8":
-  version "5.12.1"
-  resolved "https://registry.yarnpkg.com/@wdio/selenium-standalone-service/-/selenium-standalone-service-5.12.1.tgz#fcf336b935abf1ba70c7acfccb86404ad2d3a84a"
-  integrity sha512-j0N6YndgRlFTuis/Oig1G2ta6sEs9zDWePn57K8x/aH4JFJJunoFljbOTctXOE43ppEFfOuGeC6kxgSHJEqJCA==
+  version "5.13.2"
+  resolved "https://registry.yarnpkg.com/@wdio/selenium-standalone-service/-/selenium-standalone-service-5.13.2.tgz#2794a0ddd44fdc0b6a5ce580c19d6479ec51fc61"
+  integrity sha512-/WSwJLVB4rFrbP9aSoW9nudKfYgnQS9M1xnehOEjk8KdsQGbx0Nq+D1+BUIfPee6/OiTxT0Djl7M0EUjWpMqmA==
   dependencies:
     "@types/selenium-standalone" "^6.15.0"
-    "@wdio/logger" "^5.12.1"
+    "@wdio/logger" "5.13.2"
     fs-extra "^8.0.1"
     selenium-standalone "^6.15.1"
 

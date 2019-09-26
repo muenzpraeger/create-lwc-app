@@ -105,7 +105,7 @@ class CreateGenerator extends Generator {
         if (this.options.defaults) {
             this.answers = defaults
         } else {
-            let questions: any = [
+            const questions: any = [
                 {
                     type: 'input',
                     name: 'name',
@@ -175,8 +175,8 @@ class CreateGenerator extends Generator {
                     name: 'typescript',
                     message: messages.questions.typescript,
                     choices: [
-                        { name: 'TypeScript', value: 'ts' },
-                        { name: 'JavaScript', value: 'js' }
+                        { name: 'JavaScript', value: 'js' },
+                        { name: 'TypeScript', value: 'ts' }
                     ],
                     default: () => (this.options.typescript ? 1 : 0)
                 },
@@ -235,9 +235,9 @@ class CreateGenerator extends Generator {
         this.repository = this.pjson.repository = this.answers.github
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
-        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.18' }
+        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.21' }
         if (this.typescript) {
-            this.pjson.scripts.lint = 'eslint ./src/**/*.{js,ts}'
+            this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
         } else {
             this.pjson.scripts.lint = 'eslint ./src/**/*.js'
         }
@@ -301,9 +301,9 @@ class CreateGenerator extends Generator {
         ]
 
         if (this.typescript) {
-            this.pjson['lint-staged']['**/modules/**/*.{js,ts}'] = ['eslint']
+            this.pjson['lint-staged']['./src/**/*.ts'] = ['eslint']
         } else {
-            this.pjson['lint-staged']['**/modules/**/*.js'] = ['eslint']
+            this.pjson['lint-staged']['./src/**/*.js'] = ['eslint']
         }
 
         this.pjson['lint-staged']['*'] = ['git add']
@@ -367,13 +367,14 @@ class CreateGenerator extends Generator {
             this
         )
 
-        if (this.typescript) {
-            this.fs.copyTpl(
-                this.templatePath('tsconfig.json'),
-                this.destinationPath('tsconfig.json'),
-                this
-            )
-        }
+        // TODO: Verify later
+        // if (this.typescript) {
+        //     this.fs.copyTpl(
+        //         this.templatePath('tsconfig.json'),
+        //         this.destinationPath('tsconfig.json'),
+        //         this
+        //     )
+        // }
 
         this._write()
     }
@@ -381,7 +382,7 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push('lwc-services@1.3.0-beta.18')
+        dependencies.push('lwc-services@1.3.0-beta.21')
         devDependencies.push('husky@^3', 'lint-staged@^9.2')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
@@ -393,7 +394,7 @@ class CreateGenerator extends Generator {
             devDependencies.push('@types/jest@^24')
         }
 
-        let yarnOpts = {} as any
+        const yarnOpts = {} as any
         if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
         const install = (deps: string[], opts: object) =>
             this.yarn
@@ -422,7 +423,7 @@ class CreateGenerator extends Generator {
     private _write() {
         this.fs.copyTpl(
             this.templatePath('jsconfig.json'),
-            this.destinationPath('jsconfig.json'),
+            this.targetPathClient.concat('modules/jsconfig.json'),
             this
         )
         this.fs.copyTpl(

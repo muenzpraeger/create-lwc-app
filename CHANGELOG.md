@@ -1,5 +1,19 @@
 ## Changelog
 
+### 2019-09-xx (WiP)
+
+**create-lwc-app 1.3.0**
+
+-   RENAMED from `lwc-create-app` to `create-lwc-app`
+-   Now supports creation of TypeScript-based projects
+
+**lwc-services 1.3.0**
+
+-   Updated to the latest 1.1.x version of LWC
+-   Support for TypeScript (yay!)
+-   Express server recompiles automatically when project is in `watch` mode
+-   Initial implementation for testing LWC with [WebDriverIO](https://www.npmjs.com/package/wdio-lwc-service)
+
 ### 2019-06-12
 
 **lwc-services 1.2.2**

@@ -49,8 +49,10 @@ interface Config {
             env: {
                 NODE_ENV: string
             }
+            format: string
         }
     }
+    lwcCompilerStylesheetConfig: any
 }
 
 export const defaultLwcConfig: Config = {
@@ -95,16 +97,18 @@ export const defaultLwcConfig: Config = {
             minify: true,
             env: {
                 NODE_ENV: 'production'
-            }
+            },
+            format: 'amd'
         }
-    }
+    },
+    lwcCompilerStylesheetConfig: {}
 }
 
 function buildConfig(): Config {
     let combinedConfig: Config = defaultLwcConfig
     try {
         const fileName = path.resolve(process.cwd(), 'lwc-services.config.js')
-        let config = require(fileName)
+        const config = require(fileName)
         combinedConfig = merge(defaultLwcConfig, config)
         return combinedConfig
     } catch (error) {

@@ -117,6 +117,15 @@ module.exports = class ModuleResolver {
         })
     }
 
+    isImplicitHTMLImport(importee: string, importer: string) {
+        return (
+            path.extname(importer) === '.js' &&
+            path.extname(importee) === '.html' &&
+            path.dirname(importer) === path.dirname(importee) &&
+            path.basename(importer, '.js') === path.basename(importee, '.html')
+        )
+    }
+
     resolveFile(req: any, ctx: any, cb: any) {
         const { path: resourcePath, query } = req
         const extname = path.extname(resourcePath)
@@ -127,12 +136,17 @@ module.exports = class ModuleResolver {
 
         this.fs.stat(resourcePath, (err: { code: string } | null) => {
             if (err !== null && err.code === 'ENOENT') {
-                return cb(null, {
-                    path: EMPTY_STYLE,
-                    query,
-                    file: true,
-                    resolved: false
-                })
+                if (
+                    extname === '.css' ||
+                    this.isImplicitHTMLImport(resourcePath, req.context.issuer)
+                ) {
+                    return cb(null, {
+                        path: EMPTY_STYLE,
+                        query,
+                        file: true,
+                        resolved: false
+                    })
+                }
             }
 
             return cb()

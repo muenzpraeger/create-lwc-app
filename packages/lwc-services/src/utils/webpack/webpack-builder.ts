@@ -4,6 +4,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 
 const { npmmodules, LAYOUT } = require('./module')
 import * as path from 'path'
+import { readdirSync } from 'fs'
 const npms = Object.values(npmmodules).map((f: any) => path.dirname(f.entry))
 const ModuleResolver = require('./module-resolver')
 const moduleLoader = require.resolve('./module-loader')
@@ -24,12 +25,12 @@ const JS_LOADER = {
 
 const TS_LOADER = {
     test: /\.ts$/,
-    exclude: /(node_modules|modules|lwc)/,
+    exclude: /(node_modules|modules|lwc|@lwc\/wire-service)/,
     use: {
         loader: require.resolve('babel-loader'),
         options: {
             plugins: [
-                require.resolve('@babel/plugin-proposal-class-properties'),
+                require.resolve('@babel/plugin-syntax-class-properties'),
                 [
                     require.resolve('@babel/plugin-syntax-decorators'),
                     {
@@ -113,6 +114,10 @@ function buildWebpackConfig({
 
     const devToolOption = isProduction ? undefined : 'source-map'
 
+    const srcDir = path.join(moduleDir, '..')
+    const allDirs = readdirSync(srcDir, { withFileTypes: true })
+        .filter(dirent => dirent.isDirectory())
+        .map(dirent => path.join(srcDir, dirent.name))
     let serverConfig: webpack.Configuration = {
         entry: entries,
         mode: isProduction ? 'production' : 'development',
@@ -125,8 +130,8 @@ function buildWebpackConfig({
         module: {
             rules: [
                 {
-                    test: /\.(js|ts|html|css)$/,
-                    include: [moduleDir, ...npms],
+                    test: /(\.(js|ts|html|css))$/,
+                    include: [...allDirs, ...npms],
                     use: [
                         {
                             loader: moduleLoader,

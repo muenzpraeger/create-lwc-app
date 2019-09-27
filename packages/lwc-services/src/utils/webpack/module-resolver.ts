@@ -8,7 +8,7 @@ const {
     npmmodules
 } = require('./module')
 
-const EMPTY_STYLE = path.resolve(__dirname, 'mocks', 'empty-style.js')
+const EMPTY_STYLE = path.resolve(__dirname, 'mocks', 'empty-style.ts')
 
 const EXTENSIONS = ['.js', '.ts']
 
@@ -118,6 +118,10 @@ module.exports = class ModuleResolver {
     }
 
     isImplicitHTMLImport(importee: string, importer: string) {
+        const { moduleDir } = this.config
+        if (importer.indexOf(moduleDir) === -1) {
+            return true
+        }
         return (
             path.extname(importer) === '.js' &&
             path.extname(importee) === '.html' &&

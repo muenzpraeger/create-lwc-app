@@ -8,7 +8,6 @@
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
         "@babel/core": "^7.4.5",
-        "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
         "@babel/plugin-syntax-class-properties": "^7.2.0",
         "@babel/plugin-syntax-decorators": "^7.2.0",

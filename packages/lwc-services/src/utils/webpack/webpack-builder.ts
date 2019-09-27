@@ -130,7 +130,7 @@ function buildWebpackConfig({
         module: {
             rules: [
                 {
-                    test: /(\.(js|ts|html|css))$/,
+                    test: /\.(js|ts|html|css)$/,
                     include: [...allDirs, ...npms],
                     use: [
                         {

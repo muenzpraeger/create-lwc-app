@@ -2314,13 +2314,13 @@
     semver "^6.3.0"
 
 "@wdio/cli@^5.7.14":
-  version "5.13.1"
-  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-5.13.1.tgz#db6967250d9cd3f20206acf53eddd0b5f57ca8c0"
-  integrity sha512-2NvU0ALSPERjF4yK2v43NJVdrbDOqyzYvSEe6oQpnUT9i4y6dJTm15rEb3VElvajNS4irfRRyPMlG/iVbl9qxw==
+  version "5.13.2"
+  resolved "https://registry.yarnpkg.com/@wdio/cli/-/cli-5.13.2.tgz#64db05071d62ad7c00d0ea5617f91717cdcd24b1"
+  integrity sha512-2vGm/QH+n//Nc87De6UO8BwlfvC4GqvW0HJc/eah2010ZpYvD5kmR6oDDouNDsBTAXMFQlyC/q9yHxexraCv+Q==
   dependencies:
-    "@wdio/config" "^5.13.0-alpha.0"
-    "@wdio/logger" "^5.12.1"
-    "@wdio/utils" "^5.13.0"
+    "@wdio/config" "5.13.2"
+    "@wdio/logger" "5.13.2"
+    "@wdio/utils" "5.13.2"
     async-exit-hook "^2.0.1"
     chalk "^2.3.2"
     chokidar "^3.0.0"
@@ -2332,7 +2332,7 @@
     lodash.pickby "^4.6.0"
     lodash.union "^4.6.0"
     log-update "^3.2.0"
-    webdriverio "^5.13.1"
+    webdriverio "5.13.2"
     yargs "^14.0.0"
     yarn-install "^1.0.0"
 

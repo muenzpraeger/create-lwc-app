@@ -5432,9 +5432,9 @@ eslint-plugin-jest@^22.0.0:
     "@typescript-eslint/experimental-utils" "^1.13.0"
 
 eslint-plugin-wdio@^5.7.8:
-  version "5.12.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-wdio/-/eslint-plugin-wdio-5.12.1.tgz#f3d9b7c3d5e2266e2620b13593153dd3901a84a4"
-  integrity sha512-1OV3sM5t2MBGx3ai/ehhXXBmwIMFZiPowPwFxy/22vqBsOkVPFPnwt2sZsJK8m8dd46V92oukf4v05VfCoJkMw==
+  version "5.13.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-wdio/-/eslint-plugin-wdio-5.13.2.tgz#cfe75ffaea954c49d1e089f5b3b388746012951b"
+  integrity sha512-C3q1aPOPAlfcc64qE9GFfGdT/H6aZwur5ugMzXtiGejiLP/omdY0XrU8wHaLJ1QpNr+/ohf/MIYVthFK0tr1Sw==
 
 eslint-restricted-globals@^0.2.0:
   version "0.2.0"

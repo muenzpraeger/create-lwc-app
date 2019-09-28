@@ -11,16 +11,16 @@ jobs:
                       - v1-npm-{{checksum ".circleci/config.yml"}}-{{checksum "yarn.lock"}}
             - run:
                   name: Install dependencies
-                  command: npm install
+                  command: yarn install
             - run:
                   name: Prettier verification
-                  command: npm run prettier:verify
+                  command: yarn prettier:verify
             - run:
                   name: ESlint verification
-                  command: npm run lint
+                  command: yarn lint
             - run:
                   name: Build
-                  command: npm run build
+                  command: yarn build
             - run:
                   name: Sample
                   command: packages/create-lwc-app/bin/run.sh my-app

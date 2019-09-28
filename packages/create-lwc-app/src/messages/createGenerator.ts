@@ -1,5 +1,10 @@
 export const messages = {
     logs: {
+        project_support: {
+            message:
+                'For feature requests, bug reports, or your own contributions please visit https://github.com/muenzpraeger/create-lwc-app! Or follow me on Twitter @muenzpraeger.',
+            emoji: 'tada'
+        },
         project_created: {
             message:
                 'Created %s in %s. Checkout the `scripts` section of your `package.json` to get started.',

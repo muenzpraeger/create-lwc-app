@@ -182,12 +182,6 @@ class CreateGenerator extends Generator {
                 },
                 {
                     type: 'confirm',
-                    name: 'webcomponent',
-                    message: messages.questions.webcomponent,
-                    default: defaults.webcomponent
-                },
-                {
-                    type: 'confirm',
                     name: 'clientserver',
                     message: messages.questions.clientserver,
                     default: defaults.clientserver
@@ -383,7 +377,7 @@ class CreateGenerator extends Generator {
         const dependencies: string[] = []
         const devDependencies: string[] = []
         dependencies.push('lwc-services@1.3.0-beta.21')
-        devDependencies.push('husky@^3', 'lint-staged@^9.2')
+        devDependencies.push('husky@^3.0.7', 'lint-staged@^9.4')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
         }

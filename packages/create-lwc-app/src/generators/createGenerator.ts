@@ -407,6 +407,7 @@ class CreateGenerator extends Generator {
     }
 
     end() {
+        log(messages.logs.project_support)
         log(
             messages.logs.project_created,
             this.pjson.name,

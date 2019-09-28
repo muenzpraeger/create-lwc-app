@@ -2398,12 +2398,12 @@
     webdriverio "^5.13.1"
 
 "@wdio/selenium-standalone-service@^5.7.8":
-  version "5.12.1"
-  resolved "https://registry.yarnpkg.com/@wdio/selenium-standalone-service/-/selenium-standalone-service-5.12.1.tgz#fcf336b935abf1ba70c7acfccb86404ad2d3a84a"
-  integrity sha512-j0N6YndgRlFTuis/Oig1G2ta6sEs9zDWePn57K8x/aH4JFJJunoFljbOTctXOE43ppEFfOuGeC6kxgSHJEqJCA==
+  version "5.13.2"
+  resolved "https://registry.yarnpkg.com/@wdio/selenium-standalone-service/-/selenium-standalone-service-5.13.2.tgz#2794a0ddd44fdc0b6a5ce580c19d6479ec51fc61"
+  integrity sha512-/WSwJLVB4rFrbP9aSoW9nudKfYgnQS9M1xnehOEjk8KdsQGbx0Nq+D1+BUIfPee6/OiTxT0Djl7M0EUjWpMqmA==
   dependencies:
     "@types/selenium-standalone" "^6.15.0"
-    "@wdio/logger" "^5.12.1"
+    "@wdio/logger" "5.13.2"
     fs-extra "^8.0.1"
     selenium-standalone "^6.15.1"
 

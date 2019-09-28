@@ -21,9 +21,6 @@ jobs:
             - run:
                   name: Build
                   command: yarn build
-            - run:
-                  name: Sample
-                  command: packages/create-lwc-app/bin/run.sh my-app
             # - run:
             #       name: Testing
             #       command: yarn test:unit

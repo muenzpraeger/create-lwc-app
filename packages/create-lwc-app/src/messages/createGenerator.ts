@@ -9,7 +9,6 @@ export const messages = {
     questions: {
         name: 'Package name for npm',
         description: 'Description',
-        webcomponent: 'Register web component',
         author: 'Author',
         version: 'Version',
         license: 'License',

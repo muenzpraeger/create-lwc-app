@@ -182,12 +182,6 @@ class CreateGenerator extends Generator {
                 },
                 {
                     type: 'confirm',
-                    name: 'webcomponent',
-                    message: messages.questions.webcomponent,
-                    default: defaults.webcomponent
-                },
-                {
-                    type: 'confirm',
                     name: 'clientserver',
                     message: messages.questions.clientserver,
                     default: defaults.clientserver

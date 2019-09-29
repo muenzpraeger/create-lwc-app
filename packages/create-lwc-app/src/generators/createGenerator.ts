@@ -229,7 +229,7 @@ class CreateGenerator extends Generator {
         this.repository = this.pjson.repository = this.answers.github
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
-        this.pjson.dependencies = { 'lwc-services': '1.3.0-beta.21' }
+        this.pjson.dependencies = { 'lwc-services': '1.3.0' }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
         } else {
@@ -376,7 +376,7 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push('lwc-services@1.3.0-beta.21')
+        dependencies.push('lwc-services@1.3.0')
         devDependencies.push('husky@^3.0.7', 'lint-staged@^9.4')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
@@ -439,11 +439,7 @@ class CreateGenerator extends Generator {
         const fileExtension = this.typescript ? '.ts' : '.js'
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
-                this.templatePath(
-                    this.answers.webcomponent
-                        ? 'src/client/index.html'
-                        : 'src/client/index.non-wc.html'
-                ),
+                this.templatePath('src/client/index.html'),
                 this.destinationPath(
                     this.targetPathClient.concat('index.html')
                 ),

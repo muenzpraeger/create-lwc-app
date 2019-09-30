@@ -15,7 +15,7 @@
         "@lwc/eslint-plugin-lwc": "^0.8",
         "@lwc/jest-preset": "muenzpraeger/lwc-jest-preset-ts-fix",
         "@lwc/jest-resolver": "1.1.0-alpha1",
-        "@lwc/jest-serializer": "1.1.0-alpha1",
+        "@lwc/jest-serializer": "2.2.0",
         "@lwc/jest-transformer": "muenzpraeger/lwc-jest-transformer-ts-fix",
         "@lwc/rollup-plugin": "^1.1.0-beta1",
         "@oclif/command": "^1",

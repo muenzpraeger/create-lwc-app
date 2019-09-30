@@ -2,8 +2,8 @@ export const messages = {
     logs: {
         project_support: {
             message:
-                'For feature requests, bug reports, or your own contributions please visit https://github.com/muenzpraeger/create-lwc-app! Or follow me on Twitter @muenzpraeger.',
-            emoji: 'tada'
+                '---------------------------------------------------------------------\nFor feature requests, bug reports, or your own contributions visit:\nhttps://github.com/muenzpraeger/create-lwc-app\n\nOr follow @muenzpraeger on Twitter.\n---------------------------------------------------------------------\n',
+            emoji: ''
         },
         project_created: {
             message:

@@ -71,6 +71,8 @@
         "@types/semver-compare": "^1.0.0",
         "@types/webpack": "^4.4.27",
         "@types/webpack-merge": "^4.1.4",
+        "@typescript-eslint/parser": "^2.3.1",
+        "@typescript-eslint/eslint-plugin": "^2.3.1",
         "cli-ux": "^5.2.1"
     },
     "engines": {

@@ -1,4 +1,6 @@
 {
+<% if (typescript) { %>    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],<% } %>
     "extends": ["@salesforce/eslint-config-lwc/recommended"],
     "rules": {
         "@lwc/lwc/no-async-operation": "warn",

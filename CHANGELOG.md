@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2019-10-02
+
+**lwc-services 1.3.0**
+
+-   Updated linting config for TypeScript
+-   Update support for LWC npm modules (adjusting to LWC 1.1.x)
+
 ### 2019-09-29
 
 **create-lwc-app 1.3.0**

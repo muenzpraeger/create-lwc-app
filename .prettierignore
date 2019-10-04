@@ -2,4 +2,5 @@
 packages/create-lwc-app/templates/README.md
 packages/create-lwc-app/templates/lwc-services.config.js
 packages/create-lwc-app/templates/scripts/express-dev.js
+packages/create-lwc-app/templates/eslintrc.json
 packages/create-lwc-app/templates/src/client/modules/my/app/app.html

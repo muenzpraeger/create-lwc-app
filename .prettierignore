@@ -4,3 +4,11 @@ packages/create-lwc-app/templates/lwc-services.config.js
 packages/create-lwc-app/templates/scripts/express-dev.js
 packages/create-lwc-app/templates/eslintrc.json
 packages/create-lwc-app/templates/src/client/modules/my/app/app.html
+packages/create-lwc-lib/templates/README.md
+packages/create-lwc-lib/templates/index.js
+packages/create-lwc-lib/templates/server.js
+packages/create-lwc-lib/templates/scripts/rollup.config.js
+packages/create-lwc-lib/templates/scripts/synthetic-shadow.js
+packages/create-lwc-lib/templates/scripts/wdio.js
+packages/create-lwc-lib/templates/eslintrc.json
+packages/create-lwc-lib/templates/src/client/modules/my/app/app.html

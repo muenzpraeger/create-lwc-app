@@ -24,7 +24,6 @@ export const messages = {
         pkg: 'Select a package manager',
         eslint: 'Use ESlint',
         prettier: 'Use Prettier (formatting)',
-        clientserver: 'Use custom Express server configuration',
         typescript: 'Use TypeScript or JavaScript'
     },
     errors: {

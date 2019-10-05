@@ -10,8 +10,8 @@ import { log } from '../utils/logger'
 const sortPjson = require('sort-pjson')
 const debug = require('debug')('generator-oclif')
 
-const LWC_VERSION = "1.0.2"
-const LWC_JEST_PRESET = "1.1.0"
+const LWC_VERSION = "1.1.0"
+const LWC_JEST_PRESET = "2.2.0"
 
 let hasGit = false
 let hasYarn = false
@@ -42,7 +42,6 @@ class CreateGenerator extends Generator {
     answers!: {
         name: string
         description: string
-        webcomponent: boolean
         version: string
         github: { repo: string; user: string }
         author: string
@@ -82,7 +81,7 @@ class CreateGenerator extends Generator {
         if (gitName) repository = `${gitName}/${repository.split('/')[1]}`
         const defaults = {
             name: this.determineAppname().replace(/ /g, '-'),
-            webcomponent: true,
+            description: "LWC Component Library",
             typescript: false,
             version: '0.0.0',
             license: 'MIT',
@@ -168,7 +167,7 @@ class CreateGenerator extends Generator {
                     ],
                     default: () => (this.options.yarn || hasYarn ? 1 : 0)
                 },
-                // PHIL: typescript is disabled for now
+                // PHIL: disable typescript support for now
                 // {
                 //     type: 'list',
                 //     name: 'typescript',
@@ -232,6 +231,7 @@ class CreateGenerator extends Generator {
             "@salesforce/eslint-config-lwc": "~0.3.0",
             "babel-eslint": "^10.0.1",
             "concurrently": "~4.0.1",
+            "cross-env": "^6.0.3",
             "eslint": "^5.10.0",
             "jest": "~24.8.0",
             "rollup": "~0.66.6",
@@ -247,13 +247,14 @@ class CreateGenerator extends Generator {
         }
         this.pjson.scripts = {
             "lint": "eslint src/",
-            "build": "rollup -c ./scripts/rollup.config.js",
+            "build": "cross-env rollup -c ./scripts/rollup.config.js",
+            "build:production": "cross-env NODE_ENV=production rollup -c ./scripts/rollup.config.js",
+            "serve": "node index.js",
+            "start": "concurrently --kill-others \"yarn build --watch\" \"yarn serve\"",
             "test": "yarn test:unit && yarn test:integration",
             "test:unit": "jest",
             "test:integration": "wdio ./scripts/wdio.conf.js"
         }
-        this.pjson.scripts.start = "concurrently --kill-others \"yarn build --watch\" \"yarn serve\""
-        this.pjson.scripts.serve = "node index.js"
         
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
@@ -264,7 +265,6 @@ class CreateGenerator extends Generator {
             "prettier --write '**/*.{css,html,js,json,md,ts,yaml,yml}'"
         this.pjson.scripts['prettier:verify'] =
             "prettier --list-different '**/*.{css,html,js,json,md,ts,yaml,yml}'"
-        this.pjson.scripts['build:development'] = 'lwc-services build'
 
         this.pjson.husky = { hooks: {} }
         this.pjson['lint-staged'] = {}
@@ -366,6 +366,52 @@ class CreateGenerator extends Generator {
                 this
             )
         }
+
+        // Public directory (resources)
+        this.fs.copyTpl(
+            this.templatePath('public/template.html'),
+            this.destinationPath('public/template.html'),
+            this
+        )
+        this.fs.copyTpl(
+            this.templatePath('public/template-wc.html'),
+            this.destinationPath('public/template-wc.html'),
+            this
+        )
+        this.fs.copyTpl(
+            this.templatePath('public/js/gitkeep'),
+            this.destinationPath('public/js/.gitkeep'),
+            this
+        )
+
+        // Integration tests
+        this.fs.copyTpl(
+            this.templatePath('test-integration/specs/greeting/Greeting.spec.js'),
+            this.destinationPath('test-integration/specs/greeting/Greeting.spec.js'),
+            this
+        )
+        this.fs.copyTpl(
+            this.templatePath('test-integration/specs/greeting/GreetingPage.js'),
+            this.destinationPath('test-integration/specs/greeting/GreetingPage.js'),
+            this
+        )
+
+        // Rollup scripts
+        this.fs.copyTpl(
+            this.templatePath('scripts/rollup.config.js'),
+            this.destinationPath('scripts/rollup.config.js'),
+            this
+        )
+        this.fs.copyTpl(
+            this.templatePath('scripts/synthetic-shadow.js'),
+            this.destinationPath('scripts/synthetic-shadow.js'),
+            this
+        )
+        this.fs.copyTpl(
+            this.templatePath('scripts/wdio.conf.js'),
+            this.destinationPath('scripts/wdio.conf.js'),
+            this
+        )
 
         this._write()
     }

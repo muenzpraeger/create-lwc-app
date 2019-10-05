@@ -29,12 +29,9 @@
 <body>
   <h1>Your First LWC Component is Ready</h1>
   <br/><br/><br/>
-  <div id="main"></div>
+  <div id="main">
+    <my-greeting></my-greeting>
+  </div>
   <script src="/static/js/{{js_bundle}}.js"></script>
-  <script>
-    var container = document.getElementById("main");
-    var element = createLwcComponent("my-greeting");
-    container.appendChild(element);
-  </script>
 </body>
 </html>

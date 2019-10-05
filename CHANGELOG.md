@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2019-10-05
+
+**create-lwc-app 1.3.1**
+
+-   Added a new generator to generate component libraries using rollup
+
+
 ### 2019-10-02
 
 **lwc-services 1.3.1**

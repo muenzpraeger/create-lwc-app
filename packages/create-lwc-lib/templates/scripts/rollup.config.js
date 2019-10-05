@@ -22,7 +22,7 @@ function rollupConfig({ target }) {
     return {
         input,
         output: {
-            file: path.join(outputDir, isCompat ? 'compat.js' : 'main.js'),
+            file: path.join(outputDir, (isCompat ? 'compat' : 'main') + (isProduction ? ".min.js" : ".js")),
             format: 'iife',
         },
         plugins: [

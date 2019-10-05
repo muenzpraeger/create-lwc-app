@@ -51,11 +51,19 @@ If you want to override certain behavior of `lwc-services` you can place a `lwc-
 
 <!-- commands -->
 
--   [`lwc-services build`](#lwc-services-build)
--   [`lwc-services serve`](#lwc-services-serve)
--   [`lwc-services sniff`](#lwc-services-sniff)
--   [`lwc-services test`](#lwc-services-test)
--   [`lwc-services watch`](#lwc-services-watch)
+- [create-lwc-app](#create-lwc-app)
+  - [Quick Start](#quick-start)
+  - [Live App](#live-app)
+  - [So what's this tool about?](#so-whats-this-tool-about)
+  - [lwc-services](#lwc-services)
+    - [Configuration](#configuration)
+    - [Commands](#commands)
+      - [`lwc-services build`](#lwc-services-build)
+      - [`lwc-services serve`](#lwc-services-serve)
+      - [`lwc-services sniff`](#lwc-services-sniff)
+      - [`lwc-services test`](#lwc-services-test)
+      - [`lwc-services watch`](#lwc-services-watch)
+  - [Contribution](#contribution)
 
 #### `lwc-services build`
 

@@ -21,7 +21,7 @@ export function welcome(): void {
     for (let m = 0; m < i; m++) {
         message = message.concat(zap)
     }
-    message = message.concat('  Lightning Web Components  ')
+    message = message.concat('  Lightning Web Components Library  ')
     for (let m = 0; m < i; m++) {
         message = message.concat(zap)
     }

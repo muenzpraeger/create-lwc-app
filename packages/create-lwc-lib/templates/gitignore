@@ -1,0 +1,8 @@
+node_modules/
+test/screenshots/
+errorShots/
+
+*.log
+.DS_Store
+.vscode
+public/js/*.js

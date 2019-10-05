@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "declaration": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node",
+        "target": "es2018",
+        "lib": ["dom", "es2015", "es2016", "es2017", "es2018"]
+    },
+    "typeAcquisition": {
+        "include": ["jest"]
+    }
+}

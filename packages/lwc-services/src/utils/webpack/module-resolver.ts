@@ -64,18 +64,6 @@ module.exports = class ModuleResolver {
             return cb()
         }
 
-        for (let key in npmmodules) {
-            const mod = npmmodules[key].specifier
-            if (mod === request) {
-                return cb(undefined, {
-                    path: npmmodules[key].entry,
-                    query,
-                    file: true,
-                    resolved: true
-                })
-            }
-        }
-
         const mod = npmmodules[request]
         if (mod) {
             return cb(undefined, {

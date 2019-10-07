@@ -1,6 +1,6 @@
 {
     "name": "lwc-services",
-    "version": "1.3.1",
+    "version": "1.3.2",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"
@@ -17,7 +17,7 @@
         "@lwc/jest-resolver": "1.1.0-alpha1",
         "@lwc/jest-serializer": "1.1.0-alpha1",
         "@lwc/jest-transformer": "muenzpraeger/lwc-jest-transformer-ts-fix",
-        "@lwc/rollup-plugin": "^1.1.0-beta1",
+        "@lwc/rollup-plugin": "^1.1.0",
         "@oclif/command": "^1",
         "@oclif/config": "^1",
         "@oclif/plugin-help": "^2",
@@ -41,7 +41,7 @@
         "helmet": "^3.18.0",
         "html-webpack-plugin": "^3.2.0",
         "jest": "~24",
-        "lwc": "^1.1.0-beta1",
+        "lwc": "^1.1.0",
         "node-emoji": "^1.10.0",
         "nodemon": "^1.19.2",
         "prettier": "^1.18",

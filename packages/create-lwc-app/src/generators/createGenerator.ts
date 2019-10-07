@@ -33,6 +33,7 @@ class CreateGenerator extends Generator {
         clientserver: boolean
         typescript: boolean
     }
+    lib: boolean
     name: string
     args!: { [k: string]: string }
     pjson: any
@@ -65,6 +66,7 @@ class CreateGenerator extends Generator {
             typescript: opts.options.includes('typescript')
         }
         this.name = opts.name
+        this.lib = opts.lib
     }
 
     async prompting() {
@@ -179,14 +181,16 @@ class CreateGenerator extends Generator {
                         { name: 'TypeScript', value: 'ts' }
                     ],
                     default: () => (this.options.typescript ? 1 : 0)
-                },
-                {
+                }
+            ]
+            if (!this.lib) {
+                questions.push({
                     type: 'confirm',
                     name: 'clientserver',
                     message: messages.questions.clientserver,
                     default: defaults.clientserver
-                }
-            ]
+                })
+            }
             this.answers = (await this.prompt(questions)) as any
         }
         debug(this.answers)
@@ -229,7 +233,11 @@ class CreateGenerator extends Generator {
         this.repository = this.pjson.repository = this.answers.github
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
-        this.pjson.dependencies = { 'lwc-services': '1.3.0' }
+        if (this.lib) {
+            this.pjson.devDependencies = { 'lwc-services': '^1.3.2' }
+        } else {
+            this.pjson.dependencies = { 'lwc-services': '^1.3.2' }
+        }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
         } else {
@@ -301,6 +309,12 @@ class CreateGenerator extends Generator {
         }
 
         this.pjson['lint-staged']['*'] = ['git add']
+
+        if (this.lib) {
+            this.pjson.lwc = {
+                modules: ['src']
+            }
+        }
 
         this.pjson.keywords = defaults.keywords || ['lwc']
         this.pjson.homepage =
@@ -376,7 +390,11 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push('lwc-services@1.3.0')
+        if (this.lib) {
+            devDependencies.push('lwc-services@^1.3.2')
+        } else {
+            dependencies.push('lwc-services@^1.3.2')
+        }
         devDependencies.push('husky@^3.0.7', 'lint-staged@^9.4')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')

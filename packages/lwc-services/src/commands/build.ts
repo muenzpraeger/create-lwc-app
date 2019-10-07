@@ -84,7 +84,7 @@ export default class Build extends Command {
         }
 
         // Clearing build directory, if the user didn't override.
-        if (!lwcConfig.noclear) {
+        if (!flags.noclear) {
             if (fs.existsSync(BUILD_DIR)) {
                 rimraf.sync(BUILD_DIR)
                 log(messages.logs.clear)

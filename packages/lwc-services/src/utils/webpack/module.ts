@@ -1,16 +1,23 @@
-const { resolveModulesInDir, resolveModules } = require('@lwc/module-resolver')
+const { resolveModules } = require('@lwc/module-resolver')
+import * as fs from 'fs'
 import * as path from 'path'
 
 import { lwcConfig } from '../../config/lwcConfig'
 
 let npmmodules: any
+const pkgJson = JSON.parse(fs.readFileSync(`package.json`, 'utf8'))
 
-lwcConfig.localModulesDirs.forEach(dir => {
-    const lookupDir = path.resolve(dir)
-    npmmodules = { ...npmmodules, ...resolveModulesInDir(lookupDir) }
+let resolvedModules = resolveModules({
+    modules: [
+        ...lwcConfig.localModulesDirs,
+        ...Object.keys(pkgJson.dependencies)
+    ]
 })
 
-npmmodules = { ...npmmodules, ...resolveModules() }
+npmmodules = resolvedModules.reduce(
+    (map: any, m: any) => ((map[m.specifier] = m), map),
+    {}
+)
 
 const LAYOUT = {
     /**

@@ -107,7 +107,7 @@ class CreateGenerator extends Generator {
         if (this.options.defaults) {
             this.answers = defaults
         } else {
-            let questions: any = [
+            const questions: any = [
                 {
                     type: 'input',
                     name: 'name',

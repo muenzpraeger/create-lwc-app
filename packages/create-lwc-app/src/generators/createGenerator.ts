@@ -57,7 +57,7 @@ class CreateGenerator extends Generator {
     typescript?: boolean
     targetPathClient = 'src/'
 
-    constructor(args: any, opts: any, lib: boolean) {
+    constructor(args: any, opts: any) {
         super(args, opts)
         this.options = {
             defaults: opts.defaults,

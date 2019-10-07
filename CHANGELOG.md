@@ -2,11 +2,11 @@
 
 ### 2019-10-07
 
-**create-lwc-app 1.3.2**
+**create-lwc-app 1.3.3**
 
 -   New flag `--lib` to generate a library project
 
-**lwc-services 1.3.2**
+**lwc-services 1.3.3**
 
 -   Support for 3rd party npm libraries that contain `lwc` modules
 

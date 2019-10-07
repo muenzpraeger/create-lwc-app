@@ -234,9 +234,9 @@ class CreateGenerator extends Generator {
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
         if (this.lib) {
-            this.pjson.devDependencies = { 'lwc-services': '^1.3.2' }
+            this.pjson.devDependencies = { 'lwc-services': '^1.3.3' }
         } else {
-            this.pjson.dependencies = { 'lwc-services': '^1.3.2' }
+            this.pjson.dependencies = { 'lwc-services': '^1.3.3' }
         }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
@@ -391,9 +391,9 @@ class CreateGenerator extends Generator {
         const dependencies: string[] = []
         const devDependencies: string[] = []
         if (this.lib) {
-            devDependencies.push('lwc-services@^1.3.2')
+            devDependencies.push('lwc-services@^1.3.3')
         } else {
-            dependencies.push('lwc-services@^1.3.2')
+            dependencies.push('lwc-services@^1.3.3')
         }
         devDependencies.push('husky@^3.0.7', 'lint-staged@^9.4')
         if (this.clientserver) {

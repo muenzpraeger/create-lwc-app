@@ -2377,13 +2377,11 @@
     selenium-standalone "^6.15.1"
 
 "@wdio/sync@^5.9.6":
-  version "5.13.2"
-  resolved "https://registry.yarnpkg.com/@wdio/sync/-/sync-5.13.2.tgz#192029edf6d571021ea39bdee475e327b9051f59"
-  integrity sha512-3XMoSqQoudlKdSXUwVn2Gau6TlvDppVh6Vvxxlz8Id1/vmvWg0izwE+W4TlnoCiNeCtjLr2IpOXoJtKtUqeOJQ==
+  version "5.14.4"
+  resolved "https://registry.yarnpkg.com/@wdio/sync/-/sync-5.14.4.tgz#fd61f9f13e9966553126dd48a0d0762a53b91592"
+  integrity sha512-kDV+qI1CupIaIeKXJ66PH9rJMVdqoJ18SJkVbKAHTtAjjl2Dc40vhhpiO3KAR/Un5lbpupj1Sc11Cqc4wP2oWA==
   dependencies:
-    "@wdio/config" "5.13.2"
     "@wdio/logger" "5.13.2"
-    "@wdio/utils" "5.13.2"
   optionalDependencies:
     fibers "^4.0.1"
     fibers_node_v8 "^3.1.2"
@@ -8405,6 +8403,26 @@ lines-and-columns@^1.1.6:
   integrity sha1-HADHQ7QzzQpOgHWPe2SldEDZ/wA=
 
 lint-staged@^9.3.0, lint-staged@^9.4.1:
+  version "9.4.1"
+  resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-9.4.1.tgz#60c0f85745bd398e6460aa7f5adb3cad3a2b862c"
+  integrity sha512-zFRbo1bAJEVf1m33paTTjDVfy2v3lICCqHfmQSgNoI+lWpi7HPG5y/R2Y7Whdce+FKxlZYs/U1sDSx8+nmQdDA==
+  dependencies:
+    chalk "^2.4.2"
+    commander "^2.20.0"
+    cosmiconfig "^5.2.1"
+    debug "^4.1.1"
+    dedent "^0.7.0"
+    del "^5.0.0"
+    execa "^2.0.3"
+    listr "^0.14.3"
+    log-symbols "^3.0.0"
+    micromatch "^4.0.2"
+    normalize-path "^3.0.0"
+    please-upgrade-node "^3.1.1"
+    string-argv "^0.3.0"
+    stringify-object "^3.3.0"
+
+lint-staged@^9.4.1:
   version "9.4.1"
   resolved "https://registry.yarnpkg.com/lint-staged/-/lint-staged-9.4.1.tgz#60c0f85745bd398e6460aa7f5adb3cad3a2b862c"
   integrity sha512-zFRbo1bAJEVf1m33paTTjDVfy2v3lICCqHfmQSgNoI+lWpi7HPG5y/R2Y7Whdce+FKxlZYs/U1sDSx8+nmQdDA==

@@ -6,5 +6,13 @@
         "@lwc/lwc/no-async-operation": "warn",
         "@lwc/lwc/no-inner-html": "warn",
         "@lwc/lwc/no-document-query": "warn"
-    }
+    }<% if (clientserver) { %>,
+    "overrides": [
+        {
+            "files": ["src/server/**"],
+            "env": {
+                "node": true
+            }
+        }
+    ]<% } %>
 }

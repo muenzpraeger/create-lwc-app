@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2019-10-09
+
+**create-lwc-app 1.3.4**
+
+-   Updated `.eslintrc.json` file for projects with Express
+
 ### 2019-10-07
 
 **create-lwc-app 1.3.3**

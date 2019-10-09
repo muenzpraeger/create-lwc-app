@@ -26,6 +26,8 @@ try {
     // Nothing
 }
 
+const LWC_SERVICES_VERSION = '1.3.4'
+
 class CreateGenerator extends Generator {
     options: {
         defaults?: boolean
@@ -234,9 +236,13 @@ class CreateGenerator extends Generator {
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
         if (this.lib) {
-            this.pjson.devDependencies = { 'lwc-services': '^1.3.3' }
+            this.pjson.devDependencies = {
+                'lwc-services': `^${LWC_SERVICES_VERSION}`
+            }
         } else {
-            this.pjson.dependencies = { 'lwc-services': '^1.3.3' }
+            this.pjson.dependencies = {
+                'lwc-services': `^${LWC_SERVICES_VERSION}`
+            }
         }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
@@ -391,9 +397,9 @@ class CreateGenerator extends Generator {
         const dependencies: string[] = []
         const devDependencies: string[] = []
         if (this.lib) {
-            devDependencies.push('lwc-services@^1.3.3')
+            devDependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
         } else {
-            dependencies.push('lwc-services@^1.3.3')
+            dependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
         }
         devDependencies.push('husky@^3.0.7', 'lint-staged@^9.4')
         if (this.clientserver) {

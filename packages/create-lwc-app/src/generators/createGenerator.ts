@@ -26,7 +26,7 @@ try {
     // Nothing
 }
 
-const LWC_SERVICES_VERSION = '1.3.4'
+const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
     options: {
@@ -34,6 +34,7 @@ class CreateGenerator extends Generator {
         yarn: boolean
         clientserver: boolean
         typescript: boolean
+        edge: boolean
     }
     lib: boolean
     name: string
@@ -45,6 +46,7 @@ class CreateGenerator extends Generator {
         description: string
         webcomponent: boolean
         clientserver: boolean
+        edge: boolean
         version: string
         github: { repo: string; user: string }
         author: string
@@ -57,6 +59,7 @@ class CreateGenerator extends Generator {
     repository?: string
     clientserver?: boolean
     typescript?: boolean
+    edge?: boolean
     targetPathClient = 'src/'
 
     constructor(args: any, opts: any) {
@@ -65,7 +68,8 @@ class CreateGenerator extends Generator {
             defaults: opts.defaults,
             yarn: opts.options.includes('yarn') || hasYarn,
             clientserver: opts.options.includes('express'),
-            typescript: opts.options.includes('typescript')
+            typescript: opts.options.includes('typescript'),
+            edge: opts.options.includes('edge')
         }
         this.name = opts.name
         this.lib = opts.lib
@@ -87,9 +91,10 @@ class CreateGenerator extends Generator {
         if (gitName) repository = `${gitName}/${repository.split('/')[1]}`
         const defaults = {
             name: this.determineAppname().replace(/ /g, '-'),
-            webcomponent: true,
+            webcomponent: false,
             clientserver: false,
             typescript: false,
+            edge: false,
             version: '0.0.0',
             license: 'MIT',
             author: gitName,
@@ -193,6 +198,14 @@ class CreateGenerator extends Generator {
                     default: defaults.clientserver
                 })
             }
+            if (isWin) {
+                questions.push({
+                    type: 'confirm',
+                    name: 'edge',
+                    message: messages.questions.edge,
+                    default: defaults.edge
+                })
+            }
             this.answers = (await this.prompt(questions)) as any
         }
         debug(this.answers)
@@ -200,12 +213,14 @@ class CreateGenerator extends Generator {
             this.options = {
                 yarn: this.answers.pkg === 'yarn',
                 clientserver: this.answers.clientserver,
-                typescript: this.answers.typescript === 'ts'
+                typescript: this.answers.typescript === 'ts',
+                edge: this.answers.edge
             }
         }
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
         this.typescript = this.options.typescript
+        this.edge = this.options.edge
 
         if (this.clientserver) {
             this.targetPathClient = 'src/client/'
@@ -463,7 +478,7 @@ class CreateGenerator extends Generator {
         const fileExtension = this.typescript ? '.ts' : '.js'
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
-                this.templatePath('src/client/index.html'),
+                this.templatePath('src/client/index.non-wc.html'),
                 this.destinationPath(
                     this.targetPathClient.concat('index.html')
                 ),
@@ -473,7 +488,7 @@ class CreateGenerator extends Generator {
                 this.templatePath(
                     this.answers.webcomponent
                         ? 'src/client/index'.concat(fileExtension)
-                        : 'src/client/index'.concat(fileExtension)
+                        : 'src/client/index.non-wc'.concat(fileExtension)
                 ),
                 this.destinationPath(
                     this.targetPathClient.concat('index'.concat(fileExtension))

@@ -25,7 +25,8 @@ export const messages = {
         eslint: 'Use ESlint',
         prettier: 'Use Prettier (formatting)',
         clientserver: 'Use custom Express server configuration',
-        typescript: 'Use TypeScript or JavaScript'
+        typescript: 'Use TypeScript or JavaScript',
+        edge: 'Do you want to use Edge as browser'
     },
     errors: {
         no_node_installed: {

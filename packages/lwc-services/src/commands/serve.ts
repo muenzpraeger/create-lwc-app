@@ -75,9 +75,7 @@ export default class Serve extends Command {
             lwcConfig.server.customConfig &&
             fs.existsSync(lwcConfig.server.customConfig)
         ) {
-            let customExpressConfig
-
-            customExpressConfig = require(path.resolve(
+            const customExpressConfig = require(path.resolve(
                 lwcConfig.server.customConfig
             ))
 

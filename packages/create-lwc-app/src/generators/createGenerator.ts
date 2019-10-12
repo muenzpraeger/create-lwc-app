@@ -26,7 +26,7 @@ try {
     // Nothing
 }
 
-const LWC_SERVICES_VERSION = '1.3.4'
+const LWC_SERVICES_VERSION = '1.3.5'
 
 class CreateGenerator extends Generator {
     options: {

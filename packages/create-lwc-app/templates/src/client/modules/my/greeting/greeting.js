@@ -27,7 +27,7 @@ export default class Greeting extends LightningElement {
 
     @api
     set speed(value) {
-        if (SPEED_CLASS_MAP.hasOwnProperty(value)) {
+        if (SPEED_CLASS_MAP[value]) {
             this.animationSpeed = value;
         } else {
             this.animationSpeed = DEFAULT_SPEED;

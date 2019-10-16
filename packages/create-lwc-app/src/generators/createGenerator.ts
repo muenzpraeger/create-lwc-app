@@ -479,7 +479,11 @@ class CreateGenerator extends Generator {
         const fileExtension = this.typescript ? '.ts' : '.js'
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
-                this.templatePath('src/client/index.non-wc.html'),
+                this.templatePath(
+                    !this.answers.edge
+                        ? 'src/client/index.html'
+                        : 'src/client/index.non-wc.html'
+                ),
                 this.destinationPath(
                     this.targetPathClient.concat('index.html')
                 ),
@@ -487,7 +491,7 @@ class CreateGenerator extends Generator {
             )
             this.fs.copyTpl(
                 this.templatePath(
-                    this.answers.webcomponent
+                    !this.answers.edge
                         ? 'src/client/index'.concat(fileExtension)
                         : 'src/client/index.non-wc'.concat(fileExtension)
                 ),

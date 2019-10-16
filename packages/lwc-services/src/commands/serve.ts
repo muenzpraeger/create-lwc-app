@@ -77,7 +77,7 @@ export default class Serve extends Command {
         ) {
             const customExpressConfig = require(path.resolve(
                 lwcConfig.server.customConfig
-            ))
+            )).default
 
             customExpressConfig(app)
         }

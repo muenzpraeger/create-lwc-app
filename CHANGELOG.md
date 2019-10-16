@@ -2,6 +2,18 @@
 
 ### 2019-10-09
 
+**create-lwc-app 1.3.5**
+
+-   Correct template code in example (lint error)
+-   Add support for Edge (special case handling without shadow DOM)
+
+**lwc-services 1.3.5**
+
+-   Upgrade to LWC 1.1.1
+-   Fix for startup of bundled Express server with custom config
+
+### 2019-10-09
+
 **create-lwc-app 1.3.4**
 
 -   Updated `.eslintrc.json` file for projects with Express

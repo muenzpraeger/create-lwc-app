@@ -26,7 +26,7 @@ try {
     // Nothing
 }
 
-const LWC_SERVICES_VERSION = '1.3.6'
+const LWC_SERVICES_VERSION = '1.3.7'
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {

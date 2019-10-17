@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2019-10-17
+
+**lwc-services 1.3.7**
+
+-   Fixed error for JavaScript projects on the `serve` command when using a custom Express config
+
 ### 2019-10-09
 
 **create-lwc-app 1.3.5**

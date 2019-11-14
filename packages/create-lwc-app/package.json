@@ -24,7 +24,7 @@
         "sort-pjson": "^1.0.3",
         "ts-node": "^8",
         "tslib": "^1",
-        "typescript": "^3.6",
+        "typescript": "^3.7",
         "yeoman-environment": "^2.5.0",
         "yeoman-generator": "^4.1.0"
     },

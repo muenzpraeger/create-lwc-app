@@ -10,7 +10,7 @@ const {
 
 const EMPTY_STYLE = path.resolve(__dirname, 'mocks', 'empty-style.js')
 
-const EXTENSIONS = ['.js', '.ts']
+const EXTENSIONS = ['.js', '.ts', '.html', '.css']
 
 function getExtension(
     fileSystem: any,

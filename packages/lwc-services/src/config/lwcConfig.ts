@@ -53,6 +53,7 @@ interface Config {
         }
     }
     lwcCompilerStylesheetConfig: any
+    lwcExperimentalDynamicComponent: any
 }
 
 export const defaultLwcConfig: Config = {
@@ -101,7 +102,8 @@ export const defaultLwcConfig: Config = {
             format: 'amd'
         }
     },
-    lwcCompilerStylesheetConfig: {}
+    lwcCompilerStylesheetConfig: {},
+    lwcExperimentalDynamicComponent: {}
 }
 
 function buildConfig(): Config {

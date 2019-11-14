@@ -5,6 +5,7 @@ const babel = require('@babel/core')
 import { lwcConfig } from '../../config/lwcConfig'
 const productionConfig = lwcConfig.lwcCompilerOutput.production
 const stylesheetConfig = lwcConfig.lwcCompilerStylesheetConfig
+const experimentalDynamicComponent = lwcConfig.lwcExperimentalDynamicComponent
 
 const __PROD__ = process.env.NODE_ENV === 'production'
 
@@ -54,7 +55,8 @@ module.exports = function(source: any) {
             name: info.name,
             namespace: info.ns,
             outputConfig: compilerOutput,
-            stylesheetConfig
+            stylesheetConfig,
+            experimentalDynamicComponent
         })
         .then((res: any) => {
             cb(null, res.code)

@@ -43,13 +43,21 @@ interface Config {
     // LWC Compiler options for production mode.
     // Find the detailed description here: https://www.npmjs.com/package/@lwc/compiler
     lwcCompilerOutput: {
-        production: {
-            compat: boolean
-            minify: boolean
-            env: {
+        development?: {
+            compat?: boolean
+            minify?: boolean
+            env?: {
                 NODE_ENV: string
             }
-            format: string
+            format?: string
+        }
+        production?: {
+            compat?: boolean
+            minify?: boolean
+            env?: {
+                NODE_ENV: string
+            }
+            format?: string
         }
     }
     lwcCompilerStylesheetConfig: any
@@ -93,6 +101,14 @@ export const defaultLwcConfig: Config = {
     // LWC Compiler options for production mode.
     // Find the detailed description here: https://www.npmjs.com/package/@lwc/compiler
     lwcCompilerOutput: {
+        development: {
+            compat: false,
+            minify: true,
+            env: {
+                NODE_ENV: 'production'
+            },
+            format: 'amd'
+        },
         production: {
             compat: false,
             minify: true,

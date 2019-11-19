@@ -73,9 +73,9 @@ function getWebpackEntryPaths(
         return entry
     }
 
-    let paths: string[] = []
+    const paths: string[] = []
     Object.keys(entry).forEach(name => {
-        let path = entry[name]
+        const path = entry[name]
         if (typeof path === 'string') {
             paths.push(path)
         } else {
@@ -132,6 +132,8 @@ function buildWebpackConfig({
                             options: {
                                 module: MODULE_CONFIG,
                                 mode: isProduction
+                                    ? 'production'
+                                    : 'development'
                             }
                         }
                     ]
@@ -170,7 +172,7 @@ function buildWebpackConfig({
         return serverConfig
     }
 
-    let entryPaths = getWebpackEntryPaths(serverConfig.entry)
+    const entryPaths = getWebpackEntryPaths(serverConfig.entry)
     const lwcModuleResolver = {
         resolve: {
             extensions: ['.js', '.ts', '.json'],

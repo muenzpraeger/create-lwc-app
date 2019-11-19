@@ -27,6 +27,9 @@ module.exports = {
         // Rules with too much constraints
         '@typescript-eslint/explicit-member-accessibility': 0,
         '@typescript-eslint/explicit-function-return-type': 0,
-        '@typescript-eslint/no-explicit-any': 0
+        '@typescript-eslint/no-explicit-any': 0,
+
+        // Helper
+        '@typescript-eslint/ban-ts-ignore': 0
     }
 }

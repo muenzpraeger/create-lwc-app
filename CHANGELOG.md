@@ -1,5 +1,13 @@
 ## Changelog
 
+### 2019-11-19
+
+**lwc-services 1.3.9**
+
+-   Adding support for node 12
+-   Fixed error with not passing LWC compiler options
+-   Added support for CSS only modules
+
 ### 2019-10-17
 
 **lwc-services 1.3.7**

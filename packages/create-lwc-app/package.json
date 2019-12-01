@@ -16,7 +16,7 @@
         "@typescript-eslint/parser": "^2.7.0",
         "cli-ux": "^5.3.3",
         "husky": "^3.0.9",
-        "lerna": "^3.18.4",
+        "lerna": "^3.19.0",
         "lint-staged": "^9.4.2",
         "node-emoji": "^1.10.0",
         "prettier": "^1.18.0",

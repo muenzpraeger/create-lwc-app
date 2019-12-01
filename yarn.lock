@@ -2570,6 +2570,16 @@
     loglevel-plugin-prefix "^0.8.4"
     strip-ansi "^5.2.0"
 
+"@wdio/logger@5.16.10":
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.16.10.tgz#45d0ea485d52c8a7c526954ccc980d54c3e29e56"
+  integrity sha512-hRKhxgd9uB48Dtj2xe2ckxU4KwI/RO8IwguySuaI2SLFj6EDbdonwzpVkq111/fjBuq7R1NauAaNcm3AMEbIFA==
+  dependencies:
+    chalk "^3.0.0"
+    loglevel "^1.6.0"
+    loglevel-plugin-prefix "^0.8.4"
+    strip-ansi "^6.0.0"
+
 "@wdio/logger@5.16.5":
   version "5.16.5"
   resolved "https://registry.yarnpkg.com/@wdio/logger/-/logger-5.16.5.tgz#3c82a4f55d689e76e54e3718e4402b465c202214"
@@ -2627,11 +2637,11 @@
     selenium-standalone "^6.15.1"
 
 "@wdio/sync@^5.9.6":
-  version "5.16.5"
-  resolved "https://registry.yarnpkg.com/@wdio/sync/-/sync-5.16.5.tgz#d9a3cbfed43170a398ca2b7a6febc96d1c398989"
-  integrity sha512-8fp1HWEP+pTx2J8qjsp7MmfObOWrdVpuIp+M4TUhHsOj2ph2p3CY9t2M5kfBiAMw7Jc8QEfEjnSTv53cOEjC+w==
+  version "5.16.10"
+  resolved "https://registry.yarnpkg.com/@wdio/sync/-/sync-5.16.10.tgz#44ef882818283e8343899e343421a876561fc398"
+  integrity sha512-rcSjTRiEmlArrgt76OdLqqPGgMu0/KEuzCuvKnGXXjEF090M8FBhmqbpd36ax3McFzgFZx05UcKoxbjTZb4BvA==
   dependencies:
-    "@wdio/logger" "5.16.5"
+    "@wdio/logger" "5.16.10"
   optionalDependencies:
     fibers "^4.0.1"
     fibers_node_v8 "^3.1.2"

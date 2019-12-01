@@ -30,7 +30,7 @@
     },
     "devDependencies": {
         "@types/node": "^12",
-        "@types/semver-compare": "^1.0.0",
+        "@types/semver-compare": "^1.0.1",
         "ts-node": "^8"
     },
     "engines": {

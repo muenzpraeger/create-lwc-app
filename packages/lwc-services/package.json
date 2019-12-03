@@ -31,7 +31,7 @@
         "@wdio/sync": "^5.9.6",
         "babel-eslint": ">=10.0.0",
         "babel-loader": "^8.0.5",
-        "chalk": "^2.4.2",
+        "chalk": "^3.0.0",
         "compat-polyfills": "^0.22.0",
         "copy-webpack-plugin": "^5.0.2",
         "deepmerge": "^4.0.0",

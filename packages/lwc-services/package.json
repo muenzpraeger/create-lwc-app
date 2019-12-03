@@ -44,7 +44,7 @@
         "jest": "~24",
         "lwc": "^1.1.1",
         "node-emoji": "^1.10.0",
-        "nodemon": "^1.19.2",
+        "nodemon": "^2.0.1",
         "prettier": "^1.18",
         "rimraf": "^3.0",
         "rollup": "^1.10.0",

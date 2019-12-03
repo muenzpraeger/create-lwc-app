@@ -245,7 +245,7 @@ class CreateGenerator extends Generator {
         this.pjson.description =
             this.answers.description || defaults.description
         this.pjson.version = this.answers.version || defaults.version
-        this.pjson.engines.node = '>=10.0.0 <11.0.0'
+        this.pjson.engines.node = '>=10.0.0'
         this.pjson.author = this.answers.author || defaults.author
         this.pjson.license = this.answers.license || defaults.license
         this.repository = this.pjson.repository = this.answers.github

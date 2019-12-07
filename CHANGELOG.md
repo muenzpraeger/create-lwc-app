@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2019-12-07
+
+**lwc-services 1.3.12**
+
+-   Adding passthrough parameters for Jest debug command
+-   Fixed wrong path reference for Jest debug
+
 ### 2019-11-19
 
 **lwc-services 1.3.9**

@@ -76,14 +76,19 @@ export default class Test extends Command {
             // Execute command is different on Windows.
             const jestExecutable =
                 process.platform === 'win32'
-                    ? '../../node_modules/jest/bin/jest.js'
-                    : '../../node_modules/.bin/jest'
+                    ? './node_modules/jest/bin/jest.js'
+                    : './node_modules/.bin/jest'
 
             const debugArguments: string[] = [
                 '--inspect-brk',
                 jestExecutable,
                 '--runInBand'
             ]
+
+            if (flags.passthrough) {
+                flags.passthrough.forEach(arg => debugArguments.push(arg))
+            }
+
             const jestSpawn = spawn('node', debugArguments)
 
             jestSpawn.on('error', (err: string) => {
@@ -95,7 +100,7 @@ export default class Test extends Command {
                 log({ message: `${data}`, emoji: 'rainbow' })
             })
         } else {
-            let jestArguments: string[] = []
+            const jestArguments: string[] = []
             if (flags.watch) {
                 jestArguments.push('--watchAll')
             }

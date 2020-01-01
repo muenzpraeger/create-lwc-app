@@ -29,7 +29,7 @@
         "yeoman-generator": "^4.2.0"
     },
     "devDependencies": {
-        "@types/node": "^12",
+        "@types/node": "^13",
         "@types/semver-compare": "^1.0.1",
         "ts-node": "^8"
     },

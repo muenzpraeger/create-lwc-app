@@ -1594,6 +1594,14 @@ cli-cursor@^2.0.0, cli-cursor@^2.1.0:
   dependencies:
     restore-cursor "^2.0.0"
 
+cli-progress@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/cli-progress/-/cli-progress-3.4.0.tgz#5f7459dad0258376e25149893427ba7f3a5160b4"
+  integrity sha512-35zcc1FsbPfN2dVonxUQwEnqMnI5kDFx2G4qGFGWgIDYqZ6+3t4/GjX/Vk0tq6bNgI9dEFcWLJ6AaLN17NLBDA==
+  dependencies:
+    colors "^1.1.2"
+    string-width "^2.1.1"
+
 cli-table@^0.3.1:
   version "0.3.1"
   resolved "https://npmregistry-rw.herokuapp.com/cli-table/-/cli-table-0.3.1/f53b05266a8b1a0b934b3d0821e6e2dc5914ae23.tgz#f53b05266a8b1a0b934b3d0821e6e2dc5914ae23"
@@ -1609,10 +1617,10 @@ cli-truncate@^0.2.1:
     slice-ansi "0.0.4"
     string-width "^1.0.1"
 
-cli-ux@^5.3.3:
-  version "5.3.3"
-  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-5.3.3.tgz#6459e180da29f2850473b9bf2f1ae097e5257d31"
-  integrity sha512-a16g+BTjASUH41s1pevai4P3JKwhx85wkOSm6sXWsk6KkdSmDeJ16pSCn2x3nqK7W8n35igOu2YiW+qFkqLRJg==
+cli-ux@^5.4.1:
+  version "5.4.1"
+  resolved "https://registry.yarnpkg.com/cli-ux/-/cli-ux-5.4.1.tgz#d0eb2509923acd43989e11a9297de515adde9079"
+  integrity sha512-x5CJXJPKBrEo6o8Uy/Upajb9OWYMhTzOpRvKZyZ68kkHysiGd9phGP71WyHZfLUkhwdvpNUFkY2tsDr0ogyocg==
   dependencies:
     "@oclif/command" "^1.5.1"
     "@oclif/errors" "^1.2.1"
@@ -1623,11 +1631,13 @@ cli-ux@^5.3.3:
     cardinal "^2.1.1"
     chalk "^2.4.1"
     clean-stack "^2.0.0"
+    cli-progress "^3.4.0"
     extract-stack "^1.0.0"
     fs-extra "^7.0.1"
     hyperlinker "^1.0.0"
-    indent-string "^3.2.0"
+    indent-string "^4.0.0"
     is-wsl "^1.1.0"
+    js-yaml "^3.13.1"
     lodash "^4.17.11"
     natural-orderby "^2.0.1"
     password-prompt "^1.1.2"
@@ -1730,6 +1740,11 @@ colors@1.0.3:
   version "1.0.3"
   resolved "https://npmregistry-rw.herokuapp.com/colors/-/colors-1.0.3/0433f44d809680fdeb60ed260f1b0c262e82a40b.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
   integrity sha1-BDP0TYCWgP3rYO0mDxsMJi6CpAs=
+
+colors@^1.1.2:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/colors/-/colors-1.4.0.tgz#c50491479d4c1bdaed2c9ced32cf7c7dc2360f78"
+  integrity sha512-a+UqTh4kgZg/SlGvfbzDHpgRu7AAQOmmqRHJnxhRZICKFUT91brVhNNt58CMWU9PsBbv3PDCZUHbVxuDiH2mtA==
 
 columnify@^1.5.4:
   version "1.5.4"

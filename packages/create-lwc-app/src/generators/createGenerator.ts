@@ -443,7 +443,7 @@ class CreateGenerator extends Generator {
                 ignoreScripts: false
             }),
             install(dependencies, { ...yarnOpts, ...save })
-        ]).then(() => {})
+        ])
     }
 
     end() {

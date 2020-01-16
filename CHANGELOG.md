@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2020-01-16
+
+**create-lwc-app 1.3.13**
+
+-   Updating message for Edge (non-Chromium)
+
 ### 2019-12-07
 
 **lwc-services 1.3.12**

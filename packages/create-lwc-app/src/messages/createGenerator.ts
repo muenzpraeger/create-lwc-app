@@ -26,7 +26,7 @@ export const messages = {
         prettier: 'Use Prettier (formatting)',
         clientserver: 'Use custom Express server configuration',
         typescript: 'Use TypeScript or JavaScript',
-        edge: 'Do you want to use Edge as browser'
+        edge: 'Do you want to use Edge (non-Chromium version) as browser'
     },
     errors: {
         no_node_installed: {

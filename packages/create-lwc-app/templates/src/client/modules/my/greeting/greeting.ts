@@ -1,4 +1,4 @@
-import { LightningElement, track, api } from 'lwc';
+import { LightningElement, api } from 'lwc';
 
 const greetings: string[] = [
     'Hello',
@@ -21,9 +21,9 @@ const SPEED_CLASS_MAP: any = {
 const DEFAULT_SPEED = 'medium';
 
 export default class Greeting extends LightningElement {
-    @track animationSpeed: string = DEFAULT_SPEED;
-    @track index: number = 0;
-    @track isAnimating: boolean = true;
+    animationSpeed: string = DEFAULT_SPEED;
+    index = 0;
+    isAnimating = true;
 
     @api
     set speed(value: string) {

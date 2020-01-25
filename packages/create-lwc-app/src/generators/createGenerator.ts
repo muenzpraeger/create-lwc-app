@@ -26,7 +26,7 @@ try {
     // Nothing
 }
 
-const LWC_SERVICES_VERSION = '1.3.12'
+const LWC_SERVICES_VERSION = '2.0.0-beta.1'
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
@@ -266,9 +266,9 @@ class CreateGenerator extends Generator {
             this.pjson.scripts.lint = 'eslint ./src/**/*.js'
         }
         this.pjson.scripts.prettier =
-            'prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}"'
+            'prettier --write \\"**/*.{css,html,js,json,md,ts,yaml,yml}\\"'
         this.pjson.scripts['prettier:verify'] =
-            'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}"'
+            'prettier --list-different \\"**/*.{css,html,js,json,md,ts,yaml,yml}\\"'
         if (this.clientserver) {
             if (this.typescript) {
                 this.pjson.scripts.build =

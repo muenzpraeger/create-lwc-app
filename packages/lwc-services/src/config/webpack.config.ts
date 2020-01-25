@@ -12,7 +12,7 @@ const OUTPUT_DIR = path.resolve(ROOT_DIR, lwcConfig.buildDir)
 const MODULE_DIR = path.resolve(ROOT_DIR, lwcConfig.moduleDir)
 const TEMPLATES_DIR = path.resolve(ROOT_DIR, lwcConfig.sourceDir)
 let ENTRIES = path.resolve(TEMPLATES_DIR, 'index.js')
-if (ENTRIES && !fs.existsSync(ENTRIES)) {
+if (!ENTRIES || !fs.existsSync(ENTRIES)) {
     ENTRIES = path.resolve(TEMPLATES_DIR, 'index.ts')
 }
 

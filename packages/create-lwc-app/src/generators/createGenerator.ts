@@ -346,7 +346,7 @@ class CreateGenerator extends Generator {
             `https://github.com/${this.pjson.repository}/issues`
         const targetPath: string = path.resolve(this.pjson.name)
         if (!fs.existsSync(targetPath)) {
-            fs.mkdirSync(targetPath)
+            fs.mkdirSync(targetPath, { recursive: true })
         }
         this.destinationRoot(targetPath)
         process.chdir(this.destinationRoot())

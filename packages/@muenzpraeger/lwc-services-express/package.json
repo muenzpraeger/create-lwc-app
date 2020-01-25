@@ -1,0 +1,26 @@
+{
+    "name": "@muenzpraeger/lwc-services-express",
+    "version": "2.0.0-beta.1",
+    "author": "René Winkelmeyer @muenzpraeger",
+    "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
+    "dependencies": {
+        "compression": "^1.7.4",
+        "express": "^4.17.1",
+        "helmet": "^3.18.0"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
+    "keywords": [
+        "oclif",
+        "express",
+        "helmet",
+        "lwc",
+        "salesforce",
+        "web components",
+        "lightning"
+    ],
+    "license": "MIT",
+    "repository": "muenzpraeger/create-lwc-app"
+}

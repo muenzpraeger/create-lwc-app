@@ -23,7 +23,7 @@ export default class Wdio extends Command {
         log(messages.logs.starting_wdio)
 
         const wdioExecutable = path.resolve(
-            'node_modules/@wdio/cli/bin/wdio.js'
+            'node_modules/@muenzpraeger/lwc-services-wdio/node_modules/@wdio/cli/bin/wdio.js'
         )
         const wdioSpawn = spawn('node', [wdioExecutable])
 

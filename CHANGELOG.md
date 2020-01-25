@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2020-xx-xx
+
+**create-lwc-app 2.0.0**
+
+-   Adding support for @-scoped package names
+
 ### 2020-01-16
 
 **create-lwc-app 1.3.13**

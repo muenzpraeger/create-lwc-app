@@ -417,7 +417,7 @@ class CreateGenerator extends Generator {
         } else {
             dependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
         }
-        devDependencies.push('husky@^3.0.7', 'lint-staged@^9.4')
+        devDependencies.push('husky', 'lint-staged', 'prettier', 'eslint')
         if (this.clientserver) {
             devDependencies.push('npm-run-all@^4.1.5')
         }

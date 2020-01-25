@@ -14,7 +14,6 @@
         "node-emoji": "^1.10.0",
         "semver-compare": "^1.0.0",
         "sort-pjson": "^1.0.3",
-        "tslib": "^1",
         "yeoman-environment": "^2.7.0",
         "yeoman-generator": "^4.4.0"
     },
@@ -26,6 +25,7 @@
         "@typescript-eslint/eslint-plugin": "^2.14.0",
         "@typescript-eslint/parser": "^2.14.0",
         "ts-node": "^8",
+        "tslib": "^1",
         "typescript": "^3.7"
     },
     "engines": {

@@ -1,0 +1,110 @@
+{
+    "name": "lwc-services",
+    "version": "2.0.0-beta.1",
+    "author": "René Winkelmeyer @muenzpraeger",
+    "bin": {
+        "lwc-services": "./bin/run"
+    },
+    "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
+    "dependencies": {
+        "@babel/core": "^7.4.5",
+        "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+        "@babel/plugin-syntax-class-properties": "^7.2.0",
+        "@babel/plugin-syntax-decorators": "^7.2.0",
+        "@babel/preset-typescript": "^7.3.3",
+        "@lwc/eslint-plugin-lwc": "^0.8",
+        "@lwc/jest-preset": "^4.3.1",
+        "@lwc/jest-resolver": "^4.3.1",
+        "@lwc/jest-serializer": "^4.3.1",
+        "@lwc/jest-transformer": "^4.3.1",
+        "@lwc/rollup-plugin": "^1.2.1",
+        "@oclif/command": "^1",
+        "@oclif/config": "^1",
+        "@oclif/plugin-help": "^2",
+        "@oclif/plugin-not-found": "^1.2.2",
+        "@salesforce/eslint-config-lwc": "^0.4",
+        "@typescript-eslint/parser": "^2.3.3",
+        "@wdio/cli": "^5.7.14",
+        "@wdio/jasmine-framework": "^5.9.4",
+        "@wdio/local-runner": "^5.9.6",
+        "@wdio/selenium-standalone-service": "^5.7.8",
+        "@wdio/sync": "^5.9.6",
+        "babel-eslint": ">=10.0.0",
+        "babel-loader": "^8.0.5",
+        "chalk": "^3.0.0",
+        "compat-polyfills": "^0.22.0",
+        "copy-webpack-plugin": "^5.0.2",
+        "deepmerge": "^4.0.0",
+        "error-overlay-webpack-plugin": "^0.4.1",
+        "eslint": "^6.3",
+        "eslint-plugin-wdio": "^5.7.8",
+        "globby": "^10.0.1",
+        "helmet": "^3.18.0",
+        "html-webpack-plugin": "^3.2.0",
+        "jest": "~24",
+        "lwc": "^1.2.1",
+        "node-emoji": "^1.10.0",
+        "nodemon": "^2.0.1",
+        "prettier": "^1.18",
+        "rimraf": "^3.0",
+        "rollup": "^1.10.0",
+        "rollup-plugin-compat": "^0.22.0",
+        "rollup-plugin-cpy": "^2.0",
+        "rollup-plugin-replace": "^2.2.0",
+        "semver-compare": "^1.0.0",
+        "sort-pjson": "^1.0.3",
+        "ts-node": "^8.3.0",
+        "tslib": "^1",
+        "typescript": "^3.6",
+        "wdio-lwc-service": "^0.1",
+        "webdriverio": "^5.7.14",
+        "webpack": "^4.30",
+        "webpack-dev-server": "^3.3",
+        "webpack-merge": "^4.2.1"
+    },
+    "devDependencies": {
+        "@oclif/dev-cli": "^1",
+        "@oclif/test": "^1",
+        "@types/chai": "^4",
+        "@types/mocha": "^5",
+        "@types/node": "^12",
+        "@types/rimraf": "^2.0.2",
+        "@types/semver-compare": "^1.0.0",
+        "@types/webpack": "^4.4.27",
+        "@types/webpack-merge": "^4.1.4",
+        "@typescript-eslint/parser": "^2.3.1",
+        "@typescript-eslint/eslint-plugin": "^2.3.1",
+        "cli-ux": "^5.2.1"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "files": [
+        "/bin",
+        "/lib"
+    ],
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
+    "keywords": [
+        "oclif",
+        "lwc",
+        "salesforce",
+        "web components",
+        "lightning"
+    ],
+    "license": "MIT",
+    "main": "lib/index.js",
+    "oclif": {
+        "commands": "./lib/commands",
+        "bin": "lwc-services",
+        "plugins": [
+            "@oclif/plugin-not-found",
+            "@oclif/plugin-help"
+        ]
+    },
+    "repository": "muenzpraeger/create-lwc-app",
+    "scripts": {
+        "build": "tsc -b",
+        "genreadme": "oclif-dev readme && git add README.md"
+    },
+    "types": "lib/index.d.ts"
+}

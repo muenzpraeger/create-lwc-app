@@ -1,0 +1,31 @@
+{
+    "name": "@muenzpraeger/lwc-services-jest",
+    "version": "2.0.0-beta.1",
+    "author": "René Winkelmeyer @muenzpraeger",
+    "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
+    "dependencies": {
+        "@lwc/jest-preset": "^4.3.1",
+        "@lwc/jest-resolver": "^4.3.1",
+        "@lwc/jest-serializer": "^4.3.1",
+        "@lwc/jest-transformer": "^4.3.1",
+        "jest": "~25"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "files": [
+        "/bin",
+        "/lib"
+    ],
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
+    "keywords": [
+        "oclif",
+        "jest",
+        "lwc",
+        "salesforce",
+        "web components",
+        "lightning"
+    ],
+    "license": "MIT",
+    "repository": "muenzpraeger/create-lwc-app"
+}

@@ -5,6 +5,12 @@
 **create-lwc-app 2.0.0**
 
 -   Adding support for @-scoped package names
+-   Resorting dependencies
+
+**lwc-services 2.0.0**
+
+-   Uprading LWC to 1.2.1
+-   Resorting dependencies
 
 ### 2020-01-16
 

@@ -26,7 +26,11 @@ try {
     // Nothing
 }
 
-const LWC_SERVICES_VERSION = '2.0.0-beta.1'
+const pkgJson = JSON.parse(
+    fs.readFileSync(__dirname + '/../../package.json', 'utf8')
+)
+const LWC_SERVICES_VERSION = pkgJson.version
+console.log(LWC_SERVICES_VERSION)
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
@@ -253,11 +257,11 @@ class CreateGenerator extends Generator {
             : defaults.repository
         if (this.lib) {
             this.pjson.devDependencies = {
-                'lwc-services': `^${LWC_SERVICES_VERSION}`
+                '@muenzpraeger/lwc-services': `^${LWC_SERVICES_VERSION}`
             }
         } else {
             this.pjson.dependencies = {
-                'lwc-services': `^${LWC_SERVICES_VERSION}`
+                '@muenzpraeger/lwc-services': `^${LWC_SERVICES_VERSION}`
             }
         }
         if (this.typescript) {
@@ -413,9 +417,13 @@ class CreateGenerator extends Generator {
         const dependencies: string[] = []
         const devDependencies: string[] = []
         if (this.lib) {
-            devDependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
+            devDependencies.push(
+                `@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`
+            )
         } else {
-            dependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
+            dependencies.push(
+                `@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`
+            )
         }
         devDependencies.push('husky', 'lint-staged', 'prettier', 'eslint')
         if (this.clientserver) {

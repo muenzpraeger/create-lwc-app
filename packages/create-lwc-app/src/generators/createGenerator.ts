@@ -41,7 +41,6 @@ class CreateGenerator extends Generator {
         edge: boolean
         bundler: string
     }
-    lib: boolean
     name: string
     args!: { [k: string]: string }
     pjson: any
@@ -66,7 +65,7 @@ class CreateGenerator extends Generator {
     typescript?: boolean
     edge?: boolean
     targetPathClient = 'src/'
-    bundler: string
+    bundler?: string
 
     constructor(args: any, opts: any) {
         super(args, opts)

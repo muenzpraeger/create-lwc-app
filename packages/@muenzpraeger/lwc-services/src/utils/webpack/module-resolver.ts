@@ -94,7 +94,9 @@ module.exports = class ModuleResolver {
         if (layout === LAYOUT.STANDARD) {
             // TODO Proper resolve
             const directoryPath = path.resolve(root, request)
-            const extension = getExtension(this.fs, directoryPath)
+            // TODO: Add name
+            // eslint-disable-next-line no-undef
+            const extension = getExtension(this.fs, directoryPath, name)
             resolved = path.resolve(root, request, `${request}${extension}`)
         } else {
             const { ns, name } = getInfoFromId(request)

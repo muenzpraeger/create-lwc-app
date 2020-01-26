@@ -1,1 +1,2 @@
 -   Auto-update Jest config files
+-   Add instructions for manually adding Prettier and ESLint to existing projects

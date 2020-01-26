@@ -26,7 +26,11 @@ try {
     // Nothing
 }
 
-const LWC_SERVICES_VERSION = '2.0.0-beta.1'
+const pkgJson = JSON.parse(
+    fs.readFileSync(__dirname + '/../../package.json', 'utf8')
+)
+const LWC_SERVICES_VERSION = pkgJson.version
+console.log(LWC_SERVICES_VERSION)
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
@@ -253,11 +257,11 @@ class CreateGenerator extends Generator {
             : defaults.repository
         if (this.lib) {
             this.pjson.devDependencies = {
-                'lwc-services': `^${LWC_SERVICES_VERSION}`
+                '@muenzpraeger/lwc-services': `^${LWC_SERVICES_VERSION}`
             }
         } else {
             this.pjson.dependencies = {
-                'lwc-services': `^${LWC_SERVICES_VERSION}`
+                '@muenzpraeger/lwc-services': `^${LWC_SERVICES_VERSION}`
             }
         }
         if (this.typescript) {
@@ -412,20 +416,22 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        if (this.lib) {
-            devDependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
-        } else {
-            dependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
-        }
-        devDependencies.push('husky', 'lint-staged', 'prettier', 'eslint')
+        dependencies.push(`@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`)
+        devDependencies.push(
+            'husky',
+            'lint-staged',
+            'prettier',
+            'eslint',
+            `@muenzpraeger/lwc-services-core@^${LWC_SERVICES_VERSION}`
+        )
         if (this.clientserver) {
-            devDependencies.push('npm-run-all@^4.1.5')
+            devDependencies.push('npm-run-all')
         }
         if (this.typescript && this.clientserver) {
-            devDependencies.push('@types/express@^4.17')
+            devDependencies.push('@types/express')
         }
         if (this.typescript) {
-            devDependencies.push('@types/jest@^24')
+            devDependencies.push('@types/jest')
         }
 
         const yarnOpts = {} as any

@@ -30,7 +30,6 @@ const pkgJson = JSON.parse(
     fs.readFileSync(__dirname + '/../../package.json', 'utf8')
 )
 const LWC_SERVICES_VERSION = pkgJson.version
-console.log(LWC_SERVICES_VERSION)
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
@@ -40,8 +39,8 @@ class CreateGenerator extends Generator {
         clientserver: boolean
         typescript: boolean
         edge: boolean
+        bundler: string
     }
-    lib: boolean
     name: string
     args!: { [k: string]: string }
     pjson: any
@@ -49,7 +48,6 @@ class CreateGenerator extends Generator {
     answers!: {
         name: string
         description: string
-        webcomponent: boolean
         clientserver: boolean
         edge: boolean
         version: string
@@ -59,6 +57,7 @@ class CreateGenerator extends Generator {
         license: string
         pkg: string
         typescript: string
+        bundler: string
     }
     yarn!: boolean
     repository?: string
@@ -66,6 +65,7 @@ class CreateGenerator extends Generator {
     typescript?: boolean
     edge?: boolean
     targetPathClient = 'src/'
+    bundler?: string
 
     constructor(args: any, opts: any) {
         super(args, opts)
@@ -74,10 +74,10 @@ class CreateGenerator extends Generator {
             yarn: opts.options.includes('yarn') || hasYarn,
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
-            edge: opts.options.includes('edge')
+            edge: opts.options.includes('edge'),
+            bundler: opts.options.includes('bundler')
         }
         this.name = opts.name
-        this.lib = opts.lib
     }
 
     async prompting() {
@@ -96,7 +96,6 @@ class CreateGenerator extends Generator {
         if (gitName) repository = `${gitName}/${repository.split('/')[1]}`
         const defaults = {
             name: this.determineAppname().replace(/ /g, '-'),
-            webcomponent: false,
             clientserver: false,
             typescript: false,
             edge: false,
@@ -186,6 +185,17 @@ class CreateGenerator extends Generator {
                 },
                 {
                     type: 'list',
+                    name: 'bundler',
+                    message: messages.questions.bundler,
+                    choices: [
+                        { name: 'Webpack', value: 'webpack' },
+                        { name: 'Rollup', value: 'rollup' },
+                        { name: 'Parcel', value: 'parcel' }
+                    ],
+                    default: 'webpack'
+                },
+                {
+                    type: 'list',
                     name: 'typescript',
                     message: messages.questions.typescript,
                     choices: [
@@ -193,16 +203,14 @@ class CreateGenerator extends Generator {
                         { name: 'TypeScript', value: 'ts' }
                     ],
                     default: () => (this.options.typescript ? 1 : 0)
-                }
-            ]
-            if (!this.lib) {
-                questions.push({
+                },
+                {
                     type: 'confirm',
                     name: 'clientserver',
                     message: messages.questions.clientserver,
                     default: defaults.clientserver
-                })
-            }
+                }
+            ]
             if (isWin) {
                 questions.push({
                     type: 'confirm',
@@ -219,13 +227,15 @@ class CreateGenerator extends Generator {
                 yarn: this.answers.pkg === 'yarn',
                 clientserver: this.answers.clientserver,
                 typescript: this.answers.typescript === 'ts',
-                edge: this.answers.edge
+                edge: this.answers.edge,
+                bundler: this.answers.bundler
             }
         }
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
         this.typescript = this.options.typescript
         this.edge = this.options.edge
+        this.bundler = this.options.bundler
 
         if (this.clientserver) {
             this.targetPathClient = 'src/client/'
@@ -249,20 +259,17 @@ class CreateGenerator extends Generator {
         this.pjson.description =
             this.answers.description || defaults.description
         this.pjson.version = this.answers.version || defaults.version
-        this.pjson.engines.node = '>=10.0.0'
+        this.pjson.engines.node = '>=10.13.0'
+        this.pjson.engines.npm = '>=6.4.1'
+        this.pjson.engines.yarn = '>=1.9.4'
         this.pjson.author = this.answers.author || defaults.author
         this.pjson.license = this.answers.license || defaults.license
         this.repository = this.pjson.repository = this.answers.github
             ? `${this.answers.github.user}/${this.answers.github.repo}`
             : defaults.repository
-        if (this.lib) {
-            this.pjson.devDependencies = {
-                '@muenzpraeger/lwc-services': `^${LWC_SERVICES_VERSION}`
-            }
-        } else {
-            this.pjson.dependencies = {
-                '@muenzpraeger/lwc-services': `^${LWC_SERVICES_VERSION}`
-            }
+
+        this.pjson.dependencies = {
+            '@muenzpraeger/lwc-services': `^${LWC_SERVICES_VERSION}`
         }
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
@@ -279,22 +286,48 @@ class CreateGenerator extends Generator {
             'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         if (this.clientserver) {
             if (this.typescript) {
-                this.pjson.scripts.build =
-                    'lwc-services build -m production && tsc -b ./src/server'
+                if (this.bundler === 'webpack') {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production && tsc -b ./src/server'
+                } else if (this.bundler === 'rollup') {
+                    this.pjson.scripts.build =
+                        'cross-env NODE_ENV=development rollup --config scripts/rollup.config.js && tsc -b ./src/server'
+                }
             } else {
-                this.pjson.scripts.build = 'lwc-services build -m production'
+                if (this.bundler === 'webpack') {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production'
+                } else if (this.bundler === 'rollup') {
+                    this.pjson.scripts.build =
+                        'cross-env NODE_ENV=production rollup --config scripts/rollup.config.js'
+                }
             }
         } else {
-            this.pjson.scripts.build = 'lwc-services build -m production'
+            if (this.bundler === 'webpack') {
+                this.pjson.scripts.build = 'lwc-services build -m production'
+            } else if (this.bundler === 'rollup') {
+                this.pjson.scripts.build =
+                    'cross-env NODE_ENV=production rollup --config scripts/rollup.config.js'
+            }
         }
-        this.pjson.scripts['build:development'] = 'lwc-services build'
+        if (this.bundler === 'webpack') {
+            this.pjson.scripts['build:development'] = 'lwc-services build'
+        } else if (this.bundler === 'rollup') {
+            this.pjson.scripts['build:development'] =
+                'rollup --config scripts/rollup.config.js' // TODO: Verify rollup production build
+        }
+
         if (this.clientserver) {
             this.pjson.scripts.watch = 'run-p watch:client watch:server'
-            this.pjson.scripts['watch:client'] = 'lwc-services watch'
+            if (this.bundler === 'webpack') {
+                this.pjson.scripts['watch:client'] = 'lwc-services watch'
+            } else if (this.bundler === 'rollup') {
+                this.pjson.scripts['watch:client'] =
+                    'rollup --config scripts/rollup.config.js' // TODO: Verify rollup watch
+            }
             this.pjson.scripts['watch:server'] = 'nodemon'
 
             const fileExtension = this.typescript ? 'ts' : 'js'
-
             this.pjson.nodemonConfig = {}
             this.pjson.nodemonConfig.watch = [
                 'src/server/**/*.'.concat(fileExtension),
@@ -315,9 +348,14 @@ class CreateGenerator extends Generator {
                 )
             }
         } else {
-            this.pjson.scripts.watch = 'lwc-services watch'
+            if (this.bundler === 'webpack') {
+                this.pjson.scripts['watch'] = 'lwc-services watch'
+            } else if (this.bundler === 'rollup') {
+                this.pjson.scripts['watch'] =
+                    'rollup --config scripts/rollup.config.js' // TODO: Verify rollup watch
+            }
         }
-        this.pjson.scripts.serve = 'lwc-services serve'
+        this.pjson.scripts.serve = 'lwc-services serve' // TODO: Evaluate
         this.pjson.scripts['test:unit'] = 'lwc-services test:unit'
         this.pjson.scripts['test:unit:watch'] = 'lwc-services test:unit --watch'
         this.pjson.scripts['test:unit:debug'] = 'lwc-services test:unit --debug'
@@ -339,12 +377,6 @@ class CreateGenerator extends Generator {
         }
 
         this.pjson['lint-staged']['*'] = ['git add']
-
-        if (this.lib) {
-            this.pjson.lwc = {
-                modules: ['src']
-            }
-        }
 
         this.pjson.keywords = defaults.keywords || ['lwc']
         this.pjson.homepage =
@@ -420,13 +452,20 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        dependencies.push(`@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`)
+        dependencies.push(
+            `@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`,
+            `@muenzpraeger/lwc-services-express@^${LWC_SERVICES_VERSION}`
+        )
         devDependencies.push(
             'husky',
             'lint-staged',
             'prettier',
             'eslint',
-            `@muenzpraeger/lwc-services-core@^${LWC_SERVICES_VERSION}`
+            `@muenzpraeger/lwc-services-core@^${LWC_SERVICES_VERSION}`,
+            `@muenzpraeger/lwc-services-jest@^${LWC_SERVICES_VERSION}`,
+            this.bundler === 'webpack'
+                ? `@muenzpraeger/lwc-services-webpack@^${LWC_SERVICES_VERSION}`
+                : `@muenzpraeger/lwc-services-rollup@^${LWC_SERVICES_VERSION}`
         )
         if (this.clientserver) {
             devDependencies.push('npm-run-all')
@@ -447,12 +486,12 @@ class CreateGenerator extends Generator {
         const dev = this.yarn ? { dev: true } : { 'save-dev': true }
         const save = this.yarn ? {} : { save: true }
         return Promise.all([
+            install(dependencies, { ...yarnOpts, ...save }),
             install(devDependencies, {
                 ...yarnOpts,
                 ...dev,
                 ignoreScripts: false
-            }),
-            install(dependencies, { ...yarnOpts, ...save })
+            })
         ])
     }
 
@@ -612,6 +651,14 @@ class CreateGenerator extends Generator {
                 this.destinationPath(
                     this.targetPathClient.concat('resources/favicon.ico')
                 ),
+                this
+            )
+        }
+
+        if (this.bundler === 'rollup') {
+            this.fs.copyTpl(
+                this.templatePath('scripts/rollup.config.js'),
+                this.destinationPath('scripts/rollup.config.js'),
                 this
             )
         }

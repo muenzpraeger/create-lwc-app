@@ -30,7 +30,6 @@ const pkgJson = JSON.parse(
     fs.readFileSync(__dirname + '/../../package.json', 'utf8')
 )
 const LWC_SERVICES_VERSION = pkgJson.version
-console.log(LWC_SERVICES_VERSION)
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
@@ -40,6 +39,7 @@ class CreateGenerator extends Generator {
         clientserver: boolean
         typescript: boolean
         edge: boolean
+        bundler: string
     }
     lib: boolean
     name: string
@@ -49,7 +49,6 @@ class CreateGenerator extends Generator {
     answers!: {
         name: string
         description: string
-        webcomponent: boolean
         clientserver: boolean
         edge: boolean
         version: string
@@ -59,6 +58,7 @@ class CreateGenerator extends Generator {
         license: string
         pkg: string
         typescript: string
+        bundler: string
     }
     yarn!: boolean
     repository?: string
@@ -66,6 +66,7 @@ class CreateGenerator extends Generator {
     typescript?: boolean
     edge?: boolean
     targetPathClient = 'src/'
+    bundler: string
 
     constructor(args: any, opts: any) {
         super(args, opts)
@@ -74,10 +75,10 @@ class CreateGenerator extends Generator {
             yarn: opts.options.includes('yarn') || hasYarn,
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
-            edge: opts.options.includes('edge')
+            edge: opts.options.includes('edge'),
+            bundler: opts.options.includes('bundler')
         }
         this.name = opts.name
-        this.lib = opts.lib
     }
 
     async prompting() {
@@ -96,7 +97,6 @@ class CreateGenerator extends Generator {
         if (gitName) repository = `${gitName}/${repository.split('/')[1]}`
         const defaults = {
             name: this.determineAppname().replace(/ /g, '-'),
-            webcomponent: false,
             clientserver: false,
             typescript: false,
             edge: false,
@@ -183,6 +183,17 @@ class CreateGenerator extends Generator {
                         { name: 'yarn', value: 'yarn' }
                     ],
                     default: () => (this.options.yarn || hasYarn ? 1 : 0)
+                },
+                {
+                    type: 'list',
+                    name: 'budnler',
+                    message: messages.questions.bundler,
+                    choices: [
+                        { name: 'Webpack', value: 'webpack' },
+                        { name: 'Rollup', value: 'rollup' },
+                        { name: 'Parcel', value: 'parcel' }
+                    ],
+                    default: 'webpack'
                 },
                 {
                     type: 'list',

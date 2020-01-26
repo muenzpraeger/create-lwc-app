@@ -270,9 +270,13 @@ class CreateGenerator extends Generator {
             this.pjson.scripts.lint = 'eslint ./src/**/*.js'
         }
         this.pjson.scripts.prettier =
-            'prettier --write \\"**/*.{css,html,js,json,md,ts,yaml,yml}\\"'
+            // prettier-ignore
+            // eslint-disable-next-line no-useless-escape
+            'prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         this.pjson.scripts['prettier:verify'] =
-            'prettier --list-different \\"**/*.{css,html,js,json,md,ts,yaml,yml}\\"'
+            // prettier-ignore
+            // eslint-disable-next-line no-useless-escape
+            'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         if (this.clientserver) {
             if (this.typescript) {
                 this.pjson.scripts.build =

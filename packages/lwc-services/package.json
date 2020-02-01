@@ -38,7 +38,7 @@
         "error-overlay-webpack-plugin": "^0.4.1",
         "eslint": "^6.3",
         "eslint-plugin-wdio": "^5.7.8",
-        "globby": "^10.0.1",
+        "globby": "^11.0.0",
         "helmet": "^3.18.0",
         "html-webpack-plugin": "^3.2.0",
         "jest": "~24",

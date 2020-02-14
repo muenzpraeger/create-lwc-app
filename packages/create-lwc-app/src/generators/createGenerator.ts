@@ -187,10 +187,10 @@ class CreateGenerator extends Generator {
                     type: 'list',
                     name: 'bundler',
                     message: messages.questions.bundler,
+                    // TODO: Evaluate later the addition of Parcel
                     choices: [
                         { name: 'Webpack', value: 'webpack' },
-                        { name: 'Rollup', value: 'rollup' },
-                        { name: 'Parcel', value: 'parcel' }
+                        { name: 'Rollup', value: 'rollup' }
                     ],
                     default: 'webpack'
                 },
@@ -323,7 +323,7 @@ class CreateGenerator extends Generator {
                 this.pjson.scripts['watch:client'] = 'lwc-services watch'
             } else if (this.bundler === 'rollup') {
                 this.pjson.scripts['watch:client'] =
-                    'rollup --config scripts/rollup.config.js' // TODO: Verify rollup watch
+                    'rollup --config scripts/rollup.config.js --watch'
             }
             this.pjson.scripts['watch:server'] = 'nodemon'
 
@@ -352,7 +352,7 @@ class CreateGenerator extends Generator {
                 this.pjson.scripts['watch'] = 'lwc-services watch'
             } else if (this.bundler === 'rollup') {
                 this.pjson.scripts['watch'] =
-                    'rollup --config scripts/rollup.config.js' // TODO: Verify rollup watch
+                    'rollup --config scripts/rollup.config.js --watch'
             }
         }
         this.pjson.scripts.serve = 'lwc-services serve' // TODO: Evaluate
@@ -452,6 +452,7 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
+        // TODO: Revisit express
         dependencies.push(
             `@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`,
             `@muenzpraeger/lwc-services-express@^${LWC_SERVICES_VERSION}`

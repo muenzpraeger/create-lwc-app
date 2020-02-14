@@ -1,13 +1,13 @@
 {
-    "name": "lwc-services-rollup",
-    "version": "2.0.0-beta.6",
+    "name": "@muenzpraeger/lwc-services-rollup",
+    "version": "2.0.0-beta.10",
     "author": "René Winkelmeyer @muenzpraeger",
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
+        "@rollup/plugin-replace": "^2.2.0",
         "rollup": "^1.10.0",
         "rollup-plugin-compat": "^0.22.0",
-        "rollup-plugin-cpy": "^2.0",
-        "rollup-plugin-replace": "^2.2.0"
+        "rollup-plugin-cpy": "^2.0"
     },
     "engines": {
         "node": ">=10.0.0"

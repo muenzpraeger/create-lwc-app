@@ -40,6 +40,7 @@ class CreateGenerator extends Generator {
         typescript: boolean
         edge: boolean
         bundler: string
+        appType: string
     }
     name: string
     args!: { [k: string]: string }
@@ -58,6 +59,7 @@ class CreateGenerator extends Generator {
         pkg: string
         typescript: string
         bundler: string
+        appType: string
     }
     yarn!: boolean
     repository?: string
@@ -66,6 +68,7 @@ class CreateGenerator extends Generator {
     edge?: boolean
     targetPathClient = 'src/'
     bundler?: string
+    appType?: string
 
     constructor(args: any, opts: any) {
         super(args, opts)
@@ -75,7 +78,8 @@ class CreateGenerator extends Generator {
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
             edge: opts.options.includes('edge'),
-            bundler: opts.options.includes('bundler')
+            bundler: opts.options.includes('bundler'),
+            appType: opts.options.includes('type')
         }
         this.name = opts.name
     }
@@ -99,7 +103,7 @@ class CreateGenerator extends Generator {
             clientserver: false,
             typescript: false,
             edge: false,
-            version: '0.0.0',
+            version: '0.0.1',
             license: 'MIT',
             author: gitName,
             dependencies: {},
@@ -185,12 +189,25 @@ class CreateGenerator extends Generator {
                 },
                 {
                     type: 'list',
+                    name: 'appType',
+                    message: messages.questions.appType,
+                    choices: [
+                        { name: 'Standard web app', value: 'standard' },
+                        { name: 'Progressive Web App (PWA)', value: 'pwa' },
+                        {
+                            name: 'Cordova App (Electron, iOS, Android)',
+                            value: 'cordova'
+                        }
+                    ],
+                    default: 'standard'
+                },
+                {
+                    type: 'list',
                     name: 'bundler',
                     message: messages.questions.bundler,
                     choices: [
                         { name: 'Webpack', value: 'webpack' },
-                        { name: 'Rollup', value: 'rollup' },
-                        { name: 'Parcel', value: 'parcel' }
+                        { name: 'Rollup', value: 'rollup' }
                     ],
                     default: 'webpack'
                 },
@@ -228,7 +245,8 @@ class CreateGenerator extends Generator {
                 clientserver: this.answers.clientserver,
                 typescript: this.answers.typescript === 'ts',
                 edge: this.answers.edge,
-                bundler: this.answers.bundler
+                bundler: this.answers.bundler,
+                appType: this.answers.appType
             }
         }
         this.yarn = this.options.yarn
@@ -236,6 +254,7 @@ class CreateGenerator extends Generator {
         this.typescript = this.options.typescript
         this.edge = this.options.edge
         this.bundler = this.options.bundler
+        this.appType = this.options.appType
 
         if (this.clientserver) {
             this.targetPathClient = 'src/client/'
@@ -375,8 +394,6 @@ class CreateGenerator extends Generator {
         } else {
             this.pjson['lint-staged']['./src/**/*.js'] = ['eslint']
         }
-
-        this.pjson['lint-staged']['*'] = ['git add']
 
         this.pjson.keywords = defaults.keywords || ['lwc']
         this.pjson.homepage =
@@ -661,6 +678,10 @@ class CreateGenerator extends Generator {
                 this.destinationPath('scripts/rollup.config.js'),
                 this
             )
+        }
+
+        if (this.appType === 'cordova') {
+            // TODO: Add Cordova files (if needed)
         }
 
         if (this.clientserver) {

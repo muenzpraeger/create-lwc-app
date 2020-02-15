@@ -4,8 +4,8 @@ const path = require('path');
 const replace = require('rollup-plugin-replace');
 const lwcCompiler = require('@lwc/rollup-plugin');
 const compat = require('rollup-plugin-compat');
-const { transform } = require('@babel/core');
-const babelTsPlugin = require('@babel/plugin-transform-typescript');
+const { transform } = require('@babel/core');<% if (typescript) { %>    
+const babelTsPlugin = require('@babel/plugin-transform-typescript');<% } %>    
 const env = process.env.NODE_ENV || 'development';
 
 <% if (typescript) { %>    
@@ -48,9 +48,9 @@ function rollupConfig({ target }) {
         plugins: [
             <%if (typescript) {%>removeTypesPlugin(),<%}%>
             lwcCompiler()
-            // replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
-            // isCompat && compat(),
-            // isProduction && terser()
+            replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
+            isCompat && compat(),
+            isProduction && terser()
         ].filter(Boolean)
     };
 }

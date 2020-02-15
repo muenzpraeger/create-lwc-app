@@ -4,3 +4,6 @@
 -   Move lwc-services build to cross-env
 -   Add instructions for running on cloud systems (host 0.0.0.0) as default is now `localhost`
 -   Fix @babel/plugin-syntax-decorators and @babel/preset-typescript problem with the core package
+-   Document addition environment restrictions (yarn, npm, node)
+-   cross-env not found?
+

@@ -7,4 +7,6 @@ packages/create-lwc-app/templates/scripts/rollup.config.modules.js
 packages/create-lwc-app/templates/eslintrc.json
 packages/create-lwc-app/templates/src/client/index.non-wc.js
 packages/create-lwc-app/templates/src/client/index.non-wc.ts
+packages/create-lwc-app/templates/src/client/index.js
+packages/create-lwc-app/templates/src/client/index.ts
 packages/create-lwc-app/templates/src/client/modules/my/app/app.html

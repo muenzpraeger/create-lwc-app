@@ -86,7 +86,7 @@ export const defaultLwcConfig: Config = {
     // Default server options for watch command
     devServer: {
         port: 3001,
-        host: '0.0.0.0',
+        host: 'localhost',
         open: false,
         stats: 'errors-only',
         noInfo: true,
@@ -95,7 +95,7 @@ export const defaultLwcConfig: Config = {
     // Default server options for serve command
     server: {
         port: 3002,
-        host: '0.0.0.0',
+        host: 'localhost',
         open: false
     },
     // LWC Compiler options for production mode.

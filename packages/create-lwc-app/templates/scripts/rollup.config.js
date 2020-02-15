@@ -4,10 +4,9 @@ const path = require('path');
 const replace = require('rollup-plugin-replace');
 const lwcCompiler = require('@lwc/rollup-plugin');
 const { terser } = require('rollup-plugin-terser');
-const compat = require('rollup-plugin-compat');<% if (typescript) { %>
-const { transform } = require('@babel/core');
-<% } %>const env = process.env.NODE_ENV || 'development';
-<% if (typescript) { %>const babelTsPlugin = require('@babel/plugin-transform-typescript');
+const compat = require('rollup-plugin-compat');
+const { transform } = require('@babel/core');<% if (typescript) { %>    
+const babelTsPlugin = require('@babel/plugin-transform-typescript');
 
 const babelOptions = {
     babelrc: false,
@@ -31,6 +30,8 @@ function removeTypesPlugin() {
         }
     };
 }<% } %>
+  
+const env = process.env.NODE_ENV || 'development';
 
 // TODO make agnostic to clientserver
 const input = path.resolve(__dirname, '../src/index.<% if(typescript) { %>ts<% } else { %>js<% } %>');

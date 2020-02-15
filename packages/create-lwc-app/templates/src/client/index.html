@@ -12,6 +12,28 @@
         <link rel="shortcut icon" href="/resources/favicon.ico" />
     </head>
     <body>
+        <div id="outdated" style="display: none">
+            <div class="unsupported">
+                <div class="unsupported_title">App can't be loaded!</div>
+                <div class="unsupported_message"></div>
+            </div>
+        </div>
+
+        <script nomodule>
+            const { outdated } = window;
+            outdated.style.display = 'unset';
+            outdated.querySelector('.unsupported_message').textContent =
+                'This application requires a more recent version of your browser';
+        </script>
+
+        <script>
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('/sw.js');
+                });
+            }
+        </script>
+
         <my-app></my-app>
     </body>
 </html>

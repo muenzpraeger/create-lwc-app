@@ -6,7 +6,7 @@ const lwcCompiler = require('@lwc/rollup-plugin');
 const { terser } = require('rollup-plugin-terser');
 const compat = require('rollup-plugin-compat');
 import resolve from 'rollup-plugin-node-resolve';
-// TODO: const { transform } = require('@babel/core');
+// TODO-RW: const { transform } = require('@babel/core');
 const env = process.env.NODE_ENV || 'development';
 
 const input = path.resolve(__dirname, '../src/index.<% if(typescript) { %>ts<% } else { %>js<% } %>');

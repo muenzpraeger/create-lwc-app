@@ -28,6 +28,10 @@ export const messages = {
             message: 'Writing webpack.config.js file',
             emoji: 'notebook_with_decorative_cover'
         },
+        write_rollup_config: {
+            message: 'Writing rollup.config.js file',
+            emoji: 'notebook_with_decorative_cover'
+        },
         write_lwc_config: {
             message: 'Writing lwc-services.config.js file',
             emoji: 'notebook_with_decorative_cover'

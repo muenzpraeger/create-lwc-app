@@ -4,7 +4,7 @@ export const messages = {
         examples: [
             'create-lwc-app',
             'npm init lwc-app my-app',
-            'npm init lwc-app my-lib --lib',
+            'npm init lwc-app my-app --type standard',
             'yarn init lwc-app my-app -o prettier,yarn'
         ]
     },
@@ -13,7 +13,8 @@ export const messages = {
         required: false
     },
     flags: {
-        lib: 'creates a library project',
-        options: 'set project options (yarn|prettier|eslint|typescript)'
+        silent:
+            'runs a silent installation (with defaults/with provided options)',
+        options: 'set project options (yarn|prettier|eslint|typescript)' // TODO-RW: Re-work
     }
 }

@@ -1,5 +1,6 @@
 export const messages = {
-    description: 'Runs WebDriver tests for Lightning Web Components',
+    description:
+        'Runs WebDriver tests for Lightning Web Components (experimental)',
     help: {
         examples: ['lwc-services wdio']
     },

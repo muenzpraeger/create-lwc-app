@@ -1,6 +1,6 @@
 {
     "name": "@muenzpraeger/lwc-services-wdio",
-    "version": "2.0.0-beta.11",
+    "version": "2.0.0-beta.20",
     "author": "René Winkelmeyer @muenzpraeger",
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
@@ -25,6 +25,6 @@
         "web components",
         "lightning"
     ],
-    "license": "CC0-1.0",
+    "license": "MIT",
     "repository": "muenzpraeger/create-lwc-app"
 }

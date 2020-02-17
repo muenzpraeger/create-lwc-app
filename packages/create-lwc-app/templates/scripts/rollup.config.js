@@ -33,11 +33,11 @@ function removeTypesPlugin() {
   
 const env = process.env.NODE_ENV || 'development';
 
-// TODO make agnostic to clientserver
+// TODO-RW: make agnostic to clientserver
 const input = path.resolve(__dirname, '../src/index.<% if(typescript) { %>ts<% } else { %>js<% } %>');
-const outputDir = path.resolve(__dirname, '../dist/js'); // TODO: Validate with clientserver
+const outputDir = path.resolve(__dirname, '../dist/js'); // TODO-RW: Validate with clientserver
 
-// TODO: Add clean options
+// TODO-RW: Add clean options
 
 function rollupConfig({ target }) {
     const isCompat = target === 'es5';

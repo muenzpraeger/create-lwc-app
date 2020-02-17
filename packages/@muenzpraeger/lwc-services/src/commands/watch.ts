@@ -40,6 +40,11 @@ export default class Watch extends Command {
         webpack: flags.string({
             char: 'w',
             description: messages.flags.webpack
+        }),
+        bundler: flags.string({
+            char: 'b',
+            description: messages.flags.bundler,
+            default: lwcConfig.bundler
         })
     }
 

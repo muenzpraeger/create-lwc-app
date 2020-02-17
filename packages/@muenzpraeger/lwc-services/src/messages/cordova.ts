@@ -1,12 +1,12 @@
 export const messages = {
-    description: 'Runs Jest tests for Lightning Web Components',
+    description: 'Runs as passthrough for the Cordova CLI',
     help: {
         examples: [
-            'lwc-services cordova -p build ios' // TODO: Add better examples
+            'lwc-services cordova -p build ios' // TODO-RW: Add better examples
         ]
     },
     flags: {
-        passthrough: 'subsequent command line args are passed through' // TODO: Add better examples
+        passthrough: 'subsequent command line args are passed through' // TODO-RW: Add better examples
     },
     logs: {
         starting_cordova: {

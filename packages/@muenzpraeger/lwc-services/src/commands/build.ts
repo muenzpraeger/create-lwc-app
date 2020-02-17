@@ -2,7 +2,6 @@ import { Command, flags } from '@oclif/command'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as rimraf from 'rimraf'
-import * as webpack from 'webpack'
 
 import { lwcConfig } from '../config/lwcConfig'
 import { generateWebpackConfig } from '../config/webpack.config'
@@ -11,6 +10,8 @@ import { log, welcome } from '../utils/logger'
 import { analyzeStats } from '../utils/webpack/statsAnalyzer'
 
 function buildWebpack(webpackConfig: any) {
+    const webpack = require('webpack')
+
     return new Promise((resolve, reject): void => {
         webpack(webpackConfig, (err: any, stats: any): void => {
             if (err) {
@@ -61,6 +62,11 @@ export default class Build extends Command {
         webpack: flags.string({
             char: 'w',
             description: messages.flags.webpack
+        }),
+        bundler: flags.string({
+            char: 'b',
+            description: messages.flags.bundler,
+            default: lwcConfig.bundler
         })
     }
 

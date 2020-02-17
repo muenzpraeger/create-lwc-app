@@ -1,6 +1,6 @@
 {
     "name": "@muenzpraeger/lwc-services-jest",
-    "version": "2.0.0-beta.11",
+    "version": "2.0.0-beta.20",
     "author": "René Winkelmeyer @muenzpraeger",
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
@@ -8,14 +8,33 @@
         "@lwc/jest-resolver": "^4.3.1",
         "@lwc/jest-serializer": "^4.3.1",
         "@lwc/jest-transformer": "^4.3.1",
+        "@oclif/command": "^1",
+        "@oclif/config": "^1",
         "jest": "~25"
+    },
+    "devDependencies": {
+        "@oclif/dev-cli": "^1",
+        "@oclif/test": "^1",
+        "@types/chai": "^4",
+        "@types/mocha": "^5",
+        "@types/node": "^12",
+        "@types/rimraf": "^2.0.2",
+        "@types/semver-compare": "^1.0.0",
+        "@types/webpack": "^4.4.27",
+        "@types/webpack-merge": "^4.1.4",
+        "@typescript-eslint/parser": "^2.3.1",
+        "@typescript-eslint/eslint-plugin": "^2.3.1",
+        "cli-ux": "^5.2.1",
+        "node-emoji": "^1.10.0"
     },
     "engines": {
         "node": ">=10.0.0"
     },
     "files": [
         "/bin",
-        "/lib"
+        "/lib",
+        "/npm-shrinkwrap.json",
+        "/oclif.manifest.json"
     ],
     "homepage": "https://github.com/muenzpraeger/create-lwc-app",
     "keywords": [
@@ -26,6 +45,18 @@
         "web components",
         "lightning"
     ],
-    "license": "CC0-1.0",
-    "repository": "muenzpraeger/create-lwc-app"
+    "license": "MIT",
+    "repository": "muenzpraeger/create-lwc-app",
+    "oclif": {
+        "commands": "./lib/commands",
+        "bin": "lwc-services-jest",
+        "plugins": [
+            "@oclif/plugin-help"
+        ]
+    },
+    "scripts": {
+        "build": "tsc -b",
+        "genreadme": "oclif-dev readme && git add README.md"
+    },
+    "types": "lib/index.d.ts"
 }

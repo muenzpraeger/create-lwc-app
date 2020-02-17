@@ -12,6 +12,7 @@
         <link rel="shortcut icon" href="/resources/favicon.ico" />
     </head>
     <body>
+        <% if (appType === 'pwa') { %>
         <div id="outdated" style="display: none">
             <div class="unsupported">
                 <div class="unsupported_title">App can't be loaded!</div>
@@ -33,7 +34,7 @@
                 });
             }
         </script>
-
+        <% } %>
         <my-app></my-app>
     </body>
 </html>

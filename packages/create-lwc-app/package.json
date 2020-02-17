@@ -1,6 +1,6 @@
 {
     "name": "create-lwc-app",
-    "version": "2.0.0-beta.11",
+    "version": "2.0.0-beta.20",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "create-lwc-app": "./bin/run"
@@ -44,7 +44,7 @@
         "web components",
         "lightning"
     ],
-    "license": "CC0-1.0",
+    "license": "MIT",
     "main": "lib/index.js",
     "oclif": {
         "bin": "create-lwc-app"

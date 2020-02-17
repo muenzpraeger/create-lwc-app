@@ -10,7 +10,7 @@
         "Electron",
         "LWC"
     ],
-    "license": "CC0-1.0",
+    "license": "MIT",
     "devDependencies": {
         "electron": "^8.0.0"
     }

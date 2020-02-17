@@ -4,16 +4,17 @@
 
 **create-lwc-app 2.0.0**
 
--   Adding support for @-scoped package names
+-   Moving to @-scoped package names
 -   Resorting dependencies
--   Default license changed from `MIT` to `CC0-1.0`
--   Adding options for creating a basic app, a PWA, or a Cordova app (Electron, iOS, Android)
+-   Adding options when creating a new app: basic, PWA, or Cordova (Electron, iOS, Android)
 
 **lwc-services 2.0.0**
 
 -   Uprading LWC to 1.2.1
 -   Resorting dependencies
 -   Change default host for `webpack` configurations from `0.0.0.0` to `localhost`
+-   Add support for Rollup builds
+-   Add support for Cordova builds
 
 ### 2020-01-16
 

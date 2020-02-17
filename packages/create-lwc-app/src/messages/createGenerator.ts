@@ -23,7 +23,7 @@ export const messages = {
             'What is the GitHub name of the repository (https://github.com/owner/REPO)',
         pkg: 'Select a package manager',
         appType: 'Select the type of app you want to create',
-        clientserver: 'Use custom Express server configuration',
+        clientserver: 'Do you want a basic Express server?',
         bundler: 'Select a bundler',
         typescript: 'Use TypeScript or JavaScript',
         edge: 'Do you want to use Edge (non-Chromium version) as browser'

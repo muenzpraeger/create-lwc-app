@@ -76,25 +76,6 @@ EXAMPLES
   lwc-services build -d ./public --noclear
 ```
 
-#### `lwc-services serve`
-
-Runs a Lightning Web Components project with a local Express server
-
-```
-USAGE
-  $ lwc-services serve
-
-OPTIONS
-  -d, --directory=directory  [default: ./dist] defines the directory where the build is stored
-  -i, --host=host            [default: 0.0.0.0] sets the hostname/IP address
-  -o, --open                 opens the site in the default browser
-  -p, --port=port            [default: 3002] configures the port of the application
-
-EXAMPLES
-  lwc-services serve
-  lwc-services serve -p 3998 -i 192.168.178.12
-```
-
 #### `lwc-services sniff`
 
 Exports configuration information. It's not a full "eject" out of this tool. Yet.

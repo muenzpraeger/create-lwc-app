@@ -20,7 +20,7 @@
         "@oclif/plugin-not-found": "^1.2.2",
         "@rollup/plugin-replace": "^2.3.0",
         "@salesforce/eslint-config-lwc": "^0.4",
-        "@typescript-eslint/parser": "^2.3.3",
+        "@typescript-eslint/parser": "^2.20.0",
         "babel-eslint": ">=10.0.0",
         "babel-loader": "^8.0.5",
         "compat-polyfills": "^0.22.0",
@@ -58,7 +58,7 @@
         "@types/semver-compare": "^1.0.0",
         "@types/webpack": "^4.4.27",
         "@types/webpack-merge": "^4.1.4",
-        "@typescript-eslint/parser": "^2.3.1",
+        "@typescript-eslint/parser": "^2.20.0",
         "@typescript-eslint/eslint-plugin": "^2.3.1",
         "cli-ux": "^5.2.1"
     },

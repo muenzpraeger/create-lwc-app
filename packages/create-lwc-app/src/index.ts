@@ -11,11 +11,6 @@ class Create extends Command {
 
     static flags = {
         help: flags.help({ char: 'h' }),
-        lib: flags.boolean({
-            char: 'l',
-            description: messages.flags.lib,
-            default: false
-        }),
         options: flags.string({
             char: 'o',
             description: messages.flags.options
@@ -29,7 +24,6 @@ class Create extends Command {
 
         const options = flags.options ? flags.options.split(',') : []
         const name = args.name ? args.name : ''
-        const lib = flags.lib
 
         const env = createEnv()
 
@@ -44,7 +38,7 @@ class Create extends Command {
         await new Promise((resolve, reject) => {
             env.run(
                 'CreateGenerator',
-                { options: options, name: name, lib: lib },
+                { options: options, name: name },
                 (err: null | Error) => {
                     if (err) reject(err)
                     else resolve()

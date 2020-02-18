@@ -52,7 +52,7 @@
         "@oclif/dev-cli": "^1",
         "@oclif/test": "^1",
         "@types/chai": "^4",
-        "@types/mocha": "^5",
+        "@types/mocha": "^7",
         "@types/node": "^13",
         "@types/rimraf": "^2.0.2",
         "@types/semver-compare": "^1.0.0",

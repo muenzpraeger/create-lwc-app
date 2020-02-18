@@ -11,7 +11,7 @@
         "@wdio/sync": "^5.18.7",
         "eslint-plugin-wdio": "^5.7.8",
         "wdio-lwc-service": "^0.1",
-        "webdriverio": "^5.7.14"
+        "webdriverio": "^5.18.7"
     },
     "engines": {
         "node": ">=10.0.0"

@@ -6,10 +6,11 @@ import * as webpackMerge from 'webpack-merge'
 
 import { jestConfig } from '../config/jestConfig'
 import { defaultLwcConfig } from '../config/lwcConfig'
-import { generateRollupConfig } from '../config/rollup.config'
 import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/sniff'
 import { log, welcome } from '../utils/logger'
+
+const rollupConfig = path.resolve(__dirname, '../config/rollup.config.js')
 
 export default class Sniff extends Command {
     static description = messages.description
@@ -75,10 +76,9 @@ export default class Sniff extends Command {
             'module.exports = ' + util.inspect(webpackConfig, inspectOptions)
         )
         log(messages.logs.write_rollup_config)
-        fs.writeFileSync(
-            path.join(flags.directory, 'rollup.config.js'),
-            'module.exports = ' +
-                util.inspect(generateRollupConfig, inspectOptions)
+        fs.copyFileSync(
+            rollupConfig,
+            path.join(flags.directory, 'rollup.config.js')
         )
         log(messages.logs.write_lwc_config)
         fs.writeFileSync(

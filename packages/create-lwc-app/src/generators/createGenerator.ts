@@ -38,6 +38,7 @@ class CreateGenerator extends Generator {
     args!: { [k: string]: string }
     bundler?: string
     clientserver?: boolean
+    cordova?: string[]
     defaults: any
     edge?: boolean
     githubUser: string | undefined
@@ -45,6 +46,7 @@ class CreateGenerator extends Generator {
     options: GeneratorOptions
     pjson: any
     repository?: string
+    silent?: boolean = false
     targetPathClient = 'src/'
     typescript?: boolean
     yarn!: boolean
@@ -52,32 +54,36 @@ class CreateGenerator extends Generator {
     constructor(args: any, opts: any) {
         super(args, opts)
         this.options = {
-            defaults: opts.defaults,
             yarn: opts.options.includes('yarn') || hasYarn,
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
             edge: opts.options.includes('edge'),
             bundler: opts.options.includes('rollup') ? 'rollup' : 'webpack',
-            appType: opts.options.includes('type')
+            silent: opts.silent,
+            appType: opts.type,
+            cordova: opts.cordova
         }
         this.name = opts.name
     }
 
     async prompting() {
         const gitName = this.user.git.name()
-        this.defaults = {
-            name: this.name.replace(/ /g, '-'),
-            clientserver: false,
-            typescript: false,
-            edge: false,
-            version: '0.0.1',
-            license: 'MIT',
-            author: gitName,
-            options: this.options,
-            appType: 'standard',
-            bundler: 'webpack',
-            pkg: 'npm'
-        }
+        this.defaults = Object.assign(
+            {
+                name: this.name.replace(/ /g, '-'),
+                clientserver: false,
+                typescript: false,
+                edge: false,
+                version: '0.0.1',
+                license: 'MIT',
+                author: gitName,
+                appType: 'standard',
+                cordova: [],
+                bundler: 'webpack',
+                pkg: this.options.yarn ? 'yarn' : 'npm'
+            },
+            this.options
+        )
         let repository = this.name
         if (gitName) {
             repository = `${gitName}/${this.name}`
@@ -100,9 +106,7 @@ class CreateGenerator extends Generator {
         if (this.repository && (this.repository as any).url) {
             this.repository = (this.repository as any).url
         }
-        if (this.options.defaults) {
-            this.answers = this.defaults
-        } else {
+        if (!this.options.silent) {
             const answersFirst = (await this.prompt([
                 {
                     type: 'confirm',
@@ -129,7 +133,7 @@ class CreateGenerator extends Generator {
                             { name: 'Standard web app', value: 'standard' },
                             { name: 'Progressive Web App (PWA)', value: 'pwa' },
                             {
-                                name: 'Cordova (Electron, iOS, Android)',
+                                name: 'Cordova (Electron, macOS, iOS, Android)',
                                 value: 'cordova'
                             }
                         ],
@@ -223,20 +227,12 @@ class CreateGenerator extends Generator {
                     })
                 }
             }
-            this.answers = (await this.prompt(questions)) as any
+            this.options = Object.assign(
+                this.options,
+                (await this.prompt(questions)) as any
+            )
         }
-        if (!this.options.defaults) {
-            this.options = {
-                yarn: this.answers.pkg === 'yarn',
-                clientserver: this.answers.clientserver,
-                typescript: this.answers.typescript === 'ts',
-                edge: this.answers.edge,
-                bundler: this.answers.bundler
-                    ? this.answers.bundler
-                    : this.defaults.bundler,
-                appType: this.answers.appType
-            }
-        }
+
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
         this.typescript = this.options.typescript
@@ -262,9 +258,9 @@ class CreateGenerator extends Generator {
             }
         }
 
-        this.pjson.name = this.answers.name
-        this.pjson.description = this.answers.description
-            ? this.answers.description
+        this.pjson.name = this.defaults.name
+        this.pjson.description = this.defaults.description
+            ? this.defaults.description
             : 'My amazing LWC app'
 
         if (this.typescript) {
@@ -498,7 +494,7 @@ class CreateGenerator extends Generator {
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
                 this.templatePath(
-                    !this.answers.edge
+                    !this.defaults.edge
                         ? 'src/client/index.html'
                         : 'src/client/index.non-wc.html'
                 ),
@@ -509,7 +505,7 @@ class CreateGenerator extends Generator {
             )
             this.fs.copyTpl(
                 this.templatePath(
-                    !this.answers.edge
+                    !this.defaults.edge
                         ? 'src/client/index'.concat(fileExtension)
                         : 'src/client/index.non-wc'.concat(fileExtension)
                 ),
@@ -657,13 +653,14 @@ class CreateGenerator extends Generator {
 }
 
 interface GeneratorOptions {
-    defaults?: boolean
+    silent: boolean
+    appType: string
+    cordova: string[]
     yarn: boolean
     clientserver: boolean
     typescript: boolean
     edge: boolean
     bundler: string
-    appType: string
 }
 
 interface GeneratorAnswers {

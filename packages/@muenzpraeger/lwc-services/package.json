@@ -1,6 +1,6 @@
 {
     "name": "@muenzpraeger/lwc-services",
-    "version": "2.0.0-beta.20",
+    "version": "2.0.0-beta.24",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"
@@ -39,6 +39,9 @@
         "rollup": "^1.10.0",
         "rollup-plugin-compat": "^0.22.0",
         "rollup-plugin-cpy": "^2.0",
+        "rollup-plugin-livereload": "^1.0.4",
+        "rollup-plugin-serve": "^1.0.1",
+        "rollup-plugin-terser": "^5.2.0",
         "semver-compare": "^1.0.0",
         "sort-pjson": "^1.0.3",
         "ts-node": "^8.3.0",
@@ -46,7 +49,8 @@
         "typescript": "^3.6",
         "webpack": "^4.30",
         "webpack-dev-server": "^3.3",
-        "webpack-merge": "^4.2.1"
+        "webpack-merge": "^4.2.1",
+        "workbox-build": "^5.0.0"
     },
     "devDependencies": {
         "@oclif/dev-cli": "^1",
@@ -89,12 +93,13 @@
             "@oclif/plugin-help"
         ],
         "devPlugins": [
-            "@muenzpraeger/lwc-services-jest"
+            "@muenzpraeger/lwc-services-jest",
+            "@muenzpraeger/lwc-services-wdio"
         ]
     },
     "repository": "muenzpraeger/create-lwc-app",
     "scripts": {
-        "build": "tsc -b",
+        "build": "rm -rf lib && rm -f tsconfig.ts* && tsc -b",
         "genreadme": "oclif-dev readme && git add README.md"
     },
     "types": "lib/index.d.ts"

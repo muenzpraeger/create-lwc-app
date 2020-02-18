@@ -8,12 +8,11 @@ Work through all TODO comments
 Add/Update Express implementation
 Implement PWA skeleton
 Implement Cordova passthrough
-Implement Jest in dedicated package
+Implement WDIO in dedicated package
 
 -   command
 -   execution
     Modify nodemonConfig
-    Implement PWA skeleton
 
 CHECK
 sniff (with rollup config)

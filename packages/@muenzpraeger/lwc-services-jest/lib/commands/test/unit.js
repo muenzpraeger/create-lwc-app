@@ -5,7 +5,7 @@ const merge = require("deepmerge");
 const fs = require("fs");
 const path = require("path");
 const jestConfig_1 = require("../../config/jestConfig");
-const test_1 = require("../../messages/test");
+const test_unit_1 = require("../../messages/test_unit");
 const logger_1 = require("../../utils/logger");
 const spawn = require('child_process').spawn;
 class Test extends command_1.Command {
@@ -18,10 +18,10 @@ class Test extends command_1.Command {
         let jestFinalConfig = jestConfig_1.jestConfig;
         if (!fs.existsSync('jest.config.js') &&
             !fs.existsSync('jest.config.json')) {
-            logger_1.log(test_1.messages.logs.default_configuration);
+            logger_1.log(test_unit_1.messages.logs.default_configuration);
         }
         else {
-            logger_1.log(test_1.messages.logs.custom_configuration);
+            logger_1.log(test_unit_1.messages.logs.custom_configuration);
             // Yay, someone uses a custom configuration.
             if (fs.existsSync('jest.config.js')) {
                 const jestCustomConfigJs = require(path.resolve(process.cwd(), 'jest.config.js'));
@@ -32,7 +32,7 @@ class Test extends command_1.Command {
                 jestFinalConfig = Object.assign(Object.assign({}, jestFinalConfig), jestCustomConfigJson);
             }
         }
-        logger_1.log(test_1.messages.logs.starting_jest);
+        logger_1.log(test_unit_1.messages.logs.starting_jest);
         if (flags.debug) {
             // Execute command is different on Windows.
             const jestExecutable = process.platform === 'win32'
@@ -75,23 +75,23 @@ class Test extends command_1.Command {
     }
 }
 exports.default = Test;
-Test.description = test_1.messages.description;
-Test.examples = test_1.messages.help.examples;
+Test.description = test_unit_1.messages.description;
+Test.examples = test_unit_1.messages.help.examples;
 Test.flags = {
     help: command_1.flags.help({ char: 'h' }),
     coverage: command_1.flags.boolean({
         char: 'c',
-        description: test_1.messages.flags.coverage
+        description: test_unit_1.messages.flags.coverage
     }),
-    debug: command_1.flags.boolean({ char: 'd', description: test_1.messages.flags.debug }),
-    watch: command_1.flags.boolean({ char: 'w', description: test_1.messages.flags.watch }),
+    debug: command_1.flags.boolean({ char: 'd', description: test_unit_1.messages.flags.debug }),
+    watch: command_1.flags.boolean({ char: 'w', description: test_unit_1.messages.flags.watch }),
     runInBand: command_1.flags.boolean({
         char: 'r',
-        description: test_1.messages.flags.runInBand
+        description: test_unit_1.messages.flags.runInBand
     }),
     passthrough: command_1.flags.string({
         char: 'p',
         multiple: true,
-        description: test_1.messages.flags.passthrough
+        description: test_unit_1.messages.flags.passthrough
     })
 };

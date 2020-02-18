@@ -8,6 +8,9 @@ import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/build'
 import { log, welcome } from '../utils/logger'
 import { analyzeStats } from '../utils/webpack/statsAnalyzer'
+const spawn = require('child_process').spawn
+
+const rollupConfig = path.resolve(__dirname, '../config/rollup.config.js')
 
 function buildWebpack(webpackConfig: any) {
     const webpack = require('webpack')
@@ -97,49 +100,70 @@ export default class Build extends Command {
             }
         }
 
-        // Check if custom webpack config is passed, and if it really exists.
-        if (flags.webpack) {
-            if (!fs.existsSync(flags.webpack)) {
-                log(messages.errors.no_webpack)
-                return
+        if (flags.bundler === 'webpack') {
+            // Check if custom webpack config is passed, and if it really exists.
+            if (flags.webpack) {
+                if (!fs.existsSync(flags.webpack)) {
+                    log(messages.errors.no_webpack)
+                    return
+                }
             }
-        }
 
-        log(messages.logs.creating_build_configuration)
+            log(messages.logs.creating_build_configuration)
 
-        let webpackConfigCustom: any
+            let webpackConfigCustom: any
 
-        if (flags.webpack) {
-            log(messages.logs.custom_configuration)
-            webpackConfigCustom = require(path.resolve(
-                process.cwd(),
-                flags.webpack
-            ))
-        }
-        const webpackConfig = generateWebpackConfig(
-            flags.mode,
-            webpackConfigCustom
-        )
-
-        log(messages.logs.build_start)
-
-        if (flags.mode && flags.mode !== lwcConfig.mode) {
-            webpackConfig.mode = flags.mode
-        }
-
-        if (flags.destination && flags.destination !== lwcConfig.buildDir) {
-            webpackConfig.output.path = path.resolve(
-                process.cwd(),
-                flags.destination
+            if (flags.webpack) {
+                log(messages.logs.custom_configuration)
+                webpackConfigCustom = require(path.resolve(
+                    process.cwd(),
+                    flags.webpack
+                ))
+            }
+            const webpackConfig = generateWebpackConfig(
+                flags.mode,
+                webpackConfigCustom
             )
-        }
 
-        try {
-            await buildWebpack(webpackConfig)
-            log(messages.logs.build_end)
-        } catch (error) {
-            log({ message: error, emoji: 'sos' })
-            process.exit(1)
+            log(messages.logs.build_start)
+
+            if (flags.mode && flags.mode !== lwcConfig.mode) {
+                webpackConfig.mode = flags.mode
+            }
+
+            if (flags.destination && flags.destination !== lwcConfig.buildDir) {
+                webpackConfig.output.path = path.resolve(
+                    process.cwd(),
+                    flags.destination
+                )
+            }
+
+            try {
+                await buildWebpack(webpackConfig)
+                log(messages.logs.build_end)
+            } catch (error) {
+                log({ message: error, emoji: 'sos' })
+                process.exit(1)
+            }
+        } else {
+            // This looks super wonky... and it may be super wonky. ;-)
+            const args = [
+                './node_modules/rollup/dist/bin/rollup',
+                '-c',
+                rollupConfig,
+                '--environment',
+                'NODE_ENV:' + flags.mode
+            ]
+            const rollupSpawn = spawn('node', args)
+
+            rollupSpawn.on('error', (err: string) => {
+                log({ message: `${err}`, emoji: 'sos' })
+            })
+
+            // It's super weird that the debug message is passed via stderr. But it is what it is.
+            rollupSpawn.stderr.on('data', (data: string) => {
+                log({ message: `${data}`, emoji: 'rainbow' })
+            })
         }
     }
 }

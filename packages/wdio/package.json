@@ -1,6 +1,6 @@
 {
     "name": "@muenzpraeger/lwc-services-wdio",
-    "version": "2.0.0-beta.26",
+    "version": "2.0.0-beta.28",
     "author": "René Winkelmeyer @muenzpraeger",
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {

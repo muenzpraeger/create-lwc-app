@@ -1,13 +1,7 @@
 TODO
 Update README
 Create breaking changes GitHub wiki page
-Work through all TODO comments
-? Implement Cordova passthrough
-Build Express API server for Watch mode
-Build Express server for simple serve mode
-Validate PWA template
-Validate PWA setup for webpack build
-Validate PWA setup for rollup build
+Unit tests for TS not working??
 
 CHECK
 
@@ -16,3 +10,12 @@ CHECK
 -   JS/TS files for rollup - does watch work
 -   Is index.html copied for PWA/nonPWA projects on Express/withExpress
 -   Is express-dev file removed, does everything work?
+-   Validate Express simple serve
+-   Validate Express simple API
+-   Check if server.js doesn't throw an error
+-   Validate Express start message
+-   Check if cordova is no longer part of adv setup
+-   Validate Express message for setup
+-   Validate server commands for Express / no Express
+-   Validate PWA setup for webpack build (sw + images + workbox)
+-   Validate PWA setup for rollup build (sw + images + workbox)

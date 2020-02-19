@@ -131,11 +131,12 @@ class CreateGenerator extends Generator {
                         message: messages.questions.appType,
                         choices: [
                             { name: 'Standard web app', value: 'standard' },
-                            { name: 'Progressive Web App (PWA)', value: 'pwa' },
-                            {
-                                name: 'Cordova (Electron, macOS, iOS, Android)',
-                                value: 'cordova'
-                            }
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            // TODO: Validate for later implementation
+                            // {
+                            //     name: 'Cordova (Electron, macOS, iOS, Android)',
+                            //     value: 'cordova'
+                            // }
                         ],
                         default: this.defaults.appType
                     },
@@ -277,20 +278,35 @@ class CreateGenerator extends Generator {
             // eslint-disable-next-line no-useless-escape
             'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         if (this.clientserver) {
+            this.pjson.scripts.serve = 'run-p serve:client serve:api'
+            this.pjson.scripts['serve:client'] = 'node scripts/server.js'
+            this.pjson.scripts['serve:api'] = 'node lib/server/api.js'
+        } else {
+            this.pjson.scripts.serve = 'node scripts/server.js'
+        }
+        if (this.clientserver) {
             if (this.typescript) {
-                this.pjson.scripts.serve = 'node lib/server.js'
                 if (this.bundler === 'webpack') {
-                    this.pjson.scripts.build =
-                        'lwc-services build -m production && tsc -b ./src/server'
+                    if (this.appType === 'pwa') {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production -w scripts/webpack.config.js && tsc -b ./src/server'
+                    } else {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production && tsc -b ./src/server'
+                    }
                 } else if (this.bundler === 'rollup') {
                     this.pjson.scripts.build =
                         'lwc-services build -m production -b rollup && tsc -b ./src/server'
                 }
             } else {
-                this.pjson.scripts.serve = 'node src/server/index.js'
                 if (this.bundler === 'webpack') {
-                    this.pjson.scripts.build =
-                        'lwc-services build -m production'
+                    if (this.appType === 'pwa') {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production -w webpack.config.js'
+                    } else {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production'
+                    }
                 } else if (this.bundler === 'rollup') {
                     this.pjson.scripts.build =
                         'lwc-services build -m production -b rollup'
@@ -298,14 +314,25 @@ class CreateGenerator extends Generator {
             }
         } else {
             if (this.bundler === 'webpack') {
-                this.pjson.scripts.build = 'lwc-services build -m production'
+                if (this.appType === 'pwa') {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production -w webpack.config.js'
+                } else {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production'
+                }
             } else if (this.bundler === 'rollup') {
                 this.pjson.scripts.build =
                     'lwc-services build -m production -b rollup'
             }
         }
         if (this.bundler === 'webpack') {
-            this.pjson.scripts['build:development'] = 'lwc-services build'
+            if (this.appType === 'pwa') {
+                this.pjson.scripts['build:development'] =
+                    'lwc-services build -w webpack.config.js'
+            } else {
+                this.pjson.scripts['build:development'] = 'lwc-services build'
+            }
         } else if (this.bundler === 'rollup') {
             this.pjson.scripts['build:development'] =
                 'lwc-services build -b rollup'
@@ -341,7 +368,12 @@ class CreateGenerator extends Generator {
             }
         } else {
             if (this.bundler === 'webpack') {
-                this.pjson.scripts['watch'] = 'lwc-services watch'
+                if (this.appType === 'pwa') {
+                    this.pjson.scripts['watch'] =
+                        'lwc-services watch -w scripts/webpack.config.js'
+                } else {
+                    this.pjson.scripts['watch'] = 'lwc-services watch'
+                }
             } else if (this.bundler === 'rollup') {
                 this.pjson.scripts['watch'] = 'lwc-services watch -b rollup'
             }
@@ -439,8 +471,8 @@ class CreateGenerator extends Generator {
             'eslint',
             `lwc-services@^${LWC_SERVICES_VERSION}`
         )
+        dependencies.push('compression', 'express', 'helmet')
         if (this.clientserver) {
-            dependencies.push('compression', 'express', 'helmet')
             devDependencies.push('npm-run-all')
         }
         if (this.typescript && this.clientserver) {
@@ -620,12 +652,39 @@ class CreateGenerator extends Generator {
             )
         }
 
+        if (this.appType === 'pwa') {
+            if (this.bundler === 'webpack') {
+                this.fs.copyTpl(
+                    this.templatePath('webpack.config.js'),
+                    this.destinationPath('scripts/webpack.config.js'),
+                    this
+                )
+            } else {
+                this.fs.copyTpl(
+                    this.templatePath('workbox.swgenerate.js'),
+                    this.destinationPath('scripts/workbox.swgenerate.js'),
+                    this
+                )
+            }
+        }
+        this.fs.copyTpl(
+            this.templatePath('src/server/server.js'),
+            this.destinationPath('scripts/server.js'),
+            this
+        )
+
+        this.fs.copyTpl(
+            this.templatePath('src/server/server.js'),
+            this.destinationPath('scripts/server.js'),
+            this
+        )
+
         if (this.clientserver) {
             if (!fs.existsSync('src')) {
                 this.fs.copyTpl(
-                    this.templatePath('src/server/index'.concat(fileExtension)),
+                    this.templatePath('src/server/api'.concat(fileExtension)),
                     this.destinationPath(
-                        'src/server/index'.concat(fileExtension)
+                        'src/server/api'.concat(fileExtension)
                     ),
                     this
                 )

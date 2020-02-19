@@ -8,6 +8,7 @@ const { transform } = require('@babel/core')
 const babelTsPlugin = require('@babel/plugin-transform-typescript')
 const { lwcConfig } = require('./lwcConfig')
 const fs = require('fs')
+const { generateSW, injectManifest } = require('rollup-plugin-workbox')
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
@@ -41,6 +42,17 @@ if (!input || !fs.existsSync(input)) {
     input = path.resolve(process.cwd(), 'index.ts')
 }
 const outputDir = path.resolve(process.cwd(), lwcConfig.buildDir)
+const workboxSwGenerate = path.resolve(
+    process.cwd(),
+    './scripts/workbox.swgenerate.js'
+)
+const workboxInjectManifest = path.resolve(
+    process.cwd(),
+    './scripts/workbox.inject.js'
+)
+
+let hasSwGenerate = fs.existsSync(workboxSwGenerate)
+let hasInject = !hasSwGenerate & fs.existsSync(workboxInjectManifest)
 
 module.exports = (format = 'esm') => {
     const isProduction = env === 'production'
@@ -67,6 +79,8 @@ module.exports = (format = 'esm') => {
             }),
             replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
             isProduction && terser(),
+            hasSwGenerate && generateSW(workboxSwGenerate),
+            hasInject && injectManifest(workboxInjectManifest),
             isWatch &&
                 serve({
                     open: process.env.DEV_HOST_OPEN,

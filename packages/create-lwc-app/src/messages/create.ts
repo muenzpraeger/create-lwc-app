@@ -33,9 +33,8 @@ export const messages = {
     flags: {
         silent:
             'runs a silent installation (with defaults/with provided options)',
-        type:
-            'specificy the project type (standard|pwa|cordova-electron|cordova-ios|cordova-android|cordova-mac)',
+        type: 'specificy the project type (standard|pwa)',
         options:
-            'set silent installation comma-separated project options (yarn|typescript|edge|rollup|express)' // TODO-RW: Re-work
+            'set silent installation options, comma-separated (yarn|typescript|edge|rollup|express)'
     }
 }

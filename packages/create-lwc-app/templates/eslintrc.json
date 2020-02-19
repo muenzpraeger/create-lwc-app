@@ -9,7 +9,7 @@
     }<% if (clientserver) { %>,
     "overrides": [
         {
-            "files": ["src/server/**"],
+            "files": ["src/server/**", "scripts/server.js"],
             "env": {
                 "node": true
             }

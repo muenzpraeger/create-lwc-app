@@ -1,6 +1,6 @@
 {
     "name": "@muenzpraeger/lwc-services-wdio",
-    "version": "2.0.0-beta.24",
+    "version": "2.0.0-beta.26",
     "author": "René Winkelmeyer @muenzpraeger",
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "dependencies": {
@@ -16,6 +16,13 @@
     "engines": {
         "node": ">=10.0.0"
     },
+    "files": [
+        "/bin",
+        "/lib",
+        "/oclif.manifest.json",
+        "/package-lock.json",
+        "/yarn.lock"
+    ],
     "homepage": "https://github.com/muenzpraeger/create-lwc-app",
     "keywords": [
         "oclif",
@@ -26,5 +33,17 @@
         "lightning"
     ],
     "license": "MIT",
-    "repository": "muenzpraeger/create-lwc-app"
+    "repository": "muenzpraeger/create-lwc-app",
+    "oclif": {
+        "commands": "./lib/commands",
+        "bin": "lwc-services-wdio",
+        "plugins": [
+            "@oclif/plugin-help"
+        ]
+    },
+    "scripts": {
+        "build": "tsc -b",
+        "genreadme": "oclif-dev readme && git add README.md"
+    },
+    "types": "lib/index.d.ts"
 }

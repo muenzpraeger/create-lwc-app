@@ -121,7 +121,10 @@ function buildConfig(): Config {
         combinedConfig = merge(defaultLwcConfig, config)
         return combinedConfig
     } catch (error) {
-        // We don't need error handling atm
+        console.error(
+            'Using default configuration! Error loading custom config'
+        )
+        console.error(error)
     }
     return combinedConfig
 }

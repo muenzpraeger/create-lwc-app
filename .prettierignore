@@ -1,7 +1,6 @@
 **/lib/**
 packages/create-lwc-app/templates/README.md
 packages/create-lwc-app/templates/lwc-services.config.js
-packages/create-lwc-app/templates/scripts/express-dev.js
 packages/create-lwc-app/templates/scripts/rollup.config.js
 packages/create-lwc-app/templates/scripts/rollup.config.modules.js
 packages/create-lwc-app/templates/eslintrc.json

@@ -7,6 +7,7 @@ const { terser } = require('rollup-plugin-terser')
 const { transform } = require('@babel/core')
 const babelTsPlugin = require('@babel/plugin-transform-typescript')
 const { lwcConfig } = require('./lwcConfig')
+const fs = require('fs')
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
@@ -35,10 +36,11 @@ function removeTypesPlugin() {
 
 const env = process.env.NODE_ENV || lwcConfig.mode
 
-// TODO-RW: make agnostic to clientserver and JS/TS
-const input = path.resolve(process.cwd(), lwcConfig.sourceDir, 'index.js')
+let input = path.resolve(process.cwd(), lwcConfig.sourceDir, 'index.js')
+if (!input || !fs.existsSync(input)) {
+    input = path.resolve(process.cwd(), 'index.ts')
+}
 const outputDir = path.resolve(process.cwd(), lwcConfig.buildDir)
-// TODO-RW: Add clean options
 
 module.exports = (format = 'esm') => {
     const isProduction = env === 'production'

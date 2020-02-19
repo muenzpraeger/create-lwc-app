@@ -278,6 +278,7 @@ class CreateGenerator extends Generator {
             'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         if (this.clientserver) {
             if (this.typescript) {
+                this.pjson.scripts.serve = 'node lib/server.js'
                 if (this.bundler === 'webpack') {
                     this.pjson.scripts.build =
                         'lwc-services build -m production && tsc -b ./src/server'
@@ -286,6 +287,7 @@ class CreateGenerator extends Generator {
                         'lwc-services build -m production -b rollup && tsc -b ./src/server'
                 }
             } else {
+                this.pjson.scripts.serve = 'node src/server/index.js'
                 if (this.bundler === 'webpack') {
                     this.pjson.scripts.build =
                         'lwc-services build -m production'
@@ -321,8 +323,7 @@ class CreateGenerator extends Generator {
             const fileExtension = this.typescript ? 'ts' : 'js'
             this.pjson.nodemonConfig = {}
             this.pjson.nodemonConfig.watch = [
-                'src/server/**/*.'.concat(fileExtension),
-                'scripts/express-dev.'.concat(fileExtension)
+                'src/server/**/*.'.concat(fileExtension)
             ]
             this.pjson.nodemonConfig.ext = fileExtension
             this.pjson.nodemonConfig.ignore = [
@@ -330,11 +331,11 @@ class CreateGenerator extends Generator {
                 'src/**/*.test.'.concat(fileExtension)
             ]
             if (this.typescript) {
-                this.pjson.nodemonConfig.exec = 'ts-node ./scripts/express-dev.'.concat(
+                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/index.'.concat(
                     fileExtension
                 )
             } else {
-                this.pjson.nodemonConfig.exec = 'node ./scripts/express-dev.'.concat(
+                this.pjson.nodemonConfig.exec = 'node ./src/server/index.'.concat(
                     fileExtension
                 )
             }
@@ -431,16 +432,15 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        // TODO-RW: Revisit express
         devDependencies.push(
             'husky',
             'lint-staged',
             'prettier',
             'eslint',
-            `@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`,
-            `@muenzpraeger/lwc-services-jest@^${LWC_SERVICES_VERSION}`
+            `lwc-services@^${LWC_SERVICES_VERSION}`
         )
         if (this.clientserver) {
+            dependencies.push('compression', 'express', 'helmet')
             devDependencies.push('npm-run-all')
         }
         if (this.typescript && this.clientserver) {
@@ -633,17 +633,6 @@ class CreateGenerator extends Generator {
                     this.fs.copyTpl(
                         this.templatePath('src/server/tsconfig.json'),
                         this.destinationPath('src/server/tsconfig.json'),
-                        this
-                    )
-                    this.fs.copyTpl(
-                        this.templatePath('scripts/express-dev.js'),
-                        this.destinationPath('scripts/express-dev.ts'),
-                        this
-                    )
-                } else {
-                    this.fs.copyTpl(
-                        this.templatePath('scripts/express-dev.js'),
-                        this.destinationPath('scripts/express-dev.js'),
                         this
                     )
                 }

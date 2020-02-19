@@ -1,9 +1,16 @@
-import { Express } from 'express';
+const compression = require('compression');
+const helmet = require('helmet');
+const express = require('express');
+import * as path from 'path';
 
-export default function(app: Express): void {
-    // put your express app logic here
-    app.get('/some/api', (req, res) => {
-        // do stuff
-        res.json({ status: 'ok' });
-    });
-}
+const app = express();
+app.use(helmet());
+app.use(compression());
+
+const DIST_DIR = './dist';
+
+app.use(express.static(DIST_DIR));
+
+app.use('*', (req: any, res: any) => {
+    res.sendFile(path.resolve(DIST_DIR, 'index.html'));
+});

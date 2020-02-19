@@ -1,6 +1,6 @@
 {
     "name": "@muenzpraeger/lwc-services",
-    "version": "2.0.0-beta.24",
+    "version": "2.0.0-beta.26",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"
@@ -13,6 +13,10 @@
         "@babel/plugin-syntax-decorators": "^7.8.3",
         "@babel/preset-typescript": "^7.8.3",
         "@lwc/eslint-plugin-lwc": "^0.8",
+        "@lwc/jest-preset": "^4.3.1",
+        "@lwc/jest-resolver": "^4.3.1",
+        "@lwc/jest-serializer": "^4.3.1",
+        "@lwc/jest-transformer": "^4.3.1",
         "@lwc/rollup-plugin": "^1.2.1",
         "@oclif/command": "^1",
         "@oclif/config": "^1",
@@ -31,6 +35,7 @@
         "eslint": "^6.3",
         "globby": "^10.0.1",
         "html-webpack-plugin": "^3.2.0",
+        "jest": "~25",
         "lwc": "^1.2.1",
         "node-emoji": "^1.10.0",
         "nodemon": "^2.0.1",
@@ -72,8 +77,9 @@
     "files": [
         "/bin",
         "/lib",
-        "/npm-shrinkwrap.json",
-        "/oclif.manifest.json"
+        "/oclif.manifest.json",
+        "/package-lock.json",
+        "/yarn.lock"
     ],
     "homepage": "https://github.com/muenzpraeger/create-lwc-app",
     "keywords": [
@@ -91,10 +97,6 @@
         "plugins": [
             "@oclif/plugin-not-found",
             "@oclif/plugin-help"
-        ],
-        "devPlugins": [
-            "@muenzpraeger/lwc-services-jest",
-            "@muenzpraeger/lwc-services-wdio"
         ]
     },
     "repository": "muenzpraeger/create-lwc-app",

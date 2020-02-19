@@ -1,18 +1,21 @@
 -   Auto-update Jest config files
 -   Add instructions for manually adding Prettier and ESLint to existing projects
--   cross-env not found?
 
 TODO
 Update README
+Create breaking changes GitHub wiki page
 Work through all TODO comments
-Add/Update Express implementation
-Implement PWA skeleton
-Implement Cordova passthrough
-Implement WDIO in dedicated package
-
--   command
--   execution
-    Modify nodemonConfig
+? Implement Cordova passthrough
+Build Express API server for Watch mode
+Build Express server for simple serve mode
+Validate PWA template
+Validate PWA setup for webpack build
+Validate PWA setup for rollup build
 
 CHECK
-sniff (with rollup config)
+
+-   Validate if Jest work in new setup
+-   JS/TS files for rollup - does the build work
+-   JS/TS files for rollup - does watch work
+-   Is index.html copied for PWA/nonPWA projects on Express/withExpress
+-   Is express-dev file removed, does everything work?

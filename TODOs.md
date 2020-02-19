@@ -1,6 +1,3 @@
--   Auto-update Jest config files
--   Add instructions for manually adding Prettier and ESLint to existing projects
-
 TODO
 Update README
 Create breaking changes GitHub wiki page

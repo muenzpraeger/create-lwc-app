@@ -30,6 +30,19 @@ const pkgJson = JSON.parse(
 )
 const LWC_SERVICES_VERSION = pkgJson.version
 const filesDefault = ['lwc-services.config.js', 'jest.config.js', 'README.md']
+const filesPwa = [
+    'manifest.json',
+    'resources/icons/icon-16x16.png',
+    'resources/icons/icon-32x32.png',
+    'resources/icons/icon-72x72.png',
+    'resources/icons/icon-96x96.png',
+    'resources/icons/icon-128x128.png',
+    'resources/icons/icon-144x144.png',
+    'resources/icons/icon-152x152.png',
+    'resources/icons/icon-192x192.png',
+    'resources/icons/icon-384x384.png',
+    'resources/icons/icon-512x512.png'
+]
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
@@ -48,7 +61,7 @@ class CreateGenerator extends Generator {
     repository?: string
     silent?: boolean = false
     targetPathClient = 'src/'
-    typescript?: boolean
+    typescript?: any
     yarn!: boolean
 
     constructor(args: any, opts: any) {
@@ -184,11 +197,11 @@ class CreateGenerator extends Generator {
                         message: messages.questions.appType,
                         choices: [
                             { name: 'Standard web app', value: 'standard' },
-                            { name: 'Progressive Web App (PWA)', value: 'pwa' },
-                            {
-                                name: 'Cordova (Electron, iOS, Android)',
-                                value: 'cordova'
-                            }
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            // {
+                            //     name: 'Cordova (Electron, iOS, Android)',
+                            //     value: 'cordova'
+                            // }
                         ],
                         default: this.defaults.appType
                     },
@@ -233,10 +246,10 @@ class CreateGenerator extends Generator {
                 (await this.prompt(questions)) as any
             )
         }
-
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
-        this.typescript = this.options.typescript
+        this.typescript =
+            this.options.typescript === 'ts' || this.options.typescript
         this.edge = this.options.edge
         this.bundler = this.options.bundler
         this.appType = this.options.appType
@@ -280,7 +293,11 @@ class CreateGenerator extends Generator {
         if (this.clientserver) {
             this.pjson.scripts.serve = 'run-p serve:client serve:api'
             this.pjson.scripts['serve:client'] = 'node scripts/server.js'
-            this.pjson.scripts['serve:api'] = 'node lib/server/api.js'
+            if (this.typescript) {
+                this.pjson.scripts['serve:api'] = 'node lib/server/api.js'
+            } else {
+                this.pjson.scripts['serve:api'] = 'node src/server/api.js'
+            }
         } else {
             this.pjson.scripts.serve = 'node scripts/server.js'
         }
@@ -302,7 +319,7 @@ class CreateGenerator extends Generator {
                 if (this.bundler === 'webpack') {
                     if (this.appType === 'pwa') {
                         this.pjson.scripts.build =
-                            'lwc-services build -m production -w webpack.config.js'
+                            'lwc-services build -m production -w scripts/webpack.config.js'
                     } else {
                         this.pjson.scripts.build =
                             'lwc-services build -m production'
@@ -316,7 +333,7 @@ class CreateGenerator extends Generator {
             if (this.bundler === 'webpack') {
                 if (this.appType === 'pwa') {
                     this.pjson.scripts.build =
-                        'lwc-services build -m production -w webpack.config.js'
+                        'lwc-services build -m production -w scripts/webpack.config.js'
                 } else {
                     this.pjson.scripts.build =
                         'lwc-services build -m production'
@@ -329,7 +346,7 @@ class CreateGenerator extends Generator {
         if (this.bundler === 'webpack') {
             if (this.appType === 'pwa') {
                 this.pjson.scripts['build:development'] =
-                    'lwc-services build -w webpack.config.js'
+                    'lwc-services build -w scripts/webpack.config.js'
             } else {
                 this.pjson.scripts['build:development'] = 'lwc-services build'
             }
@@ -358,11 +375,11 @@ class CreateGenerator extends Generator {
                 'src/**/*.test.'.concat(fileExtension)
             ]
             if (this.typescript) {
-                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/index.'.concat(
+                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/api.'.concat(
                     fileExtension
                 )
             } else {
-                this.pjson.nodemonConfig.exec = 'node ./src/server/index.'.concat(
+                this.pjson.nodemonConfig.exec = 'node ./src/server/api.'.concat(
                     fileExtension
                 )
             }
@@ -661,11 +678,18 @@ class CreateGenerator extends Generator {
                 )
             } else {
                 this.fs.copyTpl(
-                    this.templatePath('workbox.swgenerate.js'),
-                    this.destinationPath('scripts/workbox.swgenerate.js'),
+                    this.templatePath('workbox.generatesw.js'),
+                    this.destinationPath('scripts/workbox.generatesw.js'),
                     this
                 )
             }
+            filesPwa.forEach(file => {
+                this.fs.copyTpl(
+                    this.templatePath('src/client/'.concat(file)),
+                    this.targetPathClient.concat(file),
+                    this
+                )
+            })
         }
         this.fs.copyTpl(
             this.templatePath('src/server/server.js'),
@@ -706,7 +730,7 @@ interface GeneratorOptions {
     cordova: string[]
     yarn: boolean
     clientserver: boolean
-    typescript: boolean
+    typescript: any
     edge: boolean
     bundler: string
 }

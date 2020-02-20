@@ -10,6 +10,5 @@ rm -f tsconfig.tsbuildinfo
 tsc -b
 npm publish --registry=http://localhost:4873 --tag beta
 cd ../lwc-services
-rm -f tsconfig.tsbuildinfo
-tsc -b
+yarn build
 npm publish --registry=http://localhost:4873 --tag beta

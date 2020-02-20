@@ -9,6 +9,7 @@ const babelTsPlugin = require('@babel/plugin-transform-typescript')
 const { lwcConfig } = require('./lwcConfig')
 const fs = require('fs')
 const { generateSW, injectManifest } = require('rollup-plugin-workbox')
+import copy from 'rollup-plugin-copy'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 
@@ -39,20 +40,39 @@ const env = process.env.NODE_ENV || lwcConfig.mode
 
 let input = path.resolve(process.cwd(), lwcConfig.sourceDir, 'index.js')
 if (!input || !fs.existsSync(input)) {
-    input = path.resolve(process.cwd(), 'index.ts')
+    input = path.resolve(process.cwd(), lwcConfig.sourceDir, 'index.ts')
 }
+
 const outputDir = path.resolve(process.cwd(), lwcConfig.buildDir)
-const workboxSwGenerate = path.resolve(
+
+let workboxConfig
+let hasGenerateSw = false
+let hasInject = false
+
+const workboxGenerateSw = path.resolve(
     process.cwd(),
-    './scripts/workbox.swgenerate.js'
+    './scripts/workbox.generatesw.js'
 )
 const workboxInjectManifest = path.resolve(
     process.cwd(),
     './scripts/workbox.inject.js'
 )
 
-let hasSwGenerate = fs.existsSync(workboxSwGenerate)
-let hasInject = !hasSwGenerate & fs.existsSync(workboxInjectManifest)
+if (fs.existsSync(workboxGenerateSw)) {
+    hasGenerateSw = true
+    workboxConfig = require(workboxGenerateSw)
+}
+
+if (!hasGenerateSw && fs.existsSync(workboxInjectManifest)) {
+    hasInject = true
+    workboxConfig = require(workboxGenerateSw)
+}
+
+const resources = []
+
+lwcConfig.resources.forEach(resource => {
+    resources.push({ src: resource.from, dest: resource.to })
+})
 
 module.exports = (format = 'esm') => {
     const isProduction = env === 'production'
@@ -62,7 +82,7 @@ module.exports = (format = 'esm') => {
         input,
         output: {
             file: path.join(outputDir, 'main.js'),
-            format: format
+            format: 'esm'
         },
         manualChunks(id) {
             if (id.includes('lwc')) {
@@ -79,8 +99,11 @@ module.exports = (format = 'esm') => {
             }),
             replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
             isProduction && terser(),
-            hasSwGenerate && generateSW(workboxSwGenerate),
-            hasInject && injectManifest(workboxInjectManifest),
+            hasGenerateSw && generateSW(workboxConfig),
+            hasInject && injectManifest(workboxConfig),
+            copy({
+                targets: resources
+            }),
             isWatch &&
                 serve({
                     open: process.env.DEV_HOST_OPEN,

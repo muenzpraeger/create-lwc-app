@@ -8,7 +8,7 @@ app.use(helmet());
 app.use(compression());
 
 const HOST = process.env.API_HOST || 'localhost';
-const PORT = process.env.API_PORT || 3003;
+const PORT = process.env.API_PORT || 3002;
 
 app.get('/api/v1/endpoint', (req, res) => {
     res.json({ success: true });

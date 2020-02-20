@@ -3,7 +3,6 @@
         "declaration": true,
         "importHelpers": true,
         "module": "commonjs",
-        "allowJs": true,
         "outDir": "lib",
         "rootDir": "src",
         "strict": true,

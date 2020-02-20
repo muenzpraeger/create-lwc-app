@@ -30,6 +30,19 @@ const pkgJson = JSON.parse(
 )
 const LWC_SERVICES_VERSION = pkgJson.version
 const filesDefault = ['lwc-services.config.js', 'jest.config.js', 'README.md']
+const filesPwa = [
+    'manifest.json',
+    'resources/icons/icon-16x16.png',
+    'resources/icons/icon-32x32.png',
+    'resources/icons/icon-72x72.png',
+    'resources/icons/icon-96x96.png',
+    'resources/icons/icon-128x128.png',
+    'resources/icons/icon-144x144.png',
+    'resources/icons/icon-152x152.png',
+    'resources/icons/icon-192x192.png',
+    'resources/icons/icon-384x384.png',
+    'resources/icons/icon-512x512.png'
+]
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
@@ -38,6 +51,7 @@ class CreateGenerator extends Generator {
     args!: { [k: string]: string }
     bundler?: string
     clientserver?: boolean
+    cordova?: string[]
     defaults: any
     edge?: boolean
     githubUser: string | undefined
@@ -45,39 +59,44 @@ class CreateGenerator extends Generator {
     options: GeneratorOptions
     pjson: any
     repository?: string
+    silent?: boolean = false
     targetPathClient = 'src/'
-    typescript?: boolean
+    typescript?: any
     yarn!: boolean
 
     constructor(args: any, opts: any) {
         super(args, opts)
         this.options = {
-            defaults: opts.defaults,
             yarn: opts.options.includes('yarn') || hasYarn,
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
             edge: opts.options.includes('edge'),
             bundler: opts.options.includes('rollup') ? 'rollup' : 'webpack',
-            appType: opts.options.includes('type')
+            silent: opts.silent,
+            appType: opts.type,
+            cordova: opts.cordova
         }
         this.name = opts.name
     }
 
     async prompting() {
         const gitName = this.user.git.name()
-        this.defaults = {
-            name: this.name.replace(/ /g, '-'),
-            clientserver: false,
-            typescript: false,
-            edge: false,
-            version: '0.0.1',
-            license: 'MIT',
-            author: gitName,
-            options: this.options,
-            appType: 'standard',
-            bundler: 'webpack',
-            pkg: 'npm'
-        }
+        this.defaults = Object.assign(
+            {
+                name: this.name.replace(/ /g, '-'),
+                clientserver: false,
+                typescript: false,
+                edge: false,
+                version: '0.0.1',
+                license: 'MIT',
+                author: gitName,
+                appType: 'standard',
+                cordova: [],
+                bundler: 'webpack',
+                pkg: this.options.yarn ? 'yarn' : 'npm'
+            },
+            this.options
+        )
         let repository = this.name
         if (gitName) {
             repository = `${gitName}/${this.name}`
@@ -100,9 +119,7 @@ class CreateGenerator extends Generator {
         if (this.repository && (this.repository as any).url) {
             this.repository = (this.repository as any).url
         }
-        if (this.options.defaults) {
-            this.answers = this.defaults
-        } else {
+        if (!this.options.silent) {
             const answersFirst = (await this.prompt([
                 {
                     type: 'confirm',
@@ -127,11 +144,12 @@ class CreateGenerator extends Generator {
                         message: messages.questions.appType,
                         choices: [
                             { name: 'Standard web app', value: 'standard' },
-                            { name: 'Progressive Web App (PWA)', value: 'pwa' },
-                            {
-                                name: 'Cordova (Electron, iOS, Android)',
-                                value: 'cordova'
-                            }
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            // TODO: Validate for later implementation
+                            // {
+                            //     name: 'Cordova (Electron, macOS, iOS, Android)',
+                            //     value: 'cordova'
+                            // }
                         ],
                         default: this.defaults.appType
                     },
@@ -179,11 +197,11 @@ class CreateGenerator extends Generator {
                         message: messages.questions.appType,
                         choices: [
                             { name: 'Standard web app', value: 'standard' },
-                            { name: 'Progressive Web App (PWA)', value: 'pwa' },
-                            {
-                                name: 'Cordova (Electron, iOS, Android)',
-                                value: 'cordova'
-                            }
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            // {
+                            //     name: 'Cordova (Electron, iOS, Android)',
+                            //     value: 'cordova'
+                            // }
                         ],
                         default: this.defaults.appType
                     },
@@ -223,23 +241,15 @@ class CreateGenerator extends Generator {
                     })
                 }
             }
-            this.answers = (await this.prompt(questions)) as any
-        }
-        if (!this.options.defaults) {
-            this.options = {
-                yarn: this.answers.pkg === 'yarn',
-                clientserver: this.answers.clientserver,
-                typescript: this.answers.typescript === 'ts',
-                edge: this.answers.edge,
-                bundler: this.answers.bundler
-                    ? this.answers.bundler
-                    : this.defaults.bundler,
-                appType: this.answers.appType
-            }
+            this.options = Object.assign(
+                this.options,
+                (await this.prompt(questions)) as any
+            )
         }
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
-        this.typescript = this.options.typescript
+        this.typescript =
+            this.options.typescript === 'ts' || this.options.typescript
         this.edge = this.options.edge
         this.bundler = this.options.bundler
         this.appType = this.options.appType
@@ -262,9 +272,9 @@ class CreateGenerator extends Generator {
             }
         }
 
-        this.pjson.name = this.answers.name
-        this.pjson.description = this.answers.description
-            ? this.answers.description
+        this.pjson.name = this.defaults.name
+        this.pjson.description = this.defaults.description
+            ? this.defaults.description
             : 'My amazing LWC app'
 
         if (this.typescript) {
@@ -281,18 +291,39 @@ class CreateGenerator extends Generator {
             // eslint-disable-next-line no-useless-escape
             'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         if (this.clientserver) {
+            this.pjson.scripts.serve = 'run-p serve:client serve:api'
+            this.pjson.scripts['serve:client'] = 'node scripts/server.js'
+            if (this.typescript) {
+                this.pjson.scripts['serve:api'] = 'node lib/server/api.js'
+            } else {
+                this.pjson.scripts['serve:api'] = 'node src/server/api.js'
+            }
+        } else {
+            this.pjson.scripts.serve = 'node scripts/server.js'
+        }
+        if (this.clientserver) {
             if (this.typescript) {
                 if (this.bundler === 'webpack') {
-                    this.pjson.scripts.build =
-                        'lwc-services build -m production && tsc -b ./src/server'
+                    if (this.appType === 'pwa') {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production -w scripts/webpack.config.js && tsc -b ./src/server'
+                    } else {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production && tsc -b ./src/server'
+                    }
                 } else if (this.bundler === 'rollup') {
                     this.pjson.scripts.build =
                         'lwc-services build -m production -b rollup && tsc -b ./src/server'
                 }
             } else {
                 if (this.bundler === 'webpack') {
-                    this.pjson.scripts.build =
-                        'lwc-services build -m production'
+                    if (this.appType === 'pwa') {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production -w scripts/webpack.config.js'
+                    } else {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production'
+                    }
                 } else if (this.bundler === 'rollup') {
                     this.pjson.scripts.build =
                         'lwc-services build -m production -b rollup'
@@ -300,14 +331,25 @@ class CreateGenerator extends Generator {
             }
         } else {
             if (this.bundler === 'webpack') {
-                this.pjson.scripts.build = 'lwc-services build -m production'
+                if (this.appType === 'pwa') {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production -w scripts/webpack.config.js'
+                } else {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production'
+                }
             } else if (this.bundler === 'rollup') {
                 this.pjson.scripts.build =
                     'lwc-services build -m production -b rollup'
             }
         }
         if (this.bundler === 'webpack') {
-            this.pjson.scripts['build:development'] = 'lwc-services build'
+            if (this.appType === 'pwa') {
+                this.pjson.scripts['build:development'] =
+                    'lwc-services build -w scripts/webpack.config.js'
+            } else {
+                this.pjson.scripts['build:development'] = 'lwc-services build'
+            }
         } else if (this.bundler === 'rollup') {
             this.pjson.scripts['build:development'] =
                 'lwc-services build -b rollup'
@@ -325,8 +367,7 @@ class CreateGenerator extends Generator {
             const fileExtension = this.typescript ? 'ts' : 'js'
             this.pjson.nodemonConfig = {}
             this.pjson.nodemonConfig.watch = [
-                'src/server/**/*.'.concat(fileExtension),
-                'scripts/express-dev.'.concat(fileExtension)
+                'src/server/**/*.'.concat(fileExtension)
             ]
             this.pjson.nodemonConfig.ext = fileExtension
             this.pjson.nodemonConfig.ignore = [
@@ -334,17 +375,22 @@ class CreateGenerator extends Generator {
                 'src/**/*.test.'.concat(fileExtension)
             ]
             if (this.typescript) {
-                this.pjson.nodemonConfig.exec = 'ts-node ./scripts/express-dev.'.concat(
+                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/api.'.concat(
                     fileExtension
                 )
             } else {
-                this.pjson.nodemonConfig.exec = 'node ./scripts/express-dev.'.concat(
+                this.pjson.nodemonConfig.exec = 'node ./src/server/api.'.concat(
                     fileExtension
                 )
             }
         } else {
             if (this.bundler === 'webpack') {
-                this.pjson.scripts['watch'] = 'lwc-services watch'
+                if (this.appType === 'pwa') {
+                    this.pjson.scripts['watch'] =
+                        'lwc-services watch -w scripts/webpack.config.js'
+                } else {
+                    this.pjson.scripts['watch'] = 'lwc-services watch'
+                }
             } else if (this.bundler === 'rollup') {
                 this.pjson.scripts['watch'] = 'lwc-services watch -b rollup'
             }
@@ -435,15 +481,14 @@ class CreateGenerator extends Generator {
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        // TODO-RW: Revisit express
         devDependencies.push(
             'husky',
             'lint-staged',
             'prettier',
             'eslint',
-            `@muenzpraeger/lwc-services@^${LWC_SERVICES_VERSION}`,
-            `@muenzpraeger/lwc-services-jest@^${LWC_SERVICES_VERSION}`
+            `lwc-services@^${LWC_SERVICES_VERSION}`
         )
+        dependencies.push('compression', 'express', 'helmet')
         if (this.clientserver) {
             devDependencies.push('npm-run-all')
         }
@@ -498,7 +543,7 @@ class CreateGenerator extends Generator {
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
                 this.templatePath(
-                    !this.answers.edge
+                    !this.defaults.edge
                         ? 'src/client/index.html'
                         : 'src/client/index.non-wc.html'
                 ),
@@ -509,7 +554,7 @@ class CreateGenerator extends Generator {
             )
             this.fs.copyTpl(
                 this.templatePath(
-                    !this.answers.edge
+                    !this.defaults.edge
                         ? 'src/client/index'.concat(fileExtension)
                         : 'src/client/index.non-wc'.concat(fileExtension)
                 ),
@@ -624,12 +669,46 @@ class CreateGenerator extends Generator {
             )
         }
 
+        if (this.appType === 'pwa') {
+            if (this.bundler === 'webpack') {
+                this.fs.copyTpl(
+                    this.templatePath('webpack.config.js'),
+                    this.destinationPath('scripts/webpack.config.js'),
+                    this
+                )
+            } else {
+                this.fs.copyTpl(
+                    this.templatePath('workbox.generatesw.js'),
+                    this.destinationPath('scripts/workbox.generatesw.js'),
+                    this
+                )
+            }
+            filesPwa.forEach(file => {
+                this.fs.copyTpl(
+                    this.templatePath('src/client/'.concat(file)),
+                    this.targetPathClient.concat(file),
+                    this
+                )
+            })
+        }
+        this.fs.copyTpl(
+            this.templatePath('src/server/server.js'),
+            this.destinationPath('scripts/server.js'),
+            this
+        )
+
+        this.fs.copyTpl(
+            this.templatePath('src/server/server.js'),
+            this.destinationPath('scripts/server.js'),
+            this
+        )
+
         if (this.clientserver) {
             if (!fs.existsSync('src')) {
                 this.fs.copyTpl(
-                    this.templatePath('src/server/index'.concat(fileExtension)),
+                    this.templatePath('src/server/api'.concat(fileExtension)),
                     this.destinationPath(
-                        'src/server/index'.concat(fileExtension)
+                        'src/server/api'.concat(fileExtension)
                     ),
                     this
                 )
@@ -639,17 +718,6 @@ class CreateGenerator extends Generator {
                         this.destinationPath('src/server/tsconfig.json'),
                         this
                     )
-                    this.fs.copyTpl(
-                        this.templatePath('scripts/express-dev.js'),
-                        this.destinationPath('scripts/express-dev.ts'),
-                        this
-                    )
-                } else {
-                    this.fs.copyTpl(
-                        this.templatePath('scripts/express-dev.js'),
-                        this.destinationPath('scripts/express-dev.js'),
-                        this
-                    )
                 }
             }
         }
@@ -657,13 +725,14 @@ class CreateGenerator extends Generator {
 }
 
 interface GeneratorOptions {
-    defaults?: boolean
+    silent: boolean
+    appType: string
+    cordova: string[]
     yarn: boolean
     clientserver: boolean
-    typescript: boolean
+    typescript: any
     edge: boolean
     bundler: string
-    appType: string
 }
 
 interface GeneratorAnswers {

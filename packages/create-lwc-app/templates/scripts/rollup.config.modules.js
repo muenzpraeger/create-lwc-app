@@ -20,6 +20,7 @@ function rollupConfig({ format, target }) {
         input,
         output: {
             dir: path.join(outputDir, '/modules'),
+            entryFileNames: 'entry-[name]-[hash].js',
             format: format
         },
         manualChunks(id) {

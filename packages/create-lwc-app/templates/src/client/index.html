@@ -8,11 +8,61 @@
                 font-family: Arial, Helvetica, sans-serif;
             }
         </style>
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <!-- Block zoom -->
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+        />
         <link rel="shortcut icon" href="/resources/favicon.ico" />
+        <% if (appType === 'pwa') { %>
+        <!-- Add manifest for add to home screen -->
+        <link rel="manifest" href="/manifest.json" />
+
+        <!-- Branding -->
+        <meta name="theme-color" content="#2196f3" />
+
+        <!-- Icons -->
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/resources/icons/icon-16x16.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/resources/icons/icon-32x32.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/resources/icons/icon-180x180.png"
+        />
+
+        <!-- Add to home screen for Safari on iOS -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta
+            name="apple-mobile-web-app-status-bar-style"
+            content="black-translucent"
+        />
+        <meta name="apple-mobile-web-app-title" content="rcast" />
+        <link rel="apple-touch-icon" href="/resources/icons/icon-152x152.png" />
+        <% } %>
+        <% if (bundler === 'rollup') { %><script src="/main.js"></script><% } %>
     </head>
     <body>
         <% if (appType === 'pwa') { %>
+
+        <noscript>
+            <div class="unsupported">
+                <div class="unsupported_title">LWC app can't be loaded!</div>
+                <div class="unsupported_message">
+                    This application requires javascript to work properly.
+                </div>
+            </div>
+        </noscript>
+
         <div id="outdated" style="display: none">
             <div class="unsupported">
                 <div class="unsupported_title">App can't be loaded!</div>
@@ -27,13 +77,6 @@
                 'This application requires a more recent version of your browser';
         </script>
 
-        <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/sw.js');
-                });
-            }
-        </script>
         <% } %>
         <my-app></my-app>
     </body>

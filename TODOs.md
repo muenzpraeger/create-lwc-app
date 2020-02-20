@@ -1,19 +1,8 @@
--   Auto-update Jest config files
--   Add instructions for manually adding Prettier and ESLint to existing projects
--   cross-env not found?
+Remove "customConfig" server option
 
 TODO
 Update README
-Work through all TODO comments
-Add/Update Express implementation
-Implement PWA skeleton
-Implement Cordova passthrough
-Implement Jest in dedicated package
+Create breaking changes GitHub wiki page
 
--   command
--   execution
-    Modify nodemonConfig
-    Implement PWA skeleton
-
-CHECK
-sniff (with rollup config)
+non-wc - update files
+Jest - does not find TS files (check PR stuff)

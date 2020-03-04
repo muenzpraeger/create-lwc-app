@@ -67,7 +67,7 @@ class CreateGenerator extends Generator {
     constructor(args: any, opts: any) {
         super(args, opts)
         this.options = {
-            yarn: opts.options.includes('yarn') || hasYarn,
+            yarn: opts.options.includes('yarn'),
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
             edge: opts.options.includes('edge'),
@@ -428,14 +428,6 @@ class CreateGenerator extends Generator {
         }
         this.destinationRoot(targetPath)
         process.chdir(this.destinationRoot())
-        if (hasGit) {
-            try {
-                execSync('git init', { stdio: 'ignore' })
-                hasGit = true
-            } catch {
-                // Do nothing
-            }
-        }
     }
 
     writing() {
@@ -518,6 +510,29 @@ class CreateGenerator extends Generator {
     }
 
     end() {
+        const prettierDirectory = `${this.destinationRoot()}/**/*.{css,html,js,json,md,ts,yaml,yml}`
+
+        const spawn = require('child_process').spawn
+        const args = [
+            './node_modules/.bin/prettier',
+            '--write',
+            prettierDirectory
+        ]
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const prettierSpawn = spawn('node', args, {
+            cwd: this.destinationRoot()
+        })
+
+        if (hasGit) {
+            try {
+                execSync('git init', { stdio: 'ignore' })
+                hasGit = true
+            } catch {
+                // Do nothing
+            }
+        }
+
         log(messages.logs.project_support)
         log(
             messages.logs.project_created,

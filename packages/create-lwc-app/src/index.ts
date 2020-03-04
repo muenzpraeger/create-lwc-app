@@ -26,8 +26,8 @@ class Create extends Command {
             char: 'o',
             description: messages.flags.options
         }),
-        silent: flags.boolean({
-            char: 'm',
+        yes: flags.boolean({
+            char: 'y',
             description: messages.flags.silent
         }),
         type: flags.string({ char: 't', description: messages.flags.type })
@@ -40,7 +40,7 @@ class Create extends Command {
 
         const name = args.name ? args.name : ''
         const options = flags.options ? flags.options.split(',') : []
-        const silent = flags.silent
+        const silent = flags.yes
         const types = flags.type ? flags.type.split(',') : ['standard']
 
         const cordova: string[] = []

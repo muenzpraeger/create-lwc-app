@@ -4,7 +4,7 @@ export const messages = {
         examples: [
             'create-lwc-app',
             'npm init lwc-app my-app',
-            'npm init lwc-app my-app --type standard --silent',
+            'npm init lwc-app my-app --type standard --yes',
             'yarn init lwc-app my-app -o yarn,typescript'
         ]
     },

@@ -9,7 +9,7 @@ const babelTsPlugin = require('@babel/plugin-transform-typescript')
 const { lwcConfig } = require('./lwcConfig')
 const fs = require('fs')
 const { generateSW, injectManifest } = require('rollup-plugin-workbox')
-import copy from 'rollup-plugin-copy'
+import copy from 'rollup-plugin-copy-glob'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
 

@@ -71,7 +71,7 @@ if (!hasGenerateSw && fs.existsSync(workboxInjectManifest)) {
 const resources = []
 
 lwcConfig.resources.forEach(resource => {
-    resources.push({ src: resource.from, dest: resource.to })
+    resources.push({ files: resource.from, dest: resource.to })
 })
 
 module.exports = (format = 'esm') => {
@@ -101,9 +101,7 @@ module.exports = (format = 'esm') => {
             isProduction && terser(),
             hasGenerateSw && generateSW(workboxConfig),
             hasInject && injectManifest(workboxConfig),
-            copy({
-                targets: resources
-            }),
+            copy(resources, { watch: isWatch }),
             isWatch &&
                 serve({
                     open: process.env.DEV_HOST_OPEN,

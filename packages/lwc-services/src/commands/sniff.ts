@@ -10,6 +10,8 @@ import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/sniff'
 import { log, welcome } from '../utils/logger'
 
+const rollupConfig = path.resolve(__dirname, '../config/rollup.config.js')
+
 export default class Sniff extends Command {
     static description = messages.description
 
@@ -72,6 +74,11 @@ export default class Sniff extends Command {
         fs.writeFileSync(
             path.join(flags.directory, 'webpack.config.js'),
             'module.exports = ' + util.inspect(webpackConfig, inspectOptions)
+        )
+        log(messages.logs.write_rollup_config)
+        fs.copyFileSync(
+            rollupConfig,
+            path.join(flags.directory, 'rollup.config.js')
         )
         log(messages.logs.write_lwc_config)
         fs.writeFileSync(

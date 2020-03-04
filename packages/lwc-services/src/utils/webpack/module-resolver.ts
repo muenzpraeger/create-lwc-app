@@ -92,8 +92,10 @@ module.exports = class ModuleResolver {
 
         let resolved: string
         if (layout === LAYOUT.STANDARD) {
-            // TODO Proper resolve
+            // TODO-RW: Proper resolve
             const directoryPath = path.resolve(root, request)
+            // TODO-RW: Add name
+            // eslint-disable-next-line no-undef
             const extension = getExtension(this.fs, directoryPath, name)
             resolved = path.resolve(root, request, `${request}${extension}`)
         } else {

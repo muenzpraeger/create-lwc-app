@@ -1,5 +1,5 @@
 export const messages = {
-    description: 'Creates a new webpack build',
+    description: 'Creates a new build',
     help: {
         examples: [
             'lwc-services build',
@@ -10,7 +10,8 @@ export const messages = {
         mode: 'defines the mode for the build (production|development)',
         destination: 'defines the directory where the build is stored',
         noclear: 'setting this will not re-create the build dir',
-        webpack: 'location of custom webpack configuration file'
+        webpack: 'location of custom webpack configuration file',
+        bundler: 'defines which bundler to use (webpack|rollup)'
     },
     errors: {
         no_compilation: {

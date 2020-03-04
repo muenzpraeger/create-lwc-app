@@ -8,7 +8,6 @@ import { messages } from '../messages/createGenerator'
 import { log } from '../utils/logger'
 
 const sortPjson = require('sort-pjson')
-const debug = require('debug')('generator-oclif')
 
 let hasGit = false
 let hasYarn = false
@@ -26,202 +25,234 @@ try {
     // Nothing
 }
 
-const LWC_SERVICES_VERSION = '1.3.12'
+const pkgJson = JSON.parse(
+    fs.readFileSync(__dirname + '/../../package.json', 'utf8')
+)
+const LWC_SERVICES_VERSION = pkgJson.version
+const filesDefault = ['lwc-services.config.js', 'jest.config.js', 'README.md']
+const filesPwa = [
+    'manifest.json',
+    'resources/icons/icon-16x16.png',
+    'resources/icons/icon-32x32.png',
+    'resources/icons/icon-72x72.png',
+    'resources/icons/icon-96x96.png',
+    'resources/icons/icon-128x128.png',
+    'resources/icons/icon-144x144.png',
+    'resources/icons/icon-152x152.png',
+    'resources/icons/icon-192x192.png',
+    'resources/icons/icon-384x384.png',
+    'resources/icons/icon-512x512.png'
+]
 const isWin = process.platform === 'win32'
 
 class CreateGenerator extends Generator {
-    options: {
-        defaults?: boolean
-        yarn: boolean
-        clientserver: boolean
-        typescript: boolean
-        edge: boolean
-    }
-    lib: boolean
-    name: string
+    answers!: GeneratorAnswers
+    appType?: string
     args!: { [k: string]: string }
-    pjson: any
-    githubUser: string | undefined
-    answers!: {
-        name: string
-        description: string
-        webcomponent: boolean
-        clientserver: boolean
-        edge: boolean
-        version: string
-        github: { repo: string; user: string }
-        author: string
-        files: string
-        license: string
-        pkg: string
-        typescript: string
-    }
-    yarn!: boolean
-    repository?: string
+    bundler?: string
     clientserver?: boolean
-    typescript?: boolean
+    cordova?: string[]
+    defaults: any
     edge?: boolean
+    githubUser: string | undefined
+    name: string
+    options: GeneratorOptions
+    pjson: any
+    repository?: string
+    silent?: boolean = false
     targetPathClient = 'src/'
+    typescript?: any
+    yarn!: boolean
 
     constructor(args: any, opts: any) {
         super(args, opts)
         this.options = {
-            defaults: opts.defaults,
-            yarn: opts.options.includes('yarn') || hasYarn,
+            yarn: opts.options.includes('yarn'),
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
-            edge: opts.options.includes('edge')
+            edge: opts.options.includes('edge'),
+            bundler: opts.options.includes('rollup') ? 'rollup' : 'webpack',
+            silent: opts.silent,
+            appType: opts.type,
+            cordova: opts.cordova
         }
         this.name = opts.name
-        this.lib = opts.lib
     }
 
     async prompting() {
         const gitName = this.user.git.name()
+        this.defaults = Object.assign(
+            {
+                name: this.name.replace(/ /g, '-'),
+                clientserver: false,
+                typescript: false,
+                edge: false,
+                version: '0.0.1',
+                license: 'MIT',
+                author: gitName,
+                appType: 'standard',
+                cordova: [],
+                bundler: 'webpack',
+                pkg: this.options.yarn ? 'yarn' : 'npm'
+            },
+            this.options
+        )
+        let repository = this.name
+        if (gitName) {
+            repository = `${gitName}/${this.name}`
+        }
         this.pjson = {
             scripts: {},
-            engines: {},
             devDependencies: {},
-            dependencies: {}
-        }
-        let repository = process
-            .cwd()
-            .split(path.sep)
-            .slice(-1)
-            .join('/')
-        if (gitName) repository = `${gitName}/${repository.split('/')[1]}`
-        const defaults = {
-            name: this.determineAppname().replace(/ /g, '-'),
-            webcomponent: false,
-            clientserver: false,
-            typescript: false,
-            edge: false,
-            version: '0.0.0',
-            license: 'MIT',
-            author: gitName,
             dependencies: {},
             repository,
-            ...this.pjson,
+            license: this.defaults.license,
+            version: this.defaults.version,
+            author: this.defaults.author,
             engines: {
-                node: '>=10.0.0',
-                ...this.pjson.engines
-            },
-            options: this.options
+                node: '>=10.13.0',
+                npm: '>=6.4.1',
+                yarn: '>=1.9.4'
+            }
         }
-        this.repository = defaults.repository
+        this.repository = this.defaults.repository
         if (this.repository && (this.repository as any).url) {
             this.repository = (this.repository as any).url
         }
-        if (this.options.defaults) {
-            this.answers = defaults
-        } else {
-            const questions: any = [
+        if (!this.options.silent) {
+            const answersFirst = (await this.prompt([
                 {
-                    type: 'input',
-                    name: 'name',
-                    message: messages.questions.name,
-                    default: this.name !== '' ? this.name : defaults.name
-                },
-                {
-                    type: 'input',
-                    name: 'description',
-                    message: messages.questions.description,
-                    default: defaults.description
-                },
-                {
-                    type: 'input',
-                    name: 'author',
-                    message: messages.questions.author,
-                    default: defaults.author
-                },
-                {
-                    type: 'input',
-                    name: 'version',
-                    message: messages.questions.version,
-                    default: defaults.version
-                },
-                {
-                    type: 'input',
-                    name: 'license',
-                    message: messages.questions.license,
-                    default: defaults.license
-                },
-                {
-                    type: 'input',
-                    name: 'github.user',
-                    message: messages.questions.githubUser,
-                    default: repository
-                        .split('/')
-                        .slice(0, -1)
-                        .pop(),
-                    when: !this.pjson.repository
-                },
-                {
-                    type: 'input',
-                    name: 'github.repo',
-                    message: messages.questions.githubRepo,
-                    default: (answers: any) =>
-                        (
-                            this.pjson.repository ||
-                            answers.name ||
-                            this.pjson.name
-                        )
-                            .split('/')
-                            .pop(),
-                    when: !this.pjson.repository
-                },
-                {
-                    type: 'list',
-                    name: 'pkg',
-                    message: messages.questions.pkg,
-                    choices: [
-                        { name: 'npm', value: 'npm' },
-                        { name: 'yarn', value: 'yarn' }
-                    ],
-                    default: () => (this.options.yarn || hasYarn ? 1 : 0)
-                },
-                {
-                    type: 'list',
-                    name: 'typescript',
-                    message: messages.questions.typescript,
-                    choices: [
-                        { name: 'JavaScript', value: 'js' },
-                        { name: 'TypeScript', value: 'ts' }
-                    ],
-                    default: () => (this.options.typescript ? 1 : 0)
+                    type: 'confirm',
+                    name: 'simple',
+                    message: 'Do you want to use the simple setup?',
+                    default: true
                 }
-            ]
-            if (!this.lib) {
-                questions.push({
-                    type: 'confirm',
-                    name: 'clientserver',
-                    message: messages.questions.clientserver,
-                    default: defaults.clientserver
-                })
+            ])) as any
+            let questions: any = []
+            if (answersFirst.simple) {
+                questions = [
+                    {
+                        type: 'input',
+                        name: 'name',
+                        message: messages.questions.name,
+                        default:
+                            this.name !== '' ? this.name : this.defaults.name
+                    },
+                    {
+                        type: 'list',
+                        name: 'appType',
+                        message: messages.questions.appType,
+                        choices: [
+                            { name: 'Standard web app', value: 'standard' },
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            // TODO: Validate for later implementation
+                            // {
+                            //     name: 'Cordova (Electron, macOS, iOS, Android)',
+                            //     value: 'cordova'
+                            // }
+                        ],
+                        default: this.defaults.appType
+                    },
+                    {
+                        type: 'confirm',
+                        name: 'clientserver',
+                        message: messages.questions.clientserver,
+                        default: this.defaults.clientserver
+                    }
+                ]
+            } else {
+                questions = [
+                    {
+                        type: 'input',
+                        name: 'name',
+                        message: messages.questions.name,
+                        default:
+                            this.name !== '' ? this.name : this.defaults.name
+                    },
+                    {
+                        type: 'input',
+                        name: 'description',
+                        message: messages.questions.description,
+                        default: this.defaults.description
+                    },
+                    {
+                        type: 'input',
+                        name: 'author',
+                        message: messages.questions.author,
+                        default: this.defaults.author
+                    },
+                    {
+                        type: 'list',
+                        name: 'pkg',
+                        message: messages.questions.pkg,
+                        choices: [
+                            { name: 'npm', value: 'npm' },
+                            { name: 'yarn', value: 'yarn' }
+                        ],
+                        default: () => (this.options.yarn || hasYarn ? 1 : 0)
+                    },
+                    {
+                        type: 'list',
+                        name: 'appType',
+                        message: messages.questions.appType,
+                        choices: [
+                            { name: 'Standard web app', value: 'standard' },
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            // {
+                            //     name: 'Cordova (Electron, iOS, Android)',
+                            //     value: 'cordova'
+                            // }
+                        ],
+                        default: this.defaults.appType
+                    },
+                    {
+                        type: 'list',
+                        name: 'bundler',
+                        message: messages.questions.bundler,
+                        choices: [
+                            { name: 'Webpack', value: 'webpack' },
+                            { name: 'Rollup', value: 'rollup' }
+                        ],
+                        default: this.defaults.bundler
+                    },
+                    {
+                        type: 'list',
+                        name: 'typescript',
+                        message: messages.questions.typescript,
+                        choices: [
+                            { name: 'JavaScript', value: 'js' },
+                            { name: 'TypeScript', value: 'ts' }
+                        ],
+                        default: () => (this.defaults.typescript ? 1 : 0)
+                    },
+                    {
+                        type: 'confirm',
+                        name: 'clientserver',
+                        message: messages.questions.clientserver,
+                        default: this.defaults.clientserver
+                    }
+                ]
+                if (isWin) {
+                    questions.push({
+                        type: 'confirm',
+                        name: 'edge',
+                        message: messages.questions.edge,
+                        default: this.defaults.edge
+                    })
+                }
             }
-            if (isWin) {
-                questions.push({
-                    type: 'confirm',
-                    name: 'edge',
-                    message: messages.questions.edge,
-                    default: defaults.edge
-                })
-            }
-            this.answers = (await this.prompt(questions)) as any
-        }
-        debug(this.answers)
-        if (!this.options.defaults) {
-            this.options = {
-                yarn: this.answers.pkg === 'yarn',
-                clientserver: this.answers.clientserver,
-                typescript: this.answers.typescript === 'ts',
-                edge: this.answers.edge
-            }
+            this.options = Object.assign(
+                this.options,
+                (await this.prompt(questions)) as any
+            )
         }
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
-        this.typescript = this.options.typescript
+        this.typescript =
+            this.options.typescript === 'ts' || this.options.typescript
         this.edge = this.options.edge
+        this.bundler = this.options.bundler
+        this.appType = this.options.appType
 
         if (this.clientserver) {
             this.targetPathClient = 'src/client/'
@@ -241,56 +272,102 @@ class CreateGenerator extends Generator {
             }
         }
 
-        this.pjson.name = this.answers.name || defaults.name
-        this.pjson.description =
-            this.answers.description || defaults.description
-        this.pjson.version = this.answers.version || defaults.version
-        this.pjson.engines.node = '>=10.0.0'
-        this.pjson.author = this.answers.author || defaults.author
-        this.pjson.license = this.answers.license || defaults.license
-        this.repository = this.pjson.repository = this.answers.github
-            ? `${this.answers.github.user}/${this.answers.github.repo}`
-            : defaults.repository
-        if (this.lib) {
-            this.pjson.devDependencies = {
-                'lwc-services': `^${LWC_SERVICES_VERSION}`
-            }
-        } else {
-            this.pjson.dependencies = {
-                'lwc-services': `^${LWC_SERVICES_VERSION}`
-            }
-        }
+        this.pjson.name = this.defaults.name
+        this.pjson.description = this.defaults.description
+            ? this.defaults.description
+            : 'My amazing LWC app'
+
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
         } else {
             this.pjson.scripts.lint = 'eslint ./src/**/*.js'
         }
         this.pjson.scripts.prettier =
-            'prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}"'
+            // prettier-ignore
+            // eslint-disable-next-line no-useless-escape
+            'prettier --write \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         this.pjson.scripts['prettier:verify'] =
-            'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}"'
+            // prettier-ignore
+            // eslint-disable-next-line no-useless-escape
+            'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         if (this.clientserver) {
+            this.pjson.scripts.serve = 'run-p serve:client serve:api'
+            this.pjson.scripts['serve:client'] = 'node scripts/server.js'
             if (this.typescript) {
-                this.pjson.scripts.build =
-                    'lwc-services build -m production && tsc -b ./src/server'
+                this.pjson.scripts['serve:api'] = 'node lib/server/api.js'
             } else {
-                this.pjson.scripts.build = 'lwc-services build -m production'
+                this.pjson.scripts['serve:api'] = 'node src/server/api.js'
             }
         } else {
-            this.pjson.scripts.build = 'lwc-services build -m production'
+            this.pjson.scripts.serve = 'node scripts/server.js'
         }
-        this.pjson.scripts['build:development'] = 'lwc-services build'
+        if (this.clientserver) {
+            if (this.typescript) {
+                if (this.bundler === 'webpack') {
+                    if (this.appType === 'pwa') {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production -w scripts/webpack.config.js && tsc -b ./src/server'
+                    } else {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production && tsc -b ./src/server'
+                    }
+                } else if (this.bundler === 'rollup') {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production -b rollup && tsc -b ./src/server'
+                }
+            } else {
+                if (this.bundler === 'webpack') {
+                    if (this.appType === 'pwa') {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production -w scripts/webpack.config.js'
+                    } else {
+                        this.pjson.scripts.build =
+                            'lwc-services build -m production'
+                    }
+                } else if (this.bundler === 'rollup') {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production -b rollup'
+                }
+            }
+        } else {
+            if (this.bundler === 'webpack') {
+                if (this.appType === 'pwa') {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production -w scripts/webpack.config.js'
+                } else {
+                    this.pjson.scripts.build =
+                        'lwc-services build -m production'
+                }
+            } else if (this.bundler === 'rollup') {
+                this.pjson.scripts.build =
+                    'lwc-services build -m production -b rollup'
+            }
+        }
+        if (this.bundler === 'webpack') {
+            if (this.appType === 'pwa') {
+                this.pjson.scripts['build:development'] =
+                    'lwc-services build -w scripts/webpack.config.js'
+            } else {
+                this.pjson.scripts['build:development'] = 'lwc-services build'
+            }
+        } else if (this.bundler === 'rollup') {
+            this.pjson.scripts['build:development'] =
+                'lwc-services build -b rollup'
+        }
         if (this.clientserver) {
             this.pjson.scripts.watch = 'run-p watch:client watch:server'
-            this.pjson.scripts['watch:client'] = 'lwc-services watch'
+            if (this.bundler === 'webpack') {
+                this.pjson.scripts['watch:client'] = 'lwc-services watch'
+            } else if (this.bundler === 'rollup') {
+                this.pjson.scripts['watch:client'] =
+                    'lwc-services watch -b rollup'
+            }
             this.pjson.scripts['watch:server'] = 'nodemon'
 
             const fileExtension = this.typescript ? 'ts' : 'js'
-
             this.pjson.nodemonConfig = {}
             this.pjson.nodemonConfig.watch = [
-                'src/server/**/*.'.concat(fileExtension),
-                'scripts/express-dev.'.concat(fileExtension)
+                'src/server/**/*.'.concat(fileExtension)
             ]
             this.pjson.nodemonConfig.ext = fileExtension
             this.pjson.nodemonConfig.ignore = [
@@ -298,18 +375,26 @@ class CreateGenerator extends Generator {
                 'src/**/*.test.'.concat(fileExtension)
             ]
             if (this.typescript) {
-                this.pjson.nodemonConfig.exec = 'ts-node ./scripts/express-dev.'.concat(
+                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/api.'.concat(
                     fileExtension
                 )
             } else {
-                this.pjson.nodemonConfig.exec = 'node ./scripts/express-dev.'.concat(
+                this.pjson.nodemonConfig.exec = 'node ./src/server/api.'.concat(
                     fileExtension
                 )
             }
         } else {
-            this.pjson.scripts.watch = 'lwc-services watch'
+            if (this.bundler === 'webpack') {
+                if (this.appType === 'pwa') {
+                    this.pjson.scripts['watch'] =
+                        'lwc-services watch -w scripts/webpack.config.js'
+                } else {
+                    this.pjson.scripts['watch'] = 'lwc-services watch'
+                }
+            } else if (this.bundler === 'rollup') {
+                this.pjson.scripts['watch'] = 'lwc-services watch -b rollup'
+            }
         }
-        this.pjson.scripts.serve = 'lwc-services serve'
         this.pjson.scripts['test:unit'] = 'lwc-services test:unit'
         this.pjson.scripts['test:unit:watch'] = 'lwc-services test:unit --watch'
         this.pjson.scripts['test:unit:debug'] = 'lwc-services test:unit --debug'
@@ -330,34 +415,19 @@ class CreateGenerator extends Generator {
             this.pjson['lint-staged']['./src/**/*.js'] = ['eslint']
         }
 
-        this.pjson['lint-staged']['*'] = ['git add']
-
-        if (this.lib) {
-            this.pjson.lwc = {
-                modules: ['src']
-            }
-        }
-
-        this.pjson.keywords = defaults.keywords || ['lwc']
+        this.pjson.keywords = this.defaults.keywords || ['lwc']
         this.pjson.homepage =
-            defaults.homepage || `https://github.com/${this.pjson.repository}`
+            this.defaults.homepage ||
+            `https://github.com/${this.pjson.repository}`
         this.pjson.bugs =
-            defaults.bugs ||
+            this.defaults.bugs ||
             `https://github.com/${this.pjson.repository}/issues`
         const targetPath: string = path.resolve(this.pjson.name)
         if (!fs.existsSync(targetPath)) {
-            fs.mkdirSync(targetPath)
+            fs.mkdirSync(targetPath, { recursive: true })
         }
         this.destinationRoot(targetPath)
         process.chdir(this.destinationRoot())
-        if (hasGit) {
-            try {
-                execSync('git init', { stdio: 'ignore' })
-                hasGit = true
-            } catch {
-                // Do nothing
-            }
-        }
     }
 
     writing() {
@@ -397,35 +467,28 @@ class CreateGenerator extends Generator {
             this
         )
 
-        // TODO: Verify later
-        // if (this.typescript) {
-        //     this.fs.copyTpl(
-        //         this.templatePath('tsconfig.json'),
-        //         this.destinationPath('tsconfig.json'),
-        //         this
-        //     )
-        // }
-
         this._write()
     }
 
     install() {
         const dependencies: string[] = []
         const devDependencies: string[] = []
-        if (this.lib) {
-            devDependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
-        } else {
-            dependencies.push(`lwc-services@^${LWC_SERVICES_VERSION}`)
-        }
-        devDependencies.push('husky@^3.0.7', 'lint-staged@^9.4')
+        devDependencies.push(
+            'husky',
+            'lint-staged',
+            'prettier',
+            'eslint',
+            `lwc-services@^${LWC_SERVICES_VERSION}`
+        )
+        dependencies.push('compression', 'express', 'helmet')
         if (this.clientserver) {
-            devDependencies.push('npm-run-all@^4.1.5')
+            devDependencies.push('npm-run-all')
         }
         if (this.typescript && this.clientserver) {
-            devDependencies.push('@types/express@^4.17')
+            devDependencies.push('@types/express')
         }
         if (this.typescript) {
-            devDependencies.push('@types/jest@^24')
+            devDependencies.push('@types/jest')
         }
 
         const yarnOpts = {} as any
@@ -437,16 +500,39 @@ class CreateGenerator extends Generator {
         const dev = this.yarn ? { dev: true } : { 'save-dev': true }
         const save = this.yarn ? {} : { save: true }
         return Promise.all([
+            install(dependencies, { ...yarnOpts, ...save }),
             install(devDependencies, {
                 ...yarnOpts,
                 ...dev,
                 ignoreScripts: false
-            }),
-            install(dependencies, { ...yarnOpts, ...save })
+            })
         ])
     }
 
     end() {
+        const prettierDirectory = `${this.destinationRoot()}/**/*.{css,html,js,json,md,ts,yaml,yml}`
+
+        const spawn = require('child_process').spawn
+        const args = [
+            './node_modules/.bin/prettier',
+            '--write',
+            prettierDirectory
+        ]
+
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const prettierSpawn = spawn('node', args, {
+            cwd: this.destinationRoot()
+        })
+
+        if (hasGit) {
+            try {
+                execSync('git init', { stdio: 'ignore' })
+                hasGit = true
+            } catch {
+                // Do nothing
+            }
+        }
+
         log(messages.logs.project_support)
         log(
             messages.logs.project_created,
@@ -461,26 +547,18 @@ class CreateGenerator extends Generator {
             this.targetPathClient.concat('modules/jsconfig.json'),
             this
         )
-        this.fs.copyTpl(
-            this.templatePath('jest.config.js'),
-            this.destinationPath('jest.config.js'),
-            this
-        )
-        this.fs.copyTpl(
-            this.templatePath('lwc-services.config.js'),
-            this.destinationPath('lwc-services.config.js'),
-            this
-        )
-        this.fs.copyTpl(
-            this.templatePath('README.md'),
-            this.destinationPath('README.md'),
-            this
-        )
+        filesDefault.forEach(file => {
+            this.fs.copyTpl(
+                this.templatePath(file),
+                this.destinationPath(file),
+                this
+            )
+        })
         const fileExtension = this.typescript ? '.ts' : '.js'
         if (!fs.existsSync('src')) {
             this.fs.copyTpl(
                 this.templatePath(
-                    !this.answers.edge
+                    !this.defaults.edge
                         ? 'src/client/index.html'
                         : 'src/client/index.non-wc.html'
                 ),
@@ -491,7 +569,7 @@ class CreateGenerator extends Generator {
             )
             this.fs.copyTpl(
                 this.templatePath(
-                    !this.answers.edge
+                    !this.defaults.edge
                         ? 'src/client/index'.concat(fileExtension)
                         : 'src/client/index.non-wc'.concat(fileExtension)
                 ),
@@ -606,12 +684,46 @@ class CreateGenerator extends Generator {
             )
         }
 
+        if (this.appType === 'pwa') {
+            if (this.bundler === 'webpack') {
+                this.fs.copyTpl(
+                    this.templatePath('webpack.config.js'),
+                    this.destinationPath('scripts/webpack.config.js'),
+                    this
+                )
+            } else {
+                this.fs.copyTpl(
+                    this.templatePath('workbox.generatesw.js'),
+                    this.destinationPath('scripts/workbox.generatesw.js'),
+                    this
+                )
+            }
+            filesPwa.forEach(file => {
+                this.fs.copyTpl(
+                    this.templatePath('src/client/'.concat(file)),
+                    this.targetPathClient.concat(file),
+                    this
+                )
+            })
+        }
+        this.fs.copyTpl(
+            this.templatePath('src/server/server.js'),
+            this.destinationPath('scripts/server.js'),
+            this
+        )
+
+        this.fs.copyTpl(
+            this.templatePath('src/server/server.js'),
+            this.destinationPath('scripts/server.js'),
+            this
+        )
+
         if (this.clientserver) {
             if (!fs.existsSync('src')) {
                 this.fs.copyTpl(
-                    this.templatePath('src/server/index'.concat(fileExtension)),
+                    this.templatePath('src/server/api'.concat(fileExtension)),
                     this.destinationPath(
-                        'src/server/index'.concat(fileExtension)
+                        'src/server/api'.concat(fileExtension)
                     ),
                     this
                 )
@@ -621,21 +733,37 @@ class CreateGenerator extends Generator {
                         this.destinationPath('src/server/tsconfig.json'),
                         this
                     )
-                    this.fs.copyTpl(
-                        this.templatePath('scripts/express-dev.js'),
-                        this.destinationPath('scripts/express-dev.ts'),
-                        this
-                    )
-                } else {
-                    this.fs.copyTpl(
-                        this.templatePath('scripts/express-dev.js'),
-                        this.destinationPath('scripts/express-dev.js'),
-                        this
-                    )
                 }
             }
         }
     }
+}
+
+interface GeneratorOptions {
+    silent: boolean
+    appType: string
+    cordova: string[]
+    yarn: boolean
+    clientserver: boolean
+    typescript: any
+    edge: boolean
+    bundler: string
+}
+
+interface GeneratorAnswers {
+    name: string
+    simple: boolean
+    description: string
+    clientserver: boolean
+    edge: boolean
+    version: string
+    github: { repo: string; user: string }
+    author: string
+    license: string
+    pkg: string
+    typescript: string
+    bundler: string
+    appType: string
 }
 
 export = CreateGenerator

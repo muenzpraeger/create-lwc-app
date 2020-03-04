@@ -1,5 +1,21 @@
 ## Changelog
 
+### 2020-xx-xx
+
+**create-lwc-app 2.0.0**
+
+-   Moving to @-scoped package names
+-   Resorting dependencies
+-   Adding options when creating a new app: basic, PWA, or Cordova (Electron, iOS, Android)
+
+**lwc-services 2.0.0**
+
+-   Uprading LWC to 1.2.1
+-   Resorting dependencies
+-   Change default host for `webpack` configurations from `0.0.0.0` to `localhost`
+-   Add support for Rollup builds
+-   Add support for Cordova builds
+
 ### 2020-01-16
 
 **create-lwc-app 1.3.13**

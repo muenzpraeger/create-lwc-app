@@ -4,7 +4,7 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 import { jestConfig } from '../../config/jestConfig'
-import { messages } from '../../messages/test'
+import { messages } from '../../messages/test_unit'
 import { log, welcome } from '../../utils/logger'
 
 const spawn = require('child_process').spawn

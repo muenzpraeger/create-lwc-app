@@ -2,10 +2,10 @@ export const messages = {
     description: 'Runs Jest tests for Lightning Web Components',
     help: {
         examples: [
-            'lwc-services test',
-            'lwc-services test --coverage',
-            'lwc-services test -w',
-            'lwc-services test -p --updateSnapshot'
+            'lwc-services test:unit',
+            'lwc-services test:unit --coverage',
+            'lwc-services test:unit -w',
+            'lwc-services test:unit -p --updateSnapshot'
         ]
     },
     flags: {

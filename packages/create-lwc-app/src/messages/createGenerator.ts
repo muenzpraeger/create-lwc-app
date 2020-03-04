@@ -22,9 +22,9 @@ export const messages = {
         githubRepo:
             'What is the GitHub name of the repository (https://github.com/owner/REPO)',
         pkg: 'Select a package manager',
-        eslint: 'Use ESlint',
-        prettier: 'Use Prettier (formatting)',
-        clientserver: 'Use custom Express server configuration',
+        appType: 'Select the type of app you want to create',
+        clientserver: 'Do you want a basic Express API server?',
+        bundler: 'Select a bundler',
         typescript: 'Use TypeScript or JavaScript',
         edge: 'Do you want to use Edge (non-Chromium version) as browser'
     },

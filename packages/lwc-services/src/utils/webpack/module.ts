@@ -4,17 +4,16 @@ import * as path from 'path'
 
 import { lwcConfig } from '../../config/lwcConfig'
 
-let npmmodules: any
 const pkgJson = JSON.parse(fs.readFileSync(`package.json`, 'utf8'))
 
-let resolvedModules = resolveModules({
+const resolvedModules = resolveModules({
     modules: [
         ...lwcConfig.localModulesDirs,
         ...Object.keys(pkgJson.dependencies)
     ]
 })
 
-npmmodules = resolvedModules.reduce(
+const npmmodules = resolvedModules.reduce(
     (map: any, m: any) => ((map[m.specifier] = m), map),
     {}
 )

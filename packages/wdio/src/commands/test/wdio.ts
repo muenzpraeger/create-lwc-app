@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import * as path from 'path'
 
-import { messages } from '../../messages/wdio'
+import { messages } from '../../messages/test_wdio'
 import { log, welcome } from '../../utils/logger'
 
 const spawn = require('child_process').spawn
@@ -23,7 +23,7 @@ export default class Wdio extends Command {
         log(messages.logs.starting_wdio)
 
         const wdioExecutable = path.resolve(
-            'node_modules/@wdio/cli/bin/wdio.js'
+            'node_modules/@muenzpraeger/lwc-services-wdio/node_modules/@wdio/cli/bin/wdio.js'
         )
         const wdioSpawn = spawn('node', [wdioExecutable])
 

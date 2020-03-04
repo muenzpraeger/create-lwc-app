@@ -34,9 +34,6 @@
         ],
         "**/packages/**/*.ts": [
             "eslint"
-        ],
-        "*": [
-            "git add"
         ]
     }
 }

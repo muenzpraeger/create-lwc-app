@@ -3,8 +3,8 @@
 module.exports = {
     resources: [{ from: 'src<% if (clientserver) { %>/client<% } %>/resources', to: 'dist/' }<% if (appType === 'pwa' && !clientserver) { %>, { from: 'src/index.html', to: 'dist/'}, { from: 'src/manifest.json', to: 'dist/'}<% } %><% if (appType === 'pwa' && clientserver) { %>, { from: 'src/client/index.html', to: 'dist/index.html'}, { from: 'src/client/manifest.json', to: 'dist/manifest.json'}<% } %>],<% if (clientserver) { %>
     sourceDir: './src/client',
-    moduleDir: './src/client/modules',
-    devServer: {
+    moduleDir: './src/client/modules',<% } %>
+    <% if (clientserver && bundler==='webpack')%>devServer: {
         proxy: { '/': 'http://localhost:3002' }
     }<% } %>
 };

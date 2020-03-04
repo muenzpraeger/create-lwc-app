@@ -34,7 +34,7 @@
         "deepmerge": "^4.0.0",
         "error-overlay-webpack-plugin": "^0.4.1",
         "eslint": "^6.3",
-        "globby": "^10.0.1",
+        "globby": "^11.0.0",
         "html-webpack-plugin": "^3.2.0",
         "jest": "~25",
         "lwc": "^1.3.2",

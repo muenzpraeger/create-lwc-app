@@ -69,7 +69,7 @@
         "@types/semver-compare": "^1.0.0",
         "@types/webpack": "^4.4.27",
         "@types/webpack-merge": "^4.1.4",
-        "cli-ux": "^5.4.4"
+        "cli-ux": "^5.4.5"
     },
     "engines": {
         "node": ">=10.0.0"

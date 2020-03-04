@@ -67,7 +67,7 @@ class CreateGenerator extends Generator {
     constructor(args: any, opts: any) {
         super(args, opts)
         this.options = {
-            yarn: opts.options.includes('yarn') || hasYarn,
+            yarn: opts.options.includes('yarn'),
             clientserver: opts.options.includes('express'),
             typescript: opts.options.includes('typescript'),
             edge: opts.options.includes('edge'),

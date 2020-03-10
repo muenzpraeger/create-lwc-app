@@ -30,7 +30,7 @@
         "babel-loader": "^8.0.5",
         "compat-polyfills": "^0.22.0",
         "copy-webpack-plugin": "^5.0.2",
-        "cross-env": "^7.0.1",
+        "cross-env": "^7.0.2",
         "deepmerge": "^4.0.0",
         "error-overlay-webpack-plugin": "^0.4.1",
         "eslint": "^6.3",

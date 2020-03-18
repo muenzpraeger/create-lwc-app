@@ -62,7 +62,7 @@ interface Config {
 export const defaultLwcConfig: Config = {
     // Default directory for the build output
     buildDir: './dist',
-    // Default directory for the build output
+    // Default bundler
     bundler: 'webpack',
     // Default mode for build command
     mode: 'development',

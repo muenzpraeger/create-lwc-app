@@ -4,17 +4,17 @@
 
 **create-lwc-app 2.0.0**
 
--   Moving to @-scoped package names
--   Resorting dependencies
--   Adding options when creating a new app: basic, PWA, or Cordova (Electron, iOS, Android)
+-   Adding options when creating a new app: standard or PWA
+-   Adding silent mode installation
 
 **lwc-services 2.0.0**
 
--   Uprading LWC to 1.2.1
+-   Upgrading LWC to 1.3.x
 -   Resorting dependencies
--   Change default host for `webpack` configurations from `0.0.0.0` to `localhost`
+-   Change default host watch mode from `0.0.0.0` to `localhost`
 -   Add support for Rollup builds
--   Add support for Cordova builds
+-   Add support for PWA builds
+-   Removed `serve` functionality
 
 ### 2020-01-16
 

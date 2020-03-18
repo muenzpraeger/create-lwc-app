@@ -69,6 +69,13 @@ By using new CLI parameters you can skip the whole wizard experience.
 -   `-t | --t` - set the app type. Values are `standard` | `pwa`, default is `pwa`
 -   `-o | --o` - set the options (if you want to override the defaults). Values are `rollup|yarn|express|typescript`
 
+Examples:
+
+```
+npx create-lwc-app my-cool-app
+npx create-lwc-app my-other-app --yes -t pwa -o typescript
+```
+
 ## lwc-services
 
 `create-lwc-app` is meant to be a one-stop-shop solution. The created project contains everything you need to get started. It adds the dev dependency `lwc-services`. Find below the list of all the things that are bundled with it. When you create a project with `create-lwc-app` a number of predefined scripts also get added to your `package.json`.
@@ -97,7 +104,7 @@ OPTIONS
   -d, --destination=destination  [default: ./dist] defines the directory where the build is stored
   -m, --mode=mode                [default: development] defines the mode for the build (production|development)
   -n, --noclear                  setting this will not re-create the build dir
-  -w, --webpack=webpack          location of custom webpack configuration file
+  -w, --webpack=webpack          location of custom webpack configuration file, which will be merged into the default config
 
 EXAMPLES
   lwc-services build
@@ -158,7 +165,7 @@ OPTIONS
   -m, --mode=mode        [default: development] defines the mode for the build (production|development)
   -o, --open             opens the site in the default browser
   -p, --port=port        [default: 3001] configures the port of the application
-  -w, --webpack=webpack  location of custom webpack configuration file
+  -w, --webpack=webpack  location of custom webpack configuration file, which will be merged into the default config
 
 EXAMPLES
   lwc-services watch

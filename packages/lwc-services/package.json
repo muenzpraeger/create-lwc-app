@@ -47,7 +47,7 @@
         "rollup-plugin-copy-glob": "^0.3.1",
         "rollup-plugin-livereload": "^1.0.4",
         "rollup-plugin-serve": "^1.0.1",
-        "rollup-plugin-terser": "^5.2.0",
+        "rollup-plugin-terser": "^5.3.0",
         "rollup-plugin-workbox": "^5.0.1",
         "semver-compare": "^1.0.0",
         "sort-pjson": "^1.0.3",

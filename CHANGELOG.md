@@ -1,6 +1,17 @@
 ## Changelog
 
-### 2020-xx-xx
+### 2020-03-25
+
+**create-lwc-app 2.0.2**
+
+-   Fixed JS file creation in advanced setup mode
+-   Dependency updates
+
+**lwc-services 2.0.2**
+
+-   Dependency updates
+
+### 2020-03-04
 
 **create-lwc-app 2.0.0**
 

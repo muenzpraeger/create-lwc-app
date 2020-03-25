@@ -13,7 +13,7 @@
         "@babel/plugin-syntax-decorators": "^7.8.3",
         "@babel/preset-typescript": "^7.8.3",
         "@lwc/eslint-plugin-lwc": "^0.9",
-        "@lwc/jest-preset": "^4.5.1",
+        "@lwc/jest-preset": "^4.3.0",
         "@lwc/jest-resolver": "^4.5.1",
         "@lwc/jest-serializer": "^4.5.1",
         "@lwc/jest-transformer": "^4.5.1",

@@ -84,21 +84,14 @@ function getInfoFromPath(file: string, config: any) {
             const split = file.split('.')
             jsFile = split.slice(0, -1).join('.') + '.js'
         }
-        const parent = path
-            .dirname(file)
-            .split('/')
-            .pop()
-        const basename = path
-            .basename(file)
-            .split('.')
-            .slice(0, -1)
-            .join('.')
+        const parent = path.dirname(file).split('/').pop()
+        const basename = path.basename(file).split('.').slice(0, -1).join('.')
         if (parent !== basename) {
             jsFile = path.resolve(path.dirname(file), `${parent}.js`)
         }
 
         const npms = Object.keys(npmmodules).map((k: string) => npmmodules[k])
-        const e = npms.find(e => e.entry === jsFile)
+        const e = npms.find((e) => e.entry === jsFile)
         if (e) {
             return {
                 ns: e.moduleNamespace,

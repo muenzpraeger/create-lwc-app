@@ -70,7 +70,7 @@ if (!hasGenerateSw && fs.existsSync(workboxInjectManifest)) {
 
 const resources = []
 
-lwcConfig.resources.forEach(resource => {
+lwcConfig.resources.forEach((resource) => {
     resources.push({ files: resource.from, dest: resource.to })
 })
 

@@ -8,7 +8,7 @@ const experimentalDynamicComponent = lwcConfig.lwcExperimentalDynamicComponent
 
 const { getConfig, getInfoFromPath } = require('./module')
 
-module.exports = function(source: any) {
+module.exports = function (source: any) {
     // @ts-ignore
     const { resourcePath } = this
 

@@ -54,7 +54,7 @@ class Create extends Command {
 
         let isCordova = false
 
-        types.forEach(entry => {
+        types.forEach((entry) => {
             if (entry.startsWith('cordova')) {
                 cordova.push(entry)
                 isCordova = true
@@ -79,7 +79,7 @@ class Create extends Command {
             return
         }
 
-        options.forEach(entry => {
+        options.forEach((entry) => {
             if (OPTIONS.indexOf(entry) < 0) nonCompliantOptions.push(entry)
         })
 

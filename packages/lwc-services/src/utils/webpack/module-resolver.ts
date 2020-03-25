@@ -17,7 +17,7 @@ function getExtension(
     directoryPath: string,
     fileName: string
 ) {
-    return EXTENSIONS.find(extension => {
+    return EXTENSIONS.find((extension) => {
         const pathWithExtension = `${directoryPath}/${fileName}${extension}`
         // TODO: Use async version of state instead of try catch?
         try {

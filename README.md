@@ -22,7 +22,7 @@ To get up and running execute the following command in a shell/terminal:
 npx create-lwc-app your-app-name
 ```
 
-> To run this you must have Node.js installed with at least npm 5.2+. You should be familiar with either npm or yarn. The npx tool is a package runner that installs with npm 5.2+.
+> To run this you must have Node.js 10+ installed with at least npm 5.2+. You should be familiar with either npm or yarn. The npx tool is a package runner that installs with npm 5.2+.
 
 This will run an npx installation of [create-lwc-app](./packages/create-lwc-app), guide you through the short setup, and then create a new Lightning Web Components project for you.
 

@@ -65,7 +65,7 @@
         "@types/chai": "^4.2.11",
         "@types/mocha": "^7.0.2",
         "@types/node": "^13.9.4",
-        "@types/rimraf": "^2.0.2",
+        "@types/rimraf": "^3.0.0",
         "@types/semver-compare": "^1.0.0",
         "@types/webpack": "^4.41.8",
         "@types/webpack-merge": "^4.1.4",

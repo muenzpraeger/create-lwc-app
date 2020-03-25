@@ -249,7 +249,7 @@ class CreateGenerator extends Generator {
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
         this.typescript =
-            this.options.typescript === 'ts' || this.options.typescript
+            this.options.typescript === 'ts' || this.options.typescript === 1
         this.edge = this.options.edge
         this.bundler = this.options.bundler
         this.appType = this.options.appType
@@ -491,6 +491,15 @@ class CreateGenerator extends Generator {
             devDependencies.push('@types/jest')
         }
 
+        if (hasGit) {
+            try {
+                execSync('git init', { stdio: 'ignore' })
+                hasGit = true
+            } catch {
+                // Do nothing
+            }
+        }
+
         const yarnOpts = {} as any
         if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
         const install = (deps: string[], opts: object) =>
@@ -523,15 +532,6 @@ class CreateGenerator extends Generator {
         const prettierSpawn = spawn('node', args, {
             cwd: this.destinationRoot()
         })
-
-        if (hasGit) {
-            try {
-                execSync('git init', { stdio: 'ignore' })
-                hasGit = true
-            } catch {
-                // Do nothing
-            }
-        }
 
         log(messages.logs.project_support)
         log(

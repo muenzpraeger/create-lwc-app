@@ -86,7 +86,7 @@ export default class Test extends Command {
             ]
 
             if (flags.passthrough) {
-                flags.passthrough.forEach(arg => debugArguments.push(arg))
+                flags.passthrough.forEach((arg) => debugArguments.push(arg))
             }
 
             const jestSpawn = spawn('node', debugArguments)
@@ -111,7 +111,7 @@ export default class Test extends Command {
                 jestArguments.push('--runInBand')
             }
             if (flags.passthrough) {
-                flags.passthrough.forEach(arg => jestArguments.push(arg))
+                flags.passthrough.forEach((arg) => jestArguments.push(arg))
             }
 
             const jest = require('jest')

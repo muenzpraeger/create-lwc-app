@@ -18,13 +18,13 @@
         "yeoman-generator": "^4.6.0"
     },
     "devDependencies": {
-        "@types/node": "^13.7.7",
+        "@types/node": "^13.9.4",
         "@types/semver-compare": "^1.0.1",
         "@types/yeoman-environment": "^2.3.3",
         "@types/yeoman-generator": "^3.1.4",
-        "@typescript-eslint/eslint-plugin": "^2.22.0",
-        "@typescript-eslint/parser": "^2.22.0",
-        "ts-node": "^8",
+        "@typescript-eslint/eslint-plugin": "^2.25.0",
+        "@typescript-eslint/parser": "^2.25.0",
+        "ts-node": "^8.8.1",
         "tslib": "^1.11.1",
         "typescript": "^3.8.3"
     },

@@ -547,7 +547,7 @@ class CreateGenerator extends Generator {
             this.targetPathClient.concat('modules/jsconfig.json'),
             this
         )
-        filesDefault.forEach(file => {
+        filesDefault.forEach((file) => {
             this.fs.copyTpl(
                 this.templatePath(file),
                 this.destinationPath(file),
@@ -698,7 +698,7 @@ class CreateGenerator extends Generator {
                     this
                 )
             }
-            filesPwa.forEach(file => {
+            filesPwa.forEach((file) => {
                 this.fs.copyTpl(
                     this.templatePath('src/client/'.concat(file)),
                     this.targetPathClient.concat(file),

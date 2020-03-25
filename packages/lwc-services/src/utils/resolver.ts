@@ -49,7 +49,7 @@ function resolveAsFile(name: string, extensions: string[]): string | null {
     return null
 }
 
-module.exports = function(modulePath: string, options: any): string {
+module.exports = function (modulePath: string, options: any): string {
     const layout = lwcConfig.layout
     if (isValidModuleName(modulePath)) {
         const { modulesDir, namespaces } = getProjectInfo(layout)

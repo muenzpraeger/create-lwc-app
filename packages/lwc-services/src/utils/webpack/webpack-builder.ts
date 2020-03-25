@@ -74,7 +74,7 @@ function getWebpackEntryPaths(
     }
 
     const paths: string[] = []
-    Object.keys(entry).forEach(name => {
+    Object.keys(entry).forEach((name) => {
         const path = entry[name]
         if (typeof path === 'string') {
             paths.push(path)

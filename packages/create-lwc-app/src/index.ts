@@ -1,5 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import { createEnv } from 'yeoman-environment'
+import { spawnSync } from 'child_process'
+import semverCompare = require('semver-compare')
 
 import { messages } from './messages/create'
 import { log, welcome } from './utils/logger'
@@ -46,6 +48,18 @@ class Create extends Command {
         const cordova: string[] = []
         const nonCompliantAppTypes: string[] = []
         const nonCompliantOptions: string[] = []
+
+        const nodeVersionRet = spawnSync('node', ['-v'])
+        if (nodeVersionRet.error || nodeVersionRet.status !== 0) {
+            log(messages.errors.no_node_installed)
+            return
+        }
+
+        const nodeVersion = nodeVersionRet.stdout.slice(1).toString()
+        if (semverCompare(nodeVersion, '10.0.0') < 0) {
+            log(messages.errors.wrong_node_version_installed)
+            return
+        }
 
         if (!silent && options.length > 0) {
             log(messages.errors.no_silent_with_options)

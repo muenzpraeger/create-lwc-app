@@ -27,15 +27,5 @@ export const messages = {
         bundler: 'Select a bundler',
         typescript: 'Use TypeScript or JavaScript',
         edge: 'Do you want to use Edge (non-Chromium version) as browser'
-    },
-    errors: {
-        no_node_installed: {
-            message: 'Node.js is not installed',
-            emoji: 'sos'
-        },
-        wrong_node_version_installed: {
-            message: 'Node.js version 10 and higher needs to be installed.',
-            emoji: 'sos'
-        }
     }
 }

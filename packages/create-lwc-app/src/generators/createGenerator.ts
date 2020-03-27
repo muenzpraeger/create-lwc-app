@@ -1,7 +1,6 @@
-import { execSync, spawnSync } from 'child_process'
+import { execSync } from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'
-import semverCompare = require('semver-compare')
 import * as Generator from 'yeoman-generator'
 
 import { messages } from '../messages/createGenerator'
@@ -256,20 +255,6 @@ class CreateGenerator extends Generator {
 
         if (this.clientserver) {
             this.targetPathClient = 'src/client/'
-        }
-
-        if (!this.yarn) {
-            const nodeVersionRet = spawnSync('node', ['-v'])
-            if (nodeVersionRet.error || nodeVersionRet.status !== 0) {
-                log(messages.errors.no_node_installed)
-                return
-            }
-
-            const nodeVersion = nodeVersionRet.stdout.slice(1).toString()
-            if (semverCompare(nodeVersion, '10.0.0') < 0) {
-                log(messages.errors.wrong_node_version_installed)
-                return
-            }
         }
 
         this.pjson.name = this.defaults.name

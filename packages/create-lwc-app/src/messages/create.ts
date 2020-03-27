@@ -24,6 +24,14 @@ export const messages = {
         no_mix_app_types: {
             message: "You can't mix different app types: %s",
             emoji: 'sos'
+        },
+        no_node_installed: {
+            message: 'Node.js is not installed',
+            emoji: 'sos'
+        },
+        wrong_node_version_installed: {
+            message: 'Node.js version 10 and higher needs to be installed.',
+            emoji: 'sos'
         }
     },
     args: {

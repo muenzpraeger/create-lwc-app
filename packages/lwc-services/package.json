@@ -101,8 +101,7 @@
     },
     "repository": "muenzpraeger/create-lwc-app",
     "scripts": {
-        "build": "rm -rf lib && rm -f tsconfig.ts* && tsc -b && cp -rpv ./src/config/rollup.config.js ./lib/config/rollup.config.js",
-        "genreadme": "oclif-dev readme && git add README.md"
+        "build": "rm -rf lib && tsc -b && cp -rpv ./src/config/rollup.config.js ./lib/config/rollup.config.js"
     },
     "types": "lib/index.d.ts"
 }

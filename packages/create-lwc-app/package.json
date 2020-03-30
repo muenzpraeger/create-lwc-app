@@ -51,7 +51,7 @@
     },
     "repository": "muenzpraeger/create-lwc-app",
     "scripts": {
-        "build": "tsc -b"
+        "build": "rm -rf lib && tsc -b"
     },
     "types": "lib/index.d.ts"
 }

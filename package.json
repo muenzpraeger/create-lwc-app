@@ -19,6 +19,7 @@
     },
     "scripts": {
         "build": "lerna run build",
+        "clean": "lerna run clean && lerna clean --yes && rm -rf node_modules",
         "lint": "eslint ./packages/**/src/**/*.ts",
         "prettier": "prettier --write '**/*.{html,css,js,json,md,ts,yaml,yml}'",
         "prettier:verify": "prettier --list-different '**/*.{html,css,js,json,md,ts,yaml,yml}'"

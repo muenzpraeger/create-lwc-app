@@ -53,5 +53,6 @@
     "scripts": {
         "build": "rm -rf lib && tsc -b"
     },
-    "types": "lib/index.d.ts"
+    "types": "lib/index.d.ts",
+    "gitHead": "5834967144ac69606ffac564fde8376eaec84121"
 }

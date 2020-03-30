@@ -1,11 +1,11 @@
 {
     "npmClient": "yarn",
     "useWorkspaces": true,
-    "version": "independent",
     "command": {
         "publish": {
-            "ignoreChanges": ["ignored-file", "*.md"],
-            "message": "chore(release): publish"
+            "forcePublish": "*"
         }
-    }
+    },
+    "packages": ["packages/create-lwc-app", "packages/lwc-services"],
+    "version": "2.0.3-beta.3"
 }

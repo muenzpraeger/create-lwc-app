@@ -4,7 +4,7 @@ name: create-lwc-app build
 # Definition when the workflow should run
 on:
     pull_request:
-        types: [opened, synchronize, reopened]
+        types: [opened, edited, synchronize, reopened]
 
 # Jobs to be executed
 jobs:

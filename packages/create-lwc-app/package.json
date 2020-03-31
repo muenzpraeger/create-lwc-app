@@ -1,6 +1,6 @@
 {
     "name": "create-lwc-app",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "create-lwc-app": "./bin/run"
@@ -51,7 +51,7 @@
     },
     "repository": "muenzpraeger/create-lwc-app",
     "scripts": {
-        "build": "rm -rf lib && tsc -b"
+        "build": "rm -f tsconfig.ts* && rm -rf lib && tsc -b"
     },
     "types": "lib/index.d.ts",
     "gitHead": "5834967144ac69606ffac564fde8376eaec84121"

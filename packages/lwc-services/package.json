@@ -1,6 +1,6 @@
 {
     "name": "lwc-services",
-    "version": "2.0.4",
+    "version": "2.0.5",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"

@@ -1,4 +1,5 @@
-import { buildCustomElementConstructor } from 'lwc';
+<% if (edge) { %>import '@lwc/synthetic-shadow'; <% } %>
+import { createElement } from 'lwc';
 import MyApp from 'my/app';
 <% if (appType === 'pwa') { %>
 const availableFeature = detectFeatures();
@@ -9,7 +10,9 @@ const isCompatibleBrowser = Object.keys(availableFeature).some(
 if (isCompatibleBrowser) {
     unsupportedErrorMessage(availableFeature);
 } else {
-    customElements.define('my-app', buildCustomElementConstructor(MyApp));
+    const app = createElement('my-app', { is: MyApp });
+    // eslint-disable-next-line @lwc/lwc/no-document-query
+    document.querySelector('#main').appendChild(app);
 
     if ('serviceWorker' in navigator) {
         // Register service worker after page load event to avoid delaying critical requests for the
@@ -44,5 +47,7 @@ function unsupportedErrorMessage() {
 }
     
 <% } else { %>
-customElements.define('my-app', buildCustomElementConstructor(MyApp));
+const app = createElement('my-app', { is: MyApp });
+// eslint-disable-next-line @lwc/lwc/no-document-query
+document.querySelector('#main').appendChild(app);
 <% } %>

@@ -1,43 +1,4 @@
-const { resolveModules } = require('@lwc/module-resolver')
-import * as fs from 'fs'
 import * as path from 'path'
-
-import { lwcConfig } from '../../config/lwcConfig'
-
-const pkgJson = JSON.parse(fs.readFileSync(`package.json`, 'utf8'))
-
-const resolvedModules = resolveModules({
-    modules: [
-        ...lwcConfig.localModulesDirs,
-        ...Object.keys(pkgJson.dependencies)
-    ]
-})
-
-const npmmodules = resolvedModules.reduce(
-    (map: any, m: any) => ((map[m.specifier] = m), map),
-    {}
-)
-
-const LAYOUT = {
-    /**
-     * Modules are stored at the root of the module directory with their full qualified name.
-     *      modules
-     *      └── x-foo
-     *          ├── x-foo.html
-     *          └── x-foo.js
-     */
-    STANDARD: 'standard',
-
-    /**
-     * Modules are stored in a subdirectory for each namespace.
-     *      modules
-     *      └── x
-     *          └── foo
-     *              ├── foo.html
-     *              └── foo.js
-     */
-    NAMESPACED: 'namespaced'
-}
 
 function getConfig(opts: any) {
     if (opts.module === null || typeof opts.module.path !== 'string') {
@@ -47,17 +8,7 @@ function getConfig(opts: any) {
     }
 
     const moduleConfig = {
-        layout: LAYOUT.STANDARD,
         ...opts.module
-    }
-
-    if (
-        moduleConfig.layout !== LAYOUT.STANDARD &&
-        moduleConfig.layout !== LAYOUT.NAMESPACED
-    ) {
-        throw new TypeError(
-            `module.layout is invalid. Received ${moduleConfig.layout}`
-        )
     }
 
     return { ...opts, module: moduleConfig }
@@ -76,7 +27,7 @@ function getInfoFromId(id: string) {
 }
 
 function getInfoFromPath(file: string, config: any) {
-    const { path: root, layout } = config.module
+    const { path: root } = config.module
 
     if (!file.startsWith(root)) {
         let jsFile = file
@@ -90,36 +41,20 @@ function getInfoFromPath(file: string, config: any) {
             jsFile = path.resolve(path.dirname(file), `${parent}.js`)
         }
 
-        const npms = Object.keys(npmmodules).map((k: string) => npmmodules[k])
-        const e = npms.find((e) => e.entry === jsFile)
-        if (e) {
-            return {
-                ns: e.moduleNamespace,
-                name: e.moduleName
-            }
-        }
-
         throw new Error(`Invalid file path. ${file} is not part of ${root}`)
     }
 
     const rel = path.relative(root, file)
     const parts = rel.split(path.sep)
 
-    let id = ''
-    if (layout === LAYOUT.STANDARD) {
-        id = parts[0]
-    } else if (layout === LAYOUT.NAMESPACED) {
-        id = `${parts[0]}-${parts[1]}`
-    }
+    const id = `${parts[0]}-${parts[1]}`
 
     return getInfoFromId(id)
 }
 
 module.exports = {
-    LAYOUT,
     getConfig,
     isValidModuleName,
     getInfoFromId,
-    getInfoFromPath,
-    npmmodules
+    getInfoFromPath
 }

@@ -1,9 +1,6 @@
 import * as webpack from 'webpack'
 import * as webpackMerge from 'webpack-merge'
 
-const { npmmodules, LAYOUT } = require('./module')
-import * as path from 'path'
-const npms = Object.values(npmmodules).map((f: any) => path.dirname(f.entry))
 const ModuleResolver = require('./module-resolver')
 const moduleLoader = require.resolve('./module-loader')
 
@@ -102,8 +99,7 @@ function buildWebpackConfig({
     }
 
     const MODULE_CONFIG = {
-        path: moduleDir,
-        layout: LAYOUT.NAMESPACED
+        path: moduleDir
     }
 
     const DEFINE_CONFIG = {
@@ -125,7 +121,7 @@ function buildWebpackConfig({
             rules: [
                 {
                     test: /\.(js|ts|html|css)$/,
-                    include: [moduleDir, ...npms],
+                    include: [moduleDir],
                     use: [
                         {
                             loader: moduleLoader,

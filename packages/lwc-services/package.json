@@ -16,7 +16,7 @@
         "@lwc/jest-preset": "^4.5.1",
         "@lwc/jest-resolver": "^4.5.1",
         "@lwc/jest-serializer": "^4.5.1",
-        "@lwc/jest-transformer": "^4.5.1",
+        "@lwc/jest-transformer": "^5.0.0",
         "@lwc/rollup-plugin": "^1.3.2",
         "@oclif/command": "^1",
         "@oclif/config": "^1",

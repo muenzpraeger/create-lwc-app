@@ -14,7 +14,7 @@
         "@babel/preset-typescript": "^7.9.0",
         "@lwc/eslint-plugin-lwc": "^0.9",
         "@lwc/jest-preset": "^4.5.1",
-        "@lwc/jest-resolver": "^4.5.1",
+        "@lwc/jest-resolver": "^6.0.0",
         "@lwc/jest-serializer": "^4.5.1",
         "@lwc/jest-transformer": "^4.5.1",
         "@lwc/rollup-plugin": "^1.3.2",

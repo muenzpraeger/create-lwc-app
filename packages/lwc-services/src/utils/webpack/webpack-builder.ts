@@ -1,5 +1,6 @@
 import * as webpack from 'webpack'
 import * as webpackMerge from 'webpack-merge'
+import * as path from 'path'
 
 const ModuleResolver = require('./module-resolver')
 const moduleLoader = require.resolve('./module-loader')
@@ -121,6 +122,10 @@ function buildWebpackConfig({
             rules: [
                 {
                     test: /\.(js|ts|html|css)$/,
+                    include: [
+                        moduleDir,
+                        path.resolve(process.cwd(), 'node_modules')
+                    ],
                     use: [
                         {
                             loader: moduleLoader,

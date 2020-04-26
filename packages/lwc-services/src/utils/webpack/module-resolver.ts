@@ -59,16 +59,6 @@ module.exports = class ModuleResolver {
             return cb()
         }
 
-        const mod = lwcResolver.resolveModule(request, process.cwd())
-        if (mod) {
-            return cb(undefined, {
-                path: mod.entry,
-                query,
-                file: true,
-                resolved: true
-            })
-        }
-
         if (!issuer) {
             return cb()
         }
@@ -92,6 +82,15 @@ module.exports = class ModuleResolver {
 
         this.fs.stat(resolved, (err: { code: string } | null) => {
             if (err !== null && err.code === 'ENOENT') {
+                const mod = lwcResolver.resolveModule(request, process.cwd())
+                if (mod) {
+                    return cb(undefined, {
+                        path: mod.entry,
+                        query,
+                        file: true,
+                        resolved: true
+                    })
+                }
                 return cb(`Could not resolve ${request} as ${resolved}`)
             }
 

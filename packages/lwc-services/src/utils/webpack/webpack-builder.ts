@@ -121,7 +121,6 @@ function buildWebpackConfig({
             rules: [
                 {
                     test: /\.(js|ts|html|css)$/,
-                    include: [moduleDir],
                     use: [
                         {
                             loader: moduleLoader,

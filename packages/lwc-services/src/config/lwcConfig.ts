@@ -20,8 +20,6 @@ interface Config {
     // Array of directories where to look for additional
     // modules that don't live in `moduleDir`
     localModulesDirs: string[]
-    // Defines the directory layout. Using `namespaced` is easiest. Or so.
-    layout: string
     // Default directory for source files
     sourceDir: string
     // List of resources for copying to the build folder
@@ -74,8 +72,6 @@ export const defaultLwcConfig: Config = {
     // Array of directories where to look for additional
     // modules that don't live in `moduleDir`
     localModulesDirs: [],
-    // Defines the directory layout. Using `namespaced` is easiest. Or so.
-    layout: 'namespaced',
     // Default directory for source files
     sourceDir: './src',
     // List of resources for copying to the build folder

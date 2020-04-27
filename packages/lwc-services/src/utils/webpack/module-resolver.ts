@@ -1,12 +1,7 @@
 import * as path from 'path'
 
-const {
-    LAYOUT,
-    getConfig,
-    isValidModuleName,
-    getInfoFromId,
-    npmmodules
-} = require('./module')
+const { getConfig, isValidModuleName, getInfoFromId } = require('./module')
+const lwcResolver = require('@lwc/module-resolver')
 
 const EMPTY_STYLE = path.resolve(__dirname, 'mocks', 'empty-style.js')
 
@@ -52,7 +47,7 @@ module.exports = class ModuleResolver {
     }
 
     resolveModule(req: any, ctx: any, cb: any) {
-        const { path: root, layout } = this.config.module
+        const { path: root } = this.config.module
         const { entries } = this.config
         const {
             request,
@@ -62,16 +57,6 @@ module.exports = class ModuleResolver {
 
         if (request === '@lwc/engine') {
             return cb()
-        }
-
-        const mod = npmmodules[request]
-        if (mod) {
-            return cb(undefined, {
-                path: mod.entry,
-                query,
-                file: true,
-                resolved: true
-            })
         }
 
         if (!issuer) {
@@ -90,23 +75,22 @@ module.exports = class ModuleResolver {
             return cb()
         }
 
-        let resolved: string
-        if (layout === LAYOUT.STANDARD) {
-            // TODO-RW: Proper resolve
-            const directoryPath = path.resolve(root, request)
-            // TODO-RW: Add name
-            // eslint-disable-next-line no-undef
-            const extension = getExtension(this.fs, directoryPath, name)
-            resolved = path.resolve(root, request, `${request}${extension}`)
-        } else {
-            const { ns, name } = getInfoFromId(request)
-            const directoryPath = path.resolve(root, ns, name)
-            const extension = getExtension(this.fs, directoryPath, name)
-            resolved = path.resolve(root, ns, name, `${name}${extension}`)
-        }
+        const { ns, name } = getInfoFromId(request)
+        const directoryPath = path.resolve(root, ns, name)
+        const extension = getExtension(this.fs, directoryPath, name)
+        const resolved = path.resolve(root, ns, name, `${name}${extension}`)
 
         this.fs.stat(resolved, (err: { code: string } | null) => {
             if (err !== null && err.code === 'ENOENT') {
+                const mod = lwcResolver.resolveModule(request, process.cwd())
+                if (mod) {
+                    return cb(undefined, {
+                        path: mod.entry,
+                        query,
+                        file: true,
+                        resolved: true
+                    })
+                }
                 return cb(`Could not resolve ${request} as ${resolved}`)
             }
 

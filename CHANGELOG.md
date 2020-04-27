@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2020-04-27
+
+**create-lwc-app 2.0.6**
+
+-   Initial version of npm module resolution (waiting for Jest to catch up)
+
 ### 2020-03-25
 
 **create-lwc-app 2.0.2**

@@ -9,7 +9,7 @@
     "dependencies": {
         "@oclif/command": "^1",
         "@oclif/config": "^1.14.0",
-        "@oclif/plugin-help": "^2",
+        "@oclif/plugin-help": "^3",
         "cli-ux": "^5.4.5",
         "node-emoji": "^1.10.0",
         "semver-compare": "^1.0.0",

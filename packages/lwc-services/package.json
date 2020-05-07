@@ -36,7 +36,7 @@
         "eslint": "^6.3",
         "globby": "^11.0.0",
         "html-webpack-plugin": "^4.0.1",
-        "jest": "^25",
+        "jest": "^26",
         "lwc": "^1.6.0",
         "node-emoji": "^1.10.0",
         "nodemon": "^2.0.1",

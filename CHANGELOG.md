@@ -1,10 +1,16 @@
 ## Changelog
 
+### 2020-05-07
+
+**create-lwc-app 2.0.7**
+
+-   Fix creation of TypeScript project via silent installation
+
 ### 2020-04-27
 
 **create-lwc-app 2.0.6**
 
--   Initial version of npm module resolution (waiting for Jest to catch up)
+-   Initial version of npm module resolution
 
 ### 2020-03-25
 

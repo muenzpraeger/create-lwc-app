@@ -248,7 +248,9 @@ class CreateGenerator extends Generator {
         this.yarn = this.options.yarn
         this.clientserver = this.options.clientserver
         this.typescript =
-            this.options.typescript === 'ts' || this.options.typescript === 1
+            this.options.typescript === 'ts' ||
+            this.options.typescript === 1 ||
+            this.options.typescript === true
         this.edge = this.options.edge
         this.bundler = this.options.bundler
         this.appType = this.options.appType

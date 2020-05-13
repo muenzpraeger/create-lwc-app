@@ -48,7 +48,7 @@ module.exports = class ModuleResolver {
             })
         } catch (e) {
             // LWC Module Resolver will throw errors for any non lwc modules
-            cb();
+            cb()
         }
     }
 

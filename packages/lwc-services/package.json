@@ -23,7 +23,7 @@
         "@oclif/plugin-help": "^3",
         "@oclif/plugin-not-found": "^1.2.2",
         "@rollup/plugin-replace": "^2.3.0",
-        "@salesforce/eslint-config-lwc": "^0.5",
+        "@salesforce/eslint-config-lwc": "^0.6",
         "@typescript-eslint/eslint-plugin": "^2.25.0",
         "@typescript-eslint/parser": "^2.25.0",
         "babel-eslint": "^10.1.0",

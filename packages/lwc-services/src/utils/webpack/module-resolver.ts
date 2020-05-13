@@ -1,28 +1,9 @@
 import * as path from 'path'
 
-const { getConfig, isValidModuleName, getInfoFromId } = require('./module')
+const { getConfig, isValidModuleName } = require('./module')
 const lwcResolver = require('@lwc/module-resolver')
 
 const EMPTY_STYLE = path.resolve(__dirname, 'mocks', 'empty-style.js')
-
-const EXTENSIONS = ['.js', '.ts', '.html', '.css']
-
-function getExtension(
-    fileSystem: any,
-    directoryPath: string,
-    fileName: string
-) {
-    return EXTENSIONS.find((extension) => {
-        const pathWithExtension = `${directoryPath}/${fileName}${extension}`
-        // TODO: Use async version of state instead of try catch?
-        try {
-            fileSystem.statSync(pathWithExtension)
-            return true
-        } catch (e) {
-            return false
-        }
-    })
-}
 
 /**
  * Webpack plugin to resolve LWC modules.
@@ -47,60 +28,28 @@ module.exports = class ModuleResolver {
     }
 
     resolveModule(req: any, ctx: any, cb: any) {
-        const { path: root } = this.config.module
-        const { entries } = this.config
         const {
             request,
             query,
             context: { issuer }
         } = req
 
-        if (request === '@lwc/engine') {
+        if (!issuer || !isValidModuleName(request)) {
             return cb()
         }
 
-        if (!issuer) {
-            return cb()
-        }
-
-        let properPath = issuer.startsWith(root)
-        if (!properPath) {
-            properPath = entries.find((e: string) => issuer.startsWith(e))
-        }
-        if (!properPath) {
-            return cb()
-        }
-
-        if (!isValidModuleName(request)) {
-            return cb()
-        }
-
-        const { ns, name } = getInfoFromId(request)
-        const directoryPath = path.resolve(root, ns, name)
-        const extension = getExtension(this.fs, directoryPath, name)
-        const resolved = path.resolve(root, ns, name, `${name}${extension}`)
-
-        this.fs.stat(resolved, (err: { code: string } | null) => {
-            if (err !== null && err.code === 'ENOENT') {
-                const mod = lwcResolver.resolveModule(request, process.cwd())
-                if (mod) {
-                    return cb(undefined, {
-                        path: mod.entry,
-                        query,
-                        file: true,
-                        resolved: true
-                    })
-                }
-                return cb(`Could not resolve ${request} as ${resolved}`)
-            }
-
-            return cb(err, {
-                path: resolved,
+        try {
+            const mod = lwcResolver.resolveModule(request, issuer)
+            return cb(undefined, {
+                path: mod.entry,
                 query,
                 file: true,
                 resolved: true
             })
-        })
+        } catch (e) {
+            // LWC Module Resolver will throw errors for any non lwc modules
+            cb();
+        }
     }
 
     isImplicitHTMLImport(importee: string, importer: string) {

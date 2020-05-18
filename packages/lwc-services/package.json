@@ -29,7 +29,7 @@
         "babel-eslint": "^10.1.0",
         "babel-loader": "^8.1.0",
         "compat-polyfills": "^0.22.0",
-        "copy-webpack-plugin": "^5.0.2",
+        "copy-webpack-plugin": "^6.0.1",
         "cross-env": "^7.0.2",
         "deepmerge": "^4.0.0",
         "error-overlay-webpack-plugin": "^0.4.1",

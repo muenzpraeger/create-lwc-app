@@ -2268,44 +2268,44 @@
     npmlog "^4.1.2"
     write-file-atomic "^2.3.0"
 
-"@lwc/babel-plugin-component@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/babel-plugin-component/-/babel-plugin-component-1.6.0.tgz#823f799d0587e5896b9cbf91d10cc827f803e477"
-  integrity sha512-0D93TtpSH//23EyxbmlkNTK48w1TUb+AldWz3/ASLevF+ye51DVZRi6rY2jEtEoJcrdME701l2qa0yWQFqjb/Q==
+"@lwc/babel-plugin-component@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/babel-plugin-component/-/babel-plugin-component-1.6.2.tgz#54f151f14bed02cfd8bbb8b01ce7815be6c41d9b"
+  integrity sha512-q2eRtcNl2QyGqnvcs6HYimm/2G4RMkChNJl4+Jj2bFsQnrs6krhxyxWv5T+2xjgvW8tEo3uTN2nP4WbYaBMDog==
   dependencies:
     "@babel/helper-module-imports" "7.0.0"
     "@babel/plugin-proposal-class-properties" "7.1.0"
-    "@lwc/errors" "1.6.0"
+    "@lwc/errors" "1.6.2"
     line-column "~1.0.2"
 
-"@lwc/compiler@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/compiler/-/compiler-1.6.0.tgz#a25ef122c40f2b09460c06297498886d6236c562"
-  integrity sha512-88fghGU1n0DZbkZi3i+hMy1qBD1lFetHfs7cnlEJKc6/y33H2gYWu2k7Jvv9kOYicOoUM+wZP98TJwSYcpm9Kw==
+"@lwc/compiler@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/compiler/-/compiler-1.6.2.tgz#a1f58b95e6ee2a5e3f8a8b0c2babd7ef83ae5550"
+  integrity sha512-gx7wBdIJ+YiZIQOpJrh0UMDLqbWGwr1fs197iw3UavuRXDWnztp5WuDq7PD7FAQ/F8aIZe14vaMO1tzpxlr/2w==
   dependencies:
     "@babel/core" "7.1.0"
     "@babel/plugin-proposal-object-rest-spread" "7.0.0"
-    "@lwc/babel-plugin-component" "1.6.0"
-    "@lwc/errors" "1.6.0"
-    "@lwc/shared" "1.6.0"
-    "@lwc/style-compiler" "1.6.0"
-    "@lwc/template-compiler" "1.6.0"
+    "@lwc/babel-plugin-component" "1.6.2"
+    "@lwc/errors" "1.6.2"
+    "@lwc/shared" "1.6.2"
+    "@lwc/style-compiler" "1.6.2"
+    "@lwc/template-compiler" "1.6.2"
     "@rollup/plugin-replace" "~2.3.2"
     babel-preset-compat "~0.22.0"
-    rollup "^1.32.1"
+    rollup "^2.7.3"
     terser "~4.6.11"
 
-"@lwc/engine@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/engine/-/engine-1.6.0.tgz#8f33b370b7470e6dec9be1ccdd7c4daec46400a0"
-  integrity sha512-fBltlraTdhqwKg/6fX0wFvH9yLfkIply+yW1KWXqEEthONra76AcxbygUHoLIWD2yoHTTSjJr2dl4dN6dMdXug==
+"@lwc/engine@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/engine/-/engine-1.6.2.tgz#e185e9519c528b43510f51fc181b1308911d5f32"
+  integrity sha512-MzAB8i9G8GnvwlZzn3eCKu/AI5khNBCUCSHrQKKXKJG6YJrOunqMg28LHXnpPaxkyWDXOt2cSUXq3wKjED4wEA==
   dependencies:
     observable-membrane "0.26.1"
 
-"@lwc/errors@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.6.0.tgz#96fbff266ed93659fb9d07f25f2a521b17cfcd66"
-  integrity sha512-AFKtfPRTVNDPgbi3eKhIWXaN9XqN4JxjEqHlZ9he7NLy0dBxWurgDrVDvM70uu1TsfcSWUsAWgoDATylDK+iNw==
+"@lwc/errors@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.6.2.tgz#ef19a90dfe472c0946d4834f4aa6cb4dfa052c88"
+  integrity sha512-bgWukkFUFj/lHsHP7qBBVkJ54zDSGka45hQ2ls8EYi285vCs3hBj2ekQZr5Kc0RmbFXXonwXR+iruoPRHqKiIQ==
 
 "@lwc/eslint-plugin-lwc@^0.10", "@lwc/eslint-plugin-lwc@~0.10.0":
   version "0.10.0"
@@ -2314,10 +2314,10 @@
   dependencies:
     minimatch "^3.0.4"
 
-"@lwc/features@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/features/-/features-1.6.0.tgz#46f0d35436b5fcb996e8c8d1cf2d9c4f82d936c9"
-  integrity sha512-PlE3MLdfneLIh1jJV1xLFX47n72Hl2jd9sRVpiPoqc5RpiVdU8kgiFyvnEd0xRXQx/LA2SduSuAA6C3FE2oUww==
+"@lwc/features@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/features/-/features-1.6.2.tgz#835a478f31723f05b5dea58fbca60778943e2410"
+  integrity sha512-gaI+Cq/QJIWPzOogQq7LVwem9tMw2mPWVakybeRUoREAussqhxXBveXGoauoLNbTHgumiFSp/F1LzEWE5CapVQ==
 
 "@lwc/jest-preset@^7.0.0":
   version "7.0.0"
@@ -2370,46 +2370,46 @@
     "@lwc/module-resolver" "1.6.0"
     "@rollup/pluginutils" "~3.0.9"
 
-"@lwc/shared@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/shared/-/shared-1.6.0.tgz#0b3f5ba000b318eaf712e829118d9fc16afe5b7d"
-  integrity sha512-73U4MhG1PSMEKG92KV9xSOnnz6xOhTLTR5lJpyzJaNR1LbfYBYGvvZXFmmYMJ8WeHxtdjsMWxRjv+4Ht3ua8Fg==
+"@lwc/shared@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/shared/-/shared-1.6.2.tgz#0913d6490de845ff62412e93318d32cd7ceb9fea"
+  integrity sha512-qmRxyh552lTqXmSXeGSb/FcgL8ikxIraH6+w3AZypSOialorA4qDTx7VMfdz1V0tEGhOGWGfq/fvHuGC2PdIWw==
 
-"@lwc/style-compiler@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/style-compiler/-/style-compiler-1.6.0.tgz#64d0c4529f56a69c999a8be67346b42fe135a5da"
-  integrity sha512-cpu2hr2ugqToQ18bICpWZxuajopwGebMk0eko2FWk71fyJE86RoLAr6jxyxYzplu54X5wCMRVOrmC1yHKS7vig==
+"@lwc/style-compiler@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/style-compiler/-/style-compiler-1.6.2.tgz#ac93e217631b2e1723e283dcae3d3fda91a869ae"
+  integrity sha512-pa1HTgpFdk+BlBtJH6nm7h++olu8W8swa4UahCdSS1wXNqPqGz6hXFOZp7Jo4fhewJZiDf9b5ki4YVde1/OgYQ==
   dependencies:
     cssnano-preset-default "~4.0.7"
     postcss "~7.0.27"
     postcss-selector-parser "~6.0.2"
     postcss-value-parser "~4.0.3"
 
-"@lwc/synthetic-shadow@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/synthetic-shadow/-/synthetic-shadow-1.6.0.tgz#284e74573c7e16f8f794191dec5eaa727aaa0174"
-  integrity sha512-Hl+6zvLr8GA4en9YuZrynnmEYtkJc2/3YHYysSlNNpeZPEch9dcba9eXOzFfPvIkM6WB5fd7D1WjDLHDfw9hqg==
+"@lwc/synthetic-shadow@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/synthetic-shadow/-/synthetic-shadow-1.6.2.tgz#162cd292c3b204cf60b0c60f47847dd1d1091b6c"
+  integrity sha512-PSBC0HoV+HpL0XrYvoqiKX7Q4WxMdqPiZzG3XUyrhSAw3KyAY2Dr4xVq+PqATxBaDM2rYHGGDPKPp3rbtCB7Zw==
 
-"@lwc/template-compiler@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/template-compiler/-/template-compiler-1.6.0.tgz#c33d5573f44bdc35dde92c90ccfcc53f482a1348"
-  integrity sha512-z7niB2nxT2CulU44TK82rWPidNdYsp9KDj+8LyO79irMIbUTyBKVaXAmV92CofMgE/TpjmK62hgyKsmh8ewhlg==
+"@lwc/template-compiler@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/template-compiler/-/template-compiler-1.6.2.tgz#dc2ec4ed8954c945b59dc1b17ebcd4835623804f"
+  integrity sha512-7WQIb73MsUP38AVR4mHfJ7D9F3eInzRbnq3egwNR0i7NLoeTa9uYFlkJLqLNOLnoRUQ6UH7/iia2vkNgSUtdug==
   dependencies:
     "@babel/generator" "~7.1.5"
     "@babel/parser" "~7.1.5"
     "@babel/template" "~7.1.2"
     "@babel/traverse" "~7.1.5"
     "@babel/types" "~7.1.5"
-    "@lwc/errors" "1.6.0"
-    "@lwc/shared" "1.6.0"
+    "@lwc/errors" "1.6.2"
+    "@lwc/shared" "1.6.2"
     esutils "~2.0.3"
     he "~1.2.0"
     parse5-with-errors "4.0.3-beta1"
 
-"@lwc/wire-service@1.6.0":
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/@lwc/wire-service/-/wire-service-1.6.0.tgz#b52bfcd2263f25041316fd811f68338f278507d7"
-  integrity sha512-7V7l8Ncb5aJkPcC9zBb7WZLtxmybaTk2FP7Jkfv4EYHWehLP+Mf8bG96q37N+Ai5UF2/dHC8krWJQczaHWiGRA==
+"@lwc/wire-service@1.6.2":
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/@lwc/wire-service/-/wire-service-1.6.2.tgz#5866ef22aeb42e1857eab7c98b7037bfbd294499"
+  integrity sha512-Nexh88vm7m3EjUdx+Gtugoq7yO1a9DB2qQ70AnLoxH4vu17Pw49zt08VkZ1PCOGkw9Q4RYMUWu1TPRqQTCeENQ==
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -9604,15 +9604,15 @@ lru-cache@^5.1.1:
     yallist "^3.0.2"
 
 lwc@^1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/lwc/-/lwc-1.6.0.tgz#6b697d804471f4a1d3935b15c4ec2814172ef629"
-  integrity sha512-SxEAY20kIlOkY2WPs3POu0qT9pW4je97DNhnLpYRU4ED0rSUf/ivfIzTb+iVG/KjXG6BjpIGolby+KWAiqvTXA==
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/lwc/-/lwc-1.6.2.tgz#2e10ba3ad3b6a37af70df0166bd47cad7ec2c889"
+  integrity sha512-4Mhg8EmIlA6thP0dgykPTZgUvnBiz/nHLL74MbtZDSsA3Jg4bhtDzviJKmiOOJ9mSzn47e6bTIGL8O0WkmE6ww==
   dependencies:
-    "@lwc/compiler" "1.6.0"
-    "@lwc/engine" "1.6.0"
-    "@lwc/features" "1.6.0"
-    "@lwc/synthetic-shadow" "1.6.0"
-    "@lwc/wire-service" "1.6.0"
+    "@lwc/compiler" "1.6.2"
+    "@lwc/engine" "1.6.2"
+    "@lwc/features" "1.6.2"
+    "@lwc/synthetic-shadow" "1.6.2"
+    "@lwc/wire-service" "1.6.2"
 
 macos-release@^2.2.0:
   version "2.3.0"
@@ -12433,7 +12433,7 @@ rollup-pluginutils@~2.0.1:
     estree-walker "^0.3.0"
     micromatch "^2.3.11"
 
-rollup@^1.31.1, rollup@^1.32.1:
+rollup@^1.31.1:
   version "1.32.1"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-1.32.1.tgz#4480e52d9d9e2ae4b46ba0d9ddeaf3163940f9c4"
   integrity sha512-/2HA0Ec70TvQnXdzynFffkjA6XN+1e2pEv/uKS5Ulca40g2L7KuOE3riasHoNVHOsFD5KKZgDsMk1CP3Tw9s+A==
@@ -12446,6 +12446,13 @@ rollup@^2.3.4:
   version "2.7.6"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.7.6.tgz#8e6682e64ca65eb33b896dcce902696f0415ce1a"
   integrity sha512-AdHosxHBKyBsdtbT1/AqbWNQ87O4SSxS4N9iMwEpoCDAT6e4Du3uJSy83mp3ckgmCxly5VeXGx0WHsm21Djytg==
+  optionalDependencies:
+    fsevents "~2.1.2"
+
+rollup@^2.7.3:
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.12.0.tgz#12d49d1db23020f75184da725d064d3db5245678"
+  integrity sha512-vKwc/xFkZGM9DRai3Eztpr/4g0yYDgNKVq8tLXhq/aSLbR+/EVL6rTjEW9bgWgeYEIKoN66/5w2Bjv1gzyHR/w==
   optionalDependencies:
     fsevents "~2.1.2"
 

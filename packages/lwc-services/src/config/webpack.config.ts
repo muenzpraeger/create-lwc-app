@@ -17,6 +17,7 @@ if (!ENTRIES || !fs.existsSync(ENTRIES)) {
 }
 
 // Simple mechanism to pass any arbitrary config values from the CLI for webpack
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function generateWebpackConfig(mode?: string, customConfig?: any) {
     const lwcWebpackConfig = buildWebpackConfig({
         entries: [ENTRIES],

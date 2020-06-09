@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { execSync } from 'child_process'
 import * as fs from 'fs'
 import * as path from 'path'
@@ -489,7 +490,7 @@ class CreateGenerator extends Generator {
 
         const yarnOpts = {} as any
         if (process.env.YARN_MUTEX) yarnOpts.mutex = process.env.YARN_MUTEX
-        const install = (deps: string[], opts: object) =>
+        const install = (deps: string[], opts: Record<string, unknown>) =>
             this.yarn
                 ? this.yarnInstall(deps, opts)
                 : this.npmInstall(deps, opts)

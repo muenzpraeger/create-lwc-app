@@ -9,7 +9,7 @@
     }<% if (clientserver) { %>,
     "overrides": [
         {
-            "files": ["src/server/**", "scripts/server.js", "jest.config.js"],
+            "files": ["src/server/**", "scripts/server.js", "jest.config.js", "lwc-services.config.js"],
             "env": {
                 "node": true
             }

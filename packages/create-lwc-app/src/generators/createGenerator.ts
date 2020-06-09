@@ -143,7 +143,8 @@ class CreateGenerator extends Generator {
                         message: messages.questions.appType,
                         choices: [
                             { name: 'Standard web app', value: 'standard' },
-                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' },
+                            { name: 'Electron app', value: 'electron' }
                             // TODO: Validate for later implementation
                             // {
                             //     name: 'Cordova (Electron, macOS, iOS, Android)',
@@ -196,7 +197,8 @@ class CreateGenerator extends Generator {
                         message: messages.questions.appType,
                         choices: [
                             { name: 'Standard web app', value: 'standard' },
-                            { name: 'Progressive Web App (PWA)', value: 'pwa' }
+                            { name: 'Progressive Web App (PWA)', value: 'pwa' },
+                            { name: 'Electron app', value: 'electron' }
                             // {
                             //     name: 'Cordova (Electron, iOS, Android)',
                             //     value: 'cordova'
@@ -277,6 +279,9 @@ class CreateGenerator extends Generator {
             // prettier-ignore
             // eslint-disable-next-line no-useless-escape
             'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
+        if (this.appType === 'electron') {
+            this.pjson.scripts.start = 'electron scripts/main.js'
+        }
         if (this.clientserver) {
             this.pjson.scripts.serve = 'run-p serve:client serve:api'
             this.pjson.scripts['serve:client'] = 'node scripts/server.js'
@@ -476,6 +481,9 @@ class CreateGenerator extends Generator {
         }
         if (this.typescript) {
             devDependencies.push('@types/jest')
+        }
+        if (this.appType === 'electron') {
+            devDependencies.push('electron')
         }
 
         if (hasGit) {
@@ -687,17 +695,27 @@ class CreateGenerator extends Generator {
                 )
             })
         }
-        this.fs.copyTpl(
-            this.templatePath('src/server/server.js'),
-            this.destinationPath('scripts/server.js'),
-            this
-        )
 
-        this.fs.copyTpl(
-            this.templatePath('src/server/server.js'),
-            this.destinationPath('scripts/server.js'),
-            this
-        )
+        if (this.appType !== 'electron') {
+            this.fs.copyTpl(
+                this.templatePath('src/server/server.js'),
+                this.destinationPath('scripts/server.js'),
+                this
+            )
+
+            // Why are there two of these?
+            this.fs.copyTpl(
+                this.templatePath('src/server/server.js'),
+                this.destinationPath('scripts/server.js'),
+                this
+            )
+        } else {
+            this.fs.copyTpl(
+                this.templatePath('electron/main.js'),
+                this.destinationPath('scripts/main.js'),
+                this
+            )
+        }
 
         if (this.clientserver) {
             if (!fs.existsSync('src')) {

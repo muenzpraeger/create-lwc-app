@@ -95,7 +95,11 @@ module.exports = (format = 'esm') => {
         plugins: [
             removeTypesPlugin(),
             lwcCompiler({
-                rootDir: path.join(process.cwd(), lwcConfig.moduleDir)
+                rootDir: path.join(
+                    process.cwd(),
+                    lwcConfig.sourceDir,
+                    'modules'
+                )
             }),
             replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
             isProduction && terser(),

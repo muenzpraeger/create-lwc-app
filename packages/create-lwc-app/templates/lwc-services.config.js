@@ -20,7 +20,6 @@ module.exports = {
             ],
         <% if (clientserver) { %>
             sourceDir: './src/client',
-            moduleDir: './src/client/modules',
         <% } %>
         <% if (clientserver && bundler==='webpack') {%>
             devServer: {

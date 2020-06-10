@@ -14,12 +14,6 @@ interface Config {
     mode: string
     // Clears the build directory on every build
     noclear: boolean
-    // Defines the directory where to find the individual
-    // modules. Change only when you know what you do. ;-)
-    moduleDir: string
-    // Array of directories where to look for additional
-    // modules that don't live in `moduleDir`
-    localModulesDirs: string[]
     // Default directory for source files
     sourceDir: string
     // List of resources for copying to the build folder
@@ -66,12 +60,6 @@ export const defaultLwcConfig: Config = {
     mode: 'development',
     // Clears the build directory on every build
     noclear: false,
-    // Defines the directory where to find the individual
-    // modules. Change only when you know what you do. ;-)
-    moduleDir: 'src/modules',
-    // Array of directories where to look for additional
-    // modules that don't live in `moduleDir`
-    localModulesDirs: [],
     // Default directory for source files
     sourceDir: './src',
     // List of resources for copying to the build folder

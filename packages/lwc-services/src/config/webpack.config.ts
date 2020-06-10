@@ -9,7 +9,7 @@ import { lwcConfig } from './lwcConfig'
 
 const ROOT_DIR = process.cwd()
 const OUTPUT_DIR = path.resolve(ROOT_DIR, lwcConfig.buildDir)
-const MODULE_DIR = path.resolve(ROOT_DIR, lwcConfig.moduleDir)
+const MODULE_DIR = path.resolve(ROOT_DIR, lwcConfig.sourceDir, 'modules')
 const TEMPLATES_DIR = path.resolve(ROOT_DIR, lwcConfig.sourceDir)
 let ENTRIES = path.resolve(TEMPLATES_DIR, 'index.js')
 if (!ENTRIES || !fs.existsSync(ENTRIES)) {
@@ -42,7 +42,7 @@ export function generateWebpackConfig(mode?: string, customConfig?: any) {
             })
         })
         lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
-            new CopyPlugin(resources)
+            new CopyPlugin({ patterns: resources })
         ])
     }
 

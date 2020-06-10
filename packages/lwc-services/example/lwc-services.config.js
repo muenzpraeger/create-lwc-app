@@ -9,14 +9,6 @@ module.exports = {
     mode: 'development',
     // Clears the build directory on every build
     noclear: false,
-    // Defines the directory where to find the individual
-    // modules. Change only when you know what you do. ;-)
-    moduleDir: 'src/client/modules',
-    // Array of directories where to look for additional
-    // modules that don't live in `moduleDir`
-    localModulesDirs: ['node_modules'],
-    // Defines the directory layout. Using `namespaced` is easiest. Or so.
-    layout: 'namespaced',
     // Default directory for source files
     sourceDir: './src/client',
     // List of resources for copying to the build folder

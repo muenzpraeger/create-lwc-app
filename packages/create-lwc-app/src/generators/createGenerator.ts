@@ -29,7 +29,12 @@ const pkgJson = JSON.parse(
     fs.readFileSync(__dirname + '/../../package.json', 'utf8')
 )
 const LWC_SERVICES_VERSION = pkgJson.version
-const filesDefault = ['lwc-services.config.js', 'jest.config.js', 'README.md']
+const filesDefault = [
+    'lwc.config.json',
+    'lwc-services.config.js',
+    'jest.config.js',
+    'README.md'
+]
 const filesPwa = [
     'manifest.json',
     'resources/icons/icon-16x16.png',

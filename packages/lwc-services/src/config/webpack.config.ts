@@ -42,7 +42,7 @@ export function generateWebpackConfig(mode?: string, customConfig?: any) {
             })
         })
         lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
-            new CopyPlugin(resources)
+            new CopyPlugin({ patterns: resources })
         ])
     }
 

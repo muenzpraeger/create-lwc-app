@@ -83,7 +83,6 @@ function getWebpackEntryPaths(
     return paths
 }
 
-// @ts-ignore
 function buildWebpackConfig({
     entries,
     outputDir,
@@ -115,7 +114,7 @@ function buildWebpackConfig({
         output: {
             path: outputDir,
             filename: 'app.js',
-            publicPath: '/'
+            publicPath: './'
         },
 
         module: {

@@ -8,6 +8,7 @@ import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/build'
 import { log, welcome } from '../utils/logger'
 import { analyzeStats } from '../utils/webpack/statsAnalyzer'
+import { migrateModuleResolution } from '../utils/migration'
 const spawn = require('child_process').spawn
 
 const rollupConfig = path.resolve(__dirname, '../config/rollup.config.js')
@@ -100,6 +101,8 @@ export default class Build extends Command {
                 log(messages.logs.clear)
             }
         }
+
+        await migrateModuleResolution()
 
         if (flags.bundler === 'webpack') {
             // Check if custom webpack config is passed, and if it really exists.

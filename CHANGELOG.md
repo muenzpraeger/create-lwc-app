@@ -1,5 +1,17 @@
 ## Changelog
 
+### 2020-06-10
+
+**create-lwc-app 2.1.0**
+
+-   Add default `lwc.config.json` file for module resolution to project scaffolding (https://bit.ly/lwc-module-res)
+-   Add new app type `electron` to provision a basic Electron project
+
+**lwc-services 2.1.0**
+
+-   Added automatic migration for old projects to new LWC module resolution in `build` command
+-   Added support for Electron builds
+
 ### 2020-05-07
 
 **create-lwc-app 2.0.7**

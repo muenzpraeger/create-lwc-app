@@ -66,7 +66,7 @@ If you want else you've to go with the advanced mode.
 By using new CLI parameters you can skip the whole wizard experience.
 
 -   `--yes` - mandatory flag for running the silent installation process
--   `-t | --t` - set the app type. Values are `standard` | `pwa`, default is `pwa`
+-   `-t | --t` - set the app type. Values are `standard` | `pwa` | `electron`, default is `standard`
 -   `-o | --o` - set the options (if you want to override the defaults). Values are `rollup|yarn|express|typescript`
 
 Examples:

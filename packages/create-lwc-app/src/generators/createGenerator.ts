@@ -51,7 +51,6 @@ class CreateGenerator extends Generator {
     args!: { [k: string]: string }
     bundler?: string
     clientserver?: boolean
-    cordova?: string[]
     defaults: any
     edge?: boolean
     githubUser: string | undefined
@@ -73,8 +72,7 @@ class CreateGenerator extends Generator {
             edge: opts.options.includes('edge'),
             bundler: opts.options.includes('rollup') ? 'rollup' : 'webpack',
             silent: opts.silent,
-            appType: opts.type,
-            cordova: opts.cordova
+            appType: opts.type
         }
         this.name = opts.name
     }
@@ -91,7 +89,6 @@ class CreateGenerator extends Generator {
                 license: 'MIT',
                 author: gitName,
                 appType: 'standard',
-                cordova: [],
                 bundler: 'webpack',
                 pkg: this.options.yarn ? 'yarn' : 'npm'
             },
@@ -146,11 +143,6 @@ class CreateGenerator extends Generator {
                             { name: 'Standard web app', value: 'standard' },
                             { name: 'Progressive Web App (PWA)', value: 'pwa' },
                             { name: 'Electron app', value: 'electron' }
-                            // TODO: Validate for later implementation
-                            // {
-                            //     name: 'Cordova (Electron, macOS, iOS, Android)',
-                            //     value: 'cordova'
-                            // }
                         ],
                         default: this.defaults.appType
                     },
@@ -200,10 +192,6 @@ class CreateGenerator extends Generator {
                             { name: 'Standard web app', value: 'standard' },
                             { name: 'Progressive Web App (PWA)', value: 'pwa' },
                             { name: 'Electron app', value: 'electron' }
-                            // {
-                            //     name: 'Cordova (Electron, iOS, Android)',
-                            //     value: 'cordova'
-                            // }
                         ],
                         default: this.defaults.appType
                     },
@@ -742,7 +730,6 @@ class CreateGenerator extends Generator {
 interface GeneratorOptions {
     silent: boolean
     appType: string
-    cordova: string[]
     yarn: boolean
     clientserver: boolean
     typescript: any

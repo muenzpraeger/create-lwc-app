@@ -6,14 +6,7 @@ import semverCompare = require('semver-compare')
 import { messages } from './messages/create'
 import { log, welcome } from './utils/logger'
 
-const APP_TYPES = [
-    'standard',
-    'pwa',
-    'cordova-ios',
-    'cordova-electron',
-    'cordova-android',
-    'cordova-mac'
-]
+const APP_TYPES = ['standard', 'pwa', 'electron']
 
 const OPTIONS = ['yarn', 'typescript', 'edge', 'rollup', 'express']
 
@@ -45,7 +38,6 @@ class Create extends Command {
         const silent = flags.yes
         const types = flags.type ? flags.type.split(',') : ['standard']
 
-        const cordova: string[] = []
         const nonCompliantAppTypes: string[] = []
         const nonCompliantOptions: string[] = []
 
@@ -66,19 +58,13 @@ class Create extends Command {
             return
         }
 
-        let isCordova = false
-
         types.forEach((entry) => {
-            if (entry.startsWith('cordova')) {
-                cordova.push(entry)
-                isCordova = true
-            }
             if (APP_TYPES.indexOf(entry) < 0) {
                 nonCompliantAppTypes.push(entry)
             }
         })
 
-        const type = isCordova ? 'cordova' : types[0]
+        const type = types[0]
 
         if (nonCompliantAppTypes.length > 0) {
             log(
@@ -86,11 +72,6 @@ class Create extends Command {
                 nonCompliantAppTypes.join(',')
             )
             return -1
-        }
-
-        if (cordova.length > 0 && type.length !== cordova.length) {
-            log(messages.errors.no_mix_app_types, types.join(','))
-            return
         }
 
         options.forEach((entry) => {
@@ -122,8 +103,7 @@ class Create extends Command {
                     options: options,
                     name: name,
                     silent: silent,
-                    type: type,
-                    cordova: cordova
+                    type: type
                 },
                 (err: null | Error) => {
                     if (err) reject(err)

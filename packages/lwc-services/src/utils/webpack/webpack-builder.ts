@@ -115,7 +115,7 @@ function buildWebpackConfig({
         output: {
             path: outputDir,
             filename: 'app.js',
-            publicPath: '/'
+            publicPath: './'
         },
 
         module: {
@@ -156,7 +156,7 @@ function buildWebpackConfig({
                     hot: false,
                     quiet: true,
                     compress: true,
-                    publicPath: '/',
+                    publicPath: './',
                     historyApiFallback: true
                 }
             }

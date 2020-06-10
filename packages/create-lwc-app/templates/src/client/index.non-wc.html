@@ -48,8 +48,6 @@
         />
         <meta name="apple-mobile-web-app-title" content="rcast" />
         <link rel="apple-touch-icon" href="/resources/icons/icon-152x152.png" />
-        <% } %> <% if (bundler === 'rollup') { %>
-        <script src="/main.js"></script>
         <% } %>
     </head>
     <body>
@@ -86,5 +84,8 @@
         </script>
         <% } %>
         <div id="main"></div>
+        <% if (bundler === 'rollup') { %>
+        <script src="/main.js"></script>
+        <% } %>
     </body>
 </html>

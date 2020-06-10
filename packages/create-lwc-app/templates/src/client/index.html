@@ -13,10 +13,10 @@
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=1"
         />
-        <link rel="shortcut icon" href="/resources/favicon.ico" />
+        <link rel="shortcut icon" href="./resources/favicon.ico" />
         <% if (appType === 'pwa') { %>
         <!-- Add manifest for add to home screen -->
-        <link rel="manifest" href="/manifest.json" />
+        <link rel="manifest" href="./manifest.json" />
 
         <!-- Branding -->
         <meta name="theme-color" content="#2196f3" />
@@ -26,18 +26,18 @@
             rel="icon"
             type="image/png"
             sizes="16x16"
-            href="/resources/icons/icon-16x16.png"
+            href="./resources/icons/icon-16x16.png"
         />
         <link
             rel="icon"
             type="image/png"
             sizes="32x32"
-            href="/resources/icons/icon-32x32.png"
+            href="./resources/icons/icon-32x32.png"
         />
         <link
             rel="apple-touch-icon"
             sizes="180x180"
-            href="/resources/icons/icon-180x180.png"
+            href="./resources/icons/icon-180x180.png"
         />
 
         <!-- Add to home screen for Safari on iOS -->
@@ -47,9 +47,9 @@
             content="black-translucent"
         />
         <meta name="apple-mobile-web-app-title" content="rcast" />
-        <link rel="apple-touch-icon" href="/resources/icons/icon-152x152.png" />
+        <link rel="apple-touch-icon" href="./resources/icons/icon-152x152.png" />
         <% } %>
-        <% if (bundler === 'rollup') { %><script src="/main.js"></script><% } %>
+        <% if (bundler === 'rollup') { %><script src="./main.js"></script><% } %>
     </head>
     <body>
         <% if (appType === 'pwa') { %>
@@ -79,7 +79,7 @@
         <% } %>
         <my-app></my-app>
         <% if (bundler === 'rollup') { %>
-        <script src="/main.js"></script>
+        <script src="./main.js"></script>
         <% } %>
     </body>
 </html>

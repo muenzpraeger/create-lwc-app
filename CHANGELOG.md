@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2020-06-17
+
+**create-lwc-app 2.1.1**
+
+-   Added `eslint-plugin-inclusive-language` configuration
+
+**lwc-services 2.1.1**
+
+-   Added `eslint-plugin-inclusive-language` dependency
+
 ### 2020-06-10
 
 **create-lwc-app 2.1.0**

@@ -1,6 +1,6 @@
 {
     "name": "lwc-services",
-    "version": "2.1.0",
+    "version": "2.1.1",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"
@@ -34,6 +34,7 @@
         "deepmerge": "^4.0.0",
         "error-overlay-webpack-plugin": "^0.4.1",
         "eslint": "^6.3",
+        "eslint-plugin-inclusive-language": "^1.0.0",
         "globby": "^11.0.0",
         "html-webpack-plugin": "^4.0.1",
         "jest": "^26",

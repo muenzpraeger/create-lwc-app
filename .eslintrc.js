@@ -1,6 +1,8 @@
 module.exports = {
     parser: '@typescript-eslint/parser',
 
+    plugins: ['inclusive-language'],
+
     extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
 
     parserOptions: {
@@ -30,6 +32,8 @@ module.exports = {
         '@typescript-eslint/no-explicit-any': 0,
 
         // Helper
-        '@typescript-eslint/ban-ts-ignore': 0
+        '@typescript-eslint/ban-ts-ignore': 0,
+
+        'inclusive-language/use-inclusive-words': 2
     }
 }

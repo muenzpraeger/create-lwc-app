@@ -39,5 +39,8 @@ module.exports = {
                 NODE_ENV: 'production'
             }
         }
+    },
+    lwcCompilerStylesheetConfig: {
+        customProperties: { allowDefinition: true }
     }
 }

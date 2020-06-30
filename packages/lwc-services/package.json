@@ -33,7 +33,7 @@
         "cross-env": "^7.0.2",
         "deepmerge": "^4.0.0",
         "error-overlay-webpack-plugin": "^0.4.1",
-        "eslint": "^6.3",
+        "eslint": "^7.3",
         "eslint-plugin-inclusive-language": "^1.0.0",
         "globby": "^11.0.0",
         "html-webpack-plugin": "^4.0.1",

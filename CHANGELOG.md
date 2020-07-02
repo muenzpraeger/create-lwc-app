@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2020-06-02
+
+**create-lwc-app 2.1.2**
+
+-   New projects get initialized with a `main` branch in git (no `master` anymore)
+
 ### 2020-06-17
 
 **create-lwc-app 2.1.1**

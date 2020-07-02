@@ -483,6 +483,7 @@ class CreateGenerator extends Generator {
         if (hasGit) {
             try {
                 execSync('git init', { stdio: 'ignore' })
+                execSync('git checkout -b main', { stdio: 'ignore' })
                 hasGit = true
             } catch {
                 // Do nothing

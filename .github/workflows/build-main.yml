@@ -5,7 +5,7 @@ name: create-lwc-app build
 on:
     push:
         branches:
-            - master
+            - main
 
 # Jobs to be executed
 jobs:

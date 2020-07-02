@@ -2,7 +2,7 @@
 
 A tool for setting up your Lightning Web Components projects.
 
-[![Github Workflow](https://github.com/muenzpraeger/create-lwc-app/workflows/create-lwc-app%20build/badge.svg?branch=master)](https://github.com/muenzpraeger/create-lwc-app/actions)
+[![Github Workflow](https://github.com/muenzpraeger/create-lwc-app/workflows/create-lwc-app%20build/badge.svg?branch=main)](https://github.com/muenzpraeger/create-lwc-app/actions)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 

@@ -14,9 +14,6 @@ module.exports = {
         <% if (appType === 'pwa' && clientserver) { %>
             , { from: 'src/client/manifest.json', to: 'dist/manifest.json'}
         <% } %>
-        <% if (appType === 'pwa' && !clientserver) { %>
-            , { from: 'src/client/manifest.json', to: 'dist/manifest.json'}
-        <% } %>
             ],
         <% if (clientserver) { %>
             sourceDir: './src/client',

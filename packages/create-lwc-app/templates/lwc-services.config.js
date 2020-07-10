@@ -1,7 +1,7 @@
 // Find the full example of all available configuration options at
 // https://github.com/muenzpraeger/create-lwc-app/blob/main/packages/lwc-services/example/lwc-services.config.js
 module.exports = {
-    resources: [{ from: 'src<% if (clientserver) { %>/client<% } %>/resources/<% if (bundler === 'rollup') { %>*<% } %>', to: 'dist/resources/' }
+    resources: [{ from: 'src<% if (clientserver) { %>/client<% } %>/resources/<% if (bundler === 'rollup') { %>**<% } %>', to: 'dist/resources/' }
         <% if ((appType === 'pwa' || bundler==='rollup') && !clientserver) { %>
             , { from: 'src/index.html', to: 'dist/'}, { from: 'src/manifest.json', to: 'dist/'}
         <% } %>

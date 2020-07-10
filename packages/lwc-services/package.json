@@ -38,7 +38,7 @@
         "globby": "^11.0.0",
         "html-webpack-plugin": "^4.0.1",
         "jest": "^26",
-        "lwc": "^1.6.0",
+        "lwc": "^1.7.0",
         "node-emoji": "^1.10.0",
         "nodemon": "^2.0.1",
         "prettier": "^2.0",
@@ -57,7 +57,7 @@
         "typescript": "^3.8.3",
         "webpack": "^4.42.1",
         "webpack-dev-server": "^3.3",
-        "webpack-merge": "^4.2.1",
+        "webpack-merge": "^5.0.9",
         "workbox-webpack-plugin": "^5.1.2"
     },
     "devDependencies": {

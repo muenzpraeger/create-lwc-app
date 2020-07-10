@@ -1,5 +1,12 @@
 ## Changelog
 
+### 2020-06-10
+
+**create-lwc-app 2.1.4**
+
+-   Fixes an issue where new Rollup + PWA projects added an additional config entry in `lwc-services.config.json`
+-   Fixes an issue where new Rollup projects had a wrong glob pattern in `lwc-services.config.json` for copying resources
+
 ### 2020-06-02
 
 **create-lwc-app 2.1.2**

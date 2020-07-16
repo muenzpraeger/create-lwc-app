@@ -1,0 +1,16 @@
+name: Autoresponse PR
+
+on:
+    pull_request:
+        types: [opened]
+
+jobs:
+    comment:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: rytswd/respost@v0.1.0
+              with:
+                  title: ${{ secrets.AUTORESPONSE_TITLE }}
+                  body: ${{ secrets.AUTORESPONSE_BODY_PR }}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

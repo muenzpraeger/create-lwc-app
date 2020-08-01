@@ -2427,19 +2427,19 @@
     babel-plugin-transform-dynamic-import "^2.1.0"
     babel-preset-jest "^25.4.0"
 
-"@lwc/module-resolver@1.7.2":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@lwc/module-resolver/-/module-resolver-1.7.2.tgz#8793c49dac3c785328cb2c6c59d56c720dc6116c"
-  integrity sha512-fnNl8PmjjcdMq6pDO+wPRxkuhfdqW3jYTWBQ+2Uc1HQLX3EIiPTkG+R+u8QxAI8KQlib+eOpkdTC2JPz3B9ByA==
+"@lwc/module-resolver@1.7.7":
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/@lwc/module-resolver/-/module-resolver-1.7.7.tgz#3f0b6f64eaf86f1ebe118cc36e8c77a7d7136150"
+  integrity sha512-hu0U/1wRq44c/Xc55xzvpz4lC3BAgDXPyspNBD4SkvhKLacevPWQn4CRfznvMpO9U10ewTQcEw9qzMuDPjAPWw==
   dependencies:
     resolve "~1.17.0"
 
 "@lwc/rollup-plugin@^1.7.0":
-  version "1.7.2"
-  resolved "https://registry.yarnpkg.com/@lwc/rollup-plugin/-/rollup-plugin-1.7.2.tgz#f2af0b23cd862808be90b3f2090178f3e19db55c"
-  integrity sha512-JkLem1PQc4b4OUa0SSGeVcG3ndn7MomWoEIwMHivsOVfLsT/SOVk7KMwWL+0rf3+GA1OTwf/PAY4vSMUbCL4FA==
+  version "1.7.7"
+  resolved "https://registry.yarnpkg.com/@lwc/rollup-plugin/-/rollup-plugin-1.7.7.tgz#ae8f17fdcd95362dcda1db42c51eb80dec53af52"
+  integrity sha512-SnUg75z4IuVYIDi7siB8zKidYB8AJXZKfOUnAemDw+xI67pEq7CUvhA7uHHiO1lumMR5xf2uMqKSpgexUG8uTg==
   dependencies:
-    "@lwc/module-resolver" "1.7.2"
+    "@lwc/module-resolver" "1.7.7"
     "@rollup/pluginutils" "~3.0.10"
 
 "@lwc/shared@1.7.2":
@@ -3000,10 +3000,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.0.tgz#69a23a3ad29caf0097f06eda59b361ee2f0639f6"
   integrity sha1-aaI6OtKcrwCX8G7aWbNh7i8GOfY=
 
-"@types/mocha@^7.0.2":
-  version "7.0.2"
-  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-7.0.2.tgz#b17f16cf933597e10d6d78eae3251e692ce8b0ce"
-  integrity sha512-ZvO2tAcjmMi8V/5Z3JsyofMe3hasRcaw88cto5etSVMwVQfeivGAlEYmaQgceUSVYFofVjT+ioHsATjdWcFt1w==
+"@types/mocha@^8.0.0":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-8.0.1.tgz#813b4ff8dd9920d652e1e6b451ff1e371a4561d2"
+  integrity sha512-TBZ6YdX7IZz4U9/mBoB8zCMRN1vXw8QdihRcZxD3I0Cv/r8XF8RggZ8WiXFws4aj5atzRR5hJrYer7g8nXwpnQ==
 
 "@types/node@*", "@types/node@>= 8", "@types/node@^14.0.11":
   version "14.0.20"

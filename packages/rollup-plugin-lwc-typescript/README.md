@@ -17,7 +17,7 @@ function rollupConfig() {
             format: "esm"
         },
         plugins: [
-            removeTypesPlugin(),
+            lwcTypescriptPlugin(),
             lwcRollupPlugin({
                 modules: "src/modules",
                 stylesheetConfig: {

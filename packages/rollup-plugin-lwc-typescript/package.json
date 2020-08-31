@@ -1,6 +1,6 @@
 {
     "name": "rollup-plugin-lwc-typescript",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": "René Winkelmeyer @muenzpraeger",
     "description": "Rollup plugin to transform TypeScript files to JavaScript for LWC",
     "main": "src/index.js",

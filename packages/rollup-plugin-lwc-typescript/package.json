@@ -1,0 +1,25 @@
+{
+    "name": "rollup-plugin-lwc-typescript",
+    "version": "1.0.1",
+    "author": "René Winkelmeyer @muenzpraeger",
+    "description": "Rollup plugin to transform TypeScript files to JavaScript for LWC",
+    "main": "src/index.js",
+    "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
+    "license": "MIT",
+    "dependencies": {
+        "@babel/core": "^7.11.4",
+        "@babel/plugin-transform-typescript": "^7.11.0"
+    },
+    "engines": {
+        "node": ">=10.0.0"
+    },
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
+    "keywords": [
+        "oclif",
+        "lwc",
+        "salesforce",
+        "web components",
+        "lightning"
+    ],
+    "repository": "muenzpraeger/create-lwc-app"
+}

@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2020-08-31
+
+**lwc-services 2.1.6**
+
+-   Move to _rollup-plugin-lwc-typescript_ for Rollup TypeScript transform
+
+**rollup-plugin-lwc-typescript 1.0.1**
+
+-   Publish initial version
+
 ### 2020-06-10
 
 **create-lwc-app 2.1.4**

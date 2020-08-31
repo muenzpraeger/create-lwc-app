@@ -4,37 +4,13 @@ const path = require('path')
 const replace = require('@rollup/plugin-replace')
 const lwcCompiler = require('@lwc/rollup-plugin')
 const { terser } = require('rollup-plugin-terser')
-const { transform } = require('@babel/core')
-const babelTsPlugin = require('@babel/plugin-transform-typescript')
 const { lwcConfig } = require('./lwcConfig')
 const fs = require('fs')
+import typescriptPlugin from 'rollup-plugin-lwc-typescript'
 const { generateSW, injectManifest } = require('rollup-plugin-workbox')
 import copy from 'rollup-plugin-copy-glob'
 import serve from 'rollup-plugin-serve'
 import livereload from 'rollup-plugin-livereload'
-
-const babelOptions = {
-    babelrc: false,
-    plugins: [babelTsPlugin],
-    parserOpts: {
-        plugins: [
-            ['decorators', { decoratorsBeforeExport: true }],
-            ['classProperties', {}]
-        ]
-    }
-}
-
-function removeTypesPlugin() {
-    return {
-        name: 'ts-removal',
-        transform(src, id) {
-            if (path.extname(id) === '.ts') {
-                const { code, map } = transform(src, babelOptions)
-                return { code, map }
-            }
-        }
-    }
-}
 
 const env = process.env.NODE_ENV || lwcConfig.mode
 
@@ -93,7 +69,7 @@ module.exports = (format = 'esm') => {
             return 'common'
         },
         plugins: [
-            removeTypesPlugin(),
+            typescriptPlugin(),
             lwcCompiler({
                 rootDir: path.join(
                     process.cwd(),

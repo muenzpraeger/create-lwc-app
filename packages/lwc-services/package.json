@@ -1,6 +1,6 @@
 {
     "name": "lwc-services",
-    "version": "2.1.4",
+    "version": "2.1.6",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"
@@ -47,6 +47,7 @@
         "rollup-plugin-compat": "^0.22.0",
         "rollup-plugin-copy-glob": "^0.3.1",
         "rollup-plugin-livereload": "^1.1.0",
+        "rollup-plugin-lwc-typescript": "^1.0.0",
         "rollup-plugin-serve": "^1.0.1",
         "rollup-plugin-terser": "^6.1.0",
         "rollup-plugin-workbox": "^5.0.1",

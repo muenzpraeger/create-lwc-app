@@ -13,7 +13,7 @@
     "engines": {
         "node": ">=10.0.0"
     },
-    "homepage": "https://github.com/muenzpraeger/create-lwc-app",
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app/packages/rollup-plugin-lwc-typescript",
     "keywords": [
         "oclif",
         "lwc",

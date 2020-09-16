@@ -2,11 +2,11 @@
 
 ### 2020-09-16
 
-**create-lwc-app 2.1.7**
+**create-lwc-app 2.1.9**
 
 -   Code cleanup and dependency updates
 
-**lwc-services 2.1.7**
+**lwc-services 2.1.9**
 
 -   Code cleanup and dependency updates
 

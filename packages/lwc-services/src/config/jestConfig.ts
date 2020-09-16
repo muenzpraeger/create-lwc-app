@@ -1,10 +1,7 @@
-// const jestLwcConfig = require('@lwc/jest-preset')
-// import merge = require('deepmerge')
+const jestLwcConfig = require('@lwc/jest-preset')
 import { resolve } from 'path'
 
-const jestDefaultConfig = {
-    preset: '@lwc/jest-preset',
+export const jestConfig = {
+    ...jestLwcConfig,
     resolver: resolve(__dirname, '../utils/resolver.js')
 }
-
-export const jestConfig = jestDefaultConfig

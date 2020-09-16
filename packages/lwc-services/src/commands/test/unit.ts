@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import merge = require('deepmerge')
-import * as fs from 'fs'
-import * as path from 'path'
+import { existsSync } from 'fs'
+import { resolve } from 'path'
 
 import { jestConfig } from '../../config/jestConfig'
 import { messages } from '../../messages/test_unit'
@@ -43,23 +43,20 @@ export default class Test extends Command {
         // Inspiration of this implementation taken from https://github.com/salesforce/lwc-jest. Thank you, Trevor!
         let jestFinalConfig = jestConfig
 
-        if (
-            !fs.existsSync('jest.config.js') &&
-            !fs.existsSync('jest.config.json')
-        ) {
+        if (!existsSync('jest.config.js') && !existsSync('jest.config.json')) {
             log(messages.logs.default_configuration)
         } else {
             log(messages.logs.custom_configuration)
             // Yay, someone uses a custom configuration.
-            if (fs.existsSync('jest.config.js')) {
-                const jestCustomConfigJs = require(path.resolve(
+            if (existsSync('jest.config.js')) {
+                const jestCustomConfigJs = require(resolve(
                     process.cwd(),
                     'jest.config.js'
                 ))
                 jestFinalConfig = merge(jestFinalConfig, jestCustomConfigJs)
             }
-            if (fs.existsSync('jest.config.json')) {
-                const jestCustomConfigJson = require(path.resolve(
+            if (existsSync('jest.config.json')) {
+                const jestCustomConfigJson = require(resolve(
                     process.cwd(),
                     'jest.config.json'
                 ))

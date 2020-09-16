@@ -1,6 +1,6 @@
 import { Command, flags } from '@oclif/command'
-import * as fs from 'fs'
-import * as path from 'path'
+import { existsSync } from 'fs'
+import { resolve } from 'path'
 import * as rimraf from 'rimraf'
 
 import { lwcConfig } from '../config/lwcConfig'
@@ -11,7 +11,7 @@ import { analyzeStats } from '../utils/webpack/statsAnalyzer'
 import { migrateModuleResolution } from '../utils/migration'
 const spawn = require('child_process').spawn
 
-const rollupConfig = path.resolve(__dirname, '../config/rollup.config.js')
+const rollupConfig = resolve(__dirname, '../config/rollup.config.js')
 
 function buildWebpack(webpackConfig: any) {
     const webpack = require('webpack')
@@ -89,14 +89,14 @@ export default class Build extends Command {
         const BUILD_DIR = lwcConfig.buildDir
 
         // Check if given source directory exists. If not we're exiting.
-        if (!fs.existsSync(SOURCE_DIR)) {
+        if (!existsSync(SOURCE_DIR)) {
             log(messages.errors.no_source_dir, SOURCE_DIR)
             return
         }
 
         // Clearing build directory, if the user didn't override.
         if (!flags.noclear) {
-            if (fs.existsSync(BUILD_DIR)) {
+            if (existsSync(BUILD_DIR)) {
                 rimraf.sync(BUILD_DIR)
                 log(messages.logs.clear)
             }
@@ -107,7 +107,7 @@ export default class Build extends Command {
         if (flags.bundler === 'webpack') {
             // Check if custom webpack config is passed, and if it really exists.
             if (flags.webpack) {
-                if (!fs.existsSync(flags.webpack)) {
+                if (!existsSync(flags.webpack)) {
                     log(messages.errors.no_webpack)
                     return
                 }
@@ -119,7 +119,7 @@ export default class Build extends Command {
 
             if (flags.webpack) {
                 log(messages.logs.custom_configuration)
-                webpackConfigCustom = require(path.resolve(
+                webpackConfigCustom = require(resolve(
                     process.cwd(),
                     flags.webpack
                 ))
@@ -136,7 +136,7 @@ export default class Build extends Command {
             }
 
             if (flags.destination && flags.destination !== lwcConfig.buildDir) {
-                webpackConfig.output.path = path.resolve(
+                webpackConfig.output.path = resolve(
                     process.cwd(),
                     flags.destination
                 )

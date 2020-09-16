@@ -1,5 +1,5 @@
 import merge = require('deepmerge')
-import * as path from 'path'
+import { resolve } from 'path'
 
 interface ResourceFolder {
     from: string
@@ -100,7 +100,7 @@ export const defaultLwcConfig: Config = {
 function buildConfig(): Config {
     let combinedConfig: Config = defaultLwcConfig
     try {
-        const fileName = path.resolve(process.cwd(), 'lwc-services.config.js')
+        const fileName = resolve(process.cwd(), 'lwc-services.config.js')
         const config = require(fileName)
         combinedConfig = merge(defaultLwcConfig, config)
         return combinedConfig

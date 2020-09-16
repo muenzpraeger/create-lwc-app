@@ -1,6 +1,6 @@
 import * as webpack from 'webpack'
 import * as webpackMerge from 'webpack-merge'
-import * as path from 'path'
+import { resolve } from 'path'
 
 const ModuleResolver = require('./module-resolver')
 const moduleLoader = require.resolve('./module-loader')
@@ -83,6 +83,7 @@ function getWebpackEntryPaths(
     return paths
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 function buildWebpackConfig({
     entries,
@@ -124,7 +125,7 @@ function buildWebpackConfig({
                     test: /\.(js|ts|html|css)$/,
                     include: [
                         moduleDir,
-                        path.resolve(process.cwd(), 'node_modules')
+                        resolve(process.cwd(), 'node_modules')
                     ],
                     use: [
                         {

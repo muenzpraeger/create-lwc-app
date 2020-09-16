@@ -1,6 +1,6 @@
 import { Command, flags } from '@oclif/command'
-import * as fs from 'fs'
-import * as path from 'path'
+import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'fs'
+import { join, resolve } from 'path'
 import util = require('util')
 import * as webpackMerge from 'webpack-merge'
 
@@ -10,7 +10,7 @@ import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/sniff'
 import { log, welcome } from '../utils/logger'
 
-const rollupConfig = path.resolve(__dirname, '../config/rollup.config.js')
+const rollupConfig = resolve(__dirname, '../config/rollup.config.js')
 
 export default class Sniff extends Command {
     static description = messages.description
@@ -43,8 +43,8 @@ export default class Sniff extends Command {
             return
         }
 
-        if (!fs.existsSync(flags.directory)) {
-            fs.mkdirSync(flags.directory)
+        if (!existsSync(flags.directory)) {
+            mkdirSync(flags.directory)
         }
 
         log(messages.logs.calculating_configurations)
@@ -53,7 +53,7 @@ export default class Sniff extends Command {
         if (flags.webpack) {
             // Merging custom webpack config file
             log(messages.logs.custom_configuration)
-            const webpackConfigCustom = require(path.resolve(
+            const webpackConfigCustom = require(resolve(
                 process.cwd(),
                 flags.webpack
             ))
@@ -67,23 +67,20 @@ export default class Sniff extends Command {
 
         const inspectOptions = { depth: null }
 
-        fs.writeFileSync(
-            path.join(flags.directory, 'jest.config.js'),
+        writeFileSync(
+            join(flags.directory, 'jest.config.js'),
             'module.exports = ' + util.inspect(jestConfig, inspectOptions)
         )
         log(messages.logs.write_webpack_config)
-        fs.writeFileSync(
-            path.join(flags.directory, 'webpack.config.js'),
+        writeFileSync(
+            join(flags.directory, 'webpack.config.js'),
             'module.exports = ' + util.inspect(webpackConfig, inspectOptions)
         )
         log(messages.logs.write_rollup_config)
-        fs.copyFileSync(
-            rollupConfig,
-            path.join(flags.directory, 'rollup.config.js')
-        )
+        copyFileSync(rollupConfig, join(flags.directory, 'rollup.config.js'))
         log(messages.logs.write_lwc_config)
-        fs.writeFileSync(
-            path.join(flags.directory, 'lwc-services.config.js'),
+        writeFileSync(
+            join(flags.directory, 'lwc-services.config.js'),
             'module.exports = ' + util.inspect(defaultLwcConfig, inspectOptions)
         )
         log(messages.logs.enjoy)

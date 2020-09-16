@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import { execSync } from 'child_process'
-import * as fs from 'fs'
-import * as path from 'path'
+import { existsSync, mkdirSync, readFileSync } from 'fs'
+import { join, resolve } from 'path'
 import * as Generator from 'yeoman-generator'
 
 import { messages } from '../messages/createGenerator'
@@ -26,7 +26,7 @@ try {
 }
 
 const pkgJson = JSON.parse(
-    fs.readFileSync(__dirname + '/../../package.json', 'utf8')
+    readFileSync(__dirname + '/../../package.json', 'utf8')
 )
 const LWC_SERVICES_VERSION = pkgJson.version
 const filesDefault = [
@@ -408,16 +408,16 @@ class CreateGenerator extends Generator {
         this.pjson.bugs =
             this.defaults.bugs ||
             `https://github.com/${this.pjson.repository}/issues`
-        const targetPath: string = path.resolve(this.pjson.name)
-        if (!fs.existsSync(targetPath)) {
-            fs.mkdirSync(targetPath, { recursive: true })
+        const targetPath: string = resolve(this.pjson.name)
+        if (!existsSync(targetPath)) {
+            mkdirSync(targetPath, { recursive: true })
         }
         this.destinationRoot(targetPath)
         process.chdir(this.destinationRoot())
     }
 
     writing() {
-        this.sourceRoot(path.join(__dirname, '../../templates'))
+        this.sourceRoot(join(__dirname, '../../templates'))
 
         this.fs.writeJSON(
             this.destinationPath('./package.json'),
@@ -545,7 +545,7 @@ class CreateGenerator extends Generator {
             )
         })
         const fileExtension = this.typescript ? '.ts' : '.js'
-        if (!fs.existsSync('src')) {
+        if (!existsSync('src')) {
             this.fs.copyTpl(
                 this.templatePath('src/client/index.non-wc.html'),
                 this.destinationPath(
@@ -713,7 +713,7 @@ class CreateGenerator extends Generator {
         }
 
         if (this.clientserver) {
-            if (!fs.existsSync('src')) {
+            if (!existsSync('src')) {
                 this.fs.copyTpl(
                     this.templatePath('src/server/api'.concat(fileExtension)),
                     this.destinationPath(

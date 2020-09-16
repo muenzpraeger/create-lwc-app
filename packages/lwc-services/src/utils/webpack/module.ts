@@ -1,4 +1,4 @@
-import * as path from 'path'
+import { basename, dirname, relative, resolve, sep } from 'path'
 
 function getConfig(opts: any) {
     if (opts.module === null || typeof opts.module.path !== 'string') {
@@ -35,17 +35,17 @@ function getInfoFromPath(file: string, config: any) {
             const split = file.split('.')
             jsFile = split.slice(0, -1).join('.') + '.js'
         }
-        const parent = path.dirname(file).split('/').pop()
-        const basename = path.basename(file).split('.').slice(0, -1).join('.')
-        if (parent !== basename) {
-            jsFile = path.resolve(path.dirname(file), `${parent}.js`)
+        const parent = dirname(file).split('/').pop()
+        const baseFilename = basename(file).split('.').slice(0, -1).join('.')
+        if (parent !== baseFilename) {
+            jsFile = resolve(dirname(file), `${parent}.js`)
         }
 
-        throw new Error(`Invalid file path. ${file} is not part of ${root}`)
+        throw new Error(`Invalid file  ${file} is not part of ${root}`)
     }
 
-    const rel = path.relative(root, file)
-    const parts = rel.split(path.sep)
+    const rel = relative(root, file)
+    const parts = rel.split(sep)
 
     const id = `${parts[0]}-${parts[1]}`
 

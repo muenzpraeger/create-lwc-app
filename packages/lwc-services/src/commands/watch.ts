@@ -1,7 +1,7 @@
 import { Command, flags } from '@oclif/command'
 import cli from 'cli-ux'
-import * as fs from 'fs'
-import * as path from 'path'
+import { existsSync } from 'fs'
+import { resolve } from 'path'
 import * as webpack from 'webpack'
 import * as webpackMerge from 'webpack-merge'
 
@@ -11,7 +11,7 @@ import { messages } from '../messages/watch'
 import { log, welcome } from '../utils/logger'
 const spawn = require('child_process').spawn
 
-const rollupConfig = path.resolve(__dirname, '../config/rollup.config.js')
+const rollupConfig = resolve(__dirname, '../config/rollup.config.js')
 
 export default class Watch extends Command {
     static description = messages.description
@@ -62,7 +62,7 @@ export default class Watch extends Command {
         if (flags.bundler === 'webpack') {
             // Check if custom webpack config is passed, and if it really exists.
             if (flags.webpack) {
-                if (!fs.existsSync(flags.webpack)) {
+                if (!existsSync(flags.webpack)) {
                     log(messages.errors.no_webpack)
                     return
                 }
@@ -75,7 +75,7 @@ export default class Watch extends Command {
             // Merging custom webpack config file
             if (flags.webpack) {
                 log(messages.logs.custom_configuration)
-                const webpackConfigCustom = require(path.resolve(
+                const webpackConfigCustom = require(resolve(
                     process.cwd(),
                     flags.webpack
                 ))

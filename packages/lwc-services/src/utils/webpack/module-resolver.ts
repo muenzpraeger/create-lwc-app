@@ -1,9 +1,9 @@
-import * as path from 'path'
+import { basename, dirname, extname, resolve } from 'path'
 
 const { getConfig, isValidModuleName } = require('./module')
 const lwcResolver = require('@lwc/module-resolver')
 
-const EMPTY_STYLE = path.resolve(__dirname, 'mocks', 'empty-style.js')
+const EMPTY_STYLE = resolve(__dirname, 'mocks', 'empty-style.js')
 
 /**
  * Webpack plugin to resolve LWC modules.
@@ -54,25 +54,25 @@ module.exports = class ModuleResolver {
 
     isImplicitHTMLImport(importee: string, importer: string) {
         return (
-            path.extname(importer) === '.js' &&
-            path.extname(importee) === '.html' &&
-            path.dirname(importer) === path.dirname(importee) &&
-            path.basename(importer, '.js') === path.basename(importee, '.html')
+            extname(importer) === '.js' &&
+            extname(importee) === '.html' &&
+            dirname(importer) === dirname(importee) &&
+            basename(importer, '.js') === basename(importee, '.html')
         )
     }
 
     resolveFile(req: any, ctx: any, cb: any) {
         const { path: resourcePath, query } = req
-        const extname = path.extname(resourcePath)
+        const extFilename = extname(resourcePath)
 
-        if (extname !== '.css' && extname !== '.html') {
+        if (extFilename !== '.css' && extFilename !== '.html') {
             return cb()
         }
 
         this.fs.stat(resourcePath, (err: { code: string } | null) => {
             if (err !== null && err.code === 'ENOENT') {
                 if (
-                    extname === '.css' ||
+                    extFilename === '.css' ||
                     this.isImplicitHTMLImport(resourcePath, req.context.issuer)
                 ) {
                     return cb(null, {

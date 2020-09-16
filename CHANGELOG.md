@@ -1,5 +1,15 @@
 ## Changelog
 
+### 2020-09-16
+
+**create-lwc-app 2.1.7**
+
+-   Code cleanup and dependency updates
+
+**lwc-services 2.1.7**
+
+-   Code cleanup and dependency updates
+
 ### 2020-08-31
 
 **lwc-services 2.1.6**

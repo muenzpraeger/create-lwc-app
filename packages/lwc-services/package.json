@@ -1,6 +1,6 @@
 {
     "name": "lwc-services",
-    "version": "2.1.6",
+    "version": "2.1.7",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"
@@ -33,15 +33,17 @@
         "cross-env": "^7.0.2",
         "deepmerge": "^4.0.0",
         "error-overlay-webpack-plugin": "^0.4.1",
-        "eslint": "^7.3",
+        "eslint": "^7.2.0",
         "eslint-plugin-inclusive-language": "^1.2.0",
         "globby": "^11.0.0",
         "html-webpack-plugin": "^4.0.1",
+        "husky": "^4.2.3",
         "jest": "^26",
+        "lint-staged": "^10.0.9",
         "lwc": "^1.7.0",
         "node-emoji": "^1.10.0",
         "nodemon": "^2.0.1",
-        "prettier": "^2.0",
+        "prettier": "^2.0.2",
         "rimraf": "^3.0",
         "rollup": "^2.3.4",
         "rollup-plugin-compat": "^0.22.0",

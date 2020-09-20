@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2020-09-20
+
+**create-lwc-app 2.2.0**
+
+-   Code cleanup and dependency updates
+
+**lwc-services 2.2.0**
+
+-   Support for LWC monorepos and Jest
+-   Code cleanup and dependency updates
+
 ### 2020-09-16
 
 **create-lwc-app 2.1.9**

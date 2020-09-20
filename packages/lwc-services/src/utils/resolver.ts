@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
-const lwcResolver = require('@lwc/jest-resolver')
+const lwcJestResolver = require('@lwc/jest-resolver')
+const lwcModuleResolver = require('@lwc/module-resolver')
 const { isValidModuleName, getInfoFromId } = require('./webpack/module')
 import { lwcConfig } from '../config/lwcConfig'
 
@@ -48,6 +49,17 @@ module.exports = function (modulePath: string, options: any): string {
     if (isValidModuleName(modulePath)) {
         const { modulesDir } = getProjectInfo()
         const { ns, name } = getInfoFromId(modulePath)
+
+        try {
+            const mod = lwcModuleResolver.resolveModule(
+                modulePath,
+                process.cwd()
+            )
+            return mod.entry
+        } catch (e) {
+            // do nothing
+        }
+
         const file = resolveAsFile(
             path.join(modulesDir, ns, name, name),
             options.extensions
@@ -58,5 +70,5 @@ module.exports = function (modulePath: string, options: any): string {
         }
     }
     // eslint-disable-next-line prefer-rest-params
-    return lwcResolver(...arguments)
+    return lwcJestResolver(...arguments)
 }

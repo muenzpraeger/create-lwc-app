@@ -6,5 +6,6 @@
             "forcePublish": "*"
         }
     },
-    "packages": ["packages/create-lwc-app", "packages/lwc-services"]
+    "packages": ["packages/create-lwc-app", "packages/lwc-services"],
+    "version": "2.1.9"
 }

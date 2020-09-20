@@ -2,7 +2,7 @@ import { Command, flags } from '@oclif/command'
 import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'fs'
 import { join, resolve } from 'path'
 import util = require('util')
-import * as webpackMerge from 'webpack-merge'
+import { merge } from 'webpack-merge'
 
 import { jestConfig } from '../config/jestConfig'
 import { defaultLwcConfig } from '../config/lwcConfig'
@@ -57,10 +57,7 @@ export default class Sniff extends Command {
                 process.cwd(),
                 flags.webpack
             ))
-            webpackConfig = webpackMerge.smart(
-                webpackConfig,
-                webpackConfigCustom
-            )
+            webpackConfig = merge(webpackConfig, webpackConfigCustom)
         }
 
         log(messages.logs.write_jest_config)

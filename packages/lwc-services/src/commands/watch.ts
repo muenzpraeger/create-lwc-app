@@ -3,7 +3,7 @@ import cli from 'cli-ux'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
 import * as webpack from 'webpack'
-import * as webpackMerge from 'webpack-merge'
+import { merge } from 'webpack-merge'
 
 import { lwcConfig } from '../config/lwcConfig'
 import { generateWebpackConfig } from '../config/webpack.config'
@@ -79,10 +79,7 @@ export default class Watch extends Command {
                     process.cwd(),
                     flags.webpack
                 ))
-                webpackConfig = webpackMerge.smart(
-                    webpackConfig,
-                    webpackConfigCustom
-                )
+                webpackConfig = merge(webpackConfig, webpackConfigCustom)
             }
 
             if (flags.host && flags.host !== lwcConfig.devServer.host) {

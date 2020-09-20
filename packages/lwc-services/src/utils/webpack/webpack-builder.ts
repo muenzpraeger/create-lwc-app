@@ -1,5 +1,5 @@
 import * as webpack from 'webpack'
-import * as webpackMerge from 'webpack-merge'
+import { merge } from 'webpack-merge'
 import { resolve } from 'path'
 
 const ModuleResolver = require('./module-resolver')
@@ -165,7 +165,7 @@ function buildWebpackConfig({
     }
 
     if (customConfig) {
-        serverConfig = webpackMerge.smart(serverConfig, customConfig)
+        serverConfig = merge(serverConfig, customConfig)
     }
 
     if (!serverConfig.entry || isWebpackEntryFunc(serverConfig.entry)) {
@@ -189,7 +189,7 @@ function buildWebpackConfig({
             ]
         }
     }
-    serverConfig = webpackMerge.smart(serverConfig, lwcModuleResolver)
+    serverConfig = merge(serverConfig, lwcModuleResolver)
 
     return serverConfig
 }

@@ -4,11 +4,11 @@
 
 **create-lwc-app 2.2.2**
 
-- Dependency updates
+-   Dependency updates
 
 **lwc-services 2.2.2**
 
-- Dependency updates
+-   Dependency updates
 
 ### 2020-09-22
 

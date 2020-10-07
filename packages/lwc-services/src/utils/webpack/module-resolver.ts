@@ -34,7 +34,7 @@ module.exports = class ModuleResolver {
             context: { issuer }
         } = req
 
-        if (!issuer || !isValidModuleName(request)) {
+        if (!issuer) {
             return cb()
         }
 

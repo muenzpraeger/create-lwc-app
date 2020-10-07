@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2020-09-22
+
+**lwc-services 2.2.1**
+
+-   Relaxed module check to allow multi-nested module names
+
 ### 2020-09-20
 
 **create-lwc-app 2.2.0**

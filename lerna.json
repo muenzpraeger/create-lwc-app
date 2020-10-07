@@ -7,5 +7,5 @@
         }
     },
     "packages": ["packages/create-lwc-app", "packages/lwc-services"],
-    "version": "2.2.0"
+    "version": "2.2.1"
 }

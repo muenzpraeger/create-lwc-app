@@ -1,5 +1,16 @@
 ## Changelog
 
+### 2020-10-24
+
+**create-lwc-app 2.2.3**
+
+-   Dependency updates
+
+**lwc-services 2.2.3**
+
+-   Dependency updates
+-   Simplify LWC resolver for Jest
+
 ### 2020-10-07
 
 **create-lwc-app 2.2.2**

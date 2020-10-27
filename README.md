@@ -24,6 +24,19 @@ npx create-lwc-app your-app-name
 
 > To run this you must have Node.js 10+ installed with at least npm 5.2+. You should be familiar with either npm or yarn. The npx tool is a package runner that installs with npm 5.2+.
 
+> In case of an issue as maintained below - 
+```
+npm ERR! Unexpected end of JSON input while parsing near '...node":"^6.14.0 || ^8.'
+
+npm ERR! A complete log of this run can be found in:
+npm ERR!     <local-path-where-log-will-be-stored>-debug.log
+Install for [ 'create-lwc-app@latest' ] failed with code 1
+```
+Try using below command -  [More Details can be found here for the root cause of the issue](https://stackoverflow.com/a/47896884)- 
+```
+npm cache clean --force
+```
+
 This will run an npx installation of [create-lwc-app](./packages/create-lwc-app), guide you through the short setup, and then create a new Lightning Web Components project for you.
 
 Then run `yarn watch` (or `npm run watch` depending on what you chose during the npx installation). **Done!**

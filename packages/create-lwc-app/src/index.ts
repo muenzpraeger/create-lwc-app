@@ -107,7 +107,7 @@ class Create extends Command {
                 },
                 (err: null | Error) => {
                     if (err) reject(err)
-                    else resolve()
+                    else resolve(true)
                 }
             )
         })

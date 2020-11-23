@@ -1,43 +1,5 @@
 import * as webpack from 'webpack'
 import { merge } from 'webpack-merge'
-import { resolve } from 'path'
-
-const ModuleResolver = require('./module-resolver')
-const moduleLoader = require.resolve('./module-loader')
-
-const JS_LOADER = {
-    test: /\.js$/,
-    exclude: /(node_modules|modules|lwc)/,
-    use: {
-        loader: require.resolve('babel-loader'),
-        options: {
-            plugins: [
-                require.resolve('@babel/plugin-proposal-object-rest-spread')
-            ],
-            babelrc: false
-        }
-    }
-}
-
-const TS_LOADER = {
-    test: /\.ts$/,
-    exclude: /(node_modules|modules|lwc)/,
-    use: {
-        loader: require.resolve('babel-loader'),
-        options: {
-            plugins: [
-                require.resolve('@babel/plugin-syntax-class-properties'),
-                [
-                    require.resolve('@babel/plugin-syntax-decorators'),
-                    {
-                        decoratorsBeforeExport: true
-                    }
-                ]
-            ],
-            presets: [require.resolve('@babel/preset-typescript')]
-        }
-    }
-}
 
 const optimization: webpack.Options.Optimization = {
     splitChunks: {
@@ -60,48 +22,15 @@ function isWebpackEntryFunc(entry: any): entry is webpack.EntryFunc {
     return typeof entry === 'function'
 }
 
-function getWebpackEntryPaths(
-    entry: string | string[] | webpack.Entry
-): string[] {
-    if (typeof entry === 'string') {
-        return [entry]
-    }
-
-    if (entry instanceof Array) {
-        return entry
-    }
-
-    const paths: string[] = []
-    Object.keys(entry).forEach((name) => {
-        const path = entry[name]
-        if (typeof path === 'string') {
-            paths.push(path)
-        } else {
-            paths.concat(path)
-        }
-    })
-    return paths
-}
-
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-function buildWebpackConfig({
-    entries,
-    outputDir,
-    moduleDir,
-    mode,
-    customConfig
-}: any) {
+function buildWebpackConfig({ entries, outputDir, mode, customConfig }: any) {
     let isProduction = false
 
     if (mode && mode === 'production') {
         isProduction = true
     } else {
         isProduction = process.env.NODE_ENV === 'production'
-    }
-
-    const MODULE_CONFIG = {
-        path: moduleDir
     }
 
     const DEFINE_CONFIG = {
@@ -117,31 +46,6 @@ function buildWebpackConfig({
             path: outputDir,
             filename: 'app.js',
             publicPath: './'
-        },
-
-        module: {
-            rules: [
-                {
-                    test: /\.(js|ts|html|css)$/,
-                    include: [
-                        moduleDir,
-                        resolve(process.cwd(), 'node_modules')
-                    ],
-                    use: [
-                        {
-                            loader: moduleLoader,
-                            options: {
-                                module: MODULE_CONFIG,
-                                mode: isProduction
-                                    ? 'production'
-                                    : 'development'
-                            }
-                        }
-                    ]
-                },
-                JS_LOADER,
-                TS_LOADER
-            ]
         },
 
         plugins: [new webpack.DefinePlugin(DEFINE_CONFIG)],
@@ -173,29 +77,9 @@ function buildWebpackConfig({
         return serverConfig
     }
 
-    const entryPaths = getWebpackEntryPaths(serverConfig.entry)
-    const lwcModuleResolver = {
-        resolve: {
-            extensions: ['.js', '.ts', '.json'],
-            alias: {
-                lwc: require.resolve('@lwc/engine'),
-                '@lwc/wire-service': require.resolve('@lwc/wire-service')
-            },
-            plugins: [
-                new ModuleResolver({
-                    module: MODULE_CONFIG,
-                    entries: entryPaths
-                })
-            ]
-        }
-    }
-    serverConfig = merge(serverConfig, lwcModuleResolver)
-
     return serverConfig
 }
 
 module.exports = {
-    buildWebpackConfig,
-    JS_LOADER,
-    TS_LOADER
+    buildWebpackConfig
 }

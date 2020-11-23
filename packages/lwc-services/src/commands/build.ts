@@ -36,7 +36,7 @@ function buildWebpack(webpackConfig: any) {
                 return reject(errorMessages)
             }
             analyzeStats(stats)
-            return resolve()
+            return resolve(true)
         })
     })
 }

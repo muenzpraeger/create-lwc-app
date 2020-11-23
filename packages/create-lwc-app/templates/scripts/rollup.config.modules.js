@@ -46,4 +46,4 @@ function rollupConfig({ format, target }) {
     };
 }
 
-module.exports = [rollupConfig({ format: 'es', target: 'es2017' })];
+module.exports = [rollupConfig({ format: 'es', target: 'es2019' })];

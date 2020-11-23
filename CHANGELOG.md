@@ -2,6 +2,21 @@
 
 ### 2020-10-07
 
+**create-lwc-app 2.3.0**
+
+-   Dependency updates
+
+**lwc-services 2.3.0**
+
+-   Dependency updates
+-   Switch to lwc-webpack-plugin
+
+**lwc-webpack-plugin 1.0.0**
+
+-   Initial release
+
+### 2020-10-07
+
 **create-lwc-app 2.2.2**
 
 -   Dependency updates

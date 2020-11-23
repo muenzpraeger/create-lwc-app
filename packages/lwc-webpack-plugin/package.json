@@ -1,0 +1,42 @@
+{
+    "name": "lwc-webpack-plugin",
+    "version": "1.0.0",
+    "author": "René Winkelmeyer @muenzpraeger",
+    "description": "Webpack Plugin for LWC",
+    "main": "dist/index.js",
+    "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
+    "license": "MIT",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc --watch"
+    },
+    "files": [
+        "/dist"
+    ],
+    "devDependencies": {
+        "@lwc/engine": "^1.8.6",
+        "@types/node": "^12.12.14",
+        "@types/webpack": "^4.41.0",
+        "typescript": "^4.0.5"
+    },
+    "dependencies": {
+        "@babel/preset-typescript": "^7.12.1",
+        "@lwc/babel-plugin-component": "^1.9.3",
+        "@lwc/compiler": "^1.9.3",
+        "@lwc/module-resolver": "^1.9.3",
+        "babel-loader": "^8.2.1"
+    },
+    "engines": {
+        "node": ">=12.0.0"
+    },
+    "homepage": "https://github.com/muenzpraeger/create-lwc-app/tree/main/packages/lwc-webpack-plugin",
+    "keywords": [
+        "oclif",
+        "lwc",
+        "salesforce",
+        "web components",
+        "lightning",
+        "webpack"
+    ],
+    "repository": "muenzpraeger/create-lwc-app"
+}

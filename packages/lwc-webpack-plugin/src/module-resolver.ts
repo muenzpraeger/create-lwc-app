@@ -1,6 +1,5 @@
 import { basename, dirname, extname, resolve } from 'path'
 
-const { getConfig, isValidModuleName } = require('./module')
 const lwcResolver = require('@lwc/module-resolver')
 
 const EMPTY_STYLE = resolve(__dirname, 'mocks', 'empty-style.js')
@@ -8,12 +7,12 @@ const EMPTY_STYLE = resolve(__dirname, 'mocks', 'empty-style.js')
 /**
  * Webpack plugin to resolve LWC modules.
  */
-module.exports = class ModuleResolver {
-    public config: any
+export class LwcModuleResolverPlugin {
     public fs: any
+    modules: any[]
 
-    constructor(config: any) {
-        this.config = getConfig(config)
+    constructor(modules: any[]) {
+        this.modules = modules
     }
 
     apply(resolver: any) {
@@ -28,18 +27,30 @@ module.exports = class ModuleResolver {
     }
 
     resolveModule(req: any, ctx: any, cb: any) {
-        const {
+        let {
             request,
+            // eslint-disable-next-line prefer-const
             query,
             context: { issuer }
         } = req
 
-        if (!issuer) {
-            return cb()
-        }
-
         try {
-            const mod = lwcResolver.resolveModule(request, issuer)
+            if (!issuer) {
+                issuer = process.cwd()
+            }
+
+            request = request.replace('./', '')
+
+            let mod
+
+            if (this.modules && this.modules.length) {
+                mod = lwcResolver.resolveModule(request, issuer, {
+                    modules: this.modules
+                })
+            } else {
+                mod = lwcResolver.resolveModule(request, issuer)
+            }
+
             return cb(undefined, {
                 path: mod.entry,
                 query,

@@ -9,8 +9,6 @@ import { lwcConfig } from '../config/lwcConfig'
 import { generateWebpackConfig } from '../config/webpack.config'
 import { messages } from '../messages/watch'
 import { log, welcome } from '../utils/logger'
-const spawn = require('child_process').spawn
-
 const rollupConfig = resolve(__dirname, '../config/rollup.config.js')
 
 export default class Watch extends Command {
@@ -101,9 +99,13 @@ export default class Watch extends Command {
             app.listen(
                 webpackConfig.devServer.port,
                 webpackConfig.devServer.host,
-                () => {
+                (error: string) => {
                     const protocol = 'http'
                     const url = `${protocol}://${webpackConfig.devServer.host}:${webpackConfig.devServer.port}`
+
+                    if (error) {
+                        return log(messages.logs.error, error)
+                    }
 
                     log(messages.logs.local_server_listening, url)
 
@@ -124,31 +126,22 @@ export default class Watch extends Command {
             const MODE = flags.mode || 'development'
             const OPEN = flags.open
 
-            const ENV_PARAMS = [
-                `DEV_HOST_OPEN:${OPEN}`,
-                `DEV_HOST:${HOST}`,
-                `DEV_PORT:${PORT}`,
-                `NODE_ENV:${MODE}`
-            ].join(',')
+            const rollup = require('rollup')
 
-            // This looks super wonky... and it may be super wonky. ;-)
-            const args = [
-                './node_modules/rollup/dist/bin/rollup',
-                '-c',
-                rollupConfig,
-                '--environment',
-                ENV_PARAMS,
-                '--watch'
-            ]
-            const rollupSpawn = spawn('node', args)
+            // Environment variables
+            process.env.DEV_HOST_OPEN = `${OPEN}`
+            process.env.DEV_HOST = HOST
+            process.env.DEV_PORT = `${PORT}`
+            process.env.NODE_ENV = MODE
 
-            rollupSpawn.on('error', (err: string) => {
-                log({ message: `${err}`, emoji: 'sos' })
-            })
+            const watcher = rollup.watch(rollupConfig)
 
-            // It's super weird that the debug message is passed via stderr. But it is what it is.
-            rollupSpawn.stderr.on('data', (data: string) => {
-                log({ message: `${data}`, emoji: 'rainbow' })
+            watcher.on('event', ({ code, error }: any) => {
+                switch (code) {
+                    case 'ERROR':
+                        log(messages.logs.error, error)
+                        break
+                }
             })
 
             const protocol = 'http'

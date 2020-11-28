@@ -36,6 +36,10 @@ export const messages = {
         local_server_listening: {
             message: 'Local server listening: %s',
             emoji: 'earth_americas'
+        },
+        error: {
+            message: 'Build error: %s',
+            emoji: 'sos'
         }
     }
 }

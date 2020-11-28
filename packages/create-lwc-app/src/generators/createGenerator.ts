@@ -278,7 +278,13 @@ class CreateGenerator extends Generator {
                 'lwc-services build -m production && electron scripts/main.js'
             this.pjson.scripts['start:dev'] =
                 'set NODE_ENV=development && lwc-services build && electron scripts/main.js'
-            this.pjson.scripts.start = 'electron scripts/main.js'
+            this.pjson.scripts.pack =
+                'lwc-services build -m production && electron-builder --dir'
+            this.pjson.scripts.dist =
+                'lwc-services build -m production && electron-builder'
+            this.pjson.build = {
+                appId: this.pjson.name
+            }
         }
         if (this.clientserver) {
             this.pjson.scripts.serve = 'run-p serve:client serve:api'
@@ -480,6 +486,7 @@ class CreateGenerator extends Generator {
         if (this.typescript) {
             devDependencies.push('@types/jest')
         }
+        devDependencies.push('electron-builder')
         if (this.appType === 'electron') {
             devDependencies.push('electron')
         }

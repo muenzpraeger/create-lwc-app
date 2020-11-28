@@ -22,7 +22,8 @@ export const messages = {
         host: 'sets the hostname',
         port: 'configures the port of the server',
         webpack: 'location of custom webpack configuration file',
-        bundler: 'defines which bundler to use (webpack|rollup)'
+        bundler: 'defines which bundler to use (webpack|rollup)',
+        electron: 'enables reload for Electron development'
     },
     logs: {
         build_start: {

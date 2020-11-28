@@ -1,4 +1,5 @@
 import { Command, flags } from '@oclif/command'
+import { ChildProcess, spawn } from 'child_process'
 import cli from 'cli-ux'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
@@ -46,12 +47,18 @@ export default class Watch extends Command {
             char: 'b',
             description: messages.flags.bundler,
             default: lwcConfig.bundler
+        }),
+        electron: flags.boolean({
+            char: 'e',
+            description: messages.flags.electron,
+            default: lwcConfig.electron.runOnWatch
         })
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     async run() {
         const { flags } = this.parse(Watch)
+        let electronProcess: ChildProcess = null as any;
 
         // eslint-disable-next-line no-console
         console.clear()
@@ -93,6 +100,36 @@ export default class Watch extends Command {
             const WebpackDevServer = require('webpack-dev-server')
 
             const compiler = webpack(webpackConfig)
+ 
+            compiler.hooks.done.tap(
+                'ElectronReloadPlugin',
+                (stats: webpack.Stats) => {
+
+                    if (flags.electron) {
+                        if (!electronProcess) {
+                            log({
+                                message: 'Starting Electron',
+                                emoji: 'rainbow'
+                            })
+                            electronProcess = spawn('npm', ['run', 'start:dev'])
+                            electronProcess.on('error', (err) => {
+                                console.error(
+                                    'Failed to start subprocess.' + err
+                                )
+                            })
+                            electronProcess.on('data', (data) => {
+                                console.error(
+                                    'Failed to start subprocess.' + data
+                                )
+                            })
+
+                            electronProcess.on('exit', (code, signal) => {
+                                electronProcess = null as any;
+                            })
+                        }
+                    }
+                }
+            )
 
             const app = new WebpackDevServer(compiler, webpackConfig.devServer)
 
@@ -125,24 +162,57 @@ export default class Watch extends Command {
                     : lwcConfig.devServer.port
             const MODE = flags.mode || 'development'
             const OPEN = flags.open
+            const ENV_PARAMS = [
+                `DEV_HOST_OPEN:${OPEN}`,
+                `DEV_HOST:${HOST}`,
+                `DEV_PORT:${PORT}`,
+                `NODE_ENV:${MODE}`
+            ].join(',')
 
-            const rollup = require('rollup')
+            // This looks super wonky... and it may be super wonky. ;-)
+            const args = [
+                './node_modules/rollup/dist/bin/rollup',
+                '-c',
+                rollupConfig,
+                '--environment',
+                ENV_PARAMS,
+                '--watch'
+            ]
+            const rollupSpawn = spawn('node', args)
 
-            // Environment variables
-            process.env.DEV_HOST_OPEN = `${OPEN}`
-            process.env.DEV_HOST = HOST
-            process.env.DEV_PORT = `${PORT}`
-            process.env.NODE_ENV = MODE
+            rollupSpawn.on('error', (err: string) => {
+                log({ message: `${err}`, emoji: 'sos' })
+            })
 
-            const watcher = rollup.watch(rollupConfig)
+            // It's super weird that the debug message is passed via stderr. But it is what it is.
+            rollupSpawn.stderr.on('data', (data: string) => {
+                log({ message: `${data}`, emoji: 'rainbow' })
 
-            watcher.on('event', ({ code, error }: any) => {
-                switch (code) {
-                    case 'ERROR':
-                        log(messages.logs.error, error)
-                        break
+                if (flags.electron) {
+                    if (!electronProcess) {
+                        log({
+                            message: 'Starting Electron',
+                            emoji: 'rainbow'
+                        })
+                        electronProcess = spawn('npm', ['run', 'start:dev'])
+                        electronProcess.on('error', (err) => {
+                            console.error(
+                                'Failed to start subprocess.' + err
+                            )
+                        })
+                        electronProcess.on('data', (data) => {
+                            console.error(
+                                'Failed to start subprocess.' + data
+                            )
+                        })
+
+                        electronProcess.on('exit', (code, signal) => {
+                            electronProcess = null as any;
+                        })
+                    }
                 }
             })
+ 
 
             const protocol = 'http'
             const url = `${protocol}://${HOST}:${PORT}`

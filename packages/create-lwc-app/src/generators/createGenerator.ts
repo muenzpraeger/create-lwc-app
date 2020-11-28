@@ -274,6 +274,10 @@ class CreateGenerator extends Generator {
             // eslint-disable-next-line no-useless-escape
             'prettier --list-different \"**/*.{css,html,js,json,md,ts,yaml,yml}\"'
         if (this.appType === 'electron') {
+            this.pjson.scripts.start =
+                'lwc-services build -m production && electron scripts/main.js'
+            this.pjson.scripts['start:dev'] =
+                'set NODE_ENV=development && lwc-services build && electron scripts/main.js'
             this.pjson.scripts.start = 'electron scripts/main.js'
         }
         if (this.clientserver) {

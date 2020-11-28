@@ -33,6 +33,7 @@
         "cross-env": "^7.0.2",
         "deepmerge": "^4.2.2",
         "error-overlay-webpack-plugin": "^0.4.1",
+        "electron-builder": "^22.8.1",
         "eslint": "^7.10.0",
         "eslint-plugin-inclusive-language": "^1.2.1",
         "execa": "4.1.0",

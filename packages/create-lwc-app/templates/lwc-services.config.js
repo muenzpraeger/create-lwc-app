@@ -23,4 +23,10 @@ module.exports = {
                 proxy: { '/': 'http://localhost:3002' }
             }
         <% } %>
+        <% if (appType === 'electron') {%>
+            electron: {
+                runOnWatch: true
+            }
+        <% } %>
+
 };

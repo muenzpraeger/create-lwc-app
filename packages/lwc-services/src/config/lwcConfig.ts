@@ -27,6 +27,11 @@ interface Config {
         noInfo: boolean
         contentBase: string
     }
+    // Electron specific config.
+    electron: {
+        runOnWatch?: boolean
+        hardReset?: boolean
+    }
     // LWC Compiler options for production mode.
     // Find the detailed description here: https://www.npmjs.com/package/@lwc/compiler
     lwcCompilerOutput: {
@@ -72,6 +77,9 @@ export const defaultLwcConfig: Config = {
         stats: 'errors-only',
         noInfo: true,
         contentBase: './src'
+    },
+    electron: {
+        runOnWatch: false
     },
     // LWC Compiler options for production mode.
     // Find the detailed description here: https://www.npmjs.com/package/@lwc/compiler

@@ -8,11 +8,17 @@ function createWindow() {
         height: 600
     });
 
-    // and load the index.html of the app.
-    mainWindow.loadFile('../dist/index.html');
+    if (process.env.NODE_ENV !== 'production') {
+        // Open the Local Dev Server and DevTools.
+        const HOST = process.env.HOST || 'localhost';
+        const PORT = process.env.PORT || 3001;
 
-    // Open the DevTools.
-    // mainWindow.webContents.openDevTools()
+        mainWindow.loadURL(`http://${HOST}:${PORT}`);
+        mainWindow.webContents.openDevTools();
+    } else {
+        // Production: Load the index.html of the app.
+        mainWindow.loadFile('../dist/index.html');
+    }
 }
 
 // This method will be called when Electron has finished

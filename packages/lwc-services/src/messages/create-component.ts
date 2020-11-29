@@ -1,5 +1,5 @@
 export const messages = {
-    description: 'Creates a new Lightning Web Component on project source folder',
+    description: 'Scaffolds a Lightning Web Component within project source folder',
     help: {
         examples: [
             'lwc-services create-component -n myComponent',

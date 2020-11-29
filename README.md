@@ -166,10 +166,35 @@ OPTIONS
   -o, --open             opens the site in the default browser
   -p, --port=port        [default: 3001] configures the port of the application
   -w, --webpack=webpack  location of custom webpack configuration file, which will be merged into the default config
+  -e, --electron starts electron on Live Reload mode
 
 EXAMPLES
   lwc-services watch
   lwc-services watch -p 3998 -i 192.168.178.12 -m production
+```
+
+#### `lwc-services create-component`
+
+Scaffolds a Lightning Web Component within project source folder
+
+```
+
+USAGE
+  $ lwc-services create-component
+
+OPTIONS
+  -d, --dir=dir    [default: ./src] defines the directory where the component source will be created
+  -h, --help       show CLI help
+
+  -t, --type=type  [default: lwc] defines the component type. Valid values are Ligthning Web Component, CSS Module 
+                   and ES6 module (lwc,css,es6)
+
+  --name=name      (required) defines the component name (camelCase)
+
+EXAMPLES
+  lwc-services create-component -n myComponent
+  lwc-services create-component -n myComponent -d src/modules
+  lwc-services create-component -n myComponent -t es6
 ```
 
 ## 🖖 Contribution

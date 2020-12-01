@@ -63,7 +63,7 @@
         "webpack": "^4.44.2",
         "webpack-dev-server": "^3.11.0",
         "webpack-merge": "^5.1.4",
-        "workbox-webpack-plugin": "^5.1.4"
+        "workbox-webpack-plugin": "^6.0.0"
     },
     "devDependencies": {
         "@oclif/dev-cli": "^1.22.2",

@@ -10,24 +10,24 @@
         "@oclif/command": "^1.8.0",
         "@oclif/config": "^1.17.0",
         "@oclif/plugin-help": "^3.2.0",
-        "@typescript-eslint/eslint-plugin": "^4.4.0",
-        "@typescript-eslint/parser": "^4.4.0",
-        "cli-ux": "^5.5.0",
+        "@typescript-eslint/eslint-plugin": "^4.9.0",
+        "@typescript-eslint/parser": "^4.9.0",
+        "cli-ux": "^5.5.1",
         "node-emoji": "^1.10.0",
         "semver-compare": "^1.0.0",
         "sort-pjson": "^1.0.3",
-        "ts-node": "^9.0.0",
-        "typescript": "^4.0.3",
+        "ts-node": "^9.1.0",
+        "typescript": "^4.1.2",
         "yeoman-environment": "^2.10.3",
         "yeoman-generator": "^4.12.0"
     },
     "devDependencies": {
-        "@types/node": "^14.11.5",
+        "@types/node": "^14.14.10",
         "@types/semver-compare": "^1.0.1",
-        "@types/yeoman-environment": "^2.10.1",
-        "@types/yeoman-generator": "^4.11.2",
-        "ts-node": "^9.0.0",
-        "tslib": "^2.0.2"
+        "@types/yeoman-environment": "^2.10.2",
+        "@types/yeoman-generator": "^4.11.3",
+        "ts-node": "^9.1.0",
+        "tslib": "^2.0.3"
     },
     "engines": {
         "node": ">=12.0.0"

@@ -1,6 +1,6 @@
 {
     "name": "lwc-webpack-plugin",
-    "version": "1.0.1",
+    "version": "1.1.0",
     "author": "René Winkelmeyer @muenzpraeger",
     "description": "Webpack Plugin for LWC",
     "main": "dist/index.js",
@@ -14,18 +14,17 @@
         "/dist"
     ],
     "devDependencies": {
-        "@lwc/engine": "^1.8.6",
-        "@types/node": "^12.12.14",
-        "@types/webpack": "^4.41.0",
-        "typescript": "^4.0.5"
+        "@types/node": "^14.14.10",
+        "@types/webpack": "^4.41.25",
+        "typescript": "^4.1.2"
     },
     "dependencies": {
-        "@babel/preset-typescript": "^7.12.1",
+        "@babel/preset-typescript": "^7.12.7",
         "@lwc/babel-plugin-component": "^1.9.3",
         "@lwc/compiler": "^1.9.3",
         "@lwc/synthetic-shadow": "^1.9.3",
         "@lwc/module-resolver": "^1.9.3",
-        "babel-loader": "^8.2.1",
+        "babel-loader": "^8.2.2",
         "resolve": "^1.19.0"
     },
     "engines": {

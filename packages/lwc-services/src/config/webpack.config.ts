@@ -72,7 +72,12 @@ export function generateWebpackConfig(mode?: string, customConfig?: any) {
     ])
 
     lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
-        new LwcWebpackPlugin()
+        new LwcWebpackPlugin({
+            stylesheetConfig: lwcConfig.lwcCompilerStylesheetConfig,
+            outputConfig: lwcConfig.lwcCompilerOutput.production,
+            experimentalDynamicComponent:
+                lwcConfig.lwcExperimentalDynamicComponent
+        })
     ])
 
     if (lwcConfig.resources.length) {

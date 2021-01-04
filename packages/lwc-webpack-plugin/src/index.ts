@@ -2,15 +2,17 @@
 import { resolve } from 'path'
 import { Compiler } from 'webpack'
 import { LwcModuleResolverPlugin } from './module-resolver'
-import { readFileSync } from 'fs'
-import { existsSync } from 'fs'
+import { existsSync, readFileSync } from 'fs'
 import noderesolve from 'resolve'
 
 interface PluginConfig {
     modules: any[]
+    stylesheetConfig: any
+    outputConfig: any
+    experimentalDynamicComponent: any
 }
 
-const PACKAGEJSON = 'package.json'
+const PACKAGE_JSON = 'package.json'
 
 function transformModuleRecordsToIncludes(modulesConfig: any[]): string[] {
     let modules = []
@@ -18,8 +20,8 @@ function transformModuleRecordsToIncludes(modulesConfig: any[]): string[] {
     const pkgJson = JSON.parse(
         readFileSync(resolve(process.cwd(), 'package.json'), 'utf8')
     )
-    if (pkgJson.modules && pkgJson.modules.length) {
-        modules = pkgJson.modules
+    if (pkgJson.lwc && pkgJson.lwc.modules && pkgJson.lwc.modules.length) {
+        modules = pkgJson.lwc.modules
     }
 
     if (existsSync(resolve(process.cwd(), 'lwc.config.json'))) {
@@ -48,15 +50,15 @@ function transformModuleRecordsToIncludes(modulesConfig: any[]): string[] {
                         if (!pkg.main) {
                             // If the 'main' property doesn't exist, set it to something
                             // that always exists: the file package.json
-                            pkg.main = PACKAGEJSON
+                            pkg.main = PACKAGE_JSON
                         }
                         return pkg
                     }
                 })
-                if (resolved.endsWith(PACKAGEJSON)) {
+                if (resolved.endsWith(PACKAGE_JSON)) {
                     // if we notice we're resolving to the package.json file,
                     // strip that off
-                    resolved = resolved.slice(0, -PACKAGEJSON.length)
+                    resolved = resolved.slice(0, -PACKAGE_JSON.length)
                 }
                 records.push(resolved)
             } catch (ignore) {
@@ -81,7 +83,12 @@ module.exports = class Plugin {
         this.config = config
     }
     apply(compiler: Compiler) {
-        const { modules = [] } = this.config || {}
+        const {
+            modules = [],
+            stylesheetConfig = {},
+            outputConfig = {},
+            experimentalDynamicComponent = {}
+        } = this.config || {}
         compiler.hooks.environment.tap('lwc-webpack-plugin', () => {
             const resolverPlugin = new LwcModuleResolverPlugin(modules)
 
@@ -100,7 +107,7 @@ module.exports = class Plugin {
         }
 
         // Specify known package aliases
-        alias.lwc = require.resolve('@lwc/engine')
+        alias['lwc'] = require.resolve('@lwc/engine')
         alias['wire-service'] = require.resolve('@lwc/wire-service')
         // the 'main' property for @lwc/synthetic-shadow refers to a file that
         // simply logs an error message. This needs to be fixed up to directly
@@ -122,7 +129,12 @@ module.exports = class Plugin {
             test: /\.(js|ts|html|css)$/,
             include: transformModuleRecordsToIncludes(modules),
             use: {
-                loader: require.resolve('./loader')
+                loader: require.resolve('./loader'),
+                options: {
+                    stylesheetConfig,
+                    outputConfig,
+                    experimentalDynamicComponent
+                }
             }
         })
     }

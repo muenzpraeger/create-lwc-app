@@ -1,9 +1,15 @@
 const compiler = require('@lwc/compiler')
 const babel = require('@babel/core')
 const { getInfoFromPath } = require('./module')
+import { getOptions } from 'loader-utils'
 
 module.exports = function (source: any) {
     const { resourcePath } = this
+    const {
+        stylesheetConfig,
+        outputConfig,
+        experimentalDynamicComponent
+    } = getOptions(this)
 
     let info
     try {
@@ -39,7 +45,10 @@ module.exports = function (source: any) {
     compiler
         .transform(codeTransformed, resourcePath, {
             name: info.ns,
-            namespace: 'my'
+            namespace: 'my',
+            stylesheetConfig,
+            outputConfig,
+            experimentalDynamicComponent
         })
         .then((res: any) => {
             cb(null, res.code)

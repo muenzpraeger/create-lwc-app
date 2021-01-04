@@ -29,6 +29,13 @@ module.exports = {
 }
 ```
 
+The plugin takes also two additional configuration options:
+
+-   `stylesheetConfig`
+-   `outputConfig`
+
+These options are 1:1 mappings of the LWC Compiler options, which are documented [here](https://github.com/salesforce/lwc/tree/master/packages/%40lwc/compiler#compiler-configuration-example).
+
 Read more about Lightning Web Components [here](https://github.com/muenzpraeger/create-lwc-app).
 
 ## Live App

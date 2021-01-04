@@ -1,5 +1,21 @@
 ## Changelog
 
+### 2021-01-04
+
+**create-lwc-app 2.3.1**
+
+-   Dependency updates
+
+**lwc-services 2.3.1**
+
+-   Dependency updates
+-   Fixed passing of LWC Compiler options to LWC Webpack plugin
+
+**lwc-webpack-plugin 1.2.0**
+
+-   Dependency updates
+-   Added options for LWC Compiler (stylesheets, output config, dynamic components)
+
 ### 2020-10-07
 
 **create-lwc-app 2.3.0**

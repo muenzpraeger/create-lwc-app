@@ -7,7 +7,7 @@
     "bugs": "https://github.com/muenzpraeger/create-lwc-app/issues",
     "license": "MIT",
     "dependencies": {
-        "@babel/core": "^7.12.9",
+        "@babel/core": "^7.12.10",
         "@babel/plugin-transform-typescript": "^7.12.1"
     },
     "engines": {

@@ -47,20 +47,12 @@ function transformModuleRecordsToIncludes(modulesConfig: any[]): string[] {
                      * required for a node module to be correctly detected.
                      */
                     packageFilter: (pkg) => {
-                        if (!pkg.main) {
-                            // If the 'main' property doesn't exist, set it to something
-                            // that always exists: the file package.json
-                            pkg.main = PACKAGE_JSON
-                        }
+                        pkg.main = PACKAGE_JSON
                         return pkg
                     },
                     basedir: process.cwd()
                 })
-                if (resolved.endsWith(PACKAGE_JSON)) {
-                    // if we notice we're resolving to the package.json file,
-                    // strip that off
-                    resolved = resolved.slice(0, -PACKAGE_JSON.length)
-                }
+                resolved = resolved.slice(0, -PACKAGE_JSON.length)
                 records.push(resolved)
             } catch (ignore) {
                 // log errors

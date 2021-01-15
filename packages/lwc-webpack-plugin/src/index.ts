@@ -53,7 +53,8 @@ function transformModuleRecordsToIncludes(modulesConfig: any[]): string[] {
                             pkg.main = PACKAGE_JSON
                         }
                         return pkg
-                    }
+                    },
+                    basedir: process.cwd()
                 })
                 if (resolved.endsWith(PACKAGE_JSON)) {
                     // if we notice we're resolving to the package.json file,

@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2021-01-15
+
+**lwc-webpack-plugin 1.2.1**
+
+-   Fixed an issue with resolving 3rd party npm packages
+
 ### 2021-01-04
 
 **create-lwc-app 2.3.1**

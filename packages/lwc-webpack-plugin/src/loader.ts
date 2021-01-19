@@ -33,7 +33,11 @@ module.exports = function (source: any) {
                     {
                         decoratorsBeforeExport: true
                     }
-                ]
+                ],
+                require.resolve('@babel/plugin-proposal-optional-chaining'),
+                require.resolve(
+                    '@babel/plugin-proposal-nullish-coalescing-operator'
+                )
             ],
             presets: [require.resolve('@babel/preset-typescript')]
         })

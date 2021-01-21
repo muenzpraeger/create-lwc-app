@@ -75,7 +75,8 @@ module.exports = (format = 'esm') => {
                     process.cwd(),
                     lwcConfig.sourceDir,
                     'modules'
-                )
+                ),
+                stylesheetConfig: lwcConfig.lwcCompilerStylesheetConfig || {}
             }),
             replace({ 'process.env.NODE_ENV': JSON.stringify(env) }),
             isProduction && terser(),

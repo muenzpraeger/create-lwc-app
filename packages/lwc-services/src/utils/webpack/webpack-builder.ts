@@ -1,23 +1,6 @@
 import * as webpack from 'webpack'
 import { merge } from 'webpack-merge'
 
-const optimization: webpack.Options.Optimization = {
-    splitChunks: {
-        cacheGroups: {
-            lwc: {
-                test: /[\\/]node_modules[\\/]@lwc[\\/]engine/,
-                chunks: 'all',
-                priority: 1
-            },
-            node_vendors: {
-                test: /[\\/]node_modules[\\/]/,
-                chunks: 'all',
-                priority: -10
-            }
-        }
-    }
-}
-
 function isWebpackEntryFunc(entry: any): entry is webpack.EntryFunc {
     return typeof entry === 'function'
 }
@@ -44,13 +27,12 @@ function buildWebpackConfig({ entries, outputDir, mode, customConfig }: any) {
         mode: isProduction ? 'production' : 'development',
         output: {
             path: outputDir,
-            filename: 'app.js',
+            filename: 'app-[contenthash].js',
             publicPath: './'
         },
 
         plugins: [new webpack.DefinePlugin(DEFINE_CONFIG)],
-        devtool: devToolOption,
-        optimization
+        devtool: devToolOption
     }
     if (isProduction) {
         serverConfig = {

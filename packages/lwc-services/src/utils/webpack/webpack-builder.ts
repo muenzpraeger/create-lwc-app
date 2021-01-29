@@ -1,7 +1,7 @@
 import * as webpack from 'webpack'
 import { merge } from 'webpack-merge'
 
-function isWebpackEntryFunc(entry: any): entry is webpack.EntryFunc {
+function isWebpackEntryFunc(entry: any) {
     return typeof entry === 'function'
 }
 

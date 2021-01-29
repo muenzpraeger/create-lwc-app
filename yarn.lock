@@ -2465,17 +2465,10 @@
   resolved "https://registry.yarnpkg.com/@lwc/errors/-/errors-1.10.0.tgz#54d7125e2981e861f2f0d3dbc64aebc0aeb343fe"
   integrity sha512-FSKMT6auTejHcQoOqv0LjJygkjhPCXnA39W2GII9YajuAHws9RIjfjnDJBnNpQpvHBYEV1fOrJg6RWEt2FI85Q==
 
-"@lwc/eslint-plugin-lwc@^0.11.0":
+"@lwc/eslint-plugin-lwc@^0.11.0", "@lwc/eslint-plugin-lwc@~0.11.0":
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.11.0.tgz#1c69cc673b9798e04e87ececb8529b93eb2215b1"
   integrity sha512-wJOD4XWOH91GaZfypMSKfEeMXqMfvKdsb2gSJ/9FEwJVlziKg1aagtRYJh2ln3DyEZV33tBC/p/dWzIeiwa1tg==
-  dependencies:
-    minimatch "^3.0.4"
-
-"@lwc/eslint-plugin-lwc@~0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@lwc/eslint-plugin-lwc/-/eslint-plugin-lwc-0.10.0.tgz#e282910b01b3b403d8fec03d34c4c853e29c4676"
-  integrity sha512-UsosUow0xWrzzcSK1fWDWHKBT81/pJz1/icfv7w8T+BCE9G4Kb4TwJexHLOIZvY7e/dv4Fjme4lTOWehuNE5Sg==
   dependencies:
     minimatch "^3.0.4"
 
@@ -2919,12 +2912,12 @@
     estree-walker "^2.0.1"
     picomatch "^2.2.2"
 
-"@salesforce/eslint-config-lwc@^0.8.0":
-  version "0.8.0"
-  resolved "https://registry.yarnpkg.com/@salesforce/eslint-config-lwc/-/eslint-config-lwc-0.8.0.tgz#def6022b8dbe10ac5be0fa96ad52d41f5bf168e1"
-  integrity sha512-vN6fZFtfJuo+hw7xio8vc+StCaB+8oeNP6ItFDzoFjLix2066PDJjHT1Uq1BVgmgwqXMcLUkwsg/cctZdVSugA==
+"@salesforce/eslint-config-lwc@^0.9.0":
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/@salesforce/eslint-config-lwc/-/eslint-config-lwc-0.9.0.tgz#0f920c109f2df1e4b63d0b9c374e4098af48ad87"
+  integrity sha512-9O3UG5A9UW9Rga3OYadViO8bu8kMZLA0hjoUd14EkwVNfYypu6XkJH2QElaIPngSAmbVOdq5wh3hrtv2F5TQyw==
   dependencies:
-    "@lwc/eslint-plugin-lwc" "~0.10.0"
+    "@lwc/eslint-plugin-lwc" "~0.11.0"
     babel-eslint "~10.1.0"
     eslint-plugin-import "~2.22.1"
     eslint-plugin-jest "~23.8.2"

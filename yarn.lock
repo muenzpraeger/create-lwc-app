@@ -6678,10 +6678,12 @@ eslint-plugin-import@~2.22.1:
     resolve "^1.17.0"
     tsconfig-paths "^3.9.0"
 
-eslint-plugin-inclusive-language@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-inclusive-language/-/eslint-plugin-inclusive-language-2.0.0.tgz#eca7efd4ccb6932c24c827afe6544b4f80206ce4"
-  integrity sha512-pvnOSgf49aid7+VgyeARWABQmA5jKz66J3PBPLvAl5e8/6Wrueye7vC5djRVKZOQ2lZu5cZ3F9SMi2DaDYSWzw==
+eslint-plugin-inclusive-language@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-inclusive-language/-/eslint-plugin-inclusive-language-2.0.1.tgz#f5b3be113b491d12e1566019e0fc28dea20be014"
+  integrity sha512-TtgEGVls2ifpiFnH5WepNGUsuhSASji8VT6zf7hsEKb/OUwDba+Qaseo5URtlTyYSASR4KXSMxVQPSsCb3UQWg==
+  dependencies:
+    humps "^2.0.1"
 
 eslint-plugin-jest@~23.8.2:
   version "23.8.2"
@@ -8351,6 +8353,11 @@ humanize-ms@^1.2.1:
   integrity sha1-xG4xWaKT9riW2ikxbYtv6Lt5u+0=
   dependencies:
     ms "^2.0.0"
+
+humps@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/humps/-/humps-2.0.1.tgz#dd02ea6081bd0568dc5d073184463957ba9ef9aa"
+  integrity sha1-3QLqYIG9BWjcXQcxhEY5V7qe+ao=
 
 husky@^4.3.0:
   version "4.3.7"

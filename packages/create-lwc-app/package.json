@@ -1,6 +1,6 @@
 {
     "name": "create-lwc-app",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "create-lwc-app": "./bin/run"

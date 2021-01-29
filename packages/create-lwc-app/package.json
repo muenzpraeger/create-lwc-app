@@ -1,6 +1,6 @@
 {
     "name": "create-lwc-app",
-    "version": "2.3.2",
+    "version": "3.0.0",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "create-lwc-app": "./bin/run"
@@ -30,7 +30,7 @@
         "tslib": "^2.1.0"
     },
     "engines": {
-        "node": ">=14"
+        "node": ">=14.0.0"
     },
     "files": [
         "/bin",

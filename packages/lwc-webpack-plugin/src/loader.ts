@@ -39,7 +39,12 @@ module.exports = function (source: any) {
                     '@babel/plugin-proposal-nullish-coalescing-operator'
                 )
             ],
-            presets: [require.resolve('@babel/preset-typescript')]
+            presets: [
+                require.resolve('@babel/preset-typescript'),
+                {
+                    allowDeclareFields: true
+                }
+            ]
         })
         codeTransformed = code
     }

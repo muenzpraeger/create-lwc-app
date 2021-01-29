@@ -1,5 +1,25 @@
 ## Changelog
 
+### 2021-01-29
+
+**create-lwc-app 3.0.0**
+
+-   Migrated to Webpack 5
+-   Min. node version 14
+-   Dependency updates
+
+**lwc-services 3.0.0**
+
+-   Migrated to Webpack 5
+-   Min. node version 14
+-   Pass CSS Stylesheet config for Rollup builds
+-   Dependency updates
+
+**lwc-webpack-plugin 1.2.2**
+
+-   Add `declare` support for TypeScript
+-   Add optional chaining for TypeScript
+
 ### 2021-01-15
 
 **lwc-webpack-plugin 1.2.1**

@@ -14,9 +14,11 @@ A tool for setting up your Lightning Web Components projects.
 
 [![Version](https://img.shields.io/npm/v/rollup-plugin-lwc-typescript.svg)](https://npmjs.org/package/rollup-plugin-lwc-typescript) [![Downloads/week](https://img.shields.io/npm/dw/rollup-plugin-lwc-typescript.svg)](https://npmjs.org/package/rollup-plugin-lwc-typescript) rollup-plugin-lwc-typescript
 
-## 🔥🔥 Information for migrating from lwc-services 1.x to 2.x 🔥🔥
+## 🔥🔥 Information for migrating from lwc-services 1.x to 2.x or higher 🔥🔥
 
 The new v2 release 🎉 of `create-lwc-app` / `lwc-services` brought some breaking changes. Please read [here in the wiki](https://github.com/muenzpraeger/create-lwc-app/wiki/Migration-info-v1-to-v2) what as changed, and how to adept the changes.
+
+If you migrate to 3.0.0, please note that this ships out-of-the-box with Webpack 5 and requires node 14 or higher.
 
 ## 🚀 Quick Start
 

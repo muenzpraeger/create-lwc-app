@@ -1,5 +1,6 @@
 const { buildWebpackConfig } = require('../utils/webpack/webpack-builder')
 const CopyPlugin = require('copy-webpack-plugin')
+const ErrorOverlayPlugin = require('error-overlay-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const LwcWebpackPlugin = require('lwc-webpack-plugin')
 import { join, resolve } from 'path'
@@ -89,6 +90,14 @@ export function generateWebpackConfig(mode?: string, customConfig?: any) {
         })
         lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
             new CopyPlugin({ patterns: resources })
+        ])
+    }
+
+    // error-overlay-webpack-plugin has a bug that breaks the build when > 1 entry point is specified
+    if (Object.keys(lwcWebpackConfig.entry).length == 1) {
+        lwcWebpackConfig.plugins = (lwcWebpackConfig.plugins || []).concat([
+            // TODO Test potential alternatives for multiple entries
+            new ErrorOverlayPlugin()
         ])
     }
 

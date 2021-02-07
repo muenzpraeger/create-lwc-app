@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2021-02-07
+
+**lwc-services 3.0.2**
+
+-   Dependency updates
+
 ### 2021-01-29
 
 **create-lwc-app 3.0.0**

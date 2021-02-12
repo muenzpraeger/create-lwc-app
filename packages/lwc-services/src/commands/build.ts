@@ -2,6 +2,7 @@ import { Command, flags } from '@oclif/command'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
 import * as rimraf from 'rimraf'
+import { merge } from 'webpack-merge'
 
 import { lwcConfig } from '../config/lwcConfig'
 import { generateWebpackConfig } from '../config/webpack.config'
@@ -117,17 +118,19 @@ export default class Build extends Command {
 
             let webpackConfigCustom: any
 
+            let webpackConfig = generateWebpackConfig(
+                flags.mode,
+                webpackConfigCustom
+            )
+
             if (flags.webpack) {
                 log(messages.logs.custom_configuration)
                 webpackConfigCustom = require(resolve(
                     process.cwd(),
                     flags.webpack
                 ))
+                webpackConfig = merge(webpackConfig, webpackConfigCustom)
             }
-            const webpackConfig = generateWebpackConfig(
-                flags.mode,
-                webpackConfigCustom
-            )
 
             log(messages.logs.build_start)
 

@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2021-02-012
+
+**lwc-services 3.0.3**
+
+-   Fixes webpack merge for `build` command
+
 ### 2021-02-07
 
 **lwc-services 3.0.2**

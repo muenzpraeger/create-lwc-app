@@ -20,10 +20,10 @@ function buildWebpack(webpackConfig: any) {
     return new Promise((resolve, reject): void => {
         webpack(webpackConfig, (err: any, stats: any): void => {
             if (err) {
-                reject(err)
+                return reject(err)
             }
             if (!stats || !stats.compilation) {
-                log(messages.errors.no_compilation)
+                return reject(messages.errors.no_compilation)
             }
             // Parsing out error messages during compilation. Makes life MUCH easier.
             const { errors } = stats.compilation

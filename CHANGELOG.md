@@ -2,6 +2,10 @@
 
 ### 2021-02-012
 
+**lwc-services 3.0.4**
+
+-   Fixes error reporting with custom webpack config during `build` command
+
 **lwc-services 3.0.3**
 
 -   Fixes webpack merge for `build` command

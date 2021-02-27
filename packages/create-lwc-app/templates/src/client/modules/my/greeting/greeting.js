@@ -11,7 +11,8 @@ const greetings = [
     'ጤና ይስጥልኝ',
     'Ciao',
     'नमस्ते',
-    '안녕하세요'
+    '안녕하세요',
+    'مرحبا'
 ];
 const SPEED_CLASS_MAP = {
     slow: 'fade-slow',

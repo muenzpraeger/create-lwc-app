@@ -12,7 +12,7 @@
         "@babel/plugin-syntax-class-properties": "^7.12.13",
         "@babel/plugin-syntax-decorators": "^7.12.13",
         "@babel/preset-typescript": "^7.12.13",
-        "@lwc/eslint-plugin-lwc": "^0.11.0",
+        "@lwc/eslint-plugin-lwc": "^0.12.2",
         "@lwc/jest-preset": "^7.0.0",
         "@lwc/jest-resolver": "^7.0.0",
         "@lwc/jest-serializer": "^7.0.0",

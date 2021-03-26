@@ -87,6 +87,7 @@ class CreateGenerator extends Generator {
         this.defaults = Object.assign(
             {
                 name: this.name.replace(/ /g, '-'),
+                description: 'My amazing LWC app',
                 clientserver: false,
                 typescript: false,
                 edge: false,
@@ -256,9 +257,7 @@ class CreateGenerator extends Generator {
         }
 
         this.pjson.name = this.defaults.name
-        this.pjson.description = this.defaults.description
-            ? this.defaults.description
-            : 'My amazing LWC app'
+        this.pjson.description = this.options.description
 
         if (this.typescript) {
             this.pjson.scripts.lint = 'eslint ./src/**/*.ts'
@@ -736,6 +735,7 @@ class CreateGenerator extends Generator {
 interface GeneratorOptions {
     silent: boolean
     appType: string
+    description?: string
     yarn: boolean
     clientserver: boolean
     typescript: any

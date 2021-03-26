@@ -735,6 +735,7 @@ class CreateGenerator extends Generator {
 interface GeneratorOptions {
     silent: boolean
     appType: string
+    description?: string
     yarn: boolean
     clientserver: boolean
     typescript: any

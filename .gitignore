@@ -6,6 +6,6 @@ dist
 /tmp
 node_modules
 .
-.vscode
+.vscode/
 .DS_Store
 *.tsbuildinfo

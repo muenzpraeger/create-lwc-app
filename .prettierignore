@@ -1,3 +1,4 @@
+.vscode/
 **/dist/**
 **/lib/**
 packages/create-lwc-app/templates/README.md

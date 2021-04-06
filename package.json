@@ -21,7 +21,7 @@
         "build": "lerna run build",
         "clean": "lerna run clean && lerna clean --yes && rm -rf node_modules",
         "lint": "eslint ./packages/**/src/**/*.ts",
-        "postinstall": "rm -rf node_modules/@types/webpack",
+        "postinstall": "rm -rf node_modules/@types/webpack && husky install",
         "prepare": "npm run build",
         "precommit": "npm run prettier:verify && [ $? -eq 0 ] && npm run lint",
         "prettier": "prettier --write '**/*.{html,css,js,json,md,ts,yaml,yml}'",

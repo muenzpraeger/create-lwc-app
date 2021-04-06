@@ -14,21 +14,21 @@
         "/dist"
     ],
     "devDependencies": {
-        "@types/node": "^14.14.22",
-        "typescript": "^4.1.3"
+        "@types/node": "^14.14.37",
+        "typescript": "^4.2.3"
     },
     "dependencies": {
-        "@babel/preset-typescript": "^7.12.7",
-        "@lwc/babel-plugin-component": "^1.17.0",
-        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.12.1",
-        "@babel/plugin-proposal-optional-chaining": "^7.12.7",
-        "@babel/plugin-syntax-class-properties": "^7.12.1",
-        "@babel/plugin-syntax-decorators": "^7.12.1",
-        "@lwc/compiler": "^1.17.0",
-        "@lwc/module-resolver": "^1.17.0",
-        "@lwc/synthetic-shadow": "^1.17.0",
+        "@babel/preset-typescript": "^7.13.0",
+        "@lwc/babel-plugin-component": "^1.17.6",
+        "@babel/plugin-proposal-nullish-coalescing-operator": "^7.13.8",
+        "@babel/plugin-proposal-optional-chaining": "^7.13.12",
+        "@babel/plugin-syntax-class-properties": "^7.12.13",
+        "@babel/plugin-syntax-decorators": "^7.12.13",
+        "@lwc/compiler": "^1.17.6",
+        "@lwc/module-resolver": "^1.17.6",
+        "@lwc/synthetic-shadow": "^1.17.6",
         "babel-loader": "^8.2.2",
-        "resolve": "^1.19.0"
+        "resolve": "^1.20.0"
     },
     "engines": {
         "node": ">=14.0.0"

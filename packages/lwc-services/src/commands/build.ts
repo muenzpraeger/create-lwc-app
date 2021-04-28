@@ -69,7 +69,6 @@ export default class Build extends Command {
             description: messages.flags.webpack
         }),
         'webpack-plugin-overrides': flags.string({
-            char: 'p',
             description: messages.flags['webpack-plugin-overrides']
         }),
         bundler: flags.string({

@@ -3,7 +3,7 @@ import cli from 'cli-ux'
 import { existsSync } from 'fs'
 import { resolve } from 'path'
 import * as webpack from 'webpack'
-import { merge } from 'webpack-merge'
+import { merge, mergeWithCustomize, unique } from 'webpack-merge'
 
 import { lwcConfig } from '../config/lwcConfig'
 import { generateWebpackConfig } from '../config/webpack.config'
@@ -44,6 +44,9 @@ export default class Watch extends Command {
             char: 'w',
             description: messages.flags.webpack
         }),
+        'webpack-plugin-overrides': flags.string({
+            description: messages.flags['webpack-plugin-overrides']
+        }),
         bundler: flags.string({
             char: 'b',
             description: messages.flags.bundler,
@@ -79,7 +82,21 @@ export default class Watch extends Command {
                     process.cwd(),
                     flags.webpack
                 ))
-                webpackConfig = merge(webpackConfig, webpackConfigCustom)
+
+                let mergeFunction;
+                if (flags['webpack-plugin-overrides']) {
+                    mergeFunction = mergeWithCustomize({
+                        customizeArray: unique(
+                            "plugins",
+                            flags['webpack-plugin-overrides'].split(','),
+                            (plugin) => plugin.constructor && plugin.constructor.name
+                        )
+                    })
+                } else {
+                    mergeFunction = merge
+                }
+
+                webpackConfig = mergeFunction(webpackConfig, webpackConfigCustom)
             }
 
             if (flags.host && flags.host !== lwcConfig.devServer.host) {

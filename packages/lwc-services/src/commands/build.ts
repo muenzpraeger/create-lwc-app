@@ -141,10 +141,10 @@ export default class Build extends Command {
                             "plugins",
                             flags['webpack-plugin-overrides'].split(','),
                             (plugin) => plugin.constructor && plugin.constructor.name
-                        ),
-                    });
+                        )
+                    })
                 } else {
-                    mergeFunction = merge;
+                    mergeFunction = merge
                 }
 
                 webpackConfig = mergeFunction(webpackConfig, webpackConfigCustom)

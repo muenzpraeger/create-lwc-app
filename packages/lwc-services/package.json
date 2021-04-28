@@ -67,7 +67,7 @@
         "@oclif/test": "^1.2.8",
         "@types/chai": "^4.2.16",
         "@types/mocha": "^8.2.2",
-        "@types/node": "^14.14.37",
+        "@types/node": "^15.0.0",
         "@types/rimraf": "^3.0.0",
         "@types/semver-compare": "^1.0.1",
         "@types/webpack-merge": "^5.0.0",

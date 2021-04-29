@@ -2,7 +2,7 @@ import { Command, flags } from '@oclif/command'
 import { copyFileSync, existsSync, mkdirSync, writeFileSync } from 'fs'
 import { join, resolve } from 'path'
 import util = require('util')
-import { merge } from 'webpack-merge'
+import { merge, mergeWithCustomize, unique } from 'webpack-merge'
 
 import { jestConfig } from '../config/jestConfig'
 import { defaultLwcConfig } from '../config/lwcConfig'
@@ -27,7 +27,10 @@ export default class Sniff extends Command {
         webpack: flags.string({
             char: 'w',
             description: messages.flags.webpack
-        })
+        }),
+        'webpack-plugin-overrides': flags.string({
+            description: messages.flags['webpack-plugin-overrides']
+        }),
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -57,7 +60,21 @@ export default class Sniff extends Command {
                 process.cwd(),
                 flags.webpack
             ))
-            webpackConfig = merge(webpackConfig, webpackConfigCustom)
+            
+            let mergeFunction;
+            if (flags['webpack-plugin-overrides']) {
+                mergeFunction = mergeWithCustomize({
+                    customizeArray: unique(
+                        "plugins",
+                        flags['webpack-plugin-overrides'].split(','),
+                        (plugin) => plugin.constructor && plugin.constructor.name
+                    )
+                })
+            } else {
+                mergeFunction = merge
+            }
+
+            webpackConfig = mergeFunction(webpackConfig, webpackConfigCustom)
         }
 
         log(messages.logs.write_jest_config)

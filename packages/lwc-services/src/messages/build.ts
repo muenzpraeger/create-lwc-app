@@ -11,6 +11,7 @@ export const messages = {
         destination: 'defines the directory where the build is stored',
         noclear: 'setting this will not re-create the build dir',
         webpack: 'location of custom webpack configuration file',
+        'webpack-plugin-overrides': 'comma separated values containing names of webpack plugins you want to override',
         bundler: 'defines which bundler to use (webpack|rollup)'
     },
     errors: {

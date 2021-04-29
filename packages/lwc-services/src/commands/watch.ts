@@ -83,20 +83,24 @@ export default class Watch extends Command {
                     flags.webpack
                 ))
 
-                let mergeFunction;
+                let mergeFunction
                 if (flags['webpack-plugin-overrides']) {
                     mergeFunction = mergeWithCustomize({
                         customizeArray: unique(
-                            "plugins",
+                            'plugins',
                             flags['webpack-plugin-overrides'].split(','),
-                            (plugin) => plugin.constructor && plugin.constructor.name
+                            (plugin) =>
+                                plugin.constructor && plugin.constructor.name
                         )
                     })
                 } else {
                     mergeFunction = merge
                 }
 
-                webpackConfig = mergeFunction(webpackConfig, webpackConfigCustom)
+                webpackConfig = mergeFunction(
+                    webpackConfig,
+                    webpackConfigCustom
+                )
             }
 
             if (flags.host && flags.host !== lwcConfig.devServer.host) {

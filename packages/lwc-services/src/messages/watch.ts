@@ -22,7 +22,8 @@ export const messages = {
         host: 'sets the hostname',
         port: 'configures the port of the server',
         webpack: 'location of custom webpack configuration file',
-        'webpack-plugin-overrides': 'comma separated values containing names of webpack plugins you want to override',
+        'webpack-plugin-overrides':
+            'comma separated values containing names of webpack plugins you want to override',
         bundler: 'defines which bundler to use (webpack|rollup)'
     },
     logs: {

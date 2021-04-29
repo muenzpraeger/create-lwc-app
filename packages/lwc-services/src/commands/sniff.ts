@@ -30,7 +30,7 @@ export default class Sniff extends Command {
         }),
         'webpack-plugin-overrides': flags.string({
             description: messages.flags['webpack-plugin-overrides']
-        }),
+        })
     }
 
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
@@ -60,14 +60,15 @@ export default class Sniff extends Command {
                 process.cwd(),
                 flags.webpack
             ))
-            
-            let mergeFunction;
+
+            let mergeFunction
             if (flags['webpack-plugin-overrides']) {
                 mergeFunction = mergeWithCustomize({
                     customizeArray: unique(
-                        "plugins",
+                        'plugins',
                         flags['webpack-plugin-overrides'].split(','),
-                        (plugin) => plugin.constructor && plugin.constructor.name
+                        (plugin) =>
+                            plugin.constructor && plugin.constructor.name
                     )
                 })
             } else {

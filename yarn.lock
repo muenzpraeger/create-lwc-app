@@ -3031,16 +3031,16 @@
     rxjs ">=6.4.0"
 
 "@types/yeoman-generator@*", "@types/yeoman-generator@^4.11.3":
-  version "4.11.3"
-  resolved "https://registry.yarnpkg.com/@types/yeoman-generator/-/yeoman-generator-4.11.3.tgz#3b4c0040cf0c28237dd9f535a15c620d3f68c5f4"
-  integrity sha512-bZRBRahUEs10YhPC4zTKwX5h1mfoFT4Qvav+z0WyT37SgKK9IgIozn8/k6IF9h9PNkxpAhFcER5llwdzCyFZnw==
+  version "4.11.4"
+  resolved "https://registry.yarnpkg.com/@types/yeoman-generator/-/yeoman-generator-4.11.4.tgz#bc0ff86a5d28cb2c6456ecb3dcef1364ffbc764e"
+  integrity sha512-JB0rxFS8oskkKLALii9y3Tb6DQaLQ/bxBU6nUIAh9e/47T1PvVODfMlj1Hkxrw/rzNhgGOzkG/xiOHL5EsqCag==
   dependencies:
     "@types/debug" "*"
     "@types/ejs" "*"
     "@types/inquirer" "*"
     "@types/mem-fs-editor" "*"
     "@types/yeoman-environment" "*"
-    rxjs ">=6.4.0"
+    rxjs "^6.4.0"
 
 "@typescript-eslint/eslint-plugin@^4.21.0":
   version "4.21.0"
@@ -11749,14 +11749,7 @@ run-parallel@^1.1.9:
   dependencies:
     queue-microtask "^1.2.2"
 
-rxjs@>=6.4.0, rxjs@^6.4.0, rxjs@^6.6.6:
-  version "6.6.6"
-  resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.6.tgz#14d8417aa5a07c5e633995b525e1e3c0dec03b70"
-  integrity sha512-/oTwee4N4iWzAMAL9xdGKjkEHmIwupR3oXbQjCKywF1BeFohswF3vZdogbmEF6pZkOsXTzWkrZszrWpQTByYVg==
-  dependencies:
-    tslib "^1.9.0"
-
-rxjs@^6.6.0:
+rxjs@>=6.4.0, rxjs@^6.4.0, rxjs@^6.6.0, rxjs@^6.6.6:
   version "6.6.7"
   resolved "https://registry.yarnpkg.com/rxjs/-/rxjs-6.6.7.tgz#90ac018acabf491bf65044235d5863c4dab804c9"
   integrity sha512-hTdwr+7yYNIT5n4AMYp85KA6yw2Va0FLa3Rguvbpa4W3I5xynaBZo41cM3XM+4Q6fRMj3sBYIR1VAmZMXYJvRQ==

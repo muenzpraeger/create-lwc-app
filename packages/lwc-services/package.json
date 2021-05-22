@@ -38,7 +38,7 @@
         "globby": "^11.0.3",
         "html-webpack-plugin": "^5.3.1",
         "jest": "^26.6.3",
-        "lwc": "^1.18.0",
+        "lwc": "^2.1.0",
         "lwc-webpack-plugin": "^1.2.2",
         "node-emoji": "^1.10.0",
         "nodemon": "^2.0.7",

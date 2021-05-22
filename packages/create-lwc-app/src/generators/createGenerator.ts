@@ -264,6 +264,9 @@ class CreateGenerator extends Generator {
         } else {
             this.pjson.scripts.lint = 'eslint ./src/**/*.js'
         }
+        this.pjson.postinstall = 'husky install'
+        this.pjson.precommit =
+            'precommit": "npm run prettier:verify && [ $? -eq 0 ] && npm run lint'
         this.pjson.scripts.prettier =
             // prettier-ignore
             // eslint-disable-next-line no-useless-escape
@@ -276,15 +279,15 @@ class CreateGenerator extends Generator {
             this.pjson.scripts.start = 'electron scripts/main.js'
         }
         if (this.clientserver) {
-            this.pjson.scripts.serve = 'run-p serve:client serve:api'
-            this.pjson.scripts['serve:client'] = 'node scripts/server.js'
+            this.pjson.scripts.start = 'run-p start:client start:api'
+            this.pjson.scripts['start:client'] = 'node scripts/server.js'
             if (this.typescript) {
-                this.pjson.scripts['serve:api'] = 'node lib/server/api.js'
+                this.pjson.scripts['start:api'] = 'node lib/server/api.js'
             } else {
-                this.pjson.scripts['serve:api'] = 'node src/server/api.js'
+                this.pjson.scripts['start:api'] = 'node src/server/api.js'
             }
         } else {
-            this.pjson.scripts.serve = 'node scripts/server.js'
+            this.pjson.scripts.start = 'node scripts/server.js'
         }
         if (this.clientserver) {
             if (this.typescript) {
@@ -360,8 +363,9 @@ class CreateGenerator extends Generator {
                 'src/**/*.test.'.concat(fileExtension)
             ]
             if (this.typescript) {
-                this.pjson.nodemonConfig.exec =
-                    'ts-node ./src/server/api.'.concat(fileExtension)
+                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/api.'.concat(
+                    fileExtension
+                )
             } else {
                 this.pjson.nodemonConfig.exec = 'node ./src/server/api.'.concat(
                     fileExtension
@@ -384,20 +388,6 @@ class CreateGenerator extends Generator {
         this.pjson.scripts['test:unit:debug'] = 'lwc-services test:unit --debug'
         this.pjson.scripts['test:unit:coverage'] =
             'lwc-services test:unit --coverage'
-
-        this.pjson.husky = { hooks: {} }
-        this.pjson['lint-staged'] = {}
-        this.pjson.husky.hooks['pre-commit'] = 'lint-staged'
-
-        this.pjson['lint-staged']['**/*.{css,html,js,json,md,ts,yaml,yml}'] = [
-            'prettier --write'
-        ]
-
-        if (this.typescript) {
-            this.pjson['lint-staged']['./src/**/*.ts'] = ['eslint']
-        } else {
-            this.pjson['lint-staged']['./src/**/*.js'] = ['eslint']
-        }
 
         this.pjson.keywords = this.defaults.keywords || ['lwc']
         this.pjson.homepage =
@@ -444,10 +434,14 @@ class CreateGenerator extends Generator {
             this.destinationPath('.prettierrc'),
             this
         )
-
         this.fs.copyTpl(
             this.templatePath('gitignore'),
             this.destinationPath('.gitignore'),
+            this
+        )
+        this.fs.copyTpl(
+            this.templatePath('husky/precommit'),
+            this.destinationPath('.husky/precommit'),
             this
         )
 
@@ -459,7 +453,6 @@ class CreateGenerator extends Generator {
         const devDependencies: string[] = []
         devDependencies.push(
             'husky',
-            'lint-staged',
             'prettier',
             'eslint',
             `lwc-services@^${LWC_SERVICES_VERSION}`

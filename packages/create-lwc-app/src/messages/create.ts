@@ -39,8 +39,7 @@ export const messages = {
         required: false
     },
     flags: {
-        silent:
-            'runs a silent installation (with defaults/with provided options)',
+        silent: 'runs a silent installation (with defaults/with provided options)',
         type: 'specificy the project type (standard|pwa)',
         options:
             'set silent installation options, comma-separated (yarn|typescript|edge|rollup|express)'

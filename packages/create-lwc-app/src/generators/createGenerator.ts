@@ -363,9 +363,8 @@ class CreateGenerator extends Generator {
                 'src/**/*.test.'.concat(fileExtension)
             ]
             if (this.typescript) {
-                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/api.'.concat(
-                    fileExtension
-                )
+                this.pjson.nodemonConfig.exec =
+                    'ts-node ./src/server/api.'.concat(fileExtension)
             } else {
                 this.pjson.nodemonConfig.exec = 'node ./src/server/api.'.concat(
                     fileExtension

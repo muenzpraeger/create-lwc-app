@@ -28,18 +28,5 @@
         "prettier:verify": "prettier --list-different '**/*.{html,css,js,json,md,ts,yaml,yml}'",
         "publish-beta": "lerna publish from-package --dist-tag beta",
         "publish-prod": "lerna publish from-package"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "**/*.{html,js,json,ts,yaml,yml,md}": [
-            "prettier --write"
-        ],
-        "**/packages/**/*.ts": [
-            "eslint"
-        ]
     }
 }

@@ -23,23 +23,10 @@
         "lint": "eslint ./packages/**/src/**/*.ts",
         "postinstall": "rm -rf node_modules/@types/webpack && husky install",
         "prepare": "npm run build",
-        "precommit": "npm run prettier:verify && [ $? -eq 0 ] && npm run lint",
+        "precommit": "npm run prettier && [ $? -eq 0 ] && npm run lint",
         "prettier": "prettier --write '**/*.{html,css,js,json,md,ts,yaml,yml}'",
         "prettier:verify": "prettier --list-different '**/*.{html,css,js,json,md,ts,yaml,yml}'",
         "publish-beta": "lerna publish from-package --dist-tag beta",
         "publish-prod": "lerna publish from-package"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "**/*.{html,js,json,ts,yaml,yml,md}": [
-            "prettier --write"
-        ],
-        "**/packages/**/*.ts": [
-            "eslint"
-        ]
     }
 }

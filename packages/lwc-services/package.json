@@ -15,7 +15,7 @@
         "@lwc/eslint-plugin-lwc": "~1.0.1",
         "@lwc/jest-preset": "~9.0.0",
         "@lwc/jest-resolver": "~9.0.0",
-        "@lwc/jest-serializer": "~9.0.0",
+        "@lwc/jest-serializer": "~10.0.2",
         "@lwc/jest-transformer": "~9.0.0",
         "@lwc/rollup-plugin": "~2.1.0",
         "@oclif/command": "~1.8.0",

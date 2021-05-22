@@ -363,8 +363,9 @@ class CreateGenerator extends Generator {
                 'src/**/*.test.'.concat(fileExtension)
             ]
             if (this.typescript) {
-                this.pjson.nodemonConfig.exec =
-                    'ts-node ./src/server/api.'.concat(fileExtension)
+                this.pjson.nodemonConfig.exec = 'ts-node ./src/server/api.'.concat(
+                    fileExtension
+                )
             } else {
                 this.pjson.nodemonConfig.exec = 'node ./src/server/api.'.concat(
                     fileExtension
@@ -439,8 +440,8 @@ class CreateGenerator extends Generator {
             this
         )
         this.fs.copyTpl(
-            this.templatePath('husky/precommit'),
-            this.destinationPath('.husky/precommit'),
+            this.templatePath('husky/pre-commit'),
+            this.destinationPath('.husky/pre-commit'),
             this
         )
 

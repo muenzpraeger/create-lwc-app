@@ -5,11 +5,8 @@ import { getOptions } from 'loader-utils'
 
 module.exports = function (source: any) {
     const { resourcePath } = this
-    const {
-        stylesheetConfig,
-        outputConfig,
-        experimentalDynamicComponent
-    } = getOptions(this)
+    const { stylesheetConfig, outputConfig, experimentalDynamicComponent } =
+        getOptions(this)
 
     let info
     try {

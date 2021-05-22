@@ -19,14 +19,14 @@
     },
     "dependencies": {
         "@babel/preset-typescript": "~7.13.0",
-        "@lwc/babel-plugin-component": "~2.1.0",
+        "@lwc/babel-plugin-component": "~2.1.1",
         "@babel/plugin-proposal-nullish-coalescing-operator": "~7.14.2",
         "@babel/plugin-proposal-optional-chaining": "~7.14.2",
         "@babel/plugin-syntax-class-properties": "~7.12.13",
         "@babel/plugin-syntax-decorators": "~7.12.13",
-        "@lwc/compiler": "~2.1.0",
-        "@lwc/module-resolver": "~2.1.0",
-        "@lwc/synthetic-shadow": "~2.1.0",
+        "@lwc/compiler": "~2.1.1",
+        "@lwc/module-resolver": "~2.1.1",
+        "@lwc/synthetic-shadow": "~2.1.1",
         "babel-loader": "~8.2.2",
         "resolve": "~1.20.0"
     },

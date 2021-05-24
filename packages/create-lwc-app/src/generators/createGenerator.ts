@@ -264,9 +264,9 @@ class CreateGenerator extends Generator {
         } else {
             this.pjson.scripts.lint = 'eslint ./src/**/*.js'
         }
-        this.pjson.postinstall = 'husky install'
-        this.pjson.precommit =
-            'precommit": "npm run prettier:verify && [ $? -eq 0 ] && npm run lint'
+        this.pjson.scripts.postinstall = 'husky install'
+        this.pjson.scripts.precommit =
+            'npm run prettier:verify && [ $? -eq 0 ] && npm run lint'
         this.pjson.scripts.prettier =
             // prettier-ignore
             // eslint-disable-next-line no-useless-escape
@@ -469,7 +469,6 @@ class CreateGenerator extends Generator {
         if (this.appType === 'electron') {
             devDependencies.push('electron')
         }
-
         if (hasGit) {
             try {
                 execSync('git init', { stdio: 'ignore' })

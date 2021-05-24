@@ -25,6 +25,7 @@
         "@babel/plugin-syntax-class-properties": "~7.12.13",
         "@babel/plugin-syntax-decorators": "~7.12.13",
         "@lwc/compiler": "~2.1.1",
+        "@lwc/engine-dom": "~2.1.1",
         "@lwc/module-resolver": "~2.1.1",
         "@lwc/synthetic-shadow": "~2.1.1",
         "babel-loader": "~8.2.2",

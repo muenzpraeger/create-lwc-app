@@ -100,7 +100,7 @@ module.exports = class Plugin {
         }
 
         // Specify known package aliases
-        alias['lwc'] = require.resolve('@lwc/engine')
+        alias['lwc'] = require.resolve('@lwc/engine-dom')
         alias['wire-service'] = require.resolve('@lwc/wire-service')
         // the 'main' property for @lwc/synthetic-shadow refers to a file that
         // simply logs an error message. This needs to be fixed up to directly

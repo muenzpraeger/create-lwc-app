@@ -111,6 +111,7 @@ OPTIONS
   -m, --mode=mode                [default: development] defines the mode for the build (production|development)
   -n, --noclear                  setting this will not re-create the build dir
   -w, --webpack=webpack          location of custom webpack configuration file, which will be merged into the default config
+  --webpack-plugin-override      comma separated values containing names of webpack plugins you want to override
 
 EXAMPLES
   lwc-services build
@@ -128,6 +129,7 @@ USAGE
 OPTIONS
   -d, --directory=directory  (required) exports configuration files to the given directory
   -w, --webpack=webpack      location of custom webpack configuration file
+  --webpack-plugin-override  comma separated values containing names of webpack plugins you want to override
 
 EXAMPLE
   lwc-services sniff -d somedirectory
@@ -166,12 +168,13 @@ USAGE
   $ lwc-services watch
 
 OPTIONS
-  -b, --bundler=webpack  [default: webpack] defines the to be used bundler (webpack|rollup)
-  -i, --host=host        [default: localhost] sets the hostname/IP address
-  -m, --mode=mode        [default: development] defines the mode for the build (production|development)
-  -o, --open             opens the site in the default browser
-  -p, --port=port        [default: 3001] configures the port of the application
-  -w, --webpack=webpack  location of custom webpack configuration file, which will be merged into the default config
+  -b, --bundler=webpack       [default: webpack] defines the to be used bundler (webpack|rollup)
+  -i, --host=host             [default: localhost] sets the hostname/IP address
+  -m, --mode=mode             [default: development] defines the mode for the build (production|development)
+  -o, --open                  opens the site in the default browser
+  -p, --port=port             [default: 3001] configures the port of the application
+  -w, --webpack=webpack       location of custom webpack configuration file, which will be merged into the default config
+  --webpack-plugin-override   comma separated values containing names of webpack plugins you want to override
 
 EXAMPLES
   lwc-services watch

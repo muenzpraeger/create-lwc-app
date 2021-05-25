@@ -1,6 +1,25 @@
 ## Changelog
 
-### 2021-02-012
+### 2021-05-25
+
+**create-lwc-app 3.1.0**
+
+-   Dependency updates and cleanup
+    -   Changing the name of the initial created `serve` script to `start` to simplify deployments to cloud providers
+    -   Updating to latest Husky setup
+
+**lwc-services 3.1.0**
+
+-   Dependency updates and cleanup
+-   Moving to LWC 2.x (internal change: `@lwc/engine` is replaced by `@lwc/engine-dom`)
+-   Added new CLI flag `webpack-plugin-overrides` to allow override of built-in Webpack configuration
+
+**lwc-webpack-plugin 2.0.0**
+
+-   Dependency updates and cleanup
+-   Moving to LWC 2.x (internal change: `@lwc/engine` is replaced by `@lwc/engine-dom`)
+
+### 2021-02-01
 
 **lwc-services 3.0.4**
 

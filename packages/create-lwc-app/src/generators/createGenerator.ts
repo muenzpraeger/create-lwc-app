@@ -454,6 +454,7 @@ class CreateGenerator extends Generator {
             'husky',
             'prettier',
             'eslint',
+            'eslint-plugin-inclusive-language',
             `lwc-services@^${LWC_SERVICES_VERSION}`
         )
         dependencies.push('compression', 'express', 'helmet')

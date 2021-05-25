@@ -47,12 +47,6 @@ class Create extends Command {
             return
         }
 
-        const nodeVersion = nodeVersionRet.stdout.slice(1).toString()
-        if (semverCompare(nodeVersion, '10.0.0') < 0) {
-            log(messages.errors.wrong_node_version_installed)
-            return
-        }
-
         if (!silent && options.length > 0) {
             log(messages.errors.no_silent_with_options)
             return

@@ -1,6 +1,6 @@
 {
     "name": "lwc-services",
-    "version": "3.1.1",
+    "version": "3.1.2",
     "author": "René Winkelmeyer @muenzpraeger",
     "bin": {
         "lwc-services": "./bin/run"
@@ -24,6 +24,7 @@
         "@oclif/plugin-not-found": "~2.0.0",
         "@rollup/plugin-replace": "~2.4.2",
         "@salesforce/eslint-config-lwc": "~2.0.0",
+        "@salesforce/eslint-plugin-lightning": "~0.1.1",
         "@typescript-eslint/eslint-plugin": "~4.26.0",
         "@typescript-eslint/parser": "~4.26.0",
         "@babel/eslint-parser": "~7.14.4",
@@ -32,10 +33,12 @@
         "copy-webpack-plugin": "~9.0.0",
         "cross-env": "~7.0.3",
         "deepmerge": "~4.2.2",
+        "eslint-plugin-import": "~2.23.4",
+        "eslint-plugin-jest": "~24.3.6",
         "error-overlay-webpack-plugin": "~0.4.2",
         "globby": "~11.0.3",
         "html-webpack-plugin": "~5.3.1",
-        "jest": "~27.0.4",
+        "jest": "~26",
         "lwc": "~2.1.1",
         "lwc-webpack-plugin": "~2.0.0",
         "node-emoji": "~1.10.0",

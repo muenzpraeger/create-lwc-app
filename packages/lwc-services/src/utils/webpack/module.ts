@@ -18,14 +18,6 @@ function isValidModuleName(id: string) {
     return id.match(/^(\w+\/)(\w+)$/)
 }
 
-function getInfoFromId(id: string) {
-    const [ns, ...rest] = id.split('/')
-    return {
-        ns,
-        name: rest.join('/')
-    }
-}
-
 function getInfoFromPath(file: string, config: any) {
     const { path: root } = config.module
 
@@ -46,15 +38,15 @@ function getInfoFromPath(file: string, config: any) {
 
     const rel = relative(root, file)
     const parts = rel.split(sep)
-
-    const id = `${parts[0]}-${parts[1]}`
-
-    return getInfoFromId(id)
+    const end = parts.length - 1;
+    return {
+        ns: parts[end - 2],
+        name: parts[end - 1]
+    };
 }
 
 module.exports = {
     getConfig,
     isValidModuleName,
-    getInfoFromId,
     getInfoFromPath
 }

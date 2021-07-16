@@ -1,8 +1,14 @@
 ## Changelog
 
-### 2021-0613
+### 2021-07-16
 
-**lwc-services 3.1.2\***
+**lwc-webpack-plugin 2.0.1**
+
+-   Fix to compute namespaces correct
+
+### 2021-06-13
+
+**lwc-services 3.1.2**
 
 -   Update dependencies
 

@@ -50,8 +50,8 @@ module.exports = function (source: any) {
 
     compiler
         .transform(codeTransformed, resourcePath, {
-            name: info.ns,
-            namespace: 'my',
+            name: info.name,
+            namespace: info.ns,
             stylesheetConfig,
             outputConfig,
             experimentalDynamicComponent

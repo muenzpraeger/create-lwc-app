@@ -1,6 +1,6 @@
 {
     "name": "lwc-webpack-plugin",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "author": "René Winkelmeyer @muenzpraeger",
     "description": "Webpack Plugin for LWC",
     "main": "dist/index.js",

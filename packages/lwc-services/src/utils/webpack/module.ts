@@ -38,11 +38,11 @@ function getInfoFromPath(file: string, config: any) {
 
     const rel = relative(root, file)
     const parts = rel.split(sep)
-    const end = parts.length - 1;
+    const end = parts.length - 1
     return {
         ns: parts[end - 2],
         name: parts[end - 1]
-    };
+    }
 }
 
 module.exports = {

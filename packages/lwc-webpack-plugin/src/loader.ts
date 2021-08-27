@@ -37,10 +37,12 @@ module.exports = function (source: any) {
                 )
             ],
             presets: [
-                require.resolve('@babel/preset-typescript'),
-                {
-                    allowDeclareFields: true
-                }
+                [
+                    require.resolve('@babel/preset-typescript'),
+                    {
+                        allowDeclareFields: true
+                    }
+                ]
             ]
         })
         codeTransformed = code

@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2021-08-27
+
+**lwc-webpack-plugin 2.0.2**
+
+-   Fix for TypeScript preset
+
 ### 2021-07-16
 
 **lwc-webpack-plugin 2.0.1**

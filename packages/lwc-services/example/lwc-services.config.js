@@ -34,7 +34,6 @@ module.exports = {
     lwcCompilerOutput: {
         production: {
             compat: false,
-            minify: true,
             env: {
                 NODE_ENV: 'production'
             }

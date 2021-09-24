@@ -56,7 +56,8 @@ module.exports = function (source: any) {
             namespace: info.ns,
             stylesheetConfig,
             outputConfig,
-            experimentalDynamicComponent
+            experimentalDynamicComponent,
+            scopedStyles: resourcePath.endsWith('.scoped.css')
         })
         .then((res: any) => {
             cb(null, res.code)

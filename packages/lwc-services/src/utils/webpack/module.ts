@@ -45,8 +45,17 @@ function getInfoFromPath(file: string, config: any) {
     }
 }
 
+function getInfoFromId(id: string) {
+    const [ns, ...rest] = id.split('/')
+    return {
+        ns,
+        name: rest.join('/')
+    }
+}
+
 module.exports = {
     getConfig,
     isValidModuleName,
-    getInfoFromPath
+    getInfoFromPath,
+    getInfoFromId
 }

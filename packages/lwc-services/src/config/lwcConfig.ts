@@ -32,7 +32,6 @@ interface Config {
     lwcCompilerOutput: {
         development?: {
             compat?: boolean
-            minify?: boolean
             env?: {
                 NODE_ENV: string
             }
@@ -40,7 +39,6 @@ interface Config {
         }
         production?: {
             compat?: boolean
-            minify?: boolean
             env?: {
                 NODE_ENV: string
             }
@@ -78,7 +76,6 @@ export const defaultLwcConfig: Config = {
     lwcCompilerOutput: {
         development: {
             compat: false,
-            minify: true,
             env: {
                 NODE_ENV: 'production'
             },
@@ -86,7 +83,6 @@ export const defaultLwcConfig: Config = {
         },
         production: {
             compat: false,
-            minify: true,
             env: {
                 NODE_ENV: 'production'
             },

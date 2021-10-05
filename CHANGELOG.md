@@ -1,5 +1,21 @@
 ## Changelog
 
+### 2021-10-05
+
+**create-lwc-app 3.2.0**
+
+-   Dependency updates
+
+**lwc-services 3.2.0**
+
+-   Dependency updates
+-   LWC upgrade to 2.5.x (incl. LightDOM support)
+
+**lwc-webpack-plugin 2.1.0**
+
+-   Dependency updates
+-   LWC upgrade to 2.5.x (incl. LightDOM support)
+
 ### 2021-08-27
 
 **lwc-webpack-plugin 2.0.2**

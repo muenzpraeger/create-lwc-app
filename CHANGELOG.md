@@ -1,5 +1,11 @@
 ## Changelog
 
+### 2021-10-06
+
+**lwc-services 3.2.1**
+
+-   Fix for Jest resolver
+
 ### 2021-10-05
 
 **create-lwc-app 3.2.0**

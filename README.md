@@ -1,24 +1,8 @@
 # create-lwc-app
 
-A tool for setting up your Lightning Web Components projects.
+## 🔥🔥 create-lwc-app will be EOL by March 31 2022 🔥🔥
 
-[![Github Workflow](https://github.com/muenzpraeger/create-lwc-app/workflows/create-lwc-app%20build/badge.svg?branch=main)](https://github.com/muenzpraeger/create-lwc-app/actions)
-[![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
-[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
-
-[![Version](https://img.shields.io/npm/v/create-lwc-app.svg)](https://npmjs.org/package/create-lwc-app) [![Downloads/week](https://img.shields.io/npm/dw/create-lwc-app.svg)](https://npmjs.org/package/create-lwc-app) create-lwc-app
-
-[![Version](https://img.shields.io/npm/v/lwc-services.svg)](https://npmjs.org/package/lwc-services) [![Downloads/week](https://img.shields.io/npm/dw/lwc-services.svg)](https://npmjs.org/package/lwc-services) lwc-services
-
-[![Version](https://img.shields.io/npm/v/lwc-webpack-plugin.svg)](https://npmjs.org/package/lwc-webpack-plugin) [![Downloads/week](https://img.shields.io/npm/dw/lwc-webpack-plugin.svg)](https://npmjs.org/package/lwc-webpack-plugin) lwc-webpack-plugin
-
-[![Version](https://img.shields.io/npm/v/rollup-plugin-lwc-typescript.svg)](https://npmjs.org/package/rollup-plugin-lwc-typescript) [![Downloads/week](https://img.shields.io/npm/dw/rollup-plugin-lwc-typescript.svg)](https://npmjs.org/package/rollup-plugin-lwc-typescript) rollup-plugin-lwc-typescript
-
-## 🔥🔥 Information for migrating from lwc-services 1.x to 2.x or higher 🔥🔥
-
-The new v2 release 🎉 of `create-lwc-app` / `lwc-services` brought some breaking changes. Please read [here in the wiki](https://github.com/muenzpraeger/create-lwc-app/wiki/Migration-info-v1-to-v2) what as changed, and how to adept the changes.
-
-If you migrate to 3.0.0, please note that this ships out-of-the-box with Webpack 5 and requires node 14 or higher.
+Please read [this blog post](https://developer.salesforce.com/blogs/2022/02/its-time-to-say-goodbye-to-create-lwc-app.html) for more details. We also added [migration instructions](https://github.com/muenzpraeger/create-lwc-app/wiki/Migration-info-v3-to-none) to the wiki.
 
 ## 🚀 Quick Start
 

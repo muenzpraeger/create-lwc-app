@@ -1,6 +1,6 @@
 # create-lwc-app
 
-## 🔥🔥 create-lwc-app will be EOL by March 31 2022 🔥🔥
+## 🔥🔥 create-lwc-app is EOL 🔥🔥
 
 Please read [this blog post](https://developer.salesforce.com/blogs/2022/02/its-time-to-say-goodbye-to-create-lwc-app.html) for more details. We also added [migration instructions](https://github.com/muenzpraeger/create-lwc-app/wiki/Migration-info-v3-to-none) to the wiki.
 
